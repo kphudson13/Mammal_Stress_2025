@@ -10,48 +10,52 @@ library(rr2) #for the R2.lik function
 library(gridExtra) #to set table themes
 
 rawdata <- read.csv("StressDataRaw.csv")
-summary(rawdata)
+# summary(rawdata)
 
 # Build Tree --------------------------------------------------------------
 
 StressData <- rawdata %>% 
   filter(Species != "Cebus apella", 
-         Species != "Gerbillus andersoni allenbyi") %>%
-  mutate(Species = tolower(Species))
+         Species != "Gerbillus andersoni allenbyi")
 
-taxa <- tnrs_match_names(names=c(StressData$Species)) #match names with open tree taxonomy 
+StressData$Species[StressData$Species == "Choeropsis liberiensis"] <- "Hexaprotodon liberiensis"
+StressData$Species[StressData$Species == "Spermophilus columbianus"] <- "Urocitellus columbianus"
+
+taxa <- tnrs_match_names(unique(StressData$Species)) #match names with open tree taxonomy 
 tree <- tol_induced_subtree(ott_ids = taxa$ott_id) #pull the subtree of the matched names 
 # is_in_tree(ott_id(taxa)) #check that only the taxa that are in the synthetic tree
+tree <- compute.brlen(tree, method = "Grafen", power=1) #compute branch lengths, grafen method
+write.nexus(tree, file = "Outputs/StressTree_AllSpecies.nex")
+tree <- read.nexus("Outputs/StressTree_AllSpecies.nex")
 
-#view tree (no branch lengths)
-plot(tree, cex = .8, label.offset = .1, no.margin = TRUE)
+# taxon_map_order <- structure(taxa$search_string, names = taxa$unique_name) #creates a character vector of all the names
+tree$tip.label <- strip_ott_ids(tree$tip.label, remove_underscores = T)
+# 
+# #relabel tree tip labels
+# tree$tip.label <- taxon_map_order[ otl_tips_order ]
+# 
+# # #rename some entries so they match
+# # otl_tips_order[otl_tips_order == "Capra hircus (species in domain Eukaryota)"] <- "Capra hircus"
+# # otl_tips_order[otl_tips_order == "Hexaprotodon liberiensis"] <- "Choeropsis liberiensis"
+# # otl_tips_order[otl_tips_order == "Urocitellus columbianus"] <- "Spermophilus columbianus"
+# 
+# #to view the lists lining up
+cbind(tree$tip.label, unique(StressData$Species))
 
-taxon_map_order <- structure(taxa$search_string, names = taxa$unique_name) #creates a character vector of all the names
-otl_tips_order <- strip_ott_ids(tree$tip.label, remove_underscores = T)
+plot(tree) #view the plot with new names
 
-#relabel tree tip labels
-tree$tip.label <- taxon_map_order[ otl_tips_order ]
-
-#rename some entries so they match
-otl_tips_order[otl_tips_order == "Capra hircus (species in domain Eukaryota)"] <- "Capra hircus"
-otl_tips_order[otl_tips_order == "Hexaprotodon liberiensis"] <- "Choeropsis liberiensis"
-otl_tips_order[otl_tips_order == "Urocitellus columbianus"] <- "Spermophilus columbianus"
-
-#to view the lists lining up
-cbind(sort(taxon_map_order), sort(otl_tips_order))
-
-#compute branch lengths, grafen method
-branchl <- compute.brlen(tree, method = "Grafen", power=1)
-
-plot(branchl) #view the plot with new names
-
-#build covariance matrix
-brown <- corBrownian(phy = branchl, form = ~1) 
 
 # Basal Corticosterone ~ Body Mass ----------------------------------------
 
-obj<-name.check(branchl, StressData)
-tree.short <-drop.tip(branchl, obj$tree_not_data)
+name.check(tree, StressData$Species)
+tree.short <-drop.tip(tree, obj$tree_not_data)
+
+
+
+
+#build covariance matrix
+brown <- corBrownian(phy = tree, form = ~Species) 
+
 
 #Build gls model 
 BasCrtstnMass_PGLS <- gls(log(BasalCorticosterone) ~ log(BodyMassAnAge), 
@@ -86,7 +90,7 @@ BasCrtstnMass_Plot <-
                  x = 6, y = 3), parse = TRUE)
 
 BasCrtstnMass_Plot
-ggsave(filename = "Figures/BasCrtstnMass_Plot.png",
+ggsave(filename = "Outputs/BasCrtstnMass_Plot.png",
        width = 5,
        height = 4)
 
@@ -122,7 +126,7 @@ ElvCrtstnBasCrtstn_Plot <-
                  x = 500, y = 3), parse = TRUE)
 
 ElvCrtstnBasCrtstn_Plot
-ggsave(filename = "Figures/ElvCrtstnBasCrtstn_Plot.png",
+ggsave(filename = "Outputs/ElvCrtstnBasCrtstn_Plot.png",
        width = 5,
        height = 4)
 
@@ -161,7 +165,7 @@ BasCrtsolMass_Plot <-
                  x = 6, y = 2), parse = TRUE)
 
 BasCrtsolMass_Plot
-ggsave(filename = "Figures/BasCrtsolMass_Plot.png",
+ggsave(filename = "Outputs/BasCrtsolMass_Plot.png",
        width = 5,
        height = 4)
 
@@ -208,7 +212,7 @@ StatsTab_Ordinary <- rbind(cbind(coefficients(BasCrtstnMass_Summ_Ordinary), conf
 tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
                                    bg_params=list(fill="grey80")))
 #export stats table 
-png("Figures/StatsTab_PGLS.png", 
+png("Outputs/StatsTab_PGLS.png", 
     height = 130*nrow(StatsTab_PGLS), 
     width = 430*ncol(StatsTab_PGLS),
     res = 300)
@@ -216,15 +220,15 @@ grid.table(StatsTab_PGLS, theme = tt1)
 dev.off()
 
 #export stats table 
-png("Figures/StatsTab_Ordinary.png", 
+png("Outputs/StatsTab_Ordinary.png", 
     height = 130*nrow(StatsTab_Ordinary), 
     width = 430*ncol(StatsTab_Ordinary),
     res = 300)
 grid.table(StatsTab_Ordinary, theme = tt1)
 dev.off()
 
-write.csv(StatsTab_PGLS, "StatsTab_PGLS.csv")
-write.csv(StatsTab_Ordinary, "StatsTab_Ordinary.csv")
+write.csv(StatsTab_PGLS, "Outputs/StatsTab_PGLS.csv")
+write.csv(StatsTab_Ordinary, "Outputs/StatsTab_Ordinary.csv")
 
 
 # Validate Models ---------------------------------------------------------
