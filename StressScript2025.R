@@ -3,55 +3,31 @@
 
 library(ape)
 library(nlme) #for gls
-library(rotl) #pull from tree of life
 library(tidyverse)
 library(geiger)
 library(rr2) #for the R2.lik function
 library(gridExtra) #to set table themes
 
-rawdata <- read.csv("StressDataRaw.csv")
-# summary(rawdata)
 
-# Build Tree --------------------------------------------------------------
-
-StressData <- rawdata %>% 
-  filter(Species != "Cebus apella", 
-         Species != "Gerbillus andersoni allenbyi")
-
-StressData$Species[StressData$Species == "Choeropsis liberiensis"] <- "Hexaprotodon liberiensis"
-StressData$Species[StressData$Species == "Spermophilus columbianus"] <- "Urocitellus columbianus"
-
-taxa <- tnrs_match_names(unique(StressData$Species)) #match names with open tree taxonomy 
-tree <- tol_induced_subtree(ott_ids = taxa$ott_id) #pull the subtree of the matched names 
-# is_in_tree(ott_id(taxa)) #check that only the taxa that are in the synthetic tree
-tree <- compute.brlen(tree, method = "Grafen", power=1) #compute branch lengths, grafen method
-write.nexus(tree, file = "Outputs/StressTree_AllSpecies.nex")
+StressData <- read.csv("StressDataClean.csv")
 tree <- read.nexus("Outputs/StressTree_AllSpecies.nex")
 
-# taxon_map_order <- structure(taxa$search_string, names = taxa$unique_name) #creates a character vector of all the names
-tree$tip.label <- strip_ott_ids(tree$tip.label, remove_underscores = T)
-# 
-# #relabel tree tip labels
-# tree$tip.label <- taxon_map_order[ otl_tips_order ]
-# 
+plot(tree)
+
 # # #rename some entries so they match
 # # otl_tips_order[otl_tips_order == "Capra hircus (species in domain Eukaryota)"] <- "Capra hircus"
 # # otl_tips_order[otl_tips_order == "Hexaprotodon liberiensis"] <- "Choeropsis liberiensis"
 # # otl_tips_order[otl_tips_order == "Urocitellus columbianus"] <- "Spermophilus columbianus"
 # 
 # #to view the lists lining up
-cbind(tree$tip.label, unique(StressData$Species))
+cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
 
-plot(tree) #view the plot with new names
-
+name.check(tree, StressData$Species)
 
 # Basal Corticosterone ~ Body Mass ----------------------------------------
 
-name.check(tree, StressData$Species)
-tree.short <-drop.tip(tree, obj$tree_not_data)
-
-
-
+tree.short <- drop.tip(tree, StressData%>% 
+                        drop_na(BasalCorticosterone))
 
 #build covariance matrix
 brown <- corBrownian(phy = tree, form = ~Species) 
@@ -232,6 +208,10 @@ write.csv(StatsTab_Ordinary, "Outputs/StatsTab_Ordinary.csv")
 
 
 # Validate Models ---------------------------------------------------------
+
+hist(log(rawdata$BasalCorticosterone))
+hist(log(rawdata$ElevCorticosterone))
+hist(log(rawdata$BodyMassAnAge))
 
 qqnorm(BasCrtstnMass_PGLS) #qqplot, plot function doesn't work with the PGLS objects
 plot(BasCrtstnMass_Ordinary, 2) #qqplot
