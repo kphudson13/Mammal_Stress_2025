@@ -2,6 +2,7 @@
 # Load packages and data --------------------------------------------------
 
 library(ape)
+library(rotl)
 library(nlme) #for gls
 library(tidyverse)
 library(geiger)
@@ -14,30 +15,35 @@ tree <- read.nexus("Outputs/StressTree_AllSpecies.nex")
 
 plot(tree)
 
-# # #rename some entries so they match
-# # otl_tips_order[otl_tips_order == "Capra hircus (species in domain Eukaryota)"] <- "Capra hircus"
-# # otl_tips_order[otl_tips_order == "Hexaprotodon liberiensis"] <- "Choeropsis liberiensis"
-# # otl_tips_order[otl_tips_order == "Urocitellus columbianus"] <- "Spermophilus columbianus"
-# 
-# #to view the lists lining up
+
+
+#to view the lists lining up
 cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
 
 name.check(tree, StressData$Species)
 
 # Basal Corticosterone ~ Body Mass ----------------------------------------
 
-tree.short <- drop.tip(tree, StressData%>% 
-                        drop_na(BasalCorticosterone))
+BasCrtstnMass_data = StressData %>% drop_na(BasalCorticosterone)
 
-#build covariance matrix
-brown <- corBrownian(phy = tree, form = ~Species) 
+rownames(BasCrtstnMass_data) = BasCrtstnMass_data$Species
+
+tree[["tip.label"]] = sub("\\_ott.*","",tree[["tip.label"]])
+tree[["tip.label"]] = sub("_"," ",tree[["tip.label"]])
+tree[["tip.label"]] = sub("_"," ",tree[["tip.label"]])
+tree[["tip.label"]]
+
+#tree$tip.label <- strip_ott_ids(tree$tip.label, remove_underscores = T)
+BasCrtstnMass_Species = name.check(tree, BasCrtstnMass_data)
+BasCrtstnMass_Species
+
+BasCrtstnMass_tree <- drop.tip(tree, BasCrtstnMass_Species$tree_not_data)
 
 
 #Build gls model 
 BasCrtstnMass_PGLS <- gls(log(BasalCorticosterone) ~ log(BodyMassAnAge), 
-                   data = StressData %>% 
-                     drop_na(BasalCorticosterone), 
-                   correlation = brown, 
+                   data = BasCrtstnMass_data, 
+                   correlation = corBrownian(phy = BasCrtstnMass_tree, form = ~Species), 
                    method = "ML") #ML = log-likelihood is maximized
 # residuals(BasCrtstnMass_PGLS)
 
@@ -48,14 +54,12 @@ BasCrtstnMass_RSq_PGLS <- R2_lik(BasCrtstnMass_PGLS)
 
 #Build ordinary linear model 
 BasCrtstnMass_Ordinary <- lm(log(BasalCorticosterone) ~ log(BodyMassAnAge),
-                      data=StressData %>% 
-                        drop_na(BasalCorticosterone))
+                      data=BasCrtstnMass_data)
 
 BasCrtstnMass_Summ_Ordinary <- summary(BasCrtstnMass_Ordinary)
 
 BasCrtstnMass_Plot <-
-  ggplot(data = StressData %>%
-           drop_na(BasalCorticosterone),
+  ggplot(data = BasCrtstnMass_data,
          aes(x = log(BodyMassAnAge), y = log(BasalCorticosterone))) +
   geom_point(aes(colour = Group)) +
   geom_smooth(method=lm, linewidth = 0.5, linetype = 1, colour = "black") +
