@@ -15,35 +15,24 @@ tree <- read.nexus("Outputs/StressTree_AllSpecies.nex")
 
 plot(tree)
 
-
-
 #to view the lists lining up
 cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
 
-name.check(tree, StressData$Species)
-
 # Basal Corticosterone ~ Body Mass ----------------------------------------
 
+#Filter out blank rows of Basal Corticosterone
 BasCrtstnMass_data = StressData %>% drop_na(BasalCorticosterone)
 
+#Setting row names to map the tree to
 rownames(BasCrtstnMass_data) = BasCrtstnMass_data$Species
 
-tree[["tip.label"]] = sub("\\_ott.*","",tree[["tip.label"]])
-tree[["tip.label"]] = sub("_"," ",tree[["tip.label"]])
-tree[["tip.label"]] = sub("_"," ",tree[["tip.label"]])
-tree[["tip.label"]]
-
-#tree$tip.label <- strip_ott_ids(tree$tip.label, remove_underscores = T)
-BasCrtstnMass_Species = name.check(tree, BasCrtstnMass_data)
-BasCrtstnMass_Species
-
-BasCrtstnMass_tree <- drop.tip(tree, BasCrtstnMass_Species$tree_not_data)
-
+#Remove tree species not in the basal corticosterone data
+BasCrtstnMass_Tree <- drop.tip(tree, name.check(tree, BasCrtstnMass_data)$tree_not_data)
 
 #Build gls model 
 BasCrtstnMass_PGLS <- gls(log(BasalCorticosterone) ~ log(BodyMassAnAge), 
                    data = BasCrtstnMass_data, 
-                   correlation = corBrownian(phy = BasCrtstnMass_tree, form = ~Species), 
+                   correlation = corBrownian(phy = BasCrtstnMass_Tree, form = ~Species), 
                    method = "ML") #ML = log-likelihood is maximized
 # residuals(BasCrtstnMass_PGLS)
 
@@ -76,10 +65,18 @@ ggsave(filename = "Outputs/BasCrtstnMass_Plot.png",
 
 # Elevated Corticosterone ~ Basal Corticosterone model ------------------------
 
+#Filter out blank rows of Basal Corticosterone
+ElvCrtstnBasCrtstn_data = StressData %>% drop_na(c(BasalCorticosterone, ElevCorticosterone))
+
+#Setting row names to map the tree to
+rownames(ElvCrtstnBasCrtstn_data) = ElvCrtstnBasCrtstn_data$Species
+
+#Remove tree species not in the basal and elevated corticosterone data
+ElvCrtstnBasCrtstn_Tree <- drop.tip(tree, name.check(tree, ElvCrtstnBasCrtstn_data)$tree_not_data)
+
 ElvCrtstnBasCrtstn_PGLS <- gls(log(ElevCorticosterone) ~ log(BasalCorticosterone),
-                  data=StressData %>%
-                    drop_na(c(BasalCorticosterone, ElevCorticosterone)), 
-                  correlation = brown, 
+                  data=ElvCrtstnBasCrtstn_data, 
+                  correlation = corBrownian(phy = ElvCrtstnBasCrtstn_Tree, form = ~Species), 
                   method="ML")
 
 #Get values from the model 
@@ -89,21 +86,20 @@ ElvCrtstnBasCrtstn_RSq_PGLS <- R2_lik(ElvCrtstnBasCrtstn_PGLS)
 
 #Build ordinary linear model 
 ElvCrtstnBasCrtstn_Ordinary <- lm(log(ElevCorticosterone) ~ log(BasalCorticosterone),
-                     data=StressData %>%
-                       drop_na(c(BasalCorticosterone, ElevCorticosterone)))
+                     data=ElvCrtstnBasCrtstn_data)
 
 ElvCrtstnBasCrtstn_Summ_Ordinary <- summary(ElvCrtstnBasCrtstn_Ordinary)
 
 ElvCrtstnBasCrtstn_Plot <- 
-  ggplot(data = StressData %>% drop_na(c(BasalCorticosterone, ElevCorticosterone)),
+  ggplot(data = ElvCrtstnBasCrtstn_data,
          aes(x = log(BasalCorticosterone), y = log(ElevCorticosterone))) +
   geom_point(aes(colour = Group)) +
   geom_smooth(method=lm, linewidth = 0.5, linetype = 1, colour = "black") +
   theme_classic() +
-  labs(x = "Basal Corticosterone (ng/g)",
-       y = "Elevated Corticosterone (ng/g)") +
+  labs(x = "ln Basal Corticosterone (ng/g)",
+       y = "ln Elevated Corticosterone (ng/g)") +
   geom_text(aes(label = list(bquote(y==~ .(round(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[2,1], 2)))),
-                 x = 500, y = 3), parse = TRUE)
+                 x = 5, y = 3), parse = TRUE)
 
 ElvCrtstnBasCrtstn_Plot
 ggsave(filename = "Outputs/ElvCrtstnBasCrtstn_Plot.png",
@@ -113,11 +109,20 @@ ggsave(filename = "Outputs/ElvCrtstnBasCrtstn_Plot.png",
 
 # Basal Cortisol ~ Body Mass ----------------------------------------------
 
+
+#Filter out blank rows of Basal Corticosterone
+BasCrtsolMass_data = StressData %>% drop_na(BasalCortisol)
+
+#Setting row names to map the tree to
+rownames(BasCrtsolMass_data) = BasCrtsolMass_data$Species
+
+#Remove tree species not in the basal corticosterone data
+BasCrtsolMass_Tree <- drop.tip(tree, name.check(tree, BasCrtsolMass_data)$tree_not_data)
+
 #Build gls model 
 BasCrtsolMass_PGLS <- gls(log(BasalCortisol) ~ log(BodyMassAnAge), 
-                          data = StressData %>% 
-                            drop_na(BasalCortisol), 
-                          correlation = brown, 
+                          data = BasCrtsolMass_data, 
+                          correlation = corBrownian(phy = BasCrtsolMass_Tree, form = ~Species), 
                           method = "ML") #ML = log-likelihood is maximized
 
 #Get values from the model 
@@ -127,14 +132,12 @@ BasCrtsolMass_RSq_PGLS <- R2_lik(BasCrtsolMass_PGLS)
 
 #Build ordinary linear model 
 BasCrtsolMass_Ordinary <- lm(log(BasalCortisol) ~ log(BodyMassAnAge),
-                             data=StressData %>% 
-                               drop_na(BasalCortisol))
+                             data=BasCrtsolMass_data)
 
 BasCrtsolMass_Summ_Ordinary <- summary(BasCrtsolMass_Ordinary)
 
 BasCrtsolMass_Plot <- 
-  ggplot(data = StressData %>% 
-           drop_na(BasalCortisol),
+  ggplot(data = BasCrtsolMass_data,
          aes(x = log(BodyMassAnAge), y = log(BasalCortisol))) +
   geom_point(aes(colour = Group)) +
   geom_smooth(method=lm, linewidth = 0.5, linetype = 1, colour = "black") +
@@ -213,9 +216,9 @@ write.csv(StatsTab_Ordinary, "Outputs/StatsTab_Ordinary.csv")
 
 # Validate Models ---------------------------------------------------------
 
-hist(log(rawdata$BasalCorticosterone))
-hist(log(rawdata$ElevCorticosterone))
-hist(log(rawdata$BodyMassAnAge))
+hist(log(StressData$BasalCorticosterone))
+hist(log(StressData$ElevCorticosterone))
+hist(log(StressData$BodyMassAnAge))
 
 qqnorm(BasCrtstnMass_PGLS) #qqplot, plot function doesn't work with the PGLS objects
 plot(BasCrtstnMass_Ordinary, 2) #qqplot

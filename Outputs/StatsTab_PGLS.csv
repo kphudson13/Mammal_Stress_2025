@@ -1,0 +1,4 @@
+"","Estimate","SE Est.","T value","p value","Lower 95 CI","Upper 95 CI","Intercept","R Squared"
+"Basal Corticosterone ~ Body Mass",-0.14,0.13,-1.09,0.287224,-0.4,0.12,6.31,0.05
+"Elevated Corticosterone ~ Basal Corticosterone",0.51,0.28,1.8,0.08854,-0.08,1.1,4.07,-0.36
+"Basal Cortisol ~ Body Mass",-0.36,0.11,-3.11,0.003739,-0.59,-0.12,8.27,-0.14
