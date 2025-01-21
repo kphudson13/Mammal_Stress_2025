@@ -1,155 +1,155 @@
 #NEXUS
-[R-package APE, Fri Jan 17 15:18:56 2025]
+[R-package APE, Tue Jan 21 12:31:12 2025]
 
 BEGIN TAXA;
 	DIMENSIONS NTAX = 71;
 	TAXLABELS
-		Gerbillus_gerbillus_ott404779
-		Gerbillus_pyramidum_ott404782
-		Gerbillus_nanus_ott404777
-		Gerbillus_andersoni_ott3608937
-		Acomys_cahirinus_ott816259
-		Peromyscus_maniculatus_ott377525
-		Mesocricetus_auratus_ott391631
-		Octodon_degus_ott692698
-		Cavia_porcellus_ott744000
-		Marmota_flaviventris_ott63459
-		Urocitellus_columbianus_ott1014254
-		Lepus_americanus_ott923734
-		Papio_ursinus_ott203159
-		Macaca_tonkeana_ott407753
-		Pan_troglodytes_ott417950
-		Gorilla_gorilla_gorilla_ott417953
-		Hylobates_pileatus_ott995054
-		Sapajus_apella_ott197026
-		Sapajus_libidinosus_ott748283
-		Alouatta_pigra_ott558066
-		Microcebus_murinus_ott311211
-		Propithecus_verreauxi_ott696018
-		Otolemur_garnettii_ott885705
-		Cervus_elaphus_ott936014
-		Mazama_gouazoupira_ott15447
-		Blastocerus_dichotomus_ott678842
-		Odocoileus_virginianus_ott410145
-		Rangifer_tarandus_granti_ott333726
-		Rangifer_tarandus_tarandus_ott776638
-		Capreolus_capreolus_ott460517
-		Capra_hircus_(species_in_domain_Eukaryota)_ott19017
-		Ovibos_moschatus_ott123197
-		Connochaetes_taurinus_ott19028
-		Syncerus_caffer_ott644255
-		Bos_taurus_ott490099
-		Moschus_berezovskii_ott807545
-		Giraffa_camelopardalis_ott768674
-		Tursiops_truncatus_ott124230
-		Eubalaena_glacialis_ott397247
-		Hexaprotodon_liberiensis_ott662806
-		Pecari_tajacu_ott1037242
-		Camelus_dromedarius_ott510752
-		Equus_caballus_ott1068218
-		Equus_grevyi_ott1068209
-		Ceratotherium_simum_ott1034198
-		Rhinoceros_unicornis_ott1087496
-		Mustela_nigripes_ott541439
-		Ursus_maritimus_ott10732
-		Ursus_arctos_horribilis_ott350099
-		Ursus_thibetanus_ott872580
-		Melursus_ursinus_ott297463
-		Ailuropoda_melanoleuca_ott872573
-		Eumetopias_jubatus_ott949686
-		Lycaon_pictus_ott821953
-		Canis_rufus_ott113383
-		Cerdocyon_thous_ott821960
-		Vulpes_lagopus_ott775766
-		Vulpes_vulpes_ott821964
-		Mungos_mungo_ott333729
-		Suricata_suricatta_ott803645
-		Crocuta_crocuta_ott397157
-		Panthera_tigris_tigris_ott19399
-		Panthera_tigris_sumatrae_ott42316
-		Panthera_leo_bleyenberghi_ott825431
-		Panthera_onca_ott42322
-		Neofelis_nebulosa_ott763016
-		Felis_catus_ott563166
-		Acinonyx_jubatus_ott752759
-		Elephas_maximus_ott541928
-		Loxodonta_africana_ott541936
-		Tolypeutes_matacus_ott515354
+		Gerbillus gerbillus
+		Gerbillus pyramidum
+		Gerbillus nanus
+		Gerbillus andersoni
+		Acomys cahirinus
+		Peromyscus maniculatus
+		Mesocricetus auratus
+		Octodon degus
+		Cavia porcellus
+		Marmota flaviventris
+		Urocitellus columbianus
+		Lepus americanus
+		Papio ursinus
+		Macaca tonkeana
+		Pan troglodytes
+		Gorilla gorilla gorilla
+		Hylobates pileatus
+		Sapajus apella
+		Sapajus libidinosus
+		Alouatta pigra
+		Microcebus murinus
+		Propithecus verreauxi
+		Otolemur garnettii
+		Cervus elaphus
+		Mazama gouazoupira
+		Blastocerus dichotomus
+		Odocoileus virginianus
+		Rangifer tarandus granti
+		Rangifer tarandus tarandus
+		Capreolus capreolus
+		Capra aegargrus hircus
+		Ovibos moschatus
+		Connochaetes taurinus
+		Syncerus caffer
+		Bos taurus
+		Moschus berezovskii
+		Giraffa camelopardalis
+		Tursiops truncatus
+		Eubalaena glacialis
+		Choeropsis liberiensis
+		Pecari tajacu
+		Camelus dromedarius
+		Equus caballus
+		Equus grevyi
+		Ceratotherium simum
+		Rhinoceros unicornis
+		Mustela nigripes
+		Ursus maritimus
+		Ursus arctos horribilis
+		Ursus thibetanus
+		Melursus ursinus
+		Ailuropoda melanoleuca
+		Eumetopias jubatus
+		Lycaon pictus
+		Canis rufus
+		Cerdocyon thous
+		Vulpes lagopus
+		Vulpes vulpes
+		Mungos mungo
+		Suricata suricatta
+		Crocuta crocuta
+		Panthera tigris tigris
+		Panthera tigris sumatrae
+		Panthera leo bleyenberghi
+		Panthera onca
+		Neofelis nebulosa
+		Felis catus
+		Acinonyx jubatus
+		Elephas maximus
+		Loxodonta africana
+		Tolypeutes matacus
 	;
 END;
 BEGIN TREES;
 	TRANSLATE
-		1	Gerbillus_gerbillus_ott404779,
-		2	Gerbillus_pyramidum_ott404782,
-		3	Gerbillus_nanus_ott404777,
-		4	Gerbillus_andersoni_ott3608937,
-		5	Acomys_cahirinus_ott816259,
-		6	Peromyscus_maniculatus_ott377525,
-		7	Mesocricetus_auratus_ott391631,
-		8	Octodon_degus_ott692698,
-		9	Cavia_porcellus_ott744000,
-		10	Marmota_flaviventris_ott63459,
-		11	Urocitellus_columbianus_ott1014254,
-		12	Lepus_americanus_ott923734,
-		13	Papio_ursinus_ott203159,
-		14	Macaca_tonkeana_ott407753,
-		15	Pan_troglodytes_ott417950,
-		16	Gorilla_gorilla_gorilla_ott417953,
-		17	Hylobates_pileatus_ott995054,
-		18	Sapajus_apella_ott197026,
-		19	Sapajus_libidinosus_ott748283,
-		20	Alouatta_pigra_ott558066,
-		21	Microcebus_murinus_ott311211,
-		22	Propithecus_verreauxi_ott696018,
-		23	Otolemur_garnettii_ott885705,
-		24	Cervus_elaphus_ott936014,
-		25	Mazama_gouazoupira_ott15447,
-		26	Blastocerus_dichotomus_ott678842,
-		27	Odocoileus_virginianus_ott410145,
-		28	Rangifer_tarandus_granti_ott333726,
-		29	Rangifer_tarandus_tarandus_ott776638,
-		30	Capreolus_capreolus_ott460517,
-		31	Capra_hircus_(species_in_domain_Eukaryota)_ott19017,
-		32	Ovibos_moschatus_ott123197,
-		33	Connochaetes_taurinus_ott19028,
-		34	Syncerus_caffer_ott644255,
-		35	Bos_taurus_ott490099,
-		36	Moschus_berezovskii_ott807545,
-		37	Giraffa_camelopardalis_ott768674,
-		38	Tursiops_truncatus_ott124230,
-		39	Eubalaena_glacialis_ott397247,
-		40	Hexaprotodon_liberiensis_ott662806,
-		41	Pecari_tajacu_ott1037242,
-		42	Camelus_dromedarius_ott510752,
-		43	Equus_caballus_ott1068218,
-		44	Equus_grevyi_ott1068209,
-		45	Ceratotherium_simum_ott1034198,
-		46	Rhinoceros_unicornis_ott1087496,
-		47	Mustela_nigripes_ott541439,
-		48	Ursus_maritimus_ott10732,
-		49	Ursus_arctos_horribilis_ott350099,
-		50	Ursus_thibetanus_ott872580,
-		51	Melursus_ursinus_ott297463,
-		52	Ailuropoda_melanoleuca_ott872573,
-		53	Eumetopias_jubatus_ott949686,
-		54	Lycaon_pictus_ott821953,
-		55	Canis_rufus_ott113383,
-		56	Cerdocyon_thous_ott821960,
-		57	Vulpes_lagopus_ott775766,
-		58	Vulpes_vulpes_ott821964,
-		59	Mungos_mungo_ott333729,
-		60	Suricata_suricatta_ott803645,
-		61	Crocuta_crocuta_ott397157,
-		62	Panthera_tigris_tigris_ott19399,
-		63	Panthera_tigris_sumatrae_ott42316,
-		64	Panthera_leo_bleyenberghi_ott825431,
-		65	Panthera_onca_ott42322,
-		66	Neofelis_nebulosa_ott763016,
-		67	Felis_catus_ott563166,
-		68	Acinonyx_jubatus_ott752759,
-		69	Elephas_maximus_ott541928,
-		70	Loxodonta_africana_ott541936,
-		71	Tolypeutes_matacus_ott515354
+		1	Gerbillus gerbillus,
+		2	Gerbillus pyramidum,
+		3	Gerbillus nanus,
+		4	Gerbillus andersoni,
+		5	Acomys cahirinus,
+		6	Peromyscus maniculatus,
+		7	Mesocricetus auratus,
+		8	Octodon degus,
+		9	Cavia porcellus,
+		10	Marmota flaviventris,
+		11	Urocitellus columbianus,
+		12	Lepus americanus,
+		13	Papio ursinus,
+		14	Macaca tonkeana,
+		15	Pan troglodytes,
+		16	Gorilla gorilla gorilla,
+		17	Hylobates pileatus,
+		18	Sapajus apella,
+		19	Sapajus libidinosus,
+		20	Alouatta pigra,
+		21	Microcebus murinus,
+		22	Propithecus verreauxi,
+		23	Otolemur garnettii,
+		24	Cervus elaphus,
+		25	Mazama gouazoupira,
+		26	Blastocerus dichotomus,
+		27	Odocoileus virginianus,
+		28	Rangifer tarandus granti,
+		29	Rangifer tarandus tarandus,
+		30	Capreolus capreolus,
+		31	Capra aegargrus hircus,
+		32	Ovibos moschatus,
+		33	Connochaetes taurinus,
+		34	Syncerus caffer,
+		35	Bos taurus,
+		36	Moschus berezovskii,
+		37	Giraffa camelopardalis,
+		38	Tursiops truncatus,
+		39	Eubalaena glacialis,
+		40	Choeropsis liberiensis,
+		41	Pecari tajacu,
+		42	Camelus dromedarius,
+		43	Equus caballus,
+		44	Equus grevyi,
+		45	Ceratotherium simum,
+		46	Rhinoceros unicornis,
+		47	Mustela nigripes,
+		48	Ursus maritimus,
+		49	Ursus arctos horribilis,
+		50	Ursus thibetanus,
+		51	Melursus ursinus,
+		52	Ailuropoda melanoleuca,
+		53	Eumetopias jubatus,
+		54	Lycaon pictus,
+		55	Canis rufus,
+		56	Cerdocyon thous,
+		57	Vulpes lagopus,
+		58	Vulpes vulpes,
+		59	Mungos mungo,
+		60	Suricata suricatta,
+		61	Crocuta crocuta,
+		62	Panthera tigris tigris,
+		63	Panthera tigris sumatrae,
+		64	Panthera leo bleyenberghi,
+		65	Panthera onca,
+		66	Neofelis nebulosa,
+		67	Felis catus,
+		68	Acinonyx jubatus,
+		69	Elephas maximus,
+		70	Loxodonta africana,
+		71	Tolypeutes matacus
 	;
 	TREE * UNTITLED = [&R] (((((((((3:0.04285714286,4:0.04285714286,(1:0.01428571429,2:0.01428571429)mrcaott404779ott5925550:0.02857142857)mrcaott89162ott135787:0.01428571429,5:0.05714285714)mrcaott19510ott154782:0.02857142857,(6:0.01428571429,7:0.01428571429)Cricetidae_ott671049:0.07142857143)mrcaott102ott739:0.02857142857,(8:0.01428571429,9:0.01428571429)mrcaott38834ott44975:0.1)mrcaott42ott38834:0.02857142857,(10:0.01428571429,11:0.01428571429)mrcaott10477ott136299:0.1285714286)mrcaott42ott10477:0.01428571429,12:0.1571428571)mrcaott42ott29157:0.1571428571,((((13:0.01428571429,14:0.01428571429)mrcaott33609ott111862:0.04285714286,((15:0.01428571429,16:0.01428571429)Homininae_ott312031:0.01428571429,17:0.02857142857)mrcaott83926ott96938:0.02857142857)mrcaott786ott83926:0.04285714286,((19:0.01428571429,18:0.01428571429)mrcaott299416ott748283:0.01428571429,20:0.02857142857)mrcaott2025ott57134:0.07142857143)Simiiformes_ott386195:0.04285714286,((21:0.01428571429,22:0.01428571429)mrcaott3428ott132960:0.01428571429,23:0.02857142857)Strepsirrhini_ott702147:0.1142857143)mrcaott786ott3428:0.1714285714)Euarchontoglires_ott392222:0.6428571429,((((((((24:0.08571428571,((((25:0.01428571429,26:0.01428571429)mrcaott15447ott678842:0.01428571429,27:0.02857142857)mrcaott15447ott90636:0.02857142857,(28:0.01428571429,29:0.01428571429)Rangifer_tarandus_ott410153:0.04285714286)mrcaott15447ott114864:0.01428571429,30:0.07142857143)mrcaott15447ott54038:0.01428571429)Cervidae_ott460505:0.08571428571,((((31:0.01428571429,32:0.01428571429)Caprinae_ott122647:0.01428571429,33:0.02857142857)mrcaott20474ott98208:0.02857142857,(34:0.01428571429,35:0.01428571429)mrcaott73074ott354607:0.04285714286)Bovidae_ott768677:0.01428571429,36:0.07142857143)mrcaott20474ott233507:0.1)mrcaott1548ott20474:0.01428571429,37:0.1857142857)Pecora_ott403912:0.04285714286,((38:0.01428571429,39:0.01428571429)mrcaott5256ott44568:0.01428571429,40:0.02857142857)Whippomorpha_ott7655791:0.2)mrcaott1548ott5256:0.01428571429,41:0.2428571429)mrcaott1548ott21987:0.01428571429,42:0.2571428571)Artiodactyla_ott622916:0.05714285714,((43:0.01428571429,44:0.01428571429)Equus_ott541951:0.02857142857,(45:0.01428571429,46:0.01428571429)Rhinocerotidae_ott1034218:0.02857142857)Perissodactyla_ott541948:0.2714285714)mrcaott1548ott3021:0.3142857143,(((47:0.08571428571,(((((48:0.01428571429,49:0.01428571429)mrcaott10732ott350099:0.01428571429,50:0.02857142857)mrcaott10732ott300426:0.01428571429,51:0.04285714286)mrcaott10732ott297463:0.01428571429,52:0.05714285714)Ursidae_ott297458:0.01428571429,53:0.07142857143)mrcaott10732ott22064:0.01428571429)mrcaott4697ott10732:0.07142857143,((55:0.02857142857,54:0.02857142857,56:0.02857142857)mrcaott47497ott110766:0.02857142857,(57:0.01428571429,58:0.01428571429)mrcaott297455ott419501:0.04285714286)mrcaott47497ott77889:0.1)Caniformia_ott827263:0.1428571429,(((59:0.01428571429,60:0.01428571429)mrcaott6940ott803645:0.01428571429,61:0.02857142857)mrcaott6940ott383901:0.1,((((62:0.01428571429,63:0.01428571429)Panthera_tigris_ott42314:0.02857142857,(65:0.01428571429,64:0.01428571429)mrcaott371429ott735488:0.02857142857)Panthera_ott563154:0.01428571429,66:0.05714285714)mrcaott19397ott882765:0.02857142857,(67:0.01428571429,68:0.01428571429)mrcaott54737ott86162:0.07142857143)Felidae_ott563159:0.04285714286)mrcaott6940ott19397:0.1714285714)mrcaott4697ott6940:0.3285714286)mrcaott1548ott4697:0.3285714286)Boreoeutheria_ott5334778:0.04285714286,((69:0.01428571429,70:0.01428571429)Elephantidae_ott541924:0.01428571429,71:0.02857142857)Atlantogenata_ott6520513:0.9714285714)mrcaott42ott72667;
 END;
