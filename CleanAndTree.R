@@ -36,3 +36,10 @@ cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
 write.nexus(tree, file = "Outputs/StressTree_AllSpecies.nex")
 
 write.csv(StressData, file = "StressDataClean.csv")
+
+png("Outputs/FullTree_PGLS.png",
+    height = 3000,
+    width = 1800,
+    res = 200)
+plot(tree)
+dev.off()
