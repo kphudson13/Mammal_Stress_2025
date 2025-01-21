@@ -199,39 +199,46 @@ ggsave(filename = "Outputs/ElvCrtsolBasCrtsol_Plot.png",
 #PGLS pic and table first 
 StatsTab_PGLS <- rbind(cbind(coefficients(BasCrtstnMass_Summ_PGLS), BasCrtstnMass_CI_PGLS[["coef"]]),
                        cbind(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS), ElvCrtstnBasCrtstn_CI_PGLS[["coef"]]),
-                       cbind(coefficients(BasCrtsolMass_Summ_PGLS), BasCrtsolMass_CI_PGLS[["coef"]]))%>%
+                       cbind(coefficients(BasCrtsolMass_Summ_PGLS), BasCrtsolMass_CI_PGLS[["coef"]]),
+                       cbind(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS), ElvCrtsolBasCrtsol_CI_PGLS[["coef"]]))%>%
   as.data.frame(.) %>%
   select(., -"est.") %>% #because we already have an estimate column
-  slice(-c(1,3,5)) %>% #cut out all the rows of intercept stats
+  slice(-c(1,3,5,7)) %>% #cut out all the rows of intercept stats
   cbind(., c(coefficients(BasCrtstnMass_Summ_PGLS)[1,1],
              coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[1,1],
-             coefficients(BasCrtsolMass_Summ_PGLS)[1,1]), #add back in a column for the intercept
-        c(BasCrtstnMass_RSq_PGLS, ElvCrtstnBasCrtstn_RSq_PGLS, BasCrtsolMass_RSq_PGLS)) %>% #and a colum for RSq
+             coefficients(BasCrtsolMass_Summ_PGLS)[1,1],
+             coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[1,1]), #add back in a column for the intercept
+        c(BasCrtstnMass_RSq_PGLS, ElvCrtstnBasCrtstn_RSq_PGLS, BasCrtsolMass_RSq_PGLS, ElvCrtsolBasCrtsol_RSq_PGLS)) %>% #and a colum for RSq
   mutate(across(c(1,2,3,5,6,7,8), \(x) round(x, digits = 2))) %>% #new way to round w/ anonymous function
   mutate(across((4), \(x) round(x, digits = 6))) %>%
   `colnames<-`(c("Estimate", "SE Est.", "T value",  "p value", "Lower 95 CI", "Upper 95 CI", "Intercept", "R Squared")) %>%
   `rownames<-`(c("Basal Corticosterone ~ Body Mass", 
                  "Elevated Corticosterone ~ Basal Corticosterone",
-                 "Basal Cortisol ~ Body Mass"))
+                 "Basal Cortisol ~ Body Mass",
+                 "Elevated Cortisol ~ Basal Cortisol"))
 
 #Ordinary LM pic and table second 
 StatsTab_Ordinary <- rbind(cbind(coefficients(BasCrtstnMass_Summ_Ordinary), confint(BasCrtstnMass_Ordinary)),
                            cbind(coefficients(ElvCrtstnBasCrtstn_Summ_Ordinary), confint(ElvCrtstnBasCrtstn_Ordinary)),
-                           cbind(coefficients(BasCrtsolMass_Summ_Ordinary), confint(BasCrtsolMass_Ordinary))) %>%
+                           cbind(coefficients(BasCrtsolMass_Summ_Ordinary), confint(BasCrtsolMass_Ordinary)),
+                           cbind(coefficients(ElvCrtsolBasCrtsol_Summ_Ordinary), confint(ElvCrtsolBasCrtsol_Ordinary))) %>%
   as.data.frame(.) %>%
-  slice(-c(1,3,5)) %>% #cut out all the rows of intercept stats
+  slice(-c(1,3,5,7)) %>% #cut out all the rows of intercept stats
   cbind(., c(coefficients(BasCrtstnMass_Ordinary)[1],
              coefficients(ElvCrtstnBasCrtstn_Ordinary)[1],
-             coefficients(BasCrtsolMass_Ordinary)[1]), #add back in a column for the intercept
+             coefficients(BasCrtsolMass_Ordinary)[1],
+             coefficients(ElvCrtsolBasCrtsol_Ordinary)[1]), #add back in a column for the intercept
         c(BasCrtstnMass_Summ_Ordinary$r.squared,
           ElvCrtstnBasCrtstn_Summ_Ordinary$r.squared,
-          BasCrtsolMass_Summ_Ordinary$r.squared)) %>% #and a colum for RSq
+          BasCrtsolMass_Summ_Ordinary$r.squared,
+          ElvCrtsolBasCrtsol_Summ_Ordinary$r.squared)) %>% #and a colum for RSq
   mutate(across(c(1,2,3,5,6,7,8), \(x) round(x, digits = 2))) %>% #new way to round w/ anonymous function
   mutate(across((4), \(x) round(x, digits = 6))) %>%
   `colnames<-`(c("Estimate", "SE Est.", "T value",  "p value", "Lower 95 CI", "Upper 95 CI", "Intercept", "R Squared")) %>%
   `rownames<-`(c("Basal Corticosterone ~ Body Mass", 
                  "Elevated Corticosterone ~ Basal Corticosterone",
-                 "Basal Cortisol ~ Body Mass"))
+                 "Basal Cortisol ~ Body Mass",
+                 "Elevated Cortisol ~ Basal Cortisol"))
 
 #set the theme for the table
 tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
