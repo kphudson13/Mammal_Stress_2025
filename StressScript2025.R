@@ -34,7 +34,6 @@ BasCrtstnMass_PGLS <- gls(log(BasalCorticosterone) ~ log(BodyMassAnAge),
                    data = BasCrtstnMass_data, 
                    correlation = corBrownian(phy = BasCrtstnMass_Tree, form = ~Species), 
                    method = "ML") #ML = log-likelihood is maximized
-# residuals(BasCrtstnMass_PGLS)
 
 #Get values from the model 
 BasCrtstnMass_Summ_PGLS <- summary(BasCrtstnMass_PGLS)
@@ -53,7 +52,7 @@ BasCrtstnMass_Plot <-
   geom_point(aes(colour = Group)) +
   geom_smooth(method=lm, linewidth = 0.5, linetype = 1, colour = "black") +
   theme_classic() +
-  labs(x = "Body Mass (g)",
+  labs(x = "ln Body Mass (g)",
        y = "ln Basal Corticosterone (ng/g)") +
   geom_text(aes(label = list(bquote(y==~ .(round(coefficients(BasCrtstnMass_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasCrtstnMass_Summ_PGLS)[2,1], 2)))),
                  x = 6, y = 3), parse = TRUE)
@@ -267,6 +266,8 @@ write.csv(StatsTab_Ordinary, "Outputs/StatsTab_Ordinary.csv")
 
 hist(log(StressData$BasalCorticosterone))
 hist(log(StressData$ElevCorticosterone))
+hist(log(StressData$BasalCortisol))
+hist(log(StressData$ElevCortisol))
 hist(log(StressData$BodyMassAnAge))
 
 qqnorm(BasCrtstnMass_PGLS) #qqplot, plot function doesn't work with the PGLS objects
@@ -277,6 +278,9 @@ plot(ElvCrtstnBasCrtstn_Ordinary, 2)
 
 qqnorm(BasCrtsolMass_PGLS) 
 plot(BasCrtsolMass_Ordinary, 2)
+
+qqnorm(ElvCrtsolBasCrtsol_PGLS) 
+plot(ElvCrtsolBasCrtsol_Ordinary, 2)
 
 #Build a function for the Fitted vs Residuals plot 
 Residual_Fun <- function(m) {
@@ -297,4 +301,5 @@ Residual_Fun(ElvCrtstnBasCrtstn_PGLS)
 Residual_Fun(ElvCrtstnBasCrtstn_Ordinary)
 Residual_Fun(BasCrtsolMass_PGLS)
 Residual_Fun(BasCrtsolMass_Ordinary)
-
+Residual_Fun(ElvCrtsolBasCrtsol_PGLS)
+Residual_Fun(ElvCrtsolBasCrtsol_Ordinary)
