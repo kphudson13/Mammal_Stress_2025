@@ -106,7 +106,6 @@ ggsave(filename = "Outputs/ElvCrtstnBasCrtstn_Plot.png",
        width = 5,
        height = 4)
 
-
 # Basal Cortisol ~ Body Mass ----------------------------------------------
 
 
@@ -149,6 +148,49 @@ BasCrtsolMass_Plot <-
 
 BasCrtsolMass_Plot
 ggsave(filename = "Outputs/BasCrtsolMass_Plot.png",
+       width = 5,
+       height = 4)
+
+# Elevated Cortisol ~ Basal Cortisol  model -------------------------------
+
+#Filter out blank rows of Basal Corticosterone
+ElvCrtsolBasCrtsol_data = StressData %>% drop_na(c(BasalCortisol, ElevCortisol))
+
+#Setting row names to map the tree to
+rownames(ElvCrtsolBasCrtsol_data) = ElvCrtsolBasCrtsol_data$Species
+
+#Remove tree species not in the basal and elevated corticosterone data
+ElvCrtsolBasCrtsol_Tree <- drop.tip(tree, name.check(tree, ElvCrtsolBasCrtsol_data)$tree_not_data)
+
+ElvCrtsolBasCrtsol_PGLS <- gls(log(ElevCortisol) ~ log(BasalCortisol),
+                               data=ElvCrtsolBasCrtsol_data, 
+                               correlation = corBrownian(phy = ElvCrtsolBasCrtsol_Tree, form = ~Species), 
+                               method="ML")
+
+#Get values from the model 
+ElvCrtsolBasCrtsol_Summ_PGLS <- summary(ElvCrtsolBasCrtsol_PGLS)
+ElvCrtsolBasCrtsol_CI_PGLS <- intervals(ElvCrtsolBasCrtsol_PGLS)
+ElvCrtsolBasCrtsol_RSq_PGLS <- R2_lik(ElvCrtsolBasCrtsol_PGLS)
+
+#Build ordinary linear model 
+ElvCrtsolBasCrtsol_Ordinary <- lm(log(ElevCortisol) ~ log(BasalCortisol),
+                                  data=ElvCrtsolBasCrtsol_data)
+
+ElvCrtsolBasCrtsol_Summ_Ordinary <- summary(ElvCrtsolBasCrtsol_Ordinary)
+
+ElvCrtsolBasCrtsol_Plot <- 
+  ggplot(data = ElvCrtsolBasCrtsol_data,
+         aes(x = log(BasalCortisol), y = log(ElevCortisol))) +
+  geom_point(aes(colour = Group)) +
+  geom_smooth(method=lm, linewidth = 0.5, linetype = 1, colour = "black") +
+  theme_classic() +
+  labs(x = "ln Basal Cortisol (ng/g)",
+       y = "ln Elevated Cortisol (ng/g)") +
+  geom_text(aes(label = list(bquote(y==~ .(round(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[2,1], 2)))),
+                x = 5, y = 3), parse = TRUE)
+
+ElvCrtsolBasCrtsol_Plot
+ggsave(filename = "Outputs/ElvCrtsolBasCrtsol_Plot.png",
        width = 5,
        height = 4)
 
