@@ -58,7 +58,7 @@ BasCrtstnMass_Plot <-
                  x = 6, y = 3), parse = TRUE)
 
 BasCrtstnMass_Plot
-ggsave(filename = "Outputs/BasCrtstnMass_Plot.png",
+ggsave(filename = "Outputs/Unfiltered/BasCrtstnMass_Plot.png",
        width = 5,
        height = 4)
 
@@ -101,7 +101,7 @@ ElvCrtstnBasCrtstn_Plot <-
                  x = 5, y = 3), parse = TRUE)
 
 ElvCrtstnBasCrtstn_Plot
-ggsave(filename = "Outputs/ElvCrtstnBasCrtstn_Plot.png",
+ggsave(filename = "Outputs/Unfiltered/ElvCrtstnBasCrtstn_Plot.png",
        width = 5,
        height = 4)
 
@@ -146,7 +146,7 @@ BasCrtsolMass_Plot <-
                  x = 6, y = 2), parse = TRUE)
 
 BasCrtsolMass_Plot
-ggsave(filename = "Outputs/BasCrtsolMass_Plot.png",
+ggsave(filename = "Outputs/Unfiltered/BasCrtsolMass_Plot.png",
        width = 5,
        height = 4)
 
@@ -189,7 +189,7 @@ ElvCrtsolBasCrtsol_Plot <-
                 x = 5, y = 3), parse = TRUE)
 
 ElvCrtsolBasCrtsol_Plot
-ggsave(filename = "Outputs/ElvCrtsolBasCrtsol_Plot.png",
+ggsave(filename = "Outputs/Unfiltered/ElvCrtsolBasCrtsol_Plot.png",
        width = 5,
        height = 4)
 
@@ -243,7 +243,7 @@ StatsTab_Ordinary <- rbind(cbind(coefficients(BasCrtstnMass_Summ_Ordinary), conf
 tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
                                    bg_params=list(fill="grey80")))
 #export stats table 
-png("Outputs/StatsTab_PGLS.png", 
+png("Outputs/Unfiltered/StatsTab_PGLS.png", 
     height = 130*nrow(StatsTab_PGLS), 
     width = 430*ncol(StatsTab_PGLS),
     res = 300)
@@ -251,15 +251,15 @@ grid.table(StatsTab_PGLS, theme = tt1)
 dev.off()
 
 #export stats table 
-png("Outputs/StatsTab_Ordinary.png", 
+png("Outputs/Unfiltered/StatsTab_Ordinary.png", 
     height = 130*nrow(StatsTab_Ordinary), 
     width = 430*ncol(StatsTab_Ordinary),
     res = 300)
 grid.table(StatsTab_Ordinary, theme = tt1)
 dev.off()
 
-write.csv(StatsTab_PGLS, "Outputs/StatsTab_PGLS.csv")
-write.csv(StatsTab_Ordinary, "Outputs/StatsTab_Ordinary.csv")
+write.csv(StatsTab_PGLS, "Outputs/Unfiltered/StatsTab_PGLS.csv")
+write.csv(StatsTab_Ordinary, "Outputs/Unfiltered/StatsTab_Ordinary.csv")
 
 
 # Validate Models ---------------------------------------------------------
