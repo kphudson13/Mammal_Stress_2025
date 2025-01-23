@@ -2,6 +2,7 @@
 library(ape)
 library(rotl) #pull from tree of life
 library(tidyverse)
+library(taxize) #pull upstream taxonomic data, package installed from github not CRAN
 
 rawdata <- read.csv("StressDataRaw.csv")
 # summary(rawdata)
