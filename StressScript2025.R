@@ -21,7 +21,7 @@ cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
 # Basal Corticosterone ~ Body Mass ----------------------------------------
 
 #Filter out blank rows of Basal Corticosterone
-BasCrtstnMass_data = StressData %>% drop_na(BasalCorticosterone)
+BasCrtstnMass_data <- StressData %>% drop_na(BasalCorticosterone)
 
 #Setting row names to map the tree to
 rownames(BasCrtstnMass_data) = BasCrtstnMass_data$Species
@@ -65,7 +65,7 @@ ggsave(filename = "Outputs/BasCrtstnMass_Plot.png",
 # Elevated Corticosterone ~ Basal Corticosterone model ------------------------
 
 #Filter out blank rows of Basal Corticosterone
-ElvCrtstnBasCrtstn_data = StressData %>% drop_na(c(BasalCorticosterone, ElevCorticosterone))
+ElvCrtstnBasCrtstn_data <- StressData %>% drop_na(c(BasalCorticosterone, ElevCorticosterone))
 
 #Setting row names to map the tree to
 rownames(ElvCrtstnBasCrtstn_data) = ElvCrtstnBasCrtstn_data$Species
@@ -109,7 +109,7 @@ ggsave(filename = "Outputs/ElvCrtstnBasCrtstn_Plot.png",
 
 
 #Filter out blank rows of Basal Corticosterone
-BasCrtsolMass_data = StressData %>% drop_na(BasalCortisol)
+BasCrtsolMass_data <- StressData %>% drop_na(BasalCortisol)
 
 #Setting row names to map the tree to
 rownames(BasCrtsolMass_data) = BasCrtsolMass_data$Species
@@ -153,7 +153,7 @@ ggsave(filename = "Outputs/BasCrtsolMass_Plot.png",
 # Elevated Cortisol ~ Basal Cortisol  model -------------------------------
 
 #Filter out blank rows of Basal Corticosterone
-ElvCrtsolBasCrtsol_data = StressData %>% drop_na(c(BasalCortisol, ElevCortisol))
+ElvCrtsolBasCrtsol_data <- StressData %>% drop_na(c(BasalCortisol, ElevCortisol))
 
 #Setting row names to map the tree to
 rownames(ElvCrtsolBasCrtsol_data) = ElvCrtsolBasCrtsol_data$Species
