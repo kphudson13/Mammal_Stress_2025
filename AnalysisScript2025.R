@@ -10,14 +10,6 @@ library(rr2) #for the R2.lik function
 library(gridExtra) #to set table themes
 
 
-StressData <- read.csv("StressDataClean.csv")
-tree <- read.nexus("Outputs/StressTree_AllSpecies.nex")
-
-plot(tree)
-
-#to view the lists lining up
-cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
-
 # Basal Corticosterone ~ Body Mass ----------------------------------------
 
 #Filter out blank rows of Basal Corticosterone
@@ -58,7 +50,7 @@ BasCrtstnMass_Plot <-
                  x = 6, y = 3), parse = TRUE)
 
 BasCrtstnMass_Plot
-ggsave(filename = "Outputs/Unfiltered/BasCrtstnMass_Plot.png",
+ggsave(filename = "BasCrtstnMass_Plot.png",
        width = 5,
        height = 4)
 
@@ -101,7 +93,7 @@ ElvCrtstnBasCrtstn_Plot <-
                  x = 5, y = 3), parse = TRUE)
 
 ElvCrtstnBasCrtstn_Plot
-ggsave(filename = "Outputs/Unfiltered/ElvCrtstnBasCrtstn_Plot.png",
+ggsave(filename = "ElvCrtstnBasCrtstn_Plot.png",
        width = 5,
        height = 4)
 
@@ -146,7 +138,7 @@ BasCrtsolMass_Plot <-
                  x = 6, y = 2), parse = TRUE)
 
 BasCrtsolMass_Plot
-ggsave(filename = "Outputs/Unfiltered/BasCrtsolMass_Plot.png",
+ggsave(filename = "BasCrtsolMass_Plot.png",
        width = 5,
        height = 4)
 
@@ -189,7 +181,7 @@ ElvCrtsolBasCrtsol_Plot <-
                 x = 5, y = 3), parse = TRUE)
 
 ElvCrtsolBasCrtsol_Plot
-ggsave(filename = "Outputs/Unfiltered/ElvCrtsolBasCrtsol_Plot.png",
+ggsave(filename = "ElvCrtsolBasCrtsol_Plot.png",
        width = 5,
        height = 4)
 
@@ -243,7 +235,7 @@ StatsTab_Ordinary <- rbind(cbind(coefficients(BasCrtstnMass_Summ_Ordinary), conf
 tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
                                    bg_params=list(fill="grey80")))
 #export stats table 
-png("Outputs/Unfiltered/StatsTab_PGLS.png", 
+png("StatsTab_PGLS.png", 
     height = 130*nrow(StatsTab_PGLS), 
     width = 430*ncol(StatsTab_PGLS),
     res = 300)
@@ -251,15 +243,15 @@ grid.table(StatsTab_PGLS, theme = tt1)
 dev.off()
 
 #export stats table 
-png("Outputs/Unfiltered/StatsTab_Ordinary.png", 
+png("StatsTab_Ordinary.png", 
     height = 130*nrow(StatsTab_Ordinary), 
     width = 430*ncol(StatsTab_Ordinary),
     res = 300)
 grid.table(StatsTab_Ordinary, theme = tt1)
 dev.off()
 
-write.csv(StatsTab_PGLS, "Outputs/Unfiltered/StatsTab_PGLS.csv")
-write.csv(StatsTab_Ordinary, "Outputs/Unfiltered/StatsTab_Ordinary.csv")
+write.csv(StatsTab_PGLS, "StatsTab_PGLS.csv")
+write.csv(StatsTab_Ordinary, "StatsTab_Ordinary.csv")
 
 
 # Validate Models ---------------------------------------------------------
@@ -303,3 +295,13 @@ Residual_Fun(BasCrtsolMass_PGLS)
 Residual_Fun(BasCrtsolMass_Ordinary)
 Residual_Fun(ElvCrtsolBasCrtsol_PGLS)
 Residual_Fun(ElvCrtsolBasCrtsol_Ordinary)
+
+hist(residuals(BasCrtstnMass_PGLS))
+hist(residuals(BasCrtstnMass_Ordinary))
+hist(residuals(ElvCrtstnBasCrtstn_PGLS))
+hist(residuals(ElvCrtstnBasCrtstn_Ordinary))
+hist(residuals(BasCrtsolMass_PGLS))
+hist(residuals(BasCrtsolMass_Ordinary))
+hist(residuals(ElvCrtsolBasCrtsol_PGLS))
+hist(residuals(ElvCrtsolBasCrtsol_Ordinary))
+
