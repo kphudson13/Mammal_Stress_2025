@@ -1,5 +1,5 @@
 #NEXUS
-[R-package APE, Wed Jan 22 11:31:27 2025]
+[R-package APE, Wed Jan 29 13:41:38 2025]
 
 BEGIN TAXA;
 	DIMENSIONS NTAX = 71;
@@ -34,7 +34,7 @@ BEGIN TAXA;
 		Rangifer tarandus granti
 		Rangifer tarandus tarandus
 		Capreolus capreolus
-		Capra aegargrus hircus
+		Capra hircus
 		Ovibos moschatus
 		Connochaetes taurinus
 		Syncerus caffer
@@ -109,7 +109,7 @@ BEGIN TREES;
 		28	Rangifer tarandus granti,
 		29	Rangifer tarandus tarandus,
 		30	Capreolus capreolus,
-		31	Capra aegargrus hircus,
+		31	Capra hircus,
 		32	Ovibos moschatus,
 		33	Connochaetes taurinus,
 		34	Syncerus caffer,

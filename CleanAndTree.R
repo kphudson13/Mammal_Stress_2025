@@ -20,6 +20,12 @@ StressData$Species[StressData$Species == "Gerbillus andersoni allenbyi"] <- "Ger
 StressData$Species[StressData$Species == "Capra aegargrus hircus"] <- "Capra hircus"
 
 
+#NCBI access is only available with an API key stored in the .Rprofile
+rawtaxa <- tax_name(unique(StressData$Species), get = "family", db = "ncbi")
+
+#Add family column from NCBI data
+StressData <- merge(StressData, rawtaxa[, c("query", "family")], by.x = "Species", by.y = "query")
+
 taxa <- tnrs_match_names(unique(StressData$Species)) #match names with open tree taxonomy 
 
 tree <- tol_induced_subtree(ott_ids = taxa$ott_id) #pull the subtree of the matched names 
@@ -48,18 +54,3 @@ plot(tree)
 dev.off()
 
 
-
-
-#NCBI access is only available with an API key stored in the .Rprofile
-rawtaxa <- classification(c("Elephas maximus", "Sapajus apella"), db = "ncbi")
-
-
-table <- tibble(names = names(rawtaxa), rawtaxa)
-
-
-# tibble(names = names(rawtaxa), rawtaxa) %>% 
-#   unnest() %>% 
-#   filter(rank %in% c("phylum","class","order","family","genus")) %>% 
-#   select(-id) %>% 
-#   spread(rank, name) %>% 
-#   select(name = rawtaxa, phylum, class, order, family, genus)
