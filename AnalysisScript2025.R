@@ -38,6 +38,9 @@ BasCrtstnMass_Ordinary <- lm(log(BasalCorticosterone) ~ log(BodyMassAnAge),
 
 BasCrtstnMass_Summ_Ordinary <- summary(BasCrtstnMass_Ordinary)
 
+geom_abline(intercept = coefficients(BasCrtstnMass_Summ_PGLS)[1,1], 
+            slope = coefficients(BasCrtstnMass_Summ_PGLS)[2,1])
+
 BasCrtstnMass_Plot <-
   ggplot(data = BasCrtstnMass_data,
          aes(x = log(BodyMassAnAge), y = log(BasalCorticosterone))) +
@@ -46,8 +49,9 @@ BasCrtstnMass_Plot <-
   theme_classic() +
   labs(x = "ln Body Mass (g)",
        y = "ln Basal Corticosterone (ng/g)") +
-  geom_text(aes(label = list(bquote(y==~ .(round(coefficients(BasCrtstnMass_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasCrtstnMass_Summ_PGLS)[2,1], 2)))),
-                 x = 6, y = 3), parse = TRUE)
+  annotate("text",  x = 6, y = 3,
+           label = list(bquote(y==~ .(round(coefficients(BasCrtstnMass_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasCrtstnMass_Summ_PGLS)[2,1], 2)))),
+           parse = TRUE)
 
 BasCrtstnMass_Plot
 ggsave(filename = "BasCrtstnMass_Plot.png",
@@ -89,8 +93,9 @@ ElvCrtstnBasCrtstn_Plot <-
   theme_classic() +
   labs(x = "ln Basal Corticosterone (ng/g)",
        y = "ln Elevated Corticosterone (ng/g)") +
-  geom_text(aes(label = list(bquote(y==~ .(round(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[2,1], 2)))),
-                 x = 5, y = 3), parse = TRUE)
+  annotate("text",  x = 6, y = 3,
+           label = list(bquote(y==~ .(round(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[2,1], 2)))),
+           parse = TRUE)
 
 ElvCrtstnBasCrtstn_Plot
 ggsave(filename = "ElvCrtstnBasCrtstn_Plot.png",
@@ -134,8 +139,9 @@ BasCrtsolMass_Plot <-
   theme_classic() +
   labs(x = "ln Body mass (g)",
        y = "ln Basal Cortisol (ng/g)") +
-  geom_text(aes(label = list(bquote(y==~ .(round(coefficients(BasCrtsolMass_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasCrtsolMass_Summ_PGLS)[2,1], 2)))),
-                 x = 6, y = 2), parse = TRUE)
+  annotate("text",  x = 6, y = 3,
+           label = list(bquote(y==~ .(round(coefficients(BasCrtsolMass_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasCrtsolMass_Summ_PGLS)[2,1], 2)))),
+           parse = TRUE)
 
 BasCrtsolMass_Plot
 ggsave(filename = "BasCrtsolMass_Plot.png",
@@ -177,8 +183,9 @@ ElvCrtsolBasCrtsol_Plot <-
   theme_classic() +
   labs(x = "ln Basal Cortisol (ng/g)",
        y = "ln Elevated Cortisol (ng/g)") +
-  geom_text(aes(label = list(bquote(y==~ .(round(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[2,1], 2)))),
-                x = 5, y = 3), parse = TRUE)
+  annotate("text",  x = 6, y = 3,
+           label = list(bquote(y==~ .(round(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[2,1], 2)))),
+           parse = TRUE)
 
 ElvCrtsolBasCrtsol_Plot
 ggsave(filename = "ElvCrtsolBasCrtsol_Plot.png",
