@@ -38,19 +38,23 @@ BasCrtstnMass_Ordinary <- lm(log(BasalCorticosterone) ~ log(BodyMassAnAge),
 
 BasCrtstnMass_Summ_Ordinary <- summary(BasCrtstnMass_Ordinary)
 
-geom_abline(intercept = coefficients(BasCrtstnMass_Summ_PGLS)[1,1], 
-            slope = coefficients(BasCrtstnMass_Summ_PGLS)[2,1])
 
 BasCrtstnMass_Plot <-
   ggplot(data = BasCrtstnMass_data,
          aes(x = log(BodyMassAnAge), y = log(BasalCorticosterone))) +
   geom_point(aes(colour = Group)) +
-  geom_smooth(method=lm, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_abline(intercept = coefficients(BasCrtstnMass_Summ_PGLS)[1,1], 
+              slope = coefficients(BasCrtstnMass_Summ_PGLS)[2,1],
+              linetype = 2) +
   theme_classic() +
   labs(x = "ln Body Mass (g)",
        y = "ln Basal Corticosterone (ng/g)") +
   annotate("text",  x = 6, y = 3,
-           label = list(bquote(y==~ .(round(coefficients(BasCrtstnMass_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasCrtstnMass_Summ_PGLS)[2,1], 2)))),
+           label = list(bquote(PGLS: y==~ .(round(coefficients(BasCrtstnMass_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasCrtstnMass_Summ_PGLS)[2,1], 2)))),
+           parse = TRUE) +
+  annotate("text",  x = 6, y = 2.5, 
+           label = list(bquote(LM: y==~ .(round(coefficients(BasCrtstnMass_Summ_Ordinary)[1,1], 2))~x^.(round(coefficients(BasCrtstnMass_Summ_Ordinary)[2,1], 2)))),
            parse = TRUE)
 
 BasCrtstnMass_Plot
@@ -89,12 +93,18 @@ ElvCrtstnBasCrtstn_Plot <-
   ggplot(data = ElvCrtstnBasCrtstn_data,
          aes(x = log(BasalCorticosterone), y = log(ElevCorticosterone))) +
   geom_point(aes(colour = Group)) +
-  geom_smooth(method=lm, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_abline(intercept = coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[1,1], 
+              slope = coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[2,1],
+              linetype = 2) +
   theme_classic() +
   labs(x = "ln Basal Corticosterone (ng/g)",
        y = "ln Elevated Corticosterone (ng/g)") +
   annotate("text",  x = 6, y = 3,
-           label = list(bquote(y==~ .(round(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[2,1], 2)))),
+           label = list(bquote(PGLS: y==~ .(round(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[2,1], 2)))),
+           parse = TRUE) +
+  annotate("text",  x = 6, y = 2.5,
+           label = list(bquote(LM: y==~ .(round(coefficients(ElvCrtstnBasCrtstn_Summ_Ordinary)[1,1], 2))~x^.(round(coefficients(ElvCrtstnBasCrtstn_Summ_Ordinary)[2,1], 2)))),
            parse = TRUE)
 
 ElvCrtstnBasCrtstn_Plot
@@ -135,12 +145,18 @@ BasCrtsolMass_Plot <-
   ggplot(data = BasCrtsolMass_data,
          aes(x = log(BodyMassAnAge), y = log(BasalCortisol))) +
   geom_point(aes(colour = Group)) +
-  geom_smooth(method=lm, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_abline(intercept = coefficients(BasCrtsolMass_Summ_PGLS)[1,1], 
+              slope = coefficients(BasCrtsolMass_Summ_PGLS)[2,1],
+              linetype = 2) +
   theme_classic() +
   labs(x = "ln Body mass (g)",
        y = "ln Basal Cortisol (ng/g)") +
-  annotate("text",  x = 6, y = 3,
-           label = list(bquote(y==~ .(round(coefficients(BasCrtsolMass_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasCrtsolMass_Summ_PGLS)[2,1], 2)))),
+  annotate("text",  x = 7, y = 2.5,
+           label = list(bquote(PGLS: y==~ .(round(coefficients(BasCrtsolMass_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasCrtsolMass_Summ_PGLS)[2,1], 2)))),
+           parse = TRUE) +
+  annotate("text",  x = 7, y = 2,
+           label = list(bquote(LM: y==~ .(round(coefficients(BasCrtsolMass_Summ_Ordinary)[1,1], 2))~x^.(round(coefficients(BasCrtsolMass_Summ_Ordinary)[2,1], 2)))),
            parse = TRUE)
 
 BasCrtsolMass_Plot
@@ -179,13 +195,20 @@ ElvCrtsolBasCrtsol_Plot <-
   ggplot(data = ElvCrtsolBasCrtsol_data,
          aes(x = log(BasalCortisol), y = log(ElevCortisol))) +
   geom_point(aes(colour = Group)) +
-  geom_smooth(method=lm, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_abline(intercept = coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[1,1], 
+              slope = coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[2,1],
+              linetype = 2) +
   theme_classic() +
   labs(x = "ln Basal Cortisol (ng/g)",
        y = "ln Elevated Cortisol (ng/g)") +
   annotate("text",  x = 6, y = 3,
-           label = list(bquote(y==~ .(round(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[2,1], 2)))),
+           label = list(bquote(PGLS: y==~ .(round(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[2,1], 2)))),
+           parse = TRUE) +
+  annotate("text",  x = 6, y = 2.5,
+           label = list(bquote(LM: y==~ .(round(coefficients(ElvCrtsolBasCrtsol_Summ_Ordinary)[1,1], 2))~x^.(round(coefficients(ElvCrtsolBasCrtsol_Summ_Ordinary)[2,1], 2)))),
            parse = TRUE)
+
 
 ElvCrtsolBasCrtsol_Plot
 ggsave(filename = "ElvCrtsolBasCrtsol_Plot.png",
