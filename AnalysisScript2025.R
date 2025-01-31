@@ -42,7 +42,7 @@ BasCrtstnMass_Summ_Ordinary <- summary(BasCrtstnMass_Ordinary)
 BasCrtstnMass_Plot <-
   ggplot(data = BasCrtstnMass_data,
          aes(x = log(BodyMassAnAge), y = log(BasalCorticosterone))) +
-  geom_point(aes(colour = Group)) +
+  geom_point(aes(shape = Group)) +
   geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
   geom_abline(intercept = coefficients(BasCrtstnMass_Summ_PGLS)[1,1], 
               slope = coefficients(BasCrtstnMass_Summ_PGLS)[2,1],
@@ -92,7 +92,7 @@ ElvCrtstnBasCrtstn_Summ_Ordinary <- summary(ElvCrtstnBasCrtstn_Ordinary)
 ElvCrtstnBasCrtstn_Plot <- 
   ggplot(data = ElvCrtstnBasCrtstn_data,
          aes(x = log(BasalCorticosterone), y = log(ElevCorticosterone))) +
-  geom_point(aes(colour = Group)) +
+  geom_point(aes(shape = Group)) +
   geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
   geom_abline(intercept = coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[1,1], 
               slope = coefficients(ElvCrtstnBasCrtstn_Summ_PGLS)[2,1],
@@ -144,7 +144,7 @@ BasCrtsolMass_Summ_Ordinary <- summary(BasCrtsolMass_Ordinary)
 BasCrtsolMass_Plot <- 
   ggplot(data = BasCrtsolMass_data,
          aes(x = log(BodyMassAnAge), y = log(BasalCortisol))) +
-  geom_point(aes(colour = Group)) +
+  geom_point(aes(shape = Group)) +
   geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
   geom_abline(intercept = coefficients(BasCrtsolMass_Summ_PGLS)[1,1], 
               slope = coefficients(BasCrtsolMass_Summ_PGLS)[2,1],
@@ -194,7 +194,7 @@ ElvCrtsolBasCrtsol_Summ_Ordinary <- summary(ElvCrtsolBasCrtsol_Ordinary)
 ElvCrtsolBasCrtsol_Plot <- 
   ggplot(data = ElvCrtsolBasCrtsol_data,
          aes(x = log(BasalCortisol), y = log(ElevCortisol))) +
-  geom_point(aes(colour = Group)) +
+  geom_point(aes(shape = Group)) +
   geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
   geom_abline(intercept = coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[1,1], 
               slope = coefficients(ElvCrtsolBasCrtsol_Summ_PGLS)[2,1],
