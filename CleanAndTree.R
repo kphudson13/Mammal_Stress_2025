@@ -4,7 +4,11 @@ library(rotl) #pull from tree of life
 library(tidyverse)
 library(taxize) #pull upstream taxonomic data, package installed from github not CRAN
 
+BaseWD <- "C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R" #Default WD
+setwd(BaseWD)
+
 rawdata <- read.csv("StressDataRaw.csv")
+
 # summary(rawdata)
 
 # Build Tree --------------------------------------------------------------
@@ -15,15 +19,19 @@ StressData <- rawdata %>%
 #update taxonomy from the data set
 StressData$Species[StressData$Species == "Spermophilus columbianus"] <- "Urocitellus columbianus"
 StressData$Species[StressData$Species == "Papio hamadryas ursinus"] <- "Papio ursinus" #Represents a species complex
+StressData$Species[StressData$Species == "Cebus apella/ Sapajus apella"] <- "Sapajus apella"
 StressData$Species[StressData$Species == "Cebus apella"] <- "Sapajus apella"
 StressData$Species[StressData$Species == "Gerbillus andersoni allenbyi"] <- "Gerbillus andersoni"
 StressData$Species[StressData$Species == "Capra aegargrus hircus"] <- "Capra hircus"
-
+StressData$Species[StressData$Species == "Elaphas maximus"] <- "Elephas maximus" 
+StressData$Species[StressData$Species == "Suricata suricatta "] <- "Suricata suricatta"
+StressData$Species[StressData$Species == "Sturnira parivdens"] <- "Sturnira parvidens"
+StressData$Species[StressData$Species == "Equus burchelli"] <- "Equus burchellii"
 
 #NCBI access is only available with an API key stored in the .Rprofile
 rawtaxa <- tax_name(unique(StressData$Species), get = c("family", "order"), db = "ncbi")
 
-#Add family column from NCBI data
+#Add order and family column from NCBI data
 StressData <- merge(StressData, rawtaxa[, c("query", "family", "order")], by.x = "Species", by.y = "query")
 
 colnames(StressData)[colnames(StressData) == "order"] <- "Order"

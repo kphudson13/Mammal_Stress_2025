@@ -4,7 +4,6 @@
 library(ape)
 library(tidyverse)
 
-
 BaseWD <- "C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R" #Default WD
 setwd(BaseWD) #make sure default WD is set correctly 
 CleanData <- read.csv("StressDataClean.csv")
@@ -14,10 +13,12 @@ plot(tree)
 
 #to view the lists lining up
 cbind(sort(tree$tip.label), sort(unique(CleanData$Species)))
+#To view data structure
+str(CleanData)
 
 # Unfiltered Data ---------------------------------------------------------
 
-StressData <- CleanData
+StressData <- CleanData[-48,] #remove a giraffe for now so it works
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Outputs/Unfiltered")
 
@@ -28,7 +29,7 @@ setwd(BaseWD)
 # Primate filter ----------------------------------------------------------
 
 #Remove primates
-StressData <- CleanData %>% 
+StressData <- CleanData[-48,] %>% 
   filter(Group != "Old Primate",
          Group != "New Primate")
 
@@ -41,7 +42,7 @@ setwd(BaseWD)
 # Wet Corrected Feces -----------------------------------------------------
 
 #correct wet samples by dividing by 4
-StressData <- CleanData %>%
+StressData <- CleanData[-48,] %>%
   mutate(
     BasalFGC = case_when(
       FecesMass == "wet" ~ BasalFGC/4, 
@@ -71,7 +72,7 @@ StressData <- CleanData %>%
          Group != "New Primate")
 
 
-setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Outputs/PrimateAndWet")
+setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Outputs/WetCorrected")
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AnalysisScript2025.R")
 
@@ -81,7 +82,7 @@ setwd(BaseWD)
 # Primate filter and wet corrected ----------------------------------------
 
 #correct wet samples by dividing by 4
-StressData <- CleanData %>%
+StressData <- CleanData[-48,] %>%
   mutate(
     BasalFGC = case_when(
       FecesMass == "wet" ~ BasalFGC/4, 
@@ -106,13 +107,22 @@ StressData <- CleanData %>%
     ElevFGC = case_when(
       FecesMass == "wet" ~ ElevFGC/4, 
       FecesMass == "dry" ~ ElevFGC,
-      TRUE ~ ElevFGC/4))
+      TRUE ~ ElevFGC/4)) %>% 
+  filter(Group != "Old Primate",
+         Group != "New Primate")
 
+
+
+setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Outputs/PrimateAndWet")
+
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AnalysisScript2025.R")
+
+setwd(BaseWD)
 
 # Cortisol and FGC Combined -----------------------------------------------
 
 #Add FGC to the cortisol column
-StressData <- CleanData %>% 
+StressData <- CleanData[-48,] %>% 
   mutate(BasalCortisol = case_when(
     is.na(BasalCortisol) ~ BasalFGC, 
     is.numeric(BasalCortisol) ~ BasalCortisol,

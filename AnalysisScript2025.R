@@ -9,7 +9,6 @@ library(geiger)
 library(rr2) #for the R2.lik function
 library(gridExtra) #to set table themes
 
-
 # Basal Corticosterone ~ Body Mass ----------------------------------------
 
 #Filter out blank rows of Basal Corticosterone
