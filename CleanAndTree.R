@@ -7,26 +7,29 @@ library(taxize) #pull upstream taxonomic data, package installed from github not
 BaseWD <- "C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R" #Default WD
 setwd(BaseWD)
 
-rawdata <- read.csv("StressDataRaw.csv")
+StressData <- read.csv("StressDataRaw.csv")
 
 # summary(rawdata)
 
 # Build Tree --------------------------------------------------------------
 
-StressData <- rawdata %>% 
-  filter(Species != "Gerbillus piridium") #Cant find this species 
-
-#update taxonomy from the data set
-StressData$Species[StressData$Species == "Spermophilus columbianus"] <- "Urocitellus columbianus"
-StressData$Species[StressData$Species == "Papio hamadryas ursinus"] <- "Papio ursinus" #Represents a species complex
-StressData$Species[StressData$Species == "Cebus apella/ Sapajus apella"] <- "Sapajus apella"
-StressData$Species[StressData$Species == "Cebus apella"] <- "Sapajus apella"
-StressData$Species[StressData$Species == "Gerbillus andersoni allenbyi"] <- "Gerbillus andersoni"
-StressData$Species[StressData$Species == "Capra aegargrus hircus"] <- "Capra hircus"
-StressData$Species[StressData$Species == "Elaphas maximus"] <- "Elephas maximus" 
+# StressData <- rawdata %>% 
+#   filter(Species != "Gerbillus piridium") #Cant find this species 
+# 
+# #update taxonomy from the data set
+# StressData$Species[StressData$Species == "Spermophilus columbianus"] <- "Urocitellus columbianus"
+# StressData$Species[StressData$Species == "Papio hamadryas ursinus"] <- "Papio ursinus" #Represents a species complex
+# StressData$Species[StressData$Species == "Cebus apella/ Sapajus apella"] <- "Sapajus apella"
+# StressData$Species[StressData$Species == "Cebus apella"] <- "Sapajus apella"
+# StressData$Species[StressData$Species == "Capra aegargrus hircus"] <- "Capra hircus"
+# StressData$Species[StressData$Species == "Elaphas maximus"] <- "Elephas maximus" 
 StressData$Species[StressData$Species == "Suricata suricatta "] <- "Suricata suricatta"
 StressData$Species[StressData$Species == "Sturnira parivdens"] <- "Sturnira parvidens"
 StressData$Species[StressData$Species == "Equus burchelli"] <- "Equus burchellii"
+
+StressData <- StressData %>% 
+     filter(Species != "Gerbillus andersoni") #Cant find this species 
+StressData$Species[StressData$Species == "Gerbillus andersoni allenbyi"] <- "Gerbillus andersoni"
 
 #NCBI access is only available with an API key stored in the .Rprofile
 rawtaxa <- tax_name(unique(StressData$Species), get = c("family", "order"), db = "ncbi")
@@ -47,8 +50,9 @@ tree <- compute.brlen(tree, method = "Grafen", power=1) #compute branch lengths,
 tree$tip.label <- strip_ott_ids(tree$tip.label, remove_underscores = T)
 
 #Update taxonomy from tree of life
-tree$tip.label[tree$tip.label == "Capra hircus (species in domain Eukaryota)"] <- "Capra hircus"
+# tree$tip.label[tree$tip.label == "Capra hircus (species in domain Eukaryota)"] <- "Capra hircus"
 tree$tip.label[tree$tip.label == "Hexaprotodon liberiensis"] <- "Choeropsis liberiensis"
+tree$tip.label[tree$tip.label == "Sapajus apella"] <- "Cebus apella"
 
 #to view the lists lining up
 cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
