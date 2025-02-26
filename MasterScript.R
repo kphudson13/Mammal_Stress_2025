@@ -118,7 +118,7 @@ Label <- "Primate and Wet Corrected Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Outputs/CrtstnPrimateAndWet")
 
-source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AnalysisScript2025.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 
 setwd(BaseWD)
 

@@ -52,10 +52,14 @@ BasFGCMass_Plot <-
        y = "ln Basal FGC (ng/g)",
        title = Label) +
   annotate("text",  x = 6, y = 3,
-           label = list(bquote(PGLS: y==~ .(round(coefficients(BasFGCMass_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasFGCMass_Summ_PGLS)[2,1], 2)))),
+           label = list(bquote(PGLS: y==~ .(round(coefficients(BasFGCMass_Summ_PGLS)[1,1], 2))
+                               ~x^.(round(coefficients(BasFGCMass_Summ_PGLS)[2,1], 2))
+                               ~R^2 ==~ .(round(BasFGCMass_RSq_PGLS, 2)))),
            parse = TRUE) +
   annotate("text",  x = 6, y = 2.5, 
-           label = list(bquote(LM: y==~ .(round(coefficients(BasFGCMass_Summ_Ordinary)[1,1], 2))~x^.(round(coefficients(BasFGCMass_Summ_Ordinary)[2,1], 2)))),
+           label = list(bquote(LM: y==~ .(round(coefficients(BasFGCMass_Summ_Ordinary)[1,1], 2))
+                               ~x^.(round(coefficients(BasFGCMass_Summ_Ordinary)[2,1], 2))
+                               ~R^2 ==~ .(round(BasFGCMass_Summ_Ordinary$r.squared, 2)))),
            parse = TRUE) 
 
 BasFGCMass_Plot
@@ -107,11 +111,15 @@ BasFGCMSMR_Plot <-
        y = "ln Basal FGC (ng/g)",
        title = Label) +
   annotate("text",  x = -6, y = 3,
-           label = list(bquote(PGLS: y==~ .(round(coefficients(BasFGCMSMR_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(BasFGCMSMR_Summ_PGLS)[2,1], 2)))),
+           label = list(bquote(PGLS: y==~ .(round(coefficients(BasFGCMSMR_Summ_PGLS)[1,1], 2))
+                               ~x^.(round(coefficients(BasFGCMSMR_Summ_PGLS)[2,1], 2))
+                               ~R^2 ==~ .(round(BasFGCMSMR_RSq_PGLS, 2)))),
            parse = TRUE) +
   annotate("text",  x = -6, y = 2.5, 
-           label = list(bquote(LM: y==~ .(round(coefficients(BasFGCMSMR_Summ_Ordinary)[1,1], 2))~x^.(round(coefficients(BasFGCMSMR_Summ_Ordinary)[2,1], 2)))),
-           parse = TRUE)
+           label = list(bquote(LM: y==~ .(round(coefficients(BasFGCMSMR_Summ_Ordinary)[1,1], 2))
+                               ~x^.(round(coefficients(BasFGCMSMR_Summ_Ordinary)[2,1], 2))
+                               ~R^2 ==~ .(round(BasFGCMSMR_Summ_Ordinary$r.squared, 2)))),
+           parse = TRUE) 
 
 BasFGCMSMR_Plot
 ggsave(filename = "BasFGCMSMR_Plot.png",
@@ -162,12 +170,16 @@ ElvFGCBasFGC_Plot <-
   labs(x = "ln Basal FGC (ng/g)",
        y = "ln Elevated FGC (ng/g)",
        title = Label) +
-  annotate("text",  x = 6, y = 3,
-           label = list(bquote(PGLS: y==~ .(round(coefficients(ElvFGCBasFGC_Summ_PGLS)[1,1], 2))~x^.(round(coefficients(ElvFGCBasFGC_Summ_PGLS)[2,1], 2)))),
+  annotate("text",  x = 5, y = 3,
+           label = list(bquote(PGLS: y==~ .(round(coefficients(ElvFGCBasFGC_Summ_PGLS)[1,1], 2))
+                               ~x^.(round(coefficients(ElvFGCBasFGC_Summ_PGLS)[2,1], 2))
+                               ~R^2 ==~ .(round(ElvFGCBasFGC_RSq_PGLS, 2)))),
            parse = TRUE) +
-  annotate("text",  x = 6, y = 2.5,
-           label = list(bquote(LM: y==~ .(round(coefficients(ElvFGCBasFGC_Summ_Ordinary)[1,1], 2))~x^.(round(coefficients(ElvFGCBasFGC_Summ_Ordinary)[2,1], 2)))),
-           parse = TRUE)
+  annotate("text",  x = 5, y = 2.5, 
+           label = list(bquote(LM: y==~ .(round(coefficients(ElvFGCBasFGC_Summ_Ordinary)[1,1], 2))
+                               ~x^.(round(coefficients(ElvFGCBasFGC_Summ_Ordinary)[2,1], 2))
+                               ~R^2 ==~ .(round(ElvFGCBasFGC_Summ_Ordinary$r.squared, 2)))),
+           parse = TRUE) 
 
 ElvFGCBasFGC_Plot
 ggsave(filename = "ElvFGCBasFGC_Plot.png",
