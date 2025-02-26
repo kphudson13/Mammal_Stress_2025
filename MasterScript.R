@@ -74,7 +74,7 @@ setwd(BaseWD)
 StressData <- CleanData %>% 
   filter(Group != "Yes/NWP")
 
-Label <- "Primate Corrected Model"
+Label <- "Primate Filtered Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Outputs/CrtstnPrimate")
 
@@ -83,7 +83,7 @@ source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 setwd(BaseWD)
 
 
-# Primate filter and wet corrected ----------------------------------------
+# Crtstn Primate filter and wet corrected -----------------------------------
 
 #correct wet samples by dividing by 4
 StressData <- CleanData %>%
@@ -121,4 +121,71 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Outputs/CrtstnPrim
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 
 setwd(BaseWD)
+
+
+# Crtstn Bat Filter -----------------------------------------------------
+
+StressData <- CleanData %>%
+  filter(Order != "Chiroptera") 
+
+Label <- "Bat Filtered Model"
+
+setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Outputs/CrtstnBat")
+
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+
+setwd(BaseWD)
+
+
+
+# Crtstn Bat Filter and wet corrected -------------------------------------
+
+StressData <- CleanData %>%
+  filter(Order != "Chiroptera") %>%
+  mutate(
+    BasalFGC = case_when(
+      FecesMass == "wet" ~ BasalFGC/4, 
+      FecesMass == "dry" ~ BasalFGC,
+      TRUE ~ BasalFGC/4),
+    BasalCortisol = case_when(
+      FecesMass == "wet" ~ BasalCortisol/4, 
+      FecesMass == "dry" ~ BasalCortisol,
+      TRUE ~ BasalCortisol/4),
+    BasalCorticosterone = case_when(
+      FecesMass == "wet" ~ BasalCorticosterone/4, 
+      FecesMass == "dry" ~ BasalCorticosterone,
+      TRUE ~ BasalCorticosterone/4),
+    ElevCortisol = case_when(
+      FecesMass == "wet" ~ ElevCortisol/4, 
+      FecesMass == "dry" ~ ElevCortisol,
+      TRUE ~ ElevCortisol/4),
+    ElevCorticosterone = case_when(
+      FecesMass == "wet" ~ ElevCorticosterone/4, 
+      FecesMass == "dry" ~ ElevCorticosterone,
+      TRUE ~ ElevCorticosterone/4),
+    ElevFGC = case_when(
+      FecesMass == "wet" ~ ElevFGC/4, 
+      FecesMass == "dry" ~ ElevFGC,
+      TRUE ~ ElevFGC/4)) 
+
+Label <- "Bat and Wet Corrected Model"  
+
+setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Outputs/CrtstnBatAndWet")
+
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+
+setwd(BaseWD)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
