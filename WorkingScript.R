@@ -43,7 +43,7 @@ BasFGCMass_Plot <-
   ggplot(data = BasFGCMass_data,
          aes(x = log(BodyMassAnAge), y = log(BasalFGC))) +
   geom_point(aes(shape = Order)) +
-  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black", se = FALSE) +
   geom_abline(intercept = coefficients(BasFGCMass_Summ_PGLS)[1,1], 
               slope = coefficients(BasFGCMass_Summ_PGLS)[2,1],
               linetype = 2) +
@@ -51,12 +51,12 @@ BasFGCMass_Plot <-
   labs(x = "ln Body Mass (g)",
        y = "ln Basal FGC (ng/g)",
        title = Label) +
-  annotate("text",  x = 6, y = 3,
+  annotate("text",  x = 7, y = 2,
            label = list(bquote(PGLS: y==~ .(round(coefficients(BasFGCMass_Summ_PGLS)[1,1], 2))
                                ~x^.(round(coefficients(BasFGCMass_Summ_PGLS)[2,1], 2))
                                ~R^2 ==~ .(round(BasFGCMass_RSq_PGLS, 2)))),
            parse = TRUE) +
-  annotate("text",  x = 6, y = 2.5, 
+  annotate("text",  x = 7, y = 1.5, 
            label = list(bquote(LM: y==~ .(round(coefficients(BasFGCMass_Summ_Ordinary)[1,1], 2))
                                ~x^.(round(coefficients(BasFGCMass_Summ_Ordinary)[2,1], 2))
                                ~R^2 ==~ .(round(BasFGCMass_Summ_Ordinary$r.squared, 2)))),
@@ -102,7 +102,7 @@ BasFGCMSMR_Plot <-
   ggplot(data = BasFGCMSMR_data,
          aes(x = log(MSMR), y = log(BasalFGC))) +
   geom_point(aes(shape = Order)) +
-  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black", se = FALSE) +
   geom_abline(intercept = coefficients(BasFGCMSMR_Summ_PGLS)[1,1], 
               slope = coefficients(BasFGCMSMR_Summ_PGLS)[2,1],
               linetype = 2) +
@@ -110,12 +110,12 @@ BasFGCMSMR_Plot <-
   labs(x = "ln MSMR",
        y = "ln Basal FGC (ng/g)",
        title = Label) +
-  annotate("text",  x = -6, y = 3,
+  annotate("text",  x = -5.5, y = 3,
            label = list(bquote(PGLS: y==~ .(round(coefficients(BasFGCMSMR_Summ_PGLS)[1,1], 2))
                                ~x^.(round(coefficients(BasFGCMSMR_Summ_PGLS)[2,1], 2))
                                ~R^2 ==~ .(round(BasFGCMSMR_RSq_PGLS, 2)))),
            parse = TRUE) +
-  annotate("text",  x = -6, y = 2.5, 
+  annotate("text",  x = -5.5, y = 2.5, 
            label = list(bquote(LM: y==~ .(round(coefficients(BasFGCMSMR_Summ_Ordinary)[1,1], 2))
                                ~x^.(round(coefficients(BasFGCMSMR_Summ_Ordinary)[2,1], 2))
                                ~R^2 ==~ .(round(BasFGCMSMR_Summ_Ordinary$r.squared, 2)))),
@@ -162,7 +162,7 @@ ElvFGCBasFGC_Plot <-
   ggplot(data = ElvFGCBasFGC_data,
          aes(x = log(BasalFGC), y = log(ElevFGC))) +
   geom_point(aes(shape = Order)) +
-  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black") +
+  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black", se = FALSE) +
   geom_abline(intercept = coefficients(ElvFGCBasFGC_Summ_PGLS)[1,1], 
               slope = coefficients(ElvFGCBasFGC_Summ_PGLS)[2,1],
               linetype = 2) +
@@ -170,12 +170,12 @@ ElvFGCBasFGC_Plot <-
   labs(x = "ln Basal FGC (ng/g)",
        y = "ln Elevated FGC (ng/g)",
        title = Label) +
-  annotate("text",  x = 5, y = 3,
+  annotate("text",  x = 5, y = 2,
            label = list(bquote(PGLS: y==~ .(round(coefficients(ElvFGCBasFGC_Summ_PGLS)[1,1], 2))
                                ~x^.(round(coefficients(ElvFGCBasFGC_Summ_PGLS)[2,1], 2))
                                ~R^2 ==~ .(round(ElvFGCBasFGC_RSq_PGLS, 2)))),
            parse = TRUE) +
-  annotate("text",  x = 5, y = 2.5, 
+  annotate("text",  x = 5, y = 1.5, 
            label = list(bquote(LM: y==~ .(round(coefficients(ElvFGCBasFGC_Summ_Ordinary)[1,1], 2))
                                ~x^.(round(coefficients(ElvFGCBasFGC_Summ_Ordinary)[2,1], 2))
                                ~R^2 ==~ .(round(ElvFGCBasFGC_Summ_Ordinary$r.squared, 2)))),
@@ -187,7 +187,33 @@ ggsave(filename = "ElvFGCBasFGC_Plot.png",
        height = 4)
 
 
+# Stats Tables ------------------------------------------------------------
+
+#PGLS pic and table first 
+StatsTab_PGLS <- rbind(cbind(coefficients(BasFGCMass_Summ_PGLS), BasFGCMass_CI_PGLS[["coef"]]),
+                       cbind(coefficients(BasFGCMSMR_Summ_PGLS), BasFGCMSMR_CI_PGLS[["coef"]]),
+                       cbind(coefficients(ElvFGCBasFGC_Summ_PGLS), ElvFGCBasFGC_CI_PGLS[["coef"]])) %>%
+  as.data.frame(.) %>%
+  select(., -"est.") %>% #because we already have an estimate column
+  slice(-c(1,3,5)) %>% #cut out all the rows of intercept stats
+  cbind(., c(coefficients(BasFGCMass_Summ_PGLS)[1,1],
+             coefficients(BasFGCMSMR_Summ_PGLS)[1,1],
+             coefficients(ElvFGCBasFGC_Summ_PGLS)[1,1]), #add back in a column for the intercept
+        c(BasFGCMass_RSq_PGLS, BasFGCMSMR_RSq_PGLS, ElvFGCBasFGC_RSq_PGLS)) %>% #and a column for RSq
+  mutate(across(c(1,2,3,5,6,7,8), \(x) round(x, digits = 2))) %>% #new way to round w/ anonymous function
+  mutate(across((4), \(x) round(x, digits = 6))) %>%
+  `colnames<-`(c("Estimate", "SE Est.", "T value",  "p value", "Lower 95 CI", "Upper 95 CI", "Intercept", "R Squared")) %>%
+  `rownames<-`(c("Basal FGC ~ Body Mass", 
+                 "Basal FGC ~ MSMR",
+                 "Elevated FGC ~ Basal FGC"))
 
 
-
-
+tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
+                                   bg_params=list(fill="grey80")))
+#export stats table 
+png("StatsTab_PGLS.png", 
+    height = 130*nrow(StatsTab_PGLS), 
+    width = 430*ncol(StatsTab_PGLS),
+    res = 300)
+grid.table(StatsTab_PGLS, theme = tt1)
+dev.off()

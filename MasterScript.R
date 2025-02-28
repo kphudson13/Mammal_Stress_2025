@@ -3,6 +3,7 @@
 
 library(ape)
 library(tidyverse)
+library(beepr)
 
 BaseWD <- "C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R" #Default WD
 setwd(BaseWD) #make sure default WD is set correctly 
@@ -28,7 +29,6 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Outputs/CrtstnMode
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 
 setwd(BaseWD)
-
 
 # Crtstn Wet Corrected Feces ----------------------------------------------
 
@@ -176,10 +176,7 @@ source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 
 setwd(BaseWD)
 
-
-
-
-
+beep(sound = 2)
 
 
 
