@@ -43,6 +43,7 @@ BasFGCMass_Plot <-
   ggplot(data = BasFGCMass_data,
          aes(x = log(BodyMassAnAge), y = log(BasalFGC))) +
   geom_point(aes(shape = Order)) +
+  scale_shape_manual(values = c(1, 17, 24, 3, 4, 16, 15)) +
   geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black", se = FALSE) +
   geom_abline(intercept = coefficients(BasFGCMass_Summ_PGLS)[1,1], 
               slope = coefficients(BasFGCMass_Summ_PGLS)[2,1],
@@ -51,12 +52,12 @@ BasFGCMass_Plot <-
   labs(x = "ln Body Mass (g)",
        y = "ln Basal FGC (ng/g)",
        title = Label) +
-  annotate("text",  x = 7, y = 2,
+  annotate("text",  x = 7, y = 1.5,
            label = list(bquote(PGLS: y==~ .(round(coefficients(BasFGCMass_Summ_PGLS)[1,1], 2))
                                ~x^.(round(coefficients(BasFGCMass_Summ_PGLS)[2,1], 2))
                                ~R^2 ==~ .(round(BasFGCMass_RSq_PGLS, 2)))),
            parse = TRUE) +
-  annotate("text",  x = 7, y = 1.5, 
+  annotate("text",  x = 7, y = 1, 
            label = list(bquote(LM: y==~ .(round(coefficients(BasFGCMass_Summ_Ordinary)[1,1], 2))
                                ~x^.(round(coefficients(BasFGCMass_Summ_Ordinary)[2,1], 2))
                                ~R^2 ==~ .(round(BasFGCMass_Summ_Ordinary$r.squared, 2)))),
@@ -102,6 +103,7 @@ BasFGCMSMR_Plot <-
   ggplot(data = BasFGCMSMR_data,
          aes(x = log(MSMR), y = log(BasalFGC))) +
   geom_point(aes(shape = Order)) +
+  scale_shape_manual(values = c(1, 17, 24, 3, 4, 16, 15)) +
   geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black", se = FALSE) +
   geom_abline(intercept = coefficients(BasFGCMSMR_Summ_PGLS)[1,1], 
               slope = coefficients(BasFGCMSMR_Summ_PGLS)[2,1],
@@ -162,6 +164,7 @@ ElvFGCBasFGC_Plot <-
   ggplot(data = ElvFGCBasFGC_data,
          aes(x = log(BasalFGC), y = log(ElevFGC))) +
   geom_point(aes(shape = Order)) +
+  scale_shape_manual(values = c(1, 17, 24, 3, 4, 16, 15)) +
   geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black", se = FALSE) +
   geom_abline(intercept = coefficients(ElvFGCBasFGC_Summ_PGLS)[1,1], 
               slope = coefficients(ElvFGCBasFGC_Summ_PGLS)[2,1],
