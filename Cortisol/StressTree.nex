@@ -1,0 +1,109 @@
+#NEXUS
+[R-package APE, Thu Mar  6 15:38:53 2025]
+
+BEGIN TAXA;
+	DIMENSIONS NTAX = 48;
+	TAXLABELS
+		Mus musculus
+		Rattus norvegicus
+		Gerbillus gerbillus
+		Gerbillus pyramidum
+		Gerbillus nanus
+		Gerbillus andersoni
+		Peromyscus maniculatus
+		Ctenomys sociabilis
+		Octodon degus
+		Marmota flaviventris
+		Papio ursinus
+		Gorilla gorilla gorilla
+		Hylobates pileatus
+		Microcebus murinus
+		Otolemur garnettii
+		Cervus elaphus
+		Odocoileus virginianus
+		Rangifer tarandus granti
+		Rangifer tarandus tarandus
+		Ovibos moschatus
+		Connochaetes taurinus
+		Aepyceros melampus
+		Tragelaphus strepsiceros
+		Tragelaphus buxtoni
+		Syncerus caffer
+		Giraffa camelopardalis
+		Choeropsis liberiensis
+		Equus burchellii
+		Equus caballus
+		Equus grevyi
+		Artibeus jamaicensis
+		Artibeus lituratus
+		Sturnira hondurensis
+		Sturnira parvidens
+		Mustela nigripes
+		Ursus maritimus
+		Ursus arctos horribilis
+		Ursus thibetanus
+		Melursus ursinus
+		Lycaon pictus
+		Canis rufus
+		Mungos mungo
+		Suricata suricatta
+		Panthera onca
+		Neofelis nebulosa
+		Felis catus
+		Acinonyx jubatus
+		Myrmecophaga tridactyla
+	;
+END;
+BEGIN TREES;
+	TRANSLATE
+		1	Mus musculus,
+		2	Rattus norvegicus,
+		3	Gerbillus gerbillus,
+		4	Gerbillus pyramidum,
+		5	Gerbillus nanus,
+		6	Gerbillus andersoni,
+		7	Peromyscus maniculatus,
+		8	Ctenomys sociabilis,
+		9	Octodon degus,
+		10	Marmota flaviventris,
+		11	Papio ursinus,
+		12	Gorilla gorilla gorilla,
+		13	Hylobates pileatus,
+		14	Microcebus murinus,
+		15	Otolemur garnettii,
+		16	Cervus elaphus,
+		17	Odocoileus virginianus,
+		18	Rangifer tarandus granti,
+		19	Rangifer tarandus tarandus,
+		20	Ovibos moschatus,
+		21	Connochaetes taurinus,
+		22	Aepyceros melampus,
+		23	Tragelaphus strepsiceros,
+		24	Tragelaphus buxtoni,
+		25	Syncerus caffer,
+		26	Giraffa camelopardalis,
+		27	Choeropsis liberiensis,
+		28	Equus burchellii,
+		29	Equus caballus,
+		30	Equus grevyi,
+		31	Artibeus jamaicensis,
+		32	Artibeus lituratus,
+		33	Sturnira hondurensis,
+		34	Sturnira parvidens,
+		35	Mustela nigripes,
+		36	Ursus maritimus,
+		37	Ursus arctos horribilis,
+		38	Ursus thibetanus,
+		39	Melursus ursinus,
+		40	Lycaon pictus,
+		41	Canis rufus,
+		42	Mungos mungo,
+		43	Suricata suricatta,
+		44	Panthera onca,
+		45	Neofelis nebulosa,
+		46	Felis catus,
+		47	Acinonyx jubatus,
+		48	Myrmecophaga tridactyla
+	;
+	TREE * UNTITLED = [&R] ((((((((1:0.02127659574,2:0.02127659574)mrcaott102ott8118:0.08510638298,(5:0.06382978723,6:0.06382978723,(3:0.02127659574,4:0.02127659574)mrcaott404779ott5925550:0.04255319149)mrcaott89162ott135787:0.04255319149)Muridae_ott816256:0.02127659574,7:0.1276595745)mrcaott102ott739:0.04255319149,(8:0.02127659574,9:0.02127659574)mrcaott38834ott198654:0.1489361702)mrcaott42ott38834:0.02127659574,10:0.1914893617)mrcaott42ott10477:0.1063829787,((11:0.04255319149,(12:0.02127659574,13:0.02127659574)mrcaott83926ott96938:0.02127659574)mrcaott786ott83926:0.04255319149,(14:0.02127659574,15:0.02127659574)Strepsirrhini_ott702147:0.06382978723)mrcaott786ott3428:0.2127659574)Euarchontoglires_ott392222:0.6808510638,(((((((16:0.06382978723,(17:0.04255319149,(18:0.02127659574,19:0.02127659574)Rangifer_tarandus_ott410153:0.02127659574)mrcaott15447ott114864:0.02127659574)Cervidae_ott460505:0.1276595745,(((20:0.02127659574,21:0.02127659574)mrcaott20474ott98208:0.02127659574,22:0.04255319149)mrcaott20474ott561127:0.06382978723,((24:0.02127659574,23:0.02127659574)mrcaott24247ott70829:0.02127659574,25:0.04255319149)mrcaott24247ott73074:0.06382978723)Bovidae_ott768677:0.08510638298)mrcaott1548ott20474:0.02127659574,26:0.2127659574)Pecora_ott403912:0.02127659574,27:0.2340425532)mrcaott1548ott5256:0.06382978723,(28:0.04255319149,29:0.04255319149,30:0.04255319149)Equus_ott541951:0.2553191489)mrcaott1548ott3021:0.08510638298,((31:0.02127659574,32:0.02127659574)mrcaott9379ott62481:0.04255319149,(33:0.02127659574,34:0.02127659574)mrcaott136686ott526954:0.04255319149)Stenodermatinae_ott1039976:0.3191489362)mrcaott1548ott6790:0.2765957447,(((35:0.08510638298,(((36:0.02127659574,37:0.02127659574)mrcaott10732ott350099:0.02127659574,38:0.04255319149)mrcaott10732ott300426:0.02127659574,39:0.06382978723)mrcaott10732ott297463:0.02127659574)mrcaott4697ott10732:0.04255319149,(41:0.02127659574,40:0.02127659574)mrcaott47497ott110766:0.1063829787)Caniformia_ott827263:0.1276595745,((42:0.02127659574,43:0.02127659574)mrcaott6940ott803645:0.08510638298,((44:0.02127659574,45:0.02127659574)mrcaott19397ott882765:0.04255319149,(46:0.02127659574,47:0.02127659574)mrcaott54737ott86162:0.04255319149)Felidae_ott563159:0.04255319149)mrcaott6940ott19397:0.1489361702)mrcaott4697ott6940:0.4042553191)mrcaott1548ott4697:0.3191489362)Boreoeutheria_ott5334778:0.02127659574,48:1)mrcaott42ott72667;
+END;

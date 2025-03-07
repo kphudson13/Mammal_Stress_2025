@@ -87,9 +87,9 @@ StressData <- read.csv("CortisolDataRaw.csv")
 # StressData$Species[StressData$Species == "Cebus apella"] <- "Sapajus apella"
 # StressData$Species[StressData$Species == "Capra aegargrus hircus"] <- "Capra hircus"
 # StressData$Species[StressData$Species == "Elaphas maximus"] <- "Elephas maximus" 
-#StressData$Species[StressData$Species == "Suricata suricatta "] <- "Suricata suricatta"
-#StressData$Species[StressData$Species == "Sturnira parivdens"] <- "Sturnira parvidens"
-#StressData$Species[StressData$Species == "Equus burchelli"] <- "Equus burchellii"
+StressData$Species[StressData$Species == "Suricata suricatta "] <- "Suricata suricatta"
+StressData$Species[StressData$Species == "Sturnira parivdens"] <- "Sturnira parvidens"
+StressData$Species[StressData$Species == "Equus burchelli"] <- "Equus burchellii"
 
 StressData <- StressData %>% 
   filter(Species != "Gerbillus andersoni") #Got rid of one of them, fix this later
@@ -116,7 +116,7 @@ tree$tip.label <- strip_ott_ids(tree$tip.label, remove_underscores = T)
 #Update taxonomy from tree of life
 # tree$tip.label[tree$tip.label == "Capra hircus (species in domain Eukaryota)"] <- "Capra hircus"
 tree$tip.label[tree$tip.label == "Hexaprotodon liberiensis"] <- "Choeropsis liberiensis"
-tree$tip.label[tree$tip.label == "Sapajus apella"] <- "Cebus apella"
+#tree$tip.label[tree$tip.label == "Sapajus apella"] <- "Cebus apella"
 
 #to view the lists lining up
 cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
@@ -132,5 +132,6 @@ dev.off()
 
 write.csv(StressData, file = "CortisolDataClean.csv")
 
+setwd(BaseWD) #return to base working directory
 
 beep()

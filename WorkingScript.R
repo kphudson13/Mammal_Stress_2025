@@ -220,3 +220,4 @@ png("StatsTab_PGLS.png",
     res = 300)
 grid.table(StatsTab_PGLS, theme = tt1)
 dev.off()
+

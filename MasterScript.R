@@ -114,7 +114,6 @@ setwd(BaseWD)
 
 
 
-
 # Cortisol Uncorrected ----------------------------------------------------
 
 
@@ -127,6 +126,35 @@ StressData <- read.csv("CortisolDataClean.csv")
 Label <- "Unfilted Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolUncorrected")
+
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+
+setwd(BaseWD)
+
+
+# Cortisol Wet Corrected --------------------------------------------------
+
+setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol")
+
+tree <- read.nexus("StressTree.nex")
+
+StressData <- read.csv("CortisolDataClean.csv")
+
+#correct wet samples by dividing by 4
+StressData <- read.csv("CortisolDataClean.csv") %>%
+  mutate(
+    BasalFGC = case_when(
+      FecesMass == "wet" ~ BasalFGC/4, 
+      FecesMass == "dry" ~ BasalFGC,
+      TRUE ~ BasalFGC/4),
+    ElevFGC = case_when(
+      FecesMass == "wet" ~ ElevFGC/4, 
+      FecesMass == "dry" ~ ElevFGC,
+      TRUE ~ ElevFGC/4))
+
+Label <- "Wet Corrected Model"
+
+setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolWetCorrected")
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 
