@@ -6,6 +6,7 @@ library(nlme) #for gls
 library(tidyverse)
 library(geiger)
 library(rr2) #for the R2.lik function
+library(grid) #to set table themes
 library(gridExtra) #to set table themes
 
 
@@ -215,9 +216,11 @@ tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
                                    bg_params=list(fill="grey80")))
 #export stats table 
 png("StatsTab_PGLS.png", 
-    height = 130*nrow(StatsTab_PGLS), 
+    height = 160*nrow(StatsTab_PGLS), 
     width = 430*ncol(StatsTab_PGLS),
     res = 300)
+grid.newpage()
 grid.table(StatsTab_PGLS, theme = tt1)
+grid.text(Label, x = 0.2, y = 0.9, gp = gpar(fontface = "bold"))
 dev.off()
 
