@@ -101,21 +101,7 @@ source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 setwd(BaseWD)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Cortisol Uncorrected ----------------------------------------------------
-
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol")
 
@@ -130,7 +116,6 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolU
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 
 setwd(BaseWD)
-
 
 # Cortisol Wet Corrected --------------------------------------------------
 

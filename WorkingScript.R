@@ -19,7 +19,11 @@ BasFGCMass_data <- StressData %>% drop_na(BasalFGC)
 rownames(BasFGCMass_data) = BasFGCMass_data$Species
 
 #Remove tree species not in the basal FGC data
-BasFGCMass_Tree <- drop.tip(tree, name.check(tree, BasFGCMass_data)$tree_not_data)
+if (sum(is.na(StressData$BasalFGC)) > 0) {
+  BasFGCMass_Tree <- drop.tip(tree, name.check(tree, BasFGCMass_data)$tree_not_data)
+} else {
+  BasFGCMass_Tree <- tree
+}
 
 cbind(sort(BasFGCMass_Tree$tip.label), sort(unique(BasFGCMass_data$Species)))
 
@@ -44,7 +48,7 @@ BasFGCMass_Plot <-
   ggplot(data = BasFGCMass_data,
          aes(x = log(BodyMassAnAge), y = log(BasalFGC))) +
   geom_point(aes(shape = Order)) +
-  scale_shape_manual(values = c(1, 17, 24, 3, 4, 16, 15)) +
+  scale_shape_manual(values = c(1, 17, 24, 3, 4, 16, 15, 11, 12)) +
   geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black", se = FALSE) +
   geom_abline(intercept = coefficients(BasFGCMass_Summ_PGLS)[1,1], 
               slope = coefficients(BasFGCMass_Summ_PGLS)[2,1],
@@ -79,7 +83,11 @@ BasFGCMSMR_data <- StressData %>% drop_na(c(BasalFGC, MSMR))
 rownames(BasFGCMSMR_data) = BasFGCMSMR_data$Species
 
 #Remove tree species not in the basal FGC data
-BasFGCMSMR_Tree <- drop.tip(tree, name.check(tree, BasFGCMSMR_data)$tree_not_data)
+if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$MSMR)) > 0) {
+  BasFGCMSMR_Tree <- drop.tip(tree, name.check(tree, BasFGCMSMR_data)$tree_not_data)
+} else {
+  BasFGCMSMR_Tree <- tree
+}
 
 cbind(sort(BasFGCMSMR_Tree$tip.label), sort(unique(BasFGCMSMR_data$Species)))
 
@@ -104,7 +112,7 @@ BasFGCMSMR_Plot <-
   ggplot(data = BasFGCMSMR_data,
          aes(x = log(MSMR), y = log(BasalFGC))) +
   geom_point(aes(shape = Order)) +
-  scale_shape_manual(values = c(1, 17, 24, 3, 4, 16, 15)) +
+  scale_shape_manual(values = c(1, 17, 24, 3, 4, 16, 15, 11, 12)) +
   geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black", se = FALSE) +
   geom_abline(intercept = coefficients(BasFGCMSMR_Summ_PGLS)[1,1], 
               slope = coefficients(BasFGCMSMR_Summ_PGLS)[2,1],
@@ -139,8 +147,14 @@ ElvFGCBasFGC_data <- StressData %>% drop_na(c(BasalFGC, ElevFGC))
 #Setting row names to map the tree to
 rownames(ElvFGCBasFGC_data) = ElvFGCBasFGC_data$Species
 
-#Remove tree species not in the basal and elevated FGC data
-ElvFGCBasFGC_Tree <- drop.tip(tree, name.check(tree, ElvFGCBasFGC_data)$tree_not_data)
+
+
+#Remove tree species not in the basal FGC data
+if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$ElevFGC)) > 0) {
+  ElvFGCBasFGC_Tree <- drop.tip(tree, name.check(tree, ElvFGCBasFGC_data)$tree_not_data)
+} else {
+  ElvFGCBasFGC_Tree <- tree
+}
 
 #Remove tree species not in the basal and elevated FGC data
 ElvFGCBasFGC_Tree <- drop.tip(tree, name.check(tree, ElvFGCBasFGC_data)$tree_not_data)
