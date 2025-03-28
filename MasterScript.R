@@ -21,8 +21,6 @@ shapes <- c("Artiodactyla" = 0,
             "Primates" = 17, 
             "Pilosa" = 19)
 
-#to view the lists lining up
-#cbind(sort(tree$tip.label), sort(unique(CleanData$Species)))
 #To view data structure
 #str(read.nexus("StressTree.nex"))
 
@@ -157,5 +155,48 @@ source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 
 setwd(BaseWD)
 
+# FGC Uncorrected ---------------------------------------------------------
+
+setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/FGCAnalysis")
+      
+tree <- read.nexus("StressTree.nex")  
+
+StressData <- read.csv("FGCDataClean.csv")
+
+Label <- "FGC - Unfilted Model"
+
+setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/FGCAnalysis/FGCUncorrected")
+      
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+
+setwd(BaseWD)      
+      
+
+# FGC Wet Corrected -------------------------------------------------------
+
+setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/FGCAnalysis")
+
+tree <- read.nexus("StressTree.nex")  
+
+StressData <- read.csv("FGCDataClean.csv") %>%
+  mutate(
+    BasalFGC = case_when(
+      FecesMass == "wet" ~ BasalFGC/4, 
+      FecesMass == "dry" ~ BasalFGC,
+      TRUE ~ BasalFGC/4),
+    ElevFGC = case_when(
+      FecesMass == "wet" ~ ElevFGC/4, 
+      FecesMass == "dry" ~ ElevFGC,
+      TRUE ~ ElevFGC/4))
+
+Label <- "FGC - Wet Corrected Model"
+
+setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/FGCAnalysis/FGCWetCorrected")
+
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+
+setwd(BaseWD)      
+      
+      
 
 say("Done", by = "frog", what_color = "darkgreen")
