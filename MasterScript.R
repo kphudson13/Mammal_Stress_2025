@@ -4,10 +4,22 @@
 library(ape)
 library(tidyverse)
 library(beepr)
+library(cowsay)
 
 BaseWD <- "C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R" #Default WD
 setwd(BaseWD) #make sure default WD is set correctly 
 
+#store shapes so all orders match in geom_point functions
+shapes <- c("Artiodactyla" = 0, 
+            "Carnivora" = 1,
+            "Chiroptera"= 2,
+            "Cingulata" = 3,
+            "Rodentia" = 4,
+            "Lagomorpha" = 11,
+            "Perissodactyla" = 15,
+            "Proboscidea" = 16,
+            "Primates" = 17, 
+            "Pilosa" = 19)
 
 #to view the lists lining up
 #cbind(sort(tree$tip.label), sort(unique(CleanData$Species)))
@@ -22,7 +34,7 @@ tree <- read.nexus("StressTree.nex")
 
 StressData <- read.csv("CrtstnDataClean.csv")
 
-Label <- "Unfilted Model"
+Label <- "Corticosterone - Unfilted Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone/CrtstnUncorrected")
 
@@ -48,7 +60,7 @@ StressData <- read.csv("CrtstnDataClean.csv") %>%
       FecesMass == "dry" ~ ElevFGC,
       TRUE ~ ElevFGC/4))
 
-Label <- "Wet Corrected Model"
+Label <- "Corticosterone - Wet Corrected Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone/CrtstnWetCorrected")
 
@@ -65,7 +77,7 @@ tree <- read.nexus("StressTree.nex")
 StressData <- read.csv("CrtstnDataClean.csv") %>%
   filter(Order != "Chiroptera") 
 
-Label <- "Bat Filtered Model"
+Label <- "Corticosterone - Bat Filtered Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone/CrtstnBat")
 
@@ -92,7 +104,7 @@ StressData <- read.csv("CrtstnDataClean.csv") %>%
       FecesMass == "dry" ~ ElevFGC,
       TRUE ~ ElevFGC/4)) 
 
-Label <- "Bat and Wet Corrected Model"  
+Label <- "Corticosterone - Bat and Wet Corrected Model"  
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone/CrtstnBatAndWet")
 
@@ -109,7 +121,7 @@ tree <- read.nexus("StressTree.nex")
 
 StressData <- read.csv("CortisolDataClean.csv")
 
-Label <- "Unfilted Model"
+Label <- "Cortisol - Unfilted Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolUncorrected")
 
@@ -137,10 +149,13 @@ StressData <- read.csv("CortisolDataClean.csv") %>%
       FecesMass == "dry" ~ ElevFGC,
       TRUE ~ ElevFGC/4))
 
-Label <- "Wet Corrected Model"
+Label <- "Cortisol - Wet Corrected Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolWetCorrected")
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 
 setwd(BaseWD)
+
+
+say("Done", by = "frog", what_color = "darkgreen")
