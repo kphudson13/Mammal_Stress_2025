@@ -355,7 +355,7 @@ StatsTab_PGLS <- rbind(cbind(coefficients(BasFGCMass_Summ_PGLS), BasFGCMass_CI_P
         rbind(BasFGCMass_RSq_PGLS, BasFGCMSMR_RSq_PGLS, ElvFGCBasFGC_RSq_PGLS, BasFGCLifespan_RSq_PGLS, LifespanBasFGC_RSq_PGLS)) %>% #and a column for RSq
   mutate(across(c(1,2,3,5,6,7,8,9,10), \(x) round(x, digits = 2))) %>% #new way to round w/ anonymous function
   mutate(across((4), \(x) round(x, digits = 6))) %>%
-  `colnames<-`(c("Estimate", "SE Est.", "T value",  "p value", "Lower 95 CI", "Upper 95 CI", "Intercept", "Likelyhood R2", "Redisual R2", "Predicted R2")) %>%
+  `colnames<-`(c("Estimate", "SE Est.", "T value",  "p value", "Lower 95 CI", "Upper 95 CI", "Intercept", "Likelihood R2", "Residual R2", "Predicted R2")) %>%
   `rownames<-`(c("Basal FGC ~ Body Mass", 
                  "Basal FGC ~ MSMR",
                  "Elevated FGC ~ Basal FGC",
