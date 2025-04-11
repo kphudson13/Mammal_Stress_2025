@@ -197,6 +197,5 @@ source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 
 setwd(BaseWD)      
       
-      
 
 say("Done", by = "frog", what_color = "darkgreen")

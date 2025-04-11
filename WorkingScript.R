@@ -37,7 +37,8 @@ BasFGCMass_PGLS <- gls(log(BasalFGC) ~ log(BodyMassAnAge),
 #Get values from the model 
 BasFGCMass_Summ_PGLS <- summary(BasFGCMass_PGLS)
 BasFGCMass_CI_PGLS <- intervals(BasFGCMass_PGLS)
-BasFGCMass_RSq_PGLS <- R2_lik(BasFGCMass_PGLS)
+BasFGCMass_RSq_PGLS <- R2(BasFGCMass_PGLS)
+
 
 #Build ordinary linear model 
 BasFGCMass_Ordinary <- lm(log(BasalFGC) ~ log(BodyMassAnAge),
@@ -101,7 +102,7 @@ BasFGCMSMR_PGLS <- gls(log(BasalFGC) ~ log(MSMR),
 #Get values from the model 
 BasFGCMSMR_Summ_PGLS <- summary(BasFGCMSMR_PGLS)
 BasFGCMSMR_CI_PGLS <- intervals(BasFGCMSMR_PGLS)
-BasFGCMSMR_RSq_PGLS <- R2_lik(BasFGCMSMR_PGLS)
+BasFGCMSMR_RSq_PGLS <- R2(BasFGCMSMR_PGLS)
 
 #Build ordinary linear model 
 BasFGCMSMR_Ordinary <- lm(log(BasalFGC) ~ log(MSMR),
@@ -168,7 +169,7 @@ ElvFGCBasFGC_PGLS <- gls(log(ElevFGC) ~ log(BasalFGC),
 #Get values from the model 
 ElvFGCBasFGC_Summ_PGLS <- summary(ElvFGCBasFGC_PGLS)
 ElvFGCBasFGC_CI_PGLS <- intervals(ElvFGCBasFGC_PGLS)
-ElvFGCBasFGC_RSq_PGLS <- R2_lik(ElvFGCBasFGC_PGLS)
+ElvFGCBasFGC_RSq_PGLS <- R2(ElvFGCBasFGC_PGLS)
 
 #Build ordinary linear model 
 ElvFGCBasFGC_Ordinary <- lm(log(ElevFGC) ~ log(BasalFGC),
@@ -234,7 +235,7 @@ LifespanBasFGC_PGLS <- gls(log(MaxLifespan) ~ log(BasalFGC),
 #Get values from the model 
 LifespanBasFGC_Summ_PGLS <- summary(LifespanBasFGC_PGLS)
 LifespanBasFGC_CI_PGLS <- intervals(LifespanBasFGC_PGLS)
-LifespanBasFGC_RSq_PGLS <- R2_lik(LifespanBasFGC_PGLS)
+LifespanBasFGC_RSq_PGLS <- R2(LifespanBasFGC_PGLS)
 
 #Build ordinary linear model 
 LifespanBasFGC_Ordinary <- lm(log(MaxLifespan) ~ log(BasalFGC),
@@ -298,7 +299,7 @@ BasFGCLifespan_PGLS <- gls(log(BasalFGC) ~ log(MaxLifespan),
 #Get values from the model 
 BasFGCLifespan_Summ_PGLS <- summary(BasFGCLifespan_PGLS)
 BasFGCLifespan_CI_PGLS <- intervals(BasFGCLifespan_PGLS)
-BasFGCLifespan_RSq_PGLS <- R2_lik(BasFGCLifespan_PGLS)
+BasFGCLifespan_RSq_PGLS <- R2(BasFGCLifespan_PGLS)
 
 #Build ordinary linear model 
 BasFGCLifespan_Ordinary <- lm(log(BasalFGC) ~ log(MaxLifespan),
@@ -337,7 +338,7 @@ ggsave(filename = "BasFGCLifespan_Plot.png",
 
 # Stats Tables ------------------------------------------------------------
 
-#PGLS pic and table first 
+#PGLS table
 StatsTab_PGLS <- rbind(cbind(coefficients(BasFGCMass_Summ_PGLS), BasFGCMass_CI_PGLS[["coef"]]),
                        cbind(coefficients(BasFGCMSMR_Summ_PGLS), BasFGCMSMR_CI_PGLS[["coef"]]),
                        cbind(coefficients(ElvFGCBasFGC_Summ_PGLS), ElvFGCBasFGC_CI_PGLS[["coef"]]),
@@ -351,10 +352,10 @@ StatsTab_PGLS <- rbind(cbind(coefficients(BasFGCMass_Summ_PGLS), BasFGCMass_CI_P
              coefficients(ElvFGCBasFGC_Summ_PGLS)[1,1],
              coefficients(BasFGCLifespan_Summ_PGLS)[1,1],
              coefficients(LifespanBasFGC_Summ_PGLS)[1,1]), #add back in a column for the intercept
-        c(BasFGCMass_RSq_PGLS, BasFGCMSMR_RSq_PGLS, ElvFGCBasFGC_RSq_PGLS, BasFGCLifespan_RSq_PGLS, LifespanBasFGC_RSq_PGLS)) %>% #and a column for RSq
-  mutate(across(c(1,2,3,5,6,7,8), \(x) round(x, digits = 2))) %>% #new way to round w/ anonymous function
+        rbind(BasFGCMass_RSq_PGLS, BasFGCMSMR_RSq_PGLS, ElvFGCBasFGC_RSq_PGLS, BasFGCLifespan_RSq_PGLS, LifespanBasFGC_RSq_PGLS)) %>% #and a column for RSq
+  mutate(across(c(1,2,3,5,6,7,8,9,10), \(x) round(x, digits = 2))) %>% #new way to round w/ anonymous function
   mutate(across((4), \(x) round(x, digits = 6))) %>%
-  `colnames<-`(c("Estimate", "SE Est.", "T value",  "p value", "Lower 95 CI", "Upper 95 CI", "Intercept", "R Squared")) %>%
+  `colnames<-`(c("Estimate", "SE Est.", "T value",  "p value", "Lower 95 CI", "Upper 95 CI", "Intercept", "Likelyhood R2", "Redisual R2", "Predicted R2")) %>%
   `rownames<-`(c("Basal FGC ~ Body Mass", 
                  "Basal FGC ~ MSMR",
                  "Elevated FGC ~ Basal FGC",
@@ -373,4 +374,5 @@ grid.newpage()
 grid.table(StatsTab_PGLS, theme = tt1)
 grid.text(Label, x = 0.2, y = 0.9, gp = gpar(fontface = "bold"))
 dev.off()
+
 
