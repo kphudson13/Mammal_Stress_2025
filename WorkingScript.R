@@ -34,10 +34,15 @@ BasFGCMass_PGLS <- gls(log(BasalFGC) ~ log(BodyMassAnAge),
                           correlation = corBrownian(phy = BasFGCMass_Tree, form = ~Species), 
                           method = "ML") #ML = log-likelihood is maximized
 
+BasFGCMass_Reduced <- gls(log(BasalFGC) ~ 1, 
+                          data = BasFGCMass_data, 
+                          correlation = corBrownian(phy = BasFGCMass_Tree, form = ~Species), 
+                          method = "ML") #ML = log-likelihood is maximized
+
 #Get values from the model 
 BasFGCMass_Summ_PGLS <- summary(BasFGCMass_PGLS)
 BasFGCMass_CI_PGLS <- intervals(BasFGCMass_PGLS)
-BasFGCMass_RSq_PGLS <- R2(BasFGCMass_PGLS)
+BasFGCMass_RSq_PGLS <- R2(BasFGCMass_PGLS, BasFGCMass_Reduced)
 
 
 #Build ordinary linear model 
@@ -99,10 +104,15 @@ BasFGCMSMR_PGLS <- gls(log(BasalFGC) ~ log(MSMR),
                        correlation = corBrownian(phy = BasFGCMSMR_Tree, form = ~Species), 
                        method = "ML") #ML = log-likelihood is maximized
 
+BasFGCMSMR_Reduced <- gls(log(BasalFGC) ~ 1, 
+                          data = BasFGCMSMR_data, 
+                          correlation = corBrownian(phy = BasFGCMSMR_Tree, form = ~Species), 
+                          method = "ML") #ML = log-likelihood is maximized
+
 #Get values from the model 
 BasFGCMSMR_Summ_PGLS <- summary(BasFGCMSMR_PGLS)
 BasFGCMSMR_CI_PGLS <- intervals(BasFGCMSMR_PGLS)
-BasFGCMSMR_RSq_PGLS <- R2(BasFGCMSMR_PGLS)
+BasFGCMSMR_RSq_PGLS <- R2(BasFGCMSMR_PGLS, BasFGCMSMR_Reduced)
 
 #Build ordinary linear model 
 BasFGCMSMR_Ordinary <- lm(log(BasalFGC) ~ log(MSMR),
@@ -140,7 +150,7 @@ ggsave(filename = "BasFGCMSMR_Plot.png",
        height = 4)
 
 
-# Basal vs. Elevated FGC --------------------------------------------------
+# Elevated vs. Basal FGC --------------------------------------------------
 
 
 #Filter out blank rows of Basal FGC and Elevated FGC
@@ -166,10 +176,15 @@ ElvFGCBasFGC_PGLS <- gls(log(ElevFGC) ~ log(BasalFGC),
                                correlation = corBrownian(phy = ElvFGCBasFGC_Tree, form = ~Species), 
                                method="ML")
 
+ElvFGCBasFGC_Reduced <- gls(log(ElevFGC) ~ 1, 
+                            data=ElvFGCBasFGC_data, 
+                            correlation = corBrownian(phy = ElvFGCBasFGC_Tree, form = ~Species), 
+                            method="ML")
+
 #Get values from the model 
 ElvFGCBasFGC_Summ_PGLS <- summary(ElvFGCBasFGC_PGLS)
 ElvFGCBasFGC_CI_PGLS <- intervals(ElvFGCBasFGC_PGLS)
-ElvFGCBasFGC_RSq_PGLS <- R2(ElvFGCBasFGC_PGLS)
+ElvFGCBasFGC_RSq_PGLS <- R2(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Reduced)
 
 #Build ordinary linear model 
 ElvFGCBasFGC_Ordinary <- lm(log(ElevFGC) ~ log(BasalFGC),
@@ -207,7 +222,6 @@ ggsave(filename = "ElvFGCBasFGC_Plot.png",
        height = 4)
 
 
-
 # Lifespan vs. Basal model ------------------------------------------------
 
 
@@ -232,10 +246,15 @@ LifespanBasFGC_PGLS <- gls(log(MaxLifespan) ~ log(BasalFGC),
                            correlation = corBrownian(phy = LifespanBasFGC_Tree, form = ~Species), 
                            method = "ML") #ML = log-likelihood is maximized
 
+LifespanBasFGC_Reduced <- gls(log(MaxLifespan) ~ 1, 
+                              data = LifespanBasFGC_data, 
+                              correlation = corBrownian(phy = LifespanBasFGC_Tree, form = ~Species), 
+                              method = "ML") #ML = log-likelihood is maximized
+
 #Get values from the model 
 LifespanBasFGC_Summ_PGLS <- summary(LifespanBasFGC_PGLS)
 LifespanBasFGC_CI_PGLS <- intervals(LifespanBasFGC_PGLS)
-LifespanBasFGC_RSq_PGLS <- R2(LifespanBasFGC_PGLS)
+LifespanBasFGC_RSq_PGLS <- R2(LifespanBasFGC_PGLS, LifespanBasFGC_Reduced)
 
 #Build ordinary linear model 
 LifespanBasFGC_Ordinary <- lm(log(MaxLifespan) ~ log(BasalFGC),
@@ -296,10 +315,15 @@ BasFGCLifespan_PGLS <- gls(log(BasalFGC) ~ log(MaxLifespan),
                        correlation = corBrownian(phy = BasFGCLifespan_Tree, form = ~Species), 
                        method = "ML") #ML = log-likelihood is maximized
 
+BasFGCLifespan_Reduced <- gls(log(BasalFGC) ~ 1, 
+                           data = BasFGCLifespan_data, 
+                           correlation = corBrownian(phy = BasFGCLifespan_Tree, form = ~Species), 
+                           method = "ML") #ML = log-likelihood is maximized
+
 #Get values from the model 
 BasFGCLifespan_Summ_PGLS <- summary(BasFGCLifespan_PGLS)
 BasFGCLifespan_CI_PGLS <- intervals(BasFGCLifespan_PGLS)
-BasFGCLifespan_RSq_PGLS <- R2(BasFGCLifespan_PGLS)
+BasFGCLifespan_RSq_PGLS <- R2(BasFGCLifespan_PGLS, BasFGCLifespan_Reduced)
 
 #Build ordinary linear model 
 BasFGCLifespan_Ordinary <- lm(log(BasalFGC) ~ log(MaxLifespan),
