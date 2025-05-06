@@ -32,11 +32,12 @@ tree <- read.nexus("StressTree.nex")
 
 StressData <- read.csv("CrtstnDataClean.csv")
 
-Label <- "Corticosterone - Unfilted Model"
+Label <- "Corticosterone - Uncorrected Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone/CrtstnUncorrected")
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
 
 setwd(BaseWD)
 
@@ -50,12 +51,12 @@ tree <- read.nexus("StressTree.nex")
 StressData <- read.csv("CrtstnDataClean.csv") %>%
   mutate(
     BasalFGC = case_when(
-      FecesMass == "wet" ~ BasalFGC/4, 
-      FecesMass == "dry" ~ BasalFGC,
+      FecesMass == "wet" ~ BasalFGC, 
+      FecesMass == "dry" ~ BasalFGC/4,
       TRUE ~ BasalFGC/4),
     ElevFGC = case_when(
-      FecesMass == "wet" ~ ElevFGC/4, 
-      FecesMass == "dry" ~ ElevFGC,
+      FecesMass == "wet" ~ ElevFGC, 
+      FecesMass == "dry" ~ ElevFGC/4,
       TRUE ~ ElevFGC/4))
 
 Label <- "Corticosterone - Wet Corrected Model"
@@ -63,6 +64,7 @@ Label <- "Corticosterone - Wet Corrected Model"
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone/CrtstnWetCorrected")
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
 
 setwd(BaseWD)
 
@@ -80,6 +82,7 @@ Label <- "Corticosterone - Bat Filtered Model"
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone/CrtstnBat")
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
 
 setwd(BaseWD)
 
@@ -107,9 +110,9 @@ Label <- "Corticosterone - Bat and Wet Corrected Model"
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone/CrtstnBatAndWet")
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
 
 setwd(BaseWD)
-
 
 # Cortisol Uncorrected ----------------------------------------------------
 
@@ -119,11 +122,12 @@ tree <- read.nexus("StressTree.nex")
 
 StressData <- read.csv("CortisolDataClean.csv")
 
-Label <- "Cortisol - Unfilted Model"
+Label <- "Cortisol - Uncorrected Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolUncorrected")
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
 
 setwd(BaseWD)
 
@@ -139,12 +143,12 @@ StressData <- read.csv("CortisolDataClean.csv")
 StressData <- read.csv("CortisolDataClean.csv") %>%
   mutate(
     BasalFGC = case_when(
-      FecesMass == "wet" ~ BasalFGC/4, 
-      FecesMass == "dry" ~ BasalFGC,
+      FecesMass == "wet" ~ BasalFGC, 
+      FecesMass == "dry" ~ BasalFGC/4,
       TRUE ~ BasalFGC/4),
     ElevFGC = case_when(
-      FecesMass == "wet" ~ ElevFGC/4, 
-      FecesMass == "dry" ~ ElevFGC,
+      FecesMass == "wet" ~ ElevFGC, 
+      FecesMass == "dry" ~ ElevFGC/4,
       TRUE ~ ElevFGC/4))
 
 Label <- "Cortisol - Wet Corrected Model"
@@ -152,6 +156,7 @@ Label <- "Cortisol - Wet Corrected Model"
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolWetCorrected")
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
 
 setwd(BaseWD)
 
@@ -163,14 +168,14 @@ tree <- read.nexus("StressTree.nex")
 
 StressData <- read.csv("FGCDataClean.csv")
 
-Label <- "FGC - Unfilted Model"
+Label <- "FGC - Uncorrected Model"
 
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/FGCAnalysis/FGCUncorrected")
       
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
 
 setwd(BaseWD)      
-      
 
 # FGC Wet Corrected -------------------------------------------------------
 
@@ -181,12 +186,12 @@ tree <- read.nexus("StressTree.nex")
 StressData <- read.csv("FGCDataClean.csv") %>%
   mutate(
     BasalFGC = case_when(
-      FecesMass == "wet" ~ BasalFGC/4, 
-      FecesMass == "dry" ~ BasalFGC,
+      FecesMass == "wet" ~ BasalFGC,
+      FecesMass == "dry" ~ BasalFGC/4,
       TRUE ~ BasalFGC/4),
     ElevFGC = case_when(
-      FecesMass == "wet" ~ ElevFGC/4, 
-      FecesMass == "dry" ~ ElevFGC,
+      FecesMass == "wet" ~ ElevFGC, 
+      FecesMass == "dry" ~ ElevFGC/4,
       TRUE ~ ElevFGC/4))
 
 Label <- "FGC - Wet Corrected Model"
@@ -194,8 +199,14 @@ Label <- "FGC - Wet Corrected Model"
 setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/FGCAnalysis/FGCWetCorrected")
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
 
 setwd(BaseWD)      
-      
+
+# Done --------------------------------------------------------------------
 
 say("Done", by = "frog", what_color = "darkgreen")
+beep(10)
+
+
+

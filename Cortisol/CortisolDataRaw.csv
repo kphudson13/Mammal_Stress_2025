@@ -6,7 +6,6 @@ Group,Species,BodyMassAnAge,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass
 ,Artibeus lituratus,65,872.25,,EIA,22,none,wet,,,0.008588,37.3,
 ,Blastocerus dichotomus,102500,130.333,,EIA,4,N/A,dry,adult and juveniles,13.7,,,
 ,Bos taurus,750000,96.4,,EIA,1,N/A,wet,adult (pregnant and lactating),20,0.000884,38,
-,Camelus dromedarius,434000,503.9,2060.93,"HPLC, EIA",1,ACTH,wet,juvenile and adult,28.4,0.000552,37.5,
 ,Canis rufus,22983.2,312.55,969.85,EIA,9,longitudinal analysis,dry,adult,,,,
 ,Capra aegargrus hircus,61000,124,1096,EIA,1,ACTH,wet,adult,20.8,0.0014,39.3,
 ,Capreolus capreolus,21667,60.92,459,EIA,1,ACTH,wet,,17.5,0.002156,,

@@ -4,10 +4,10 @@ library(ape)
 library(rotl)
 library(nlme) #for gls
 library(tidyverse)
-library(geiger)
-library(rr2) #for the R2.lik function
+library(rr2) #for the R2 function
 library(grid) #to set table themes
 library(gridExtra) #to set table themes
+library(phytools) 
 
 #Models are written in y vs. x format
 
@@ -26,6 +26,7 @@ if (sum(is.na(StressData$BasalFGC)) > 0) {
   BasFGCMass_Tree <- tree
 }
 
+#to view them lining up
 cbind(sort(BasFGCMass_Tree$tip.label), sort(unique(BasFGCMass_data$Species)))
 
 #Build gls model 
@@ -34,16 +35,16 @@ BasFGCMass_PGLS <- gls(log(BasalFGC) ~ log(BodyMassAnAge),
                           correlation = corBrownian(phy = BasFGCMass_Tree, form = ~Species), 
                           method = "ML") #ML = log-likelihood is maximized
 
+#Specify reduced model, intercept model but phylogeny is the same
 BasFGCMass_Reduced <- gls(log(BasalFGC) ~ 1, 
                           data = BasFGCMass_data, 
                           correlation = corBrownian(phy = BasFGCMass_Tree, form = ~Species), 
-                          method = "ML") #ML = log-likelihood is maximized
+                          method = "ML")
 
 #Get values from the model 
 BasFGCMass_Summ_PGLS <- summary(BasFGCMass_PGLS)
 BasFGCMass_CI_PGLS <- intervals(BasFGCMass_PGLS)
 BasFGCMass_RSq_PGLS <- R2(BasFGCMass_PGLS, BasFGCMass_Reduced)
-
 
 #Build ordinary linear model 
 BasFGCMass_Ordinary <- lm(log(BasalFGC) ~ log(BodyMassAnAge),
@@ -67,7 +68,7 @@ BasFGCMass_Plot <-
   annotate("text",  x = 7, y = 1.5,
            label = list(bquote(PGLS: y==~ .(round(coefficients(BasFGCMass_Summ_PGLS)[1,1], 2))
                                ~x^.(round(coefficients(BasFGCMass_Summ_PGLS)[2,1], 2))
-                               ~R^2 ==~ .(round(BasFGCMass_RSq_PGLS, 2)))),
+                               ~R^2 ==~ .(round(BasFGCMass_RSq_PGLS[1], 2)))),
            parse = TRUE) +
   annotate("text",  x = 7, y = 1, 
            label = list(bquote(LM: y==~ .(round(coefficients(BasFGCMass_Summ_Ordinary)[1,1], 2))
@@ -104,6 +105,7 @@ BasFGCMSMR_PGLS <- gls(log(BasalFGC) ~ log(MSMR),
                        correlation = corBrownian(phy = BasFGCMSMR_Tree, form = ~Species), 
                        method = "ML") #ML = log-likelihood is maximized
 
+#Specify reduced model, phylogeny is the same
 BasFGCMSMR_Reduced <- gls(log(BasalFGC) ~ 1, 
                           data = BasFGCMSMR_data, 
                           correlation = corBrownian(phy = BasFGCMSMR_Tree, form = ~Species), 
@@ -136,7 +138,7 @@ BasFGCMSMR_Plot <-
   annotate("text",  x = -5.5, y = 3,
            label = list(bquote(PGLS: y==~ .(round(coefficients(BasFGCMSMR_Summ_PGLS)[1,1], 2))
                                ~x^.(round(coefficients(BasFGCMSMR_Summ_PGLS)[2,1], 2))
-                               ~R^2 ==~ .(round(BasFGCMSMR_RSq_PGLS, 2)))),
+                               ~R^2 ==~ .(round(BasFGCMSMR_RSq_PGLS[1], 2)))),
            parse = TRUE) +
   annotate("text",  x = -5.5, y = 2.5, 
            label = list(bquote(LM: y==~ .(round(coefficients(BasFGCMSMR_Summ_Ordinary)[1,1], 2))
@@ -152,14 +154,11 @@ ggsave(filename = "BasFGCMSMR_Plot.png",
 
 # Elevated vs. Basal FGC --------------------------------------------------
 
-
 #Filter out blank rows of Basal FGC and Elevated FGC
 ElvFGCBasFGC_data <- StressData %>% drop_na(c(BasalFGC, ElevFGC))
 
 #Setting row names to map the tree to
 rownames(ElvFGCBasFGC_data) = ElvFGCBasFGC_data$Species
-
-
 
 #Remove tree species not in the basal FGC data
 if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$ElevFGC)) > 0) {
@@ -168,14 +167,13 @@ if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$ElevFGC)) > 0) {
   ElvFGCBasFGC_Tree <- tree
 }
 
-#Remove tree species not in the basal and elevated FGC data
-ElvFGCBasFGC_Tree <- drop.tip(tree, name.check(tree, ElvFGCBasFGC_data)$tree_not_data)
-
+#Build gls model 
 ElvFGCBasFGC_PGLS <- gls(log(ElevFGC) ~ log(BasalFGC),
                                data=ElvFGCBasFGC_data, 
                                correlation = corBrownian(phy = ElvFGCBasFGC_Tree, form = ~Species), 
                                method="ML")
 
+#Specify reduced model, phylogeny is the same
 ElvFGCBasFGC_Reduced <- gls(log(ElevFGC) ~ 1, 
                             data=ElvFGCBasFGC_data, 
                             correlation = corBrownian(phy = ElvFGCBasFGC_Tree, form = ~Species), 
@@ -204,11 +202,12 @@ ElvFGCBasFGC_Plot <-
   theme_classic() +
   labs(x = "ln Basal FGC (ng/g)",
        y = "ln Elevated FGC (ng/g)",
-       title = Label) +
+       title = Label,
+       subtitle = "All Stressors") +
   annotate("text",  x = 5, y = 2,
            label = list(bquote(PGLS: y==~ .(round(coefficients(ElvFGCBasFGC_Summ_PGLS)[1,1], 2))
                                ~x^.(round(coefficients(ElvFGCBasFGC_Summ_PGLS)[2,1], 2))
-                               ~R^2 ==~ .(round(ElvFGCBasFGC_RSq_PGLS, 2)))),
+                               ~R^2 ==~ .(round(ElvFGCBasFGC_RSq_PGLS[1], 2)))),
            parse = TRUE) +
   annotate("text",  x = 5, y = 1.5, 
            label = list(bquote(LM: y==~ .(round(coefficients(ElvFGCBasFGC_Summ_Ordinary)[1,1], 2))
@@ -221,9 +220,78 @@ ggsave(filename = "ElvFGCBasFGC_Plot.png",
        width = 5,
        height = 4)
 
+# ACTH only ---------------------------------------------------------------
+
+#Filter out blank rows of Basal FGC and Elevated FGC
+ElvACTH_data <- StressData %>% 
+  drop_na(c(BasalFGC, ElevFGC)) %>%
+  filter(Stressor == "ACTH")
+
+#Setting row names to map the tree to
+rownames(ElvACTH_data) = ElvACTH_data$Species
+
+#Remove tree species not in the basal FGC data
+if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$ElevFGC)) > 0) {
+  ElvACTH_Tree <- drop.tip(tree, name.check(tree, ElvACTH_data)$tree_not_data)
+} else {
+  ElvACTH_Tree <- tree
+}
+
+#Build gls model 
+ElvACTH_PGLS <- gls(log(ElevFGC) ~ log(BasalFGC),
+                         data=ElvACTH_data, 
+                         correlation = corBrownian(phy = ElvACTH_Tree, form = ~Species), 
+                         method="ML")
+
+#Specify reduced model, phylogeny is the same
+ElvACTH_Reduced <- gls(log(ElevFGC) ~ 1, 
+                            data=ElvACTH_data, 
+                            correlation = corBrownian(phy = ElvACTH_Tree, form = ~Species), 
+                            method="ML")
+
+#Get values from the model 
+ElvACTH_Summ_PGLS <- summary(ElvACTH_PGLS)
+ElvACTH_CI_PGLS <- intervals(ElvACTH_PGLS)
+ElvACTH_RSq_PGLS <- R2(ElvACTH_PGLS, ElvACTH_Reduced)
+
+#Build ordinary linear model 
+ElvACTH_Ordinary <- lm(log(ElevFGC) ~ log(BasalFGC),
+                            data=ElvACTH_data)
+
+ElvACTH_Summ_Ordinary <- summary(ElvACTH_Ordinary)
+
+ElvACTH_Plot <- 
+  ggplot(data = ElvACTH_data,
+         aes(x = log(BasalFGC), y = log(ElevFGC))) +
+  geom_point(aes(shape = Order)) +
+  scale_shape_manual(values = shapes) +
+  geom_smooth(method=lm, formula = y ~ x, linewidth = 0.5, linetype = 1, colour = "black", se = FALSE) +
+  geom_abline(intercept = coefficients(ElvACTH_Summ_PGLS)[1,1], 
+              slope = coefficients(ElvACTH_Summ_PGLS)[2,1],
+              linetype = 2) +
+  theme_classic() +
+  labs(x = "ln Basal FGC (ng/g)",
+       y = "ln Elevated FGC (ng/g)",
+       title = Label,
+       subtitle = "ACTH Only") +
+  annotate("text",  x = 5, y = 2,
+           label = list(bquote(PGLS: y==~ .(round(coefficients(ElvACTH_Summ_PGLS)[1,1], 2))
+                               ~x^.(round(coefficients(ElvACTH_Summ_PGLS)[2,1], 2))
+                               ~R^2 ==~ .(round(ElvACTH_RSq_PGLS[1], 2)))),
+           parse = TRUE) +
+  annotate("text",  x = 5, y = 1.5, 
+           label = list(bquote(LM: y==~ .(round(coefficients(ElvACTH_Summ_Ordinary)[1,1], 2))
+                               ~x^.(round(coefficients(ElvACTH_Summ_Ordinary)[2,1], 2))
+                               ~R^2 ==~ .(round(ElvACTH_Summ_Ordinary$r.squared, 2)))),
+           parse = TRUE) 
+
+ElvACTH_Plot
+ggsave(filename = "ElvACTH_Plot.png",
+       width = 5,
+       height = 4)
+
 
 # Lifespan vs. Basal model ------------------------------------------------
-
 
 #Filter out blank rows of Basal FGC
 LifespanBasFGC_data <- StressData %>% drop_na(c(BasalFGC, MaxLifespan))
@@ -246,6 +314,7 @@ LifespanBasFGC_PGLS <- gls(log(MaxLifespan) ~ log(BasalFGC),
                            correlation = corBrownian(phy = LifespanBasFGC_Tree, form = ~Species), 
                            method = "ML") #ML = log-likelihood is maximized
 
+#Specify reduced model, phylogeny is the same
 LifespanBasFGC_Reduced <- gls(log(MaxLifespan) ~ 1, 
                               data = LifespanBasFGC_data, 
                               correlation = corBrownian(phy = LifespanBasFGC_Tree, form = ~Species), 
@@ -278,7 +347,7 @@ LifespanBasFGC_Plot <-
   annotate("text",  x = 5, y = 1.5,
            label = list(bquote(PGLS: y==~ .(round(coefficients(LifespanBasFGC_Summ_PGLS)[1,1], 2))
                                ~x^.(round(coefficients(LifespanBasFGC_Summ_PGLS)[2,1], 2))
-                               ~R^2 ==~ .(round(LifespanBasFGC_RSq_PGLS, 2)))),
+                               ~R^2 ==~ .(round(LifespanBasFGC_RSq_PGLS[1], 2)))),
            parse = TRUE) +
   annotate("text",  x = 5, y = 1, 
            label = list(bquote(LM: y==~ .(round(coefficients(LifespanBasFGC_Summ_Ordinary)[1,1], 2))
@@ -292,7 +361,6 @@ ggsave(filename = "LifespanBasFGC_Plot.png",
        height = 4)
 
 # Basal vs. Lifespan Model --------------------------------------------------
-
 
 #Filter out blank rows of Basal FGC
 BasFGCLifespan_data <- StressData %>% drop_na(c(BasalFGC, MaxLifespan))
@@ -315,6 +383,7 @@ BasFGCLifespan_PGLS <- gls(log(BasalFGC) ~ log(MaxLifespan),
                        correlation = corBrownian(phy = BasFGCLifespan_Tree, form = ~Species), 
                        method = "ML") #ML = log-likelihood is maximized
 
+#Specify reduced model, phylogeny is the same
 BasFGCLifespan_Reduced <- gls(log(BasalFGC) ~ 1, 
                            data = BasFGCLifespan_data, 
                            correlation = corBrownian(phy = BasFGCLifespan_Tree, form = ~Species), 
@@ -347,7 +416,7 @@ BasFGCLifespan_Plot <-
   annotate("text",  x = 3, y = 1.5,
            label = list(bquote(PGLS: y==~ .(round(coefficients(BasFGCLifespan_Summ_PGLS)[1,1], 2))
                                ~x^.(round(coefficients(BasFGCLifespan_Summ_PGLS)[2,1], 2))
-                               ~R^2 ==~ .(round(BasFGCLifespan_RSq_PGLS, 2)))),
+                               ~R^2 ==~ .(round(BasFGCLifespan_RSq_PGLS[1], 2)))),
            parse = TRUE) +
   annotate("text",  x = 3, y = 1, 
            label = list(bquote(LM: y==~ .(round(coefficients(BasFGCLifespan_Summ_Ordinary)[1,1], 2))
@@ -398,5 +467,6 @@ grid.newpage()
 grid.table(StatsTab_PGLS, theme = tt1)
 grid.text(Label, x = 0.2, y = 0.9, gp = gpar(fontface = "bold"))
 dev.off()
+
 
 
