@@ -4,10 +4,10 @@ library(ape)
 library(rotl)
 library(nlme) #for gls
 library(tidyverse)
+library(geiger) #for name.check
 library(rr2) #for the R2 function
 library(grid) #to set table themes
 library(gridExtra) #to set table themes
-library(phytools) 
 
 #Models are written in y vs. x format
 
@@ -36,10 +36,8 @@ BasFGCMass_PGLS <- gls(log(BasalFGC) ~ log(BodyMassAnAge),
                           method = "ML") #ML = log-likelihood is maximized
 
 #Specify reduced model, intercept model but phylogeny is the same
-BasFGCMass_Reduced <- gls(log(BasalFGC) ~ 1, 
-                          data = BasFGCMass_data, 
-                          correlation = corBrownian(phy = BasFGCMass_Tree, form = ~Species), 
-                          method = "ML")
+BasFGCMass_Reduced <- lm(log(BasalFGC) ~ 1, 
+                          data = BasFGCMass_data)
 
 #Get values from the model 
 BasFGCMass_Summ_PGLS <- summary(BasFGCMass_PGLS)
@@ -106,10 +104,8 @@ BasFGCMSMR_PGLS <- gls(log(BasalFGC) ~ log(MSMR),
                        method = "ML") #ML = log-likelihood is maximized
 
 #Specify reduced model, phylogeny is the same
-BasFGCMSMR_Reduced <- gls(log(BasalFGC) ~ 1, 
-                          data = BasFGCMSMR_data, 
-                          correlation = corBrownian(phy = BasFGCMSMR_Tree, form = ~Species), 
-                          method = "ML") #ML = log-likelihood is maximized
+BasFGCMSMR_Reduced <- lm(log(BasalFGC) ~ 1, 
+                          data = BasFGCMSMR_data) 
 
 #Get values from the model 
 BasFGCMSMR_Summ_PGLS <- summary(BasFGCMSMR_PGLS)
@@ -174,10 +170,8 @@ ElvFGCBasFGC_PGLS <- gls(log(ElevFGC) ~ log(BasalFGC),
                                method="ML")
 
 #Specify reduced model, phylogeny is the same
-ElvFGCBasFGC_Reduced <- gls(log(ElevFGC) ~ 1, 
-                            data=ElvFGCBasFGC_data, 
-                            correlation = corBrownian(phy = ElvFGCBasFGC_Tree, form = ~Species), 
-                            method="ML")
+ElvFGCBasFGC_Reduced <- lm(log(ElevFGC) ~ 1, 
+                            data=ElvFGCBasFGC_data)
 
 #Get values from the model 
 ElvFGCBasFGC_Summ_PGLS <- summary(ElvFGCBasFGC_PGLS)
@@ -244,10 +238,8 @@ ElvACTH_PGLS <- gls(log(ElevFGC) ~ log(BasalFGC),
                          method="ML")
 
 #Specify reduced model, phylogeny is the same
-ElvACTH_Reduced <- gls(log(ElevFGC) ~ 1, 
-                            data=ElvACTH_data, 
-                            correlation = corBrownian(phy = ElvACTH_Tree, form = ~Species), 
-                            method="ML")
+ElvACTH_Reduced <- lm(log(ElevFGC) ~ 1, 
+                            data=ElvACTH_data)
 
 #Get values from the model 
 ElvACTH_Summ_PGLS <- summary(ElvACTH_PGLS)
@@ -315,10 +307,8 @@ LifespanBasFGC_PGLS <- gls(log(MaxLifespan) ~ log(BasalFGC),
                            method = "ML") #ML = log-likelihood is maximized
 
 #Specify reduced model, phylogeny is the same
-LifespanBasFGC_Reduced <- gls(log(MaxLifespan) ~ 1, 
-                              data = LifespanBasFGC_data, 
-                              correlation = corBrownian(phy = LifespanBasFGC_Tree, form = ~Species), 
-                              method = "ML") #ML = log-likelihood is maximized
+LifespanBasFGC_Reduced <- lm(log(MaxLifespan) ~ 1, 
+                              data = LifespanBasFGC_data) 
 
 #Get values from the model 
 LifespanBasFGC_Summ_PGLS <- summary(LifespanBasFGC_PGLS)
@@ -384,10 +374,8 @@ BasFGCLifespan_PGLS <- gls(log(BasalFGC) ~ log(MaxLifespan),
                        method = "ML") #ML = log-likelihood is maximized
 
 #Specify reduced model, phylogeny is the same
-BasFGCLifespan_Reduced <- gls(log(BasalFGC) ~ 1, 
-                           data = BasFGCLifespan_data, 
-                           correlation = corBrownian(phy = BasFGCLifespan_Tree, form = ~Species), 
-                           method = "ML") #ML = log-likelihood is maximized
+BasFGCLifespan_Reduced <- lm(log(BasalFGC) ~ 1, 
+                           data = BasFGCLifespan_data)
 
 #Get values from the model 
 BasFGCLifespan_Summ_PGLS <- summary(BasFGCLifespan_PGLS)

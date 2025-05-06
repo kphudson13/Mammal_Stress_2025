@@ -1,4 +1,6 @@
 
+library(phytools) 
+
 Mass_signal <- 
   phylosig(tree = tree, 
            x = setNames(StressData$BodyMassAnAge, StressData$Species),   
