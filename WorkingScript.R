@@ -26,8 +26,7 @@ if (sum(is.na(StressData$BasalFGC)) > 0) {
   BasFGCMass_Tree <- tree
 }
 
-#to view them lining up
-cbind(sort(BasFGCMass_Tree$tip.label), sort(unique(BasFGCMass_data$Species)))
+# cbind(sort(BasFGCMass_Tree$tip.label), sort(unique(BasFGCMass_data$Species)))
 
 #Build gls model 
 BasFGCMass_PGLS <- gls(log(BasalFGC) ~ log(BodyMassAnAge), 
@@ -95,7 +94,7 @@ if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$MSMR)) > 0) {
   BasFGCMSMR_Tree <- tree
 }
 
-cbind(sort(BasFGCMSMR_Tree$tip.label), sort(unique(BasFGCMSMR_data$Species)))
+# cbind(sort(BasFGCMSMR_Tree$tip.label), sort(unique(BasFGCMSMR_data$Species)))
 
 #Build gls model 
 BasFGCMSMR_PGLS <- gls(log(BasalFGC) ~ log(MSMR), 
@@ -298,7 +297,7 @@ if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$MaxLifespan)) > 0
   LifespanBasFGC_Tree <- tree
 }
 
-cbind(sort(LifespanBasFGC_Tree$tip.label), sort(unique(LifespanBasFGC_data$Species)))
+# cbind(sort(LifespanBasFGC_Tree$tip.label), sort(unique(LifespanBasFGC_data$Species)))
 
 #Build gls model 
 LifespanBasFGC_PGLS <- gls(log(MaxLifespan) ~ log(BasalFGC), 
@@ -365,7 +364,7 @@ if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$MaxLifespan)) > 0
   BasFGCLifespan_Tree <- tree
 }
 
-cbind(sort(BasFGCLifespan_Tree$tip.label), sort(unique(BasFGCLifespan_data$Species)))
+# cbind(sort(BasFGCLifespan_Tree$tip.label), sort(unique(BasFGCLifespan_data$Species)))
 
 #Build gls model 
 BasFGCLifespan_PGLS <- gls(log(BasalFGC) ~ log(MaxLifespan), 
