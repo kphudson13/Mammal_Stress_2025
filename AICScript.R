@@ -9,6 +9,7 @@ BasFGCMass_Stressor <- gls(log(BasalFGC) ~ log(BodyMassAnAge) + Stressor,
 summary(BasFGCMass_Stressor)
 
 BasFGCMass_AIC <- AIC(BasFGCMass_PGLS, BasFGCMass_Stressor) #compare models
+BasFGCMass_BIC <- BIC(BasFGCMass_PGLS, BasFGCMass_Stressor) 
 
 BasFGCMSMR_Stressor <- gls(log(BasalFGC) ~ log(MSMR) + Stressor, 
                        data = BasFGCMSMR_data, 
@@ -16,7 +17,8 @@ BasFGCMSMR_Stressor <- gls(log(BasalFGC) ~ log(MSMR) + Stressor,
                        method = "ML")
 summary(BasFGCMSMR_Stressor)
 
-BasFGCMSMR_AIC <- AIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor) #compare models
+BasFGCMSMR_AIC <- AIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor) 
+BasFGCMSMR_BIC <- BIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor) 
 
 ElvFGCBasFGC_Stressor <- gls(log(ElevFGC) ~ log(BasalFGC) + Stressor,
                          data=ElvFGCBasFGC_data, 
@@ -24,7 +26,8 @@ ElvFGCBasFGC_Stressor <- gls(log(ElevFGC) ~ log(BasalFGC) + Stressor,
                          method="ML")
 summary(ElvFGCBasFGC_Stressor)
 
-ElvFGCBasFGC_AIC <- AIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor) #compare models
+ElvFGCBasFGC_AIC <- AIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor) 
+ElvFGCBasFGC_BIC <- BIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor) 
 
 LifespanBasFGC_Stressor <- gls(log(MaxLifespan) ~ log(BasalFGC) + Stressor, 
                            data = LifespanBasFGC_data, 
@@ -32,10 +35,13 @@ LifespanBasFGC_Stressor <- gls(log(MaxLifespan) ~ log(BasalFGC) + Stressor,
                            method = "ML")
 summary(LifespanBasFGC_Stressor)
 
-LfespanBasFGC_AIC <- AIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor) #compare models
+LifespanBasFGC_AIC <- AIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor)
+LifespanBasFGC_BIC <- BIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor)
 
-AIC_table <- as.data.frame(rbind(BasFGCMass_AIC, BasFGCMSMR_AIC, ElvFGCBasFGC_AIC, LfespanBasFGC_AIC)) %>%
-  mutate(across(2, \(x) round(x, digits = 2)))
+AIC_table <- as.data.frame(rbind(BasFGCMass_AIC, BasFGCMSMR_AIC, ElvFGCBasFGC_AIC, LifespanBasFGC_AIC)) %>%
+  cbind(., rbind(BasFGCMass_BIC, BasFGCMSMR_BIC, ElvFGCBasFGC_BIC, LifespanBasFGC_BIC)[ ,2]) %>%
+  mutate(across(c(2,3), \(x) round(x, digits = 2))) %>%
+  `colnames<-`(c("df", "AIC", "BIC"))
 
 #export stats table 
 png("AICTable.png", 
@@ -44,5 +50,9 @@ png("AICTable.png",
     res = 300)
 grid.newpage()
 grid.table(AIC_table, theme = tt1)
-grid.text(Label, x = 0.2, y = 0.9, gp = gpar(fontface = "bold"))
+grid.text(Label, x = 0.4, y = 0.9, gp = gpar(fontface = "bold"))
 dev.off()
+
+
+
+

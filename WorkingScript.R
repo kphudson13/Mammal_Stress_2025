@@ -434,13 +434,14 @@ StatsTab_PGLS <- rbind(cbind(coefficients(BasFGCMass_Summ_PGLS), BasFGCMass_CI_P
              coefficients(LifespanBasFGC_Summ_PGLS)[1,1]), #add back in a column for the intercept
         rbind(BasFGCMass_RSq_PGLS, BasFGCMSMR_RSq_PGLS, ElvFGCBasFGC_RSq_PGLS, BasFGCLifespan_RSq_PGLS, LifespanBasFGC_RSq_PGLS)) %>% #and a column for RSq
   mutate(across(c(1,2,3,5,6,7,8,9,10), \(x) round(x, digits = 2))) %>% #new way to round w/ anonymous function
-  mutate(across((4), \(x) round(x, digits = 6))) %>%
+  mutate(across((4), \(x) round(x, digits = 4))) %>%
   `colnames<-`(c("Estimate", "SE Est.", "T value",  "p value", "Lower 95 CI", "Upper 95 CI", "Intercept", "Likelihood R2", "Residual R2", "Predicted R2")) %>%
   `rownames<-`(c("Basal FGC ~ Body Mass", 
                  "Basal FGC ~ MSMR",
                  "Elevated FGC ~ Basal FGC",
                  "Basal FGC ~ Lifespan",
-                 "Lifespan ~ Basal FGC"))
+                 "Lifespan ~ Basal FGC"))  %>%
+  mutate(`p value` = ifelse(`p value` < 0.001, "< 0.001", `p value`)) #change very small p values to < 0.001
 
 
 tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
