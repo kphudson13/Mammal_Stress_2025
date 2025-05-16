@@ -20,7 +20,7 @@ Group,Species,BodyMassAnAge,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass
 ,Giraffa camelopardalis,800000,64.76,178.8,EIA,10,ACTH,dry,adult and juveniles,39.5,0.000874,37.1,
 Yes,Gorilla gorilla gorilla,139842,60,140,EIA,8,various,wet,,60.1,,,N/A
 Yes,Hylobates pileatus,5735,26.67,749.5,EIA,8,ACTH,dry,adult,38,,,N/A
-,Lycaon pictus,26500,267.75,4446,"HPLC, RIA",14,ACTH,dry,"Two 2 yr-old females, one 3-yr old female, two 8 yr-old males",17,0.003773,,
+,Lycaon pictus,26500,267.75,4446,RIA,14,ACTH,dry,"Two 2 yr-old females, one 3-yr old female, two 8 yr-old males",17,0.003773,,
 ,Marmota flaviventris,3500,132,4417,RIA,14,ACTH,dry,adult (non-breeding),21.2,0.002008,36.5,
 ,Melursus ursinus,100000,64.1,666.5,RIA,14,longitudinal analysis,dry,adult,33.3,0.000703,,
 Yes,Microcebus murinus,64.8,90,870,EIA,8,capture,wet,,18.2,,,N/A
@@ -33,7 +33,7 @@ Yes,Microcebus murinus,64.8,90,870,EIA,8,capture,wet,,18.2,,,N/A
 Yes,Otolemur garnettii,1300,,,RIA,14,relocation,wet,About 4 yrs-old?,20,0.002989,,
 ,Ovibos moschatus,315000,14.91,53.32,EIA,10,ACTH,wet,juvenile,27.4,,37.7,
 ,Panthera onca,81150,,,RIA ,14,chemical restraint and electroejaculation,dry,adult,28,0.001238,37,
-Yes,Papio hamadryas ursinus,18000,,,"HPLC, RIA",14,reproductive cycle,dry,adult,37.5,0.001665,,
+Yes,Papio hamadryas ursinus,18000,,, RIA,14,reproductive cycle,dry,adult,37.5,0.001665,,
 ,Peromyscus maniculatus,21,1436.55,2368.47,EIA,10,ACTH,dry,adult (non-reproductive),8.3,0.010683,36.6,
 ,Rangifer tarandus tarandus,101250,60.66,82.6,RIA,14,ACTH,dry,,21.8,0.001408,37.2,
 ,Rangifer tarandus granti,101250,41.3,137.8,RIA,14,ACTH,dry,,21.8,0.001408,,N/A
@@ -47,4 +47,4 @@ Yes,Papio hamadryas ursinus,18000,,,"HPLC, RIA",14,reproductive cycle,dry,adult,
 ,Ursus arctos horribilis,277500,,,RIA,14,ACTH,dry,,40,,37.3,
 ,Ursus maritimus,475000,64.64,,EIA,10,relocation,dry,juveniles and adults,43.8,0.00067,36.8,
 ,Ursus thibetanus,103750,45.1,212.8,RIA,14,longitudinal analysis,dry,adult,39.2,,37.5,N/A
-,Myrmecophaga tridactyla,28500,30,,,,,wet,adult,31,0.000475,,
+,Myrmecophaga tridactyla,28500,30,,EIA,,,wet,adult,31,0.000475,,

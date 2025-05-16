@@ -31,7 +31,8 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone")
 tree <- read.nexus("StressTree.nex")
 
 StressData <- read.csv("CrtstnDataClean.csv") %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) 
+rownames(StressData) = StressData$Species
 
 Label <- "Corticosterone - Uncorrected Model"
 
@@ -53,11 +54,11 @@ tree <- read.nexus("StressTree.nex")
 StressData <- read.csv("CrtstnDataClean.csv") %>%
   mutate(
     BasalFGC = case_when(
-      FecesMass == "wet" ~ BasalFGC, 
+      FecesMass == "wet" ~ BasalFGC,
       FecesMass == "dry" ~ BasalFGC/4,
       TRUE ~ BasalFGC/4),
     ElevFGC = case_when(
-      FecesMass == "wet" ~ ElevFGC, 
+      FecesMass == "wet" ~ ElevFGC,
       FecesMass == "dry" ~ ElevFGC/4,
       TRUE ~ ElevFGC/4)) %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
@@ -87,7 +88,7 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolU
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
-source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
+# source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
 
 setwd(BaseWD)
 
@@ -118,7 +119,7 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolW
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
-source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
+# source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
 
 setwd(BaseWD)
 

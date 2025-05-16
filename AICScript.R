@@ -1,42 +1,46 @@
 
 
-
-
-BasFGCMass_Stressor <- gls(log(BasalFGC) ~ log(BodyMassAnAge) + Stressor, 
-                       data = BasFGCMass_data, 
-                       correlation = corBrownian(phy = BasFGCMass_Tree, form = ~Species), 
-                       method = "ML") 
-summary(BasFGCMass_Stressor)
-
-BasFGCMass_AIC <- AIC(BasFGCMass_PGLS, BasFGCMass_Stressor) #compare models
-BasFGCMass_BIC <- BIC(BasFGCMass_PGLS, BasFGCMass_Stressor) 
-
 BasFGCMSMR_Stressor <- gls(log(BasalFGC) ~ log(MSMR) + Stressor, 
                        data = BasFGCMSMR_data, 
-                       correlation = corBrownian(phy = BasFGCMSMR_Tree, form = ~Species), 
-                       method = "ML")
-summary(BasFGCMSMR_Stressor)
+                       correlation = corPagel(value = BasFGC_signal1$lambda, phy = BasFGCMSMR_Tree, form = ~Species))
 
-BasFGCMSMR_AIC <- AIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor) 
-BasFGCMSMR_BIC <- BIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor) 
+BasFGCMSMR_Method <- gls(log(BasalFGC) ~ log(MSMR) + Method, 
+                           data = BasFGCMSMR_data, 
+                           correlation = corPagel(value = BasFGC_signal1$lambda, phy = BasFGCMSMR_Tree, form = ~Species))
+
+BasFGCMSMR_AIC <- AIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor, BasFGCMSMR_Method) #compare models
+BasFGCMSMR_BIC <- BIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor, BasFGCMSMR_Method) 
+
+BasFGCMass_Stressor <- gls(log(BasalFGC) ~ log(BodyMassAnAge) + Stressor, 
+                           data = BasFGCMass_data, 
+                           correlation = corPagel(value = BasFGC_signal2$lambda, phy = BasFGCMass_Tree, form = ~Species)                       ) 
+BasFGCMass_Method <- gls(log(BasalFGC) ~ log(BodyMassAnAge) + Method, 
+                         data = BasFGCMass_data, 
+                         correlation = corPagel(value = BasFGC_signal2$lambda, phy = BasFGCMass_Tree, form = ~Species)) 
+
+BasFGCMass_AIC <- AIC(BasFGCMass_PGLS, BasFGCMass_Stressor, BasFGCMass_Method) #compare models
+BasFGCMass_BIC <- BIC(BasFGCMass_PGLS, BasFGCMass_Stressor, BasFGCMass_Method) 
+
 
 ElvFGCBasFGC_Stressor <- gls(log(ElevFGC) ~ log(BasalFGC) + Stressor,
                          data=ElvFGCBasFGC_data, 
-                         correlation = corBrownian(phy = ElvFGCBasFGC_Tree, form = ~Species), 
-                         method="ML")
-summary(ElvFGCBasFGC_Stressor)
+                         correlation = corPagel(value = ElvFGC_signal$lambda, phy = ElvFGCBasFGC_Tree, form = ~Species))
+ElvFGCBasFGC_Method <- gls(log(ElevFGC) ~ log(BasalFGC) + Method, 
+                         data=ElvFGCBasFGC_data, 
+                         correlation = corPagel(value = ElvFGC_signal$lambda,phy = ElvFGCBasFGC_Tree, form = ~Species))
 
-ElvFGCBasFGC_AIC <- AIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor) 
-ElvFGCBasFGC_BIC <- BIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor) 
+ElvFGCBasFGC_AIC <- AIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor, ElvFGCBasFGC_Method) #compare models
+ElvFGCBasFGC_BIC <- BIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor, ElvFGCBasFGC_Method) 
 
 LifespanBasFGC_Stressor <- gls(log(MaxLifespan) ~ log(BasalFGC) + Stressor, 
                            data = LifespanBasFGC_data, 
-                           correlation = corBrownian(phy = LifespanBasFGC_Tree, form = ~Species), 
-                           method = "ML")
-summary(LifespanBasFGC_Stressor)
+                           correlation = corPagel(value = Lifespan_signal$lambda,phy = LifespanBasFGC_Tree, form = ~Species))
+LifespanBasFGC_Method <- gls(log(MaxLifespan) ~ log(BasalFGC) + Method, 
+                           data = LifespanBasFGC_data, 
+                           correlation = corPagel(value = Lifespan_signal$lambda,phy = LifespanBasFGC_Tree, form = ~Species))
 
-LifespanBasFGC_AIC <- AIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor)
-LifespanBasFGC_BIC <- BIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor)
+LifespanBasFGC_AIC <- AIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor, LifespanBasFGC_Method) #compare models
+LifespanBasFGC_BIC <- BIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor, LifespanBasFGC_Method)
 
 AIC_table <- as.data.frame(rbind(BasFGCMass_AIC, BasFGCMSMR_AIC, ElvFGCBasFGC_AIC, LifespanBasFGC_AIC)) %>%
   cbind(., rbind(BasFGCMass_BIC, BasFGCMSMR_BIC, ElvFGCBasFGC_BIC, LifespanBasFGC_BIC)[ ,2]) %>%

@@ -1,0 +1,85 @@
+Species,Base,Elev,Method,Mass,MSMR,Anes,Sex,Stressor,Captive
+Aepyceros melampus,7,54,,52500,,"N, Y",,C,N
+Bison bison,,29,LC,579255,,,B,,Y
+Bison bonasus,5,37,"RIA, LC",800000,,N,B,C,"N, Y"
+Bos taurus,15,44,RIA,900000,0.9,N,B,C,Y
+Capra hircus,17,,RIA,29860,,N,,C,Y
+Connochaetes taurinus,,20,RIA,179999,1.2,N,,C,N
+Damaliscus lunatus,,37,RIA,136000,,N,,C,N
+Damaliscus pygargus,,31,RIA,61000,,N,,C,N
+Hippotragus equinus,8,49,,269998,,"N, Y",,C,N
+Hippotragus niger,,31,RIA,227499,,Y,,C,N
+Kobus ellipsiprymnus,,95,RIA,210000,,Y,,C,N
+Oreamnos americanus,,34,LC,72500,1.5,,B,,Y
+Ovibos moschatus,13,57,RIA,368502,,"N, Y","B, F",C,"Y, N"
+Ovis aries,15,66,RIA,100000,,N,B,A,Y
+Ovis canadensis,6,63,RIA,74645,1.5,"N, Y",B,A,Y
+Sylvicapra grimmia,,21,RIA,19500,,N,,C,N
+Syncerus caffer,16,42,RIA,580003,,Y,M,A,N
+Taurotragus oryx,,28,RIA,569994,1.3,Y,,C,N
+Tragelaphus angasii,,85,RIA,86600,,Y,,C,N
+Tragelaphus scriptus,,32,RIA,43250,,,,C,N
+Tragelaphus strepsiceros,,46,RIA,213501,,Y,,C,N
+Camelus bactrianus,,33,LC,690000,,,B,,Y
+Camelus dromedarius,,46,RIA,800000,,Y,M,C,Y
+Vicugna vicugna,13,59,RIA,31500,,N,M,A,N
+Alces alces ,15,93,,358996,0.9,"N, Y",B,C,N
+Axis axis,,47,RIA,69500,,N,F,C,N
+Cervus elaphus,16,103,RIA,156250,1.7,Y,M,A,Y
+Cervus timorensis,4,113,RIA,100000,,Y,M,A,N
+Hydropotes inermis,5,49,RIA,13500,,N,B,C,Y
+Odocoileus virginianus,31,85,CPB,55509,2.4,N,B,C,Y
+Pudu puda,4,27,RIA,9750,,N,,A,Y
+Rangifer tarandus,11,65,RIA,86034,1.4,N,F,A,Y
+Giraffa camelopardalis,,45,RIA,899995,,N,,C,N
+Sus scrofa domesticus,55,110,RIA,60000,0.8,N,,C,Y
+Canis lupus dingo ,25,82,DI,16800,1.8,UK,B,A,Y
+Lycaon pictus,41,121,RIA,22050,,Y,B,A,Y
+Nyctereutes procyonoides,,15,RIA,5387,,N,,,Y
+Acinonyx jubatus,29,286,RIA,50000,1.3,Y,B,A,Y
+Panthera pardus,379,536,RIA,55000,,Y,M,C,Y
+Panthera tigris,131,242,RIA,200000,1,Y,M,C,Y
+Puma concolor,123,723,RIA,51600,,Y,M,C,Y
+Martes americana,15,39,RIA,"884, 849",3.7,Y,B,ST,Y
+Mirounga angustirostris,,80,RIA,1481000,,Y,M,C,N
+Ursus americanus,,72,,65250,2,Y,F,C,N
+Ursus arctos,53,80,,139441,0.7,Y,B,C,N
+Ursus maritimus,,84,RIA,352501,0.6,Y,M,C,N
+Balaenoptera acutorostrata,,18,RIA,10000000,,N,B,C,N
+Balaenoptera borealis,,11,RIA,20000000,,N,B,C,N
+Balaenoptera edeni,,23,RIA,16000000,,N,,ST,N
+Balaenoptera physalus,,10,RIA,45000000,,N,,C,N
+Stenella attenuata,,50,CEI,100000,,N,B,C,N
+Tursiops truncatus,13,25,RIA,142666,1.9,N,F,C,Y
+Delphinapterus leucas,32,63,RIA,1400000,1.2,N,B,C,N
+Physeter macrocephalus,,18,RIA,40000000,,N,B,C,N
+Pteropus hypomelanus,123,1090,RIA,516,3.1,N,B,C,Y
+Pteropus pumilus,394,502,RIA,249,3.6,N,F,C,Y
+Pteropus vampyrus,423,1137,RIA,1024,4.4,N,B,C,Y
+Myotis lucifugus,409,756,RIA,8,8.7,N,M,C,N
+Procavia capensis,34,,FM,3030,1.5,N,M,,N
+Lepus americanus,22,268,DCC,1464,3.2,N,M,A,N
+Equus caballus,26,41,RIA,444900,1.4,N,,SO,Y
+Equus grevyi,,299,LC,408000,,,B,,Y
+Ceratotherium simum,,18,RIA,2949986,,Y,,C,N
+Diceros bicornis,,33,RIA,1180511,,Y,B,C,N
+Halichoerus grypus,342,,DI,250000,,N,M,,N
+Saimiri sciureus,730,2590,RIA,705,5.1,N,F,ST,Y
+Chlorocebus aethiops,142,390,RIA,"3000, 3300",,"N, Y",M,C,N
+Macaca mulatta,180,300,RIA,10000,5.2,Y,M,C,Y
+Papio hamadryas,474,,RIA,21300,,N,M,,Y
+Homo sapiens,84,336,RIA,79923,1.2,N,M,T,
+Pan troglodytes,455,660,RIA,45000,2.6,"N, Y",B,C,Y
+Callicebus moloch,280,510,RIA,855,,N,B,SO,Y
+Elephas maximus,23,,RIA,5000000,0.8,N,F,,Y
+Loxodonta africana,5,86,RIA,3940034,0.9,N,F,A,Y
+Cavia porcellus,82,,GF,728,3.1,,,,Y
+Octodon degus,135,439,RIA,210,4.9,N,M,C,N
+Glaucomys sabrinus,,978,RIA,166,,Y,B,C,N
+Glaucomys volans,,1620,RIA,64,5.9,Y,B,C,N
+Sciurus carolinensis,,373,RIA,507,4.7,Y,B,C,N
+Spermophilus parryii,126,164,DCC,"372, 454",4.5,Y,M,A,N
+Spermophilus  richardsonii,75,145,RIA,372,2.7,Y,M,C,N
+Tamias amoenus,679,1081,RIA,52,9.4,Y,B,C,N
+Tamias striatus,,259,DCC,112,5.8,Y,B,C,N
+Tamiasciurus hudsonicus ,,781,DCC,236,6.2,Y,M,A,N

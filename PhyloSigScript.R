@@ -1,6 +1,9 @@
 
 library(phytools) 
 
+# cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
+# name.check(tree, StressData)
+
 Mass_signal <- 
   phylosig(tree = tree, 
            x = setNames(StressData$BodyMassAnAge, StressData$Species),   
@@ -10,28 +13,28 @@ Mass_signal <-
 
 BasFGC_signal <-
   phylosig(tree = tree,
-           x = setNames(BasFGCMass_data$BasalFGC, BasFGCMass_data$Species),   
+           x = setNames(StressData$BasalFGC, StressData$Species),   
            method = "lambda",
            test = TRUE, 
            nsim = 1000)
 
 MSMR_signal <-
   phylosig(tree = tree,
-           x = setNames(BasFGCMSMR_data$MSMR, BasFGCMSMR_data$Species),   
+           x = setNames(StressData$MSMR, StressData$Species),   
            method = "lambda",
            test = TRUE, 
            nsim = 1000)
 
 ElvFGC_signal <-
   phylosig(tree = tree,
-           x = setNames(ElvFGCBasFGC_data$ElevFGC, ElvFGCBasFGC_data$Species),   
+           x = setNames(StressData$ElevFGC, StressData$Species),   
            method = "lambda",
            test = TRUE, 
            nsim = 1000)
 
 Lifespan_signal <-
   phylosig(tree = tree,
-           x = setNames(LifespanBasFGC_data$MaxLifespan, LifespanBasFGC_data$Species),   
+           x = setNames(StressData$MaxLifespan, StressData$Species),   
            method = "lambda",
            test = TRUE, 
            nsim = 1000)
