@@ -68,16 +68,18 @@ BasFGCMSMR_Plot <-
          aes(x = log(MSMR), y = log(BasalFGC))) +
   geom_point() +
   geom_abline(intercept = coefficients(summary(BasFGCMSMR_PGLS))[1,1], 
-              slope = coefficients(summary(BasFGCMSMR_PGLS))[2,1]) +
+              slope = coefficients(summary(BasFGCMSMR_PGLS))[2,1], 
+              ) +
   theme_classic() +
   labs(x = "ln MSMR",
-       y = "ln Basal FGC (ng/g)",
-       title = "A") +
-  annotate("text",  x = 2, y = 3,
-           label = list(bquote(y==~ .(round(coefficients(summary(BasFGCMSMR_PGLS))[1,1], 2))
-                               ~x^.(round(coefficients(summary(BasFGCMSMR_PGLS))[2,1], 2))
-                               ~R^2 ==~ .(round(as.numeric(R2(BasFGCMSMR_PGLS, BasFGCMSMR_Reduced)[3]), 2)))),
-           parse = TRUE)
+       y = "ln Basal FGC (ng/g)") +
+  annotate("text",  x = 2, y = 2.5,
+           label = list(bquote(atop(y==~ .(round(coefficients(summary(BasFGCMSMR_PGLS))[1,1], 2))
+                               ~x^.(round(coefficients(summary(BasFGCMSMR_PGLS))[2,1], 2)),
+                               ~R^2 ==~ .(round(as.numeric(R2(BasFGCMSMR_PGLS, BasFGCMSMR_Reduced)[3]), 2))))),
+           parse = TRUE) +
+  scale_x_continuous(limits = c(-1.5, 3)) +
+  scale_y_continuous(limits = c(2, 8.5))
 
 BasFGCMSMR_Plot
 save(BasFGCMSMR_Plot, file = "BasFGCMSMR_Plot.RData") #save file
@@ -111,8 +113,8 @@ BasFGC_signal2 <-
 
 #Build gls model 
 BasFGCMass_PGLS <- gls(log(BasalFGC) ~ log(BodyMassAnAge), 
-                          data = BasFGCMass_data, 
-                          correlation = corPagel(value = BasFGC_signal2$lambda, phy = BasFGCMass_Tree, form = ~Species))
+                       data = BasFGCMass_data, 
+                       correlation = corPagel(value = BasFGC_signal2$lambda, phy = BasFGCMass_Tree, form = ~Species))
 
 #limit lambda to >0 to avoid errors 
 if (BasFGCMass_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
@@ -125,7 +127,7 @@ save(BasFGCMass_PGLS, file = "BasFGCMass_PGLS.RData")
 
 #Specify reduced model, intercept model but phylogeny is the same
 BasFGCMass_Reduced <- lm(log(BasalFGC) ~ 1, 
-                          data = BasFGCMass_data)
+                         data = BasFGCMass_data)
 
 save(BasFGCMass_Reduced, file = "BasFGCMass_Reduced.RData")
 
@@ -143,13 +145,14 @@ BasFGCMass_Plot <-
               slope = coefficients(summary(BasFGCMass_PGLS))[2,1]) +
   theme_classic() +
   labs(x = "ln Body Mass (g)",
-       y = "ln Basal FGC (ng/g)",
-       title = "B") +
-  annotate("text",  x = 7, y = 1.5,
-           label = list(bquote(y==~ .(round(coefficients(summary(BasFGCMass_PGLS))[1,1], 2))
-                               ~x^.(round(coefficients(summary(BasFGCMass_PGLS))[2,1], 2))
-                               ~R^2 ==~ .(round(as.numeric(R2(BasFGCMass_PGLS, BasFGCMass_Reduced)[3]), 2)))),
-           parse = TRUE) 
+       y = "ln Basal FGC (ng/g)") +
+  annotate("text",  x = 5, y = 2,
+           label = list(bquote(atop(y==~ .(round(coefficients(summary(BasFGCMass_PGLS))[1,1], 2))
+                               ~x^.(round(coefficients(summary(BasFGCMass_PGLS))[2,1], 2)),
+                               ~R^2 ==~ .(round(as.numeric(R2(BasFGCMass_PGLS, BasFGCMass_Reduced)[3]), 2))))),
+           parse = TRUE) +
+  scale_x_continuous(limits = c(2, 16)) +
+  scale_y_continuous(limits = c(1, 8.5))
 
 BasFGCMass_Plot
 save(BasFGCMass_Plot, file = "BasFGCMass_Plot.RData") #save file
@@ -214,13 +217,14 @@ ElvFGCBasFGC_Plot <-
               slope = coefficients(summary(ElvFGCBasFGC_PGLS))[2,1]) +
   theme_classic() +
   labs(x = "ln Basal FGC (ng/g)",
-       y = "ln Elevated FGC (ng/g)",
-       title = "D") +
-  annotate("text",  x = 5, y = 2,
-           label = list(bquote(y==~ .(round(coefficients(summary(ElvFGCBasFGC_PGLS))[1,1], 2))
-                               ~x^.(round(coefficients(summary(ElvFGCBasFGC_PGLS))[2,1], 2))
-                               ~R^2 ==~ .(round(as.numeric(R2(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Reduced)[3]), 2)))),
-           parse = TRUE) 
+       y = "ln Elevated FGC (ng/g)") +
+  annotate("text",  x = 6, y = 3,
+           label = list(bquote(atop(y==~ .(round(coefficients(summary(ElvFGCBasFGC_PGLS))[1,1], 2))
+                               ~x^.(round(coefficients(summary(ElvFGCBasFGC_PGLS))[2,1], 2)),
+                               ~R^2 ==~ .(round(as.numeric(R2(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Reduced)[3]), 2))))),
+           parse = TRUE) +
+  scale_x_continuous(limits = c(1, 9)) +
+  scale_y_continuous(limits = c(2, 10))
 
 ElvFGCBasFGC_Plot
 save(ElvFGCBasFGC_Plot, file = "ElvFGCBasFGC_Plot.RData") #save file
@@ -285,13 +289,14 @@ LifespanBasFGC_Plot <-
               slope = coefficients(summary(LifespanBasFGC_PGLS))[2,1]) +
   theme_classic() +
   labs(x = "ln Basal FGC (ng/g)",
-       y = "ln lifespan (years)",
-       title = "C") +
-  annotate("text",  x = 5, y = 1.5,
-           label = list(bquote(y==~ .(round(coefficients(summary(LifespanBasFGC_PGLS))[1,1], 2))
-                               ~x^.(round(coefficients(summary(LifespanBasFGC_PGLS))[2,1], 2))
-                               ~R^2 ==~ .(round(as.numeric(R2(LifespanBasFGC_PGLS, LifespanBasFGC_Reduced)[3]), 2)))),
-           parse = TRUE) 
+       y = "ln lifespan (years)") +
+  annotate("text",  x = 3, y = 1.5,
+           label = list(bquote(atop(y==~ .(round(coefficients(summary(LifespanBasFGC_PGLS))[1,1], 2))
+                               ~x^.(round(coefficients(summary(LifespanBasFGC_PGLS))[2,1], 2)),
+                               ~R^2 ==~ .(round(as.numeric(R2(LifespanBasFGC_PGLS, LifespanBasFGC_Reduced)[3]), 2))))),
+           parse = TRUE) +
+  scale_x_continuous(limits = c(1, 9)) +
+  scale_y_continuous(limits = c(1, 5))
 
 LifespanBasFGC_Plot
 save(LifespanBasFGC_Plot, file = "LifespanBasFGC_Plot.RData") #save file
