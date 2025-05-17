@@ -17,7 +17,6 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone")
 
 StressData <- read.csv("CrtstnDataRaw.csv")
 
-
 StressData$Species[StressData$Species == "Suricata suricatta "] <- "Suricata suricatta"
 StressData$Species[StressData$Species == "Sturnira parivdens"] <- "Sturnira parvidens"
 StressData$Species[StressData$Species == "Equus burchelli"] <- "Equus burchellii"
@@ -61,6 +60,8 @@ png("TreePic.png",
     res = 200)
 plot(tree)
 dev.off()
+
+StressData$MSMR <- StressData$MSMR * 1000 #convert to mW/g
 
 write.csv(StressData, file = "CrtstnDataClean.csv")
 
@@ -118,6 +119,8 @@ png("TreePic.png",
     res = 200)
 plot(tree)
 dev.off()
+
+StressData$MSMR <- StressData$MSMR * 1000 #convert to mW/g
 
 write.csv(StressData, file = "CortisolDataClean.csv")
 

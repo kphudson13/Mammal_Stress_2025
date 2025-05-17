@@ -6,20 +6,21 @@ library(tidyverse)
 library(beepr)
 library(cowsay)
 
+rm(list=ls())
 BaseWD <- "C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R" #Default WD
 setwd(BaseWD) #make sure default WD is set correctly 
 
-#store shapes so all orders match in geom_point functions
-shapes <- c("Artiodactyla" = 0, 
-            "Carnivora" = 1,
-            "Chiroptera"= 2,
-            "Cingulata" = 3,
-            "Rodentia" = 4,
-            "Lagomorpha" = 11,
-            "Perissodactyla" = 15,
-            "Proboscidea" = 16,
-            "Primates" = 17, 
-            "Pilosa" = 19)
+# #store shapes so all orders match in geom_point functions
+# shapes <- c("Artiodactyla" = 0, 
+#             "Carnivora" = 1,
+#             "Chiroptera"= 2,
+#             "Cingulata" = 3,
+#             "Rodentia" = 4,
+#             "Lagomorpha" = 11,
+#             "Perissodactyla" = 15,
+#             "Proboscidea" = 16,
+#             "Primates" = 17, 
+#             "Pilosa" = 19)
 
 #To view data structure
 #str(read.nexus("StressTree.nex"))
@@ -88,7 +89,7 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolU
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
-# source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
 
 setwd(BaseWD)
 
@@ -119,7 +120,7 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol/CortisolW
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
-# source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
+source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
 
 setwd(BaseWD)
 
@@ -138,7 +139,7 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/FGCAnalysis/FGCUnc
       
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
-source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
+# source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
 
 setwd(BaseWD)      
 
@@ -166,7 +167,7 @@ setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/FGCAnalysis/FGCWet
 
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Workingscript.R")
 source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/PhyloSigScript.R")
-source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
+# source("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/AICScript.R")
 
 setwd(BaseWD)      
 
