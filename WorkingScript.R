@@ -76,7 +76,7 @@ BasFGCMSMR_Plot <-
   annotate("text",  x = 2, y = 2.5,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(BasFGCMSMR_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(BasFGCMSMR_PGLS))[2,1], 2)),
-                               ~R^2 ==~ .(round(as.numeric(R2(BasFGCMSMR_PGLS, BasFGCMSMR_Reduced)[3]), 2))))),
+                               ~R^2 ==~ .(round(as.numeric(R2(BasFGCMSMR_PGLS, BasFGCMSMR_Reduced)[1]), 2))))),
            parse = TRUE) +
   scale_x_continuous(limits = c(-1.5, 3)) +
   scale_y_continuous(limits = c(2, 8.5))
@@ -149,7 +149,7 @@ BasFGCMass_Plot <-
   annotate("text",  x = 5, y = 2,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(BasFGCMass_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(BasFGCMass_PGLS))[2,1], 2)),
-                               ~R^2 ==~ .(round(as.numeric(R2(BasFGCMass_PGLS, BasFGCMass_Reduced)[3]), 2))))),
+                               ~R^2 ==~ .(round(as.numeric(R2(BasFGCMass_PGLS, BasFGCMass_Reduced)[1]), 2))))),
            parse = TRUE) +
   scale_x_continuous(limits = c(2, 16)) +
   scale_y_continuous(limits = c(1, 8.5))
@@ -221,7 +221,7 @@ ElvFGCBasFGC_Plot <-
   annotate("text",  x = 6, y = 3,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(ElvFGCBasFGC_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(ElvFGCBasFGC_PGLS))[2,1], 2)),
-                               ~R^2 ==~ .(round(as.numeric(R2(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Reduced)[3]), 2))))),
+                               ~R^2 ==~ .(round(as.numeric(R2(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Reduced)[1]), 2))))),
            parse = TRUE) +
   scale_x_continuous(limits = c(1, 9)) +
   scale_y_continuous(limits = c(2, 10))
@@ -293,7 +293,7 @@ LifespanBasFGC_Plot <-
   annotate("text",  x = 3, y = 1.5,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(LifespanBasFGC_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(LifespanBasFGC_PGLS))[2,1], 2)),
-                               ~R^2 ==~ .(round(as.numeric(R2(LifespanBasFGC_PGLS, LifespanBasFGC_Reduced)[3]), 2))))),
+                               ~R^2 ==~ .(round(as.numeric(R2(LifespanBasFGC_PGLS, LifespanBasFGC_Reduced)[1]), 2))))),
            parse = TRUE) +
   scale_x_continuous(limits = c(1, 9)) +
   scale_y_continuous(limits = c(1, 5))
