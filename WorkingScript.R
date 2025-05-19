@@ -1,14 +1,4 @@
 
-library(ape)
-library(rotl) #to pull from Open Tree of Life
-library(nlme) #for gls
-library(tidyverse)
-library(geiger) #for name.check
-library(rr2) #for the R2 function
-library(grid) #to set table themes
-library(gridExtra) #to set table themes
-library(cowplot) #to combine plots 
-
 
 #Models are written in y vs. x format
 
@@ -47,13 +37,13 @@ if (BasFGCMSMR_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
 } 
 
 #Store the PGLS model
-save(BasFGCMSMR_PGLS, file = "BasFGCMSMR_PGLS.RData")
+save(BasFGCMSMR_PGLS, file = paste(directory,"BasFGCMSMR_PGLS.RData", sep = ""))
 
 #Specify reduced model, phylogeny is the same
 BasFGCMSMR_Reduced <- lm(log(BasalFGC) ~ 1, 
                          data = BasFGCMSMR_data) 
 
-save(BasFGCMSMR_Reduced, file = "BasFGCMSMR_Reduced.RData")
+save(BasFGCMSMR_Reduced, file = paste(directory,"BasFGCMSMR_Reduced.RData", sep = ""))
 
 BasFGCMSMR_RSq_PGLS <- R2(BasFGCMSMR_PGLS, BasFGCMSMR_Reduced)
 
@@ -82,8 +72,8 @@ BasFGCMSMR_Plot <-
   scale_y_continuous(limits = c(2, 8.5))
 
 BasFGCMSMR_Plot
-save(BasFGCMSMR_Plot, file = "BasFGCMSMR_Plot.RData") #save file
-ggsave(filename = "BasFGCMSMR_Plot.png",
+save(BasFGCMSMR_Plot, file = paste(directory,"BasFGCMSMR_Plot.RData", sep = "")) #save file
+ggsave(filename = paste(directory,"BasFGCMSMR_Plot.png",sep = ""),
        width = 5,
        height = 4) #save a picture
 
@@ -122,14 +112,14 @@ if (BasFGCMass_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
 } 
 
 #Store the PGLS model
-save(BasFGCMass_PGLS, file = "BasFGCMass_PGLS.RData")
+save(BasFGCMass_PGLS, file = paste(directory,"BasFGCMass_PGLS.RData", sep = ""))
 
 
 #Specify reduced model, intercept model but phylogeny is the same
 BasFGCMass_Reduced <- lm(log(BasalFGC) ~ 1, 
                          data = BasFGCMass_data)
 
-save(BasFGCMass_Reduced, file = "BasFGCMass_Reduced.RData")
+save(BasFGCMass_Reduced, file = paste(directory,"BasFGCMass_Reduced.RData", sep = ""))
 
 #Build ordinary linear model 
 # BasFGCMass_Ordinary <- lm(log(BasalFGC) ~ log(BodyMassAnAge),
@@ -155,8 +145,8 @@ BasFGCMass_Plot <-
   scale_y_continuous(limits = c(1, 8.5))
 
 BasFGCMass_Plot
-save(BasFGCMass_Plot, file = "BasFGCMass_Plot.RData") #save file
-ggsave(filename = "BasFGCMass_Plot.png",
+save(BasFGCMass_Plot, file = paste(directory, "BasFGCMass_Plot.RData", sep = "")) #save file
+ggsave(filename = paste(directory, "BasFGCMass_Plot.png", sep = ""),
        width = 5,
        height = 4) #save a picture
 
@@ -195,13 +185,13 @@ if (ElvFGCBasFGC_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
 } 
 
 #Store the PGLS model
-save(ElvFGCBasFGC_PGLS, file = "ElvFGCBasFGC_PGLS.RData")
+save(ElvFGCBasFGC_PGLS, file = paste(directory, "ElvFGCBasFGC_PGLS.RData", sep = ""))
 
 #Specify reduced model, phylogeny is the same
 ElvFGCBasFGC_Reduced <- lm(log(ElevFGC) ~ 1, 
                            data=ElvFGCBasFGC_data)
 
-save(ElvFGCBasFGC_Reduced, file = "ElvFGCBasFGC_Reduced.RData")
+save(ElvFGCBasFGC_Reduced, file = paste(directory, "ElvFGCBasFGC_Reduced.RData", sep = ""))
 
 #Build ordinary linear model 
 # ElvFGCBasFGC_Ordinary <- lm(log(ElevFGC) ~ log(BasalFGC),
@@ -227,8 +217,8 @@ ElvFGCBasFGC_Plot <-
   scale_y_continuous(limits = c(2, 10))
 
 ElvFGCBasFGC_Plot
-save(ElvFGCBasFGC_Plot, file = "ElvFGCBasFGC_Plot.RData") #save file
-ggsave(filename = "ElvFGCBasFGC_Plot.png",
+save(ElvFGCBasFGC_Plot, file = paste(directory, "ElvFGCBasFGC_Plot.RData", sep = "")) #save file
+ggsave(filename = paste(directory, "ElvFGCBasFGC_Plot.png", sep = ""),
        width = 5,
        height = 4) #save a picture
 
@@ -267,13 +257,13 @@ if (LifespanBasFGC_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
 } 
 
 #Store the PGLS model
-save(LifespanBasFGC_PGLS, file = "LifespanBasFGC_PGLS.RData")
+save(LifespanBasFGC_PGLS, file = paste(directory, "LifespanBasFGC_PGLS.RData", sep = ""))
 
 #Specify reduced model, phylogeny is the same
 LifespanBasFGC_Reduced <- lm(log(MaxLifespan) ~ 1, 
                              data = LifespanBasFGC_data) 
 
-save(LifespanBasFGC_Reduced, file = "LifespanBasFGC_Reduced.RData")
+save(LifespanBasFGC_Reduced, file = paste(directory, "LifespanBasFGC_Reduced.RData", sep = ""))
 
 #Build ordinary linear model 
 # LifespanBasFGC_Ordinary <- lm(log(MaxLifespan) ~ log(BasalFGC),
@@ -299,12 +289,13 @@ LifespanBasFGC_Plot <-
   scale_y_continuous(limits = c(1, 5))
 
 LifespanBasFGC_Plot
-save(LifespanBasFGC_Plot, file = "LifespanBasFGC_Plot.RData") #save file
-ggsave(filename = "LifespanBasFGC_Plot.png",
+save(LifespanBasFGC_Plot, file = paste(directory, "LifespanBasFGC_Plot.RData", sep = "")) #save file
+ggsave(filename = paste(directory, "LifespanBasFGC_Plot.png", sep = ""),
        width = 5,
        height = 4) #save a picture
 
-# Stats Tables ------------------------------------------------------------
+# Stats Table ------------------------------------------------------------
+
 #PGLS table
 StatsTab_PGLS <- rbind(cbind(coefficients(summary(BasFGCMSMR_PGLS)), intervals(BasFGCMSMR_PGLS)[["coef"]]),
                        cbind(coefficients(summary(BasFGCMass_PGLS)), intervals(BasFGCMass_PGLS)[["coef"]]),
@@ -337,10 +328,10 @@ StatsTab_PGLS <- rbind(cbind(coefficients(summary(BasFGCMSMR_PGLS)), intervals(B
 tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
                                    bg_params=list(fill="grey80")))
 
-write.csv(StatsTab_PGLS, "StatsTab_PGLS.csv", row.names = TRUE)
+write.csv(StatsTab_PGLS, file = paste(directory, "StatsTab_PGLS.csv", sep = ""), row.names = TRUE)
 
 #export stats table 
-png("StatsTab_PGLS.png", 
+png(paste(directory, "StatsTab_PGLS.png", sep = ""),
     height = 190*nrow(StatsTab_PGLS), 
     width = 800*ncol(StatsTab_PGLS),
     res = 300)
@@ -348,5 +339,8 @@ grid.newpage()
 grid.table(StatsTab_PGLS, theme = tt1)
 grid.text(Label, x = 0.2, y = 0.9, gp = gpar(fontface = "bold"))
 dev.off()
+
+
+
 
 

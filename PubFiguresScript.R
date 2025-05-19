@@ -6,6 +6,8 @@ library(rr2) #for the R2 function
 library(grid) #to set table themes
 library(gridExtra) #to set table themes
 library(rlang)
+library(phytools) #for phylosig
+library(cowplot) #to combine plots 
 
 rm(list=ls())
 
@@ -234,8 +236,8 @@ StatsTab[is.na(StatsTab)] <- " "
 tt1 <- ttheme_minimal(core=list(fg_params=list(hjust = 1, x = 0.95)))
 
 png("PublicationFigures/StatsTab_PGLS.png", 
-    height = 190*nrow(StatsTab), 
-    width = 800*ncol(StatsTab),
+    height = 100*nrow(StatsTab), 
+    width = 500*ncol(StatsTab),
     res = 300)
 grid.newpage()
 g <- tableGrob(StatsTab[,1], cols = "Model", theme = tt1)
@@ -244,6 +246,132 @@ g3 <- gtable_combine(g,g2, along=1)
 grid.draw(g3)
 # grid.text(Label, x = 0.2, y = 0.9, gp = gpar(fontface = "bold"))
 dev.off()
+
+
+# Phylo Sig Table ---------------------------------------------------------
+
+Cortisol_tree <- read.nexus("Cortisol/StressTree.nex")
+Crtstn_tree <- read.nexus("Corticosterone/StressTree.nex")
+
+PhyloSigTab <- 
+cbind(c(phylosig(tree = Cortisol_tree,
+           x = setNames(Cortisol_data$BasalFGC, Cortisol_data$Species),   
+           method = "lambda",
+           test = TRUE, 
+           nsim = 1000)[["lambda"]], 
+  phylosig(tree = Cortisol_tree,
+           x = setNames(Cortisol_data$ElevFGC, Cortisol_data$Species),   
+           method = "lambda",
+           test = TRUE, 
+           nsim = 1000)[["lambda"]], 
+  phylosig(tree = Cortisol_tree,
+           x = setNames(Cortisol_data$MSMR, Cortisol_data$Species),   
+           method = "lambda",
+           test = TRUE, 
+           nsim = 1000)[["lambda"]],
+  phylosig(tree = Cortisol_tree,
+           x = setNames(Cortisol_data$BodyMassAnAge, Cortisol_data$Species),   
+           method = "lambda",
+           test = TRUE, 
+           nsim = 1000)[["lambda"]],
+  phylosig(tree = Crtstn_tree,
+           x = setNames(Crtstn_data$BasalFGC, Crtstn_data$Species),   
+           method = "lambda",
+           test = TRUE, 
+           nsim = 1000)[["lambda"]], 
+  phylosig(tree = Crtstn_tree,
+           x = setNames(Crtstn_data$ElevFGC, Crtstn_data$Species),   
+           method = "lambda",
+           test = TRUE, 
+           nsim = 1000)[["lambda"]], 
+  phylosig(tree = Crtstn_tree,
+           x = setNames(Crtstn_data$MSMR, Crtstn_data$Species),   
+           method = "lambda",
+           test = TRUE, 
+           nsim = 1000)[["lambda"]],
+  phylosig(tree = Crtstn_tree,
+           x = setNames(Crtstn_data$BodyMassAnAge, Crtstn_data$Species),   
+           method = "lambda",
+           test = TRUE, 
+           nsim = 1000)[["lambda"]]),
+       c(phylosig(tree = Cortisol_tree,
+             x = setNames(Cortisol_data$BasalFGC, Cortisol_data$Species),   
+             method = "lambda",
+             test = TRUE, 
+             nsim = 1000)[["P"]], 
+    phylosig(tree = Cortisol_tree,
+             x = setNames(Cortisol_data$ElevFGC, Cortisol_data$Species),   
+             method = "lambda",
+             test = TRUE, 
+             nsim = 1000)[["P"]], 
+    phylosig(tree = Cortisol_tree,
+             x = setNames(Cortisol_data$MSMR, Cortisol_data$Species),   
+             method = "lambda",
+             test = TRUE, 
+             nsim = 1000)[["P"]],
+    phylosig(tree = Cortisol_tree,
+             x = setNames(Cortisol_data$BodyMassAnAge, Cortisol_data$Species),   
+             method = "lambda",
+             test = TRUE, 
+             nsim = 1000)[["P"]],
+    phylosig(tree = Crtstn_tree,
+             x = setNames(Crtstn_data$BasalFGC, Crtstn_data$Species),   
+             method = "lambda",
+             test = TRUE, 
+             nsim = 1000)[["P"]],
+    phylosig(tree = Crtstn_tree,
+             x = setNames(Crtstn_data$ElevFGC, Crtstn_data$Species),   
+             method = "lambda",
+             test = TRUE, 
+             nsim = 1000)[["P"]],
+    phylosig(tree = Crtstn_tree,
+             x = setNames(Crtstn_data$MSMR, Crtstn_data$Species),   
+             method = "lambda",
+             test = TRUE, 
+             nsim = 1000)[["P"]],
+    phylosig(tree = Crtstn_tree,
+             x = setNames(Crtstn_data$BodyMassAnAge, Crtstn_data$Species),   
+             method = "lambda",
+             test = TRUE, 
+             nsim = 1000)[["P"]])) %>%
+  as.data.frame(.) %>%
+  mutate(across(c(1,2), \(x) round(x, digits = 4))) %>%
+  `colnames<-`(c("Lambda", "p value")) %>%
+  mutate(`p value` = ifelse(`p value` < 0.001, "< 0.001", `p value`)) %>% #change very small p values to < 0.001
+  mutate(Lambda = ifelse(Lambda < 0.001, "< 0.001", Lambda)) %>% 
+  add_row(.before = 1) %>% add_row(.before = 6) %>% #add blank rows to divide cortisol and crtstn
+  mutate(Variable = c("Cortisol", "Basal FGC", "Elevated FGC", "MSMR", "Body Mass (g)", 
+                      "Corticosterone", "Basal FGC", "Elevated FGC", "MSMR", "Body Mass (g)")) 
+  
+PhyloSigTab <- PhyloSigTab[ , c(3,1,2)]
+PhyloSigTab[is.na(PhyloSigTab)] <- " "
+
+
+tt1 <- ttheme_minimal(core=list(fg_params=list(hjust = 1, x = 0.95)))
+
+png("PublicationFigures/PhyloSigTab.png", 
+    height = 100*nrow(PhyloSigTab), 
+    width = 300*ncol(PhyloSigTab),
+    res = 300)
+grid.newpage()
+g <- tableGrob(PhyloSigTab[,1], cols = "Variable", theme = tt1)
+g2 <- tableGrob(PhyloSigTab[,2:ncol(PhyloSigTab)], rows = NULL, theme = ttheme_minimal())
+g3 <- gtable_combine(g,g2, along=1)
+grid.draw(g3)
+# grid.text(Label, x = 0.2, y = 0.9, gp = gpar(fontface = "bold"))
+dev.off()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

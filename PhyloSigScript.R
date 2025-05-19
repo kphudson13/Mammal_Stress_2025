@@ -3,47 +3,95 @@ library(phytools)
 
 # cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
 # name.check(tree, StressData)
-
-Mass_signal <- 
-  phylosig(tree = tree, 
-           x = setNames(StressData$BodyMassAnAge, StressData$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)
-
-BasFGC_signal <-
-  phylosig(tree = tree,
-           x = setNames(StressData$BasalFGC, StressData$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)
-
-MSMR_signal <-
-  phylosig(tree = tree,
-           x = setNames(StressData$MSMR, StressData$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)
-
-ElvFGC_signal <-
-  phylosig(tree = tree,
-           x = setNames(StressData$ElevFGC, StressData$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)
-
-Lifespan_signal <-
-  phylosig(tree = tree,
-           x = setNames(StressData$MaxLifespan, StressData$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)
+# 
+# Mass_signal <- 
+#   phylosig(tree = tree, 
+#            x = setNames(StressData$BodyMassAnAge, StressData$Species),   
+#            method = "lambda",
+#            test = TRUE, 
+#            nsim = 1000)
+# 
+# BasFGC_signal <-
+#   phylosig(tree = tree,
+#            x = setNames(StressData$BasalFGC, StressData$Species),   
+#            method = "lambda",
+#            test = TRUE, 
+#            nsim = 1000)
+# 
+# MSMR_signal <-
+#   phylosig(tree = tree,
+#            x = setNames(StressData$MSMR, StressData$Species),   
+#            method = "lambda",
+#            test = TRUE, 
+#            nsim = 1000)
+# 
+# ElvFGC_signal <-
+#   phylosig(tree = tree,
+#            x = setNames(StressData$ElevFGC, StressData$Species),   
+#            method = "lambda",
+#            test = TRUE, 
+#            nsim = 1000)
+# 
+# Lifespan_signal <-
+#   phylosig(tree = tree,
+#            x = setNames(StressData$MaxLifespan, StressData$Species),   
+#            method = "lambda",
+#            test = TRUE, 
+#            nsim = 1000)
 
 
 PhyloSig_table <- 
   data.frame(
-    Lambda = c(Mass_signal[["lambda"]], MSMR_signal[["lambda"]], BasFGC_signal[["lambda"]], ElvFGC_signal[["lambda"]], Lifespan_signal[["lambda"]]),
-    P_value = c(Mass_signal[["P"]], MSMR_signal[["P"]], BasFGC_signal[["P"]], ElvFGC_signal[["P"]], Lifespan_signal[["P"]])) %>%
+    Lambda = c(phylosig(tree = tree, 
+                        x = setNames(StressData$BodyMassAnAge, StressData$Species),   
+                        method = "lambda",
+                        test = TRUE, 
+                        nsim = 1000)[["lambda"]], 
+               phylosig(tree = tree,
+                        x = setNames(StressData$MSMR, StressData$Species),   
+                        method = "lambda",
+                        test = TRUE, 
+                        nsim = 1000)[["lambda"]], 
+               phylosig(tree = tree,
+                        x = setNames(StressData$BasalFGC, StressData$Species),   
+                        method = "lambda",
+                        test = TRUE, 
+                        nsim = 1000)[["lambda"]], 
+               phylosig(tree = tree,
+                        x = setNames(StressData$ElevFGC, StressData$Species),   
+                        method = "lambda",
+                        test = TRUE, 
+                        nsim = 1000)[["lambda"]], 
+               phylosig(tree = tree,
+                        x = setNames(StressData$MaxLifespan, StressData$Species),   
+                        method = "lambda",
+                        test = TRUE, 
+                        nsim = 1000)[["lambda"]]),
+    P_value = c(phylosig(tree = tree, 
+                         x = setNames(StressData$BodyMassAnAge, StressData$Species),   
+                         method = "lambda",
+                         test = TRUE, 
+                         nsim = 1000)[["P"]], 
+                phylosig(tree = tree,
+                         x = setNames(StressData$MSMR, StressData$Species),   
+                         method = "lambda",
+                         test = TRUE, 
+                         nsim = 1000)[["P"]], 
+                phylosig(tree = tree,
+                         x = setNames(StressData$BasalFGC, StressData$Species),   
+                         method = "lambda",
+                         test = TRUE, 
+                         nsim = 1000)[["P"]], 
+                phylosig(tree = tree,
+                         x = setNames(StressData$ElevFGC, StressData$Species),   
+                         method = "lambda",
+                         test = TRUE, 
+                         nsim = 1000)[["P"]], 
+                phylosig(tree = tree,
+                         x = setNames(StressData$MaxLifespan, StressData$Species),   
+                         method = "lambda",
+                         test = TRUE, 
+                         nsim = 1000)[["P"]])) %>%
   `rownames<-`(c("Body Mass", "MSMR", "Basal FGC", "Elevated FGC", "lifespan")) %>%
   mutate(across(c(1,2), \(x) round(x, digits = 4)))  %>%
   `colnames<-`(c("Lambda", "p value")) %>%
@@ -52,7 +100,7 @@ PhyloSig_table <-
 tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
                                    bg_params=list(fill="grey80")))
 #export stats table 
-png("PhysoSigTable.png", 
+png(paste(directory, "PhysoSigTable.png", sep = ""),
     height = 190*nrow(PhyloSig_table), 
     width = 700*ncol(PhyloSig_table),
     res = 300)

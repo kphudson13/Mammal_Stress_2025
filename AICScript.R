@@ -77,7 +77,7 @@ AIC_table <- as.data.frame(rbind(BasFGCMSMR_AIC, BasFGCMass_AIC, ElvFGCBasFGC_AI
   `colnames<-`(c("df", "AIC", "BIC"))
 
 #export stats table 
-png("AICTable.png", 
+png(paste(directory, "AICTable.png", sep = ""),
     height = 190*nrow(AIC_table), 
     width = 1000*ncol(AIC_table),
     res = 300)
