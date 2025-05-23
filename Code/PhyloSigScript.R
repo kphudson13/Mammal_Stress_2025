@@ -1,44 +1,10 @@
 
+# This script is meant to be ran as a function from MasterScript.R
+# If you wish to troubleshoot first load inputs from MasterScript.R for the dataset of choice
+# Models are written in y vs. x format
+# live laugh love -Kyle
+
 library(phytools) 
-
-# cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
-# name.check(tree, StressData)
-# 
-# Mass_signal <- 
-#   phylosig(tree = tree, 
-#            x = setNames(StressData$BodyMassAnAge, StressData$Species),   
-#            method = "lambda",
-#            test = TRUE, 
-#            nsim = 1000)
-# 
-# BasFGC_signal <-
-#   phylosig(tree = tree,
-#            x = setNames(StressData$BasalFGC, StressData$Species),   
-#            method = "lambda",
-#            test = TRUE, 
-#            nsim = 1000)
-# 
-# MSMR_signal <-
-#   phylosig(tree = tree,
-#            x = setNames(StressData$MSMR, StressData$Species),   
-#            method = "lambda",
-#            test = TRUE, 
-#            nsim = 1000)
-# 
-# ElvFGC_signal <-
-#   phylosig(tree = tree,
-#            x = setNames(StressData$ElevFGC, StressData$Species),   
-#            method = "lambda",
-#            test = TRUE, 
-#            nsim = 1000)
-# 
-# Lifespan_signal <-
-#   phylosig(tree = tree,
-#            x = setNames(StressData$MaxLifespan, StressData$Species),   
-#            method = "lambda",
-#            test = TRUE, 
-#            nsim = 1000)
-
 
 PhyloSig_table <- 
   data.frame(

@@ -1,4 +1,9 @@
 
+# This script is meant to be ran as a function from MasterScript.R
+# If you wish to troubleshoot first load inputs from MasterScript.R for the dataset of choice
+# Models are written in y vs. x format
+# live laugh love -Kyle
+
 #this includes the if functions because sometimes there is only one method
 
 BasFGCMSMR_Stressor <- gls(log(BasalFGC) ~ log(MSMR) + Stressor, 

@@ -1,4 +1,12 @@
 
+# Have you run MasterScript.R since you cloned this repository?
+# If you haven't then all binaries this script needs do not exist in your local repository
+# MasterScript.R will configure your repository with the binaries you need
+# live laugh love -Kyle
+
+# Load packages and configure ---------------------------------------------
+
+
 library(tidyverse)
 library(ape)
 library(nlme) #for gls

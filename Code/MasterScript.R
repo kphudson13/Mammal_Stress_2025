@@ -1,5 +1,13 @@
 
-# Load packages and data --------------------------------------------------
+# Master script for core data analysis
+# This script controls the flow of the analysis and runs the individual scripts
+# It is dependent on outputs from CleanAndTree.R, but those are already in the the remote repository
+# I realize leaving outputs and binaries is bad practice, but running CleanAndTree requires an API key
+# I also want the original .nex files saved, so if taxonomy changes we can still confirm our analysis
+# live laugh love -Kyle
+
+
+# Load packages ------------------------------------------------------------
 
 library(ape)
 library(rotl) #to pull from Open Tree of Life
@@ -12,11 +20,12 @@ library(gridExtra) #to set table themes
 library(cowplot) #to combine plots 
 library(beepr) #for sound notifications
 library(cowsay) #for the fun frog
+library(phytools) #for use in the phylo signal script
 
 rm(list=ls())
 
 
-# Crtstn Uncorrected ------------------------------------------------------------
+# Crtstn Uncorrected --------------------------------------------------------
 
 tree <- read.nexus("Corticosterone/StressTree.nex")
 
@@ -27,10 +36,16 @@ rownames(StressData) = StressData$Species
 directory <- "Corticosterone/CrtstnUncorrected/"
 
 #make a figure directory for initial pull users
-if(file.exists(paste(directory, "Figures", sep = ""))) {
+if(file.exists(directory)) {
+  if(file.exists(paste(directory, "Figures", sep = ""))) {
+    #do nothing
   } else {
     dir.create(paste(directory, "Figures", sep = ""))
   }
+} else {
+  dir.create(directory)
+  dir.create(paste(directory, "Figures", sep = ""))
+}
 
 Label <- "Corticosterone - Uncorrected Model"
 
@@ -58,8 +73,14 @@ StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
 directory <- "Corticosterone/CrtstnWetCorrected/"
 
 #make a figure directory for initial pull users
-if(file.exists(paste(directory, "Figures", sep = ""))) {
+if(file.exists(directory)) {
+  if(file.exists(paste(directory, "Figures", sep = ""))) {
+    #do nothing
+  } else {
+    dir.create(paste(directory, "Figures", sep = ""))
+  }
 } else {
+  dir.create(directory)
   dir.create(paste(directory, "Figures", sep = ""))
 }
 
@@ -79,8 +100,14 @@ StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
 directory <- "Cortisol/CortisolUncorrected/"
 
 #make a figure directory for initial pull users
-if(file.exists(paste(directory, "Figures", sep = ""))) {
+if(file.exists(directory)) {
+  if(file.exists(paste(directory, "Figures", sep = ""))) {
+    #do nothing
+  } else {
+    dir.create(paste(directory, "Figures", sep = ""))
+  }
 } else {
+  dir.create(directory)
   dir.create(paste(directory, "Figures", sep = ""))
 }
 
@@ -110,8 +137,14 @@ StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
 directory <- "Cortisol/CortisolWetCorrected/"
 
 #make a figure directory for initial pull users
-if(file.exists(paste(directory, "Figures", sep = ""))) {
+if(file.exists(directory)) {
+  if(file.exists(paste(directory, "Figures", sep = ""))) {
+    #do nothing
+  } else {
+    dir.create(paste(directory, "Figures", sep = ""))
+  }
 } else {
+  dir.create(directory)
   dir.create(paste(directory, "Figures", sep = ""))
 }
 
@@ -122,7 +155,7 @@ source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
 # FGC Uncorrected ---------------------------------------------------------
-    
+
 tree <- read.nexus("FGCAnalysis/StressTree.nex")  
 
 StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
@@ -131,8 +164,14 @@ StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
 directory <- "FGCAnalysis/FGCUncorrected/"
 
 #make a figure directory for initial pull users
-if(file.exists(paste(directory, "Figures", sep = ""))) {
+if(file.exists(directory)) {
+  if(file.exists(paste(directory, "Figures", sep = ""))) {
+    #do nothing
+  } else {
+    dir.create(paste(directory, "Figures", sep = ""))
+  }
 } else {
+  dir.create(directory)
   dir.create(paste(directory, "Figures", sep = ""))
 }
 
@@ -161,8 +200,14 @@ StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
 directory <- "FGCAnalysis/FGCWetCorrected/"
 
 #make a figure directory for initial pull users
-if(file.exists(paste(directory, "Figures", sep = ""))) {
+if(file.exists(directory)) {
+  if(file.exists(paste(directory, "Figures", sep = ""))) {
+    #do nothing
+  } else {
+    dir.create(paste(directory, "Figures", sep = ""))
+  }
 } else {
+  dir.create(directory)
   dir.create(paste(directory, "Figures", sep = ""))
 }
 
