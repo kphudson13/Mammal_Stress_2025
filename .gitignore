@@ -4,7 +4,7 @@
 .Ruserdata
 .Rprofile
 PEERS_talk/
-Cortisol/CortisolUncorrected/Figures
-Cortisol/CortisolWetCorrected/Figures
-Corticosterone/CrtstnUncorrected/Figures
-Corticosterone/CrtstnWetCorrected/Figures
+Cortisol/CortisolUncorrected
+Cortisol/CortisolWetCorrected
+Corticosterone/CrtstnUncorrected
+Corticosterone/CrtstnWetCorrected
