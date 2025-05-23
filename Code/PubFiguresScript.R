@@ -8,7 +8,6 @@ library(gridExtra) #to set table themes
 library(phytools) #for phylosig
 library(cowplot) #to combine plots 
 
-#update
 rm(list=ls())
 
 # FGC Figures -------------------------------------------------------------
@@ -376,9 +375,7 @@ AICTab <- rbind(Cortisol_AIC, Crtstn_AIC) %>%
 
 AICTab <- AICTab[ ,c(4,1,2,3)]
 
-
-
-
+dir.create("PublicationFigures")
 
 
 
