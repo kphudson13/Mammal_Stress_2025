@@ -61,8 +61,8 @@ BasFGCMSMR_Plot <-
               slope = coefficients(summary(BasFGCMSMR_PGLS))[2,1], 
               ) +
   theme_classic() +
-  labs(x = "ln MSMR",
-       y = "ln Basal FGC (ng/g)") +
+  labs(x = "MSMR (ln(mW/g))",
+       y = "Basal FGC (ln(ng/g))") +
   annotate("text",  x = 2, y = 2.5,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(BasFGCMSMR_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(BasFGCMSMR_PGLS))[2,1], 2)),
@@ -134,8 +134,8 @@ BasFGCMass_Plot <-
   geom_abline(intercept = coefficients(summary(BasFGCMass_PGLS))[1,1], 
               slope = coefficients(summary(BasFGCMass_PGLS))[2,1]) +
   theme_classic() +
-  labs(x = "ln Body Mass (g)",
-       y = "ln Basal FGC (ng/g)") +
+  labs(x = "Body Mass (ln(g))",
+       y = "Basal FGC (ln(ng/g))") +
   annotate("text",  x = 5, y = 2,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(BasFGCMass_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(BasFGCMass_PGLS))[2,1], 2)),
@@ -206,8 +206,8 @@ ElvFGCBasFGC_Plot <-
   geom_abline(intercept = coefficients(summary(ElvFGCBasFGC_PGLS))[1,1], 
               slope = coefficients(summary(ElvFGCBasFGC_PGLS))[2,1]) +
   theme_classic() +
-  labs(x = "ln Basal FGC (ng/g)",
-       y = "ln Elevated FGC (ng/g)") +
+  labs(x = "Basal FGC (ln(ng/g))",
+       y = "Elevated FGC (ln(ng/g))") +
   annotate("text",  x = 6, y = 3,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(ElvFGCBasFGC_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(ElvFGCBasFGC_PGLS))[2,1], 2)),
@@ -278,8 +278,8 @@ LifespanBasFGC_Plot <-
   geom_abline(intercept = coefficients(summary(LifespanBasFGC_PGLS))[1,1], 
               slope = coefficients(summary(LifespanBasFGC_PGLS))[2,1]) +
   theme_classic() +
-  labs(x = "ln Basal FGC (ng/g)",
-       y = "ln lifespan (years)") +
+  labs(x = "Basal FGC (ln(ng/g))",
+       y = "lifespan ln((years))") +
   annotate("text",  x = 3, y = 1.5,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(LifespanBasFGC_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(LifespanBasFGC_PGLS))[2,1], 2)),

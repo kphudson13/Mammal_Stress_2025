@@ -1,4 +1,5 @@
 
+#this includes the if functions because sometimes there is only one method
 
 BasFGCMSMR_Stressor <- gls(log(BasalFGC) ~ log(MSMR) + Stressor, 
                        data = BasFGCMSMR_data, 
@@ -75,6 +76,8 @@ AIC_table <- as.data.frame(rbind(BasFGCMSMR_AIC, BasFGCMass_AIC, ElvFGCBasFGC_AI
   cbind(., rbind(BasFGCMSMR_BIC, BasFGCMass_BIC, ElvFGCBasFGC_BIC, LifespanBasFGC_BIC)[ ,2]) %>%
   mutate(across(c(2,3), \(x) round(x, digits = 2))) %>%
   `colnames<-`(c("df", "AIC", "BIC"))
+
+save(AIC_table, file = paste(directory, "AIC_table.RData", sep = ""))
 
 #export stats table 
 png(paste(directory, "AICTable.png", sep = ""),

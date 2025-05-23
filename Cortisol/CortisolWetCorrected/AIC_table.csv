@@ -1,0 +1,12 @@
+"","df","AIC","BIC"
+"BasFGCMSMR_PGLS",4,86.07,90.78
+"BasFGCMSMR_Stressor",5,85.23,90.91
+"BasFGCMass_PGLS",4,173.02,180.42
+"BasFGCMass_Stressor",5,175.08,184.22
+"BasFGCMass_Method",6,162.44,173.28
+"ElvFGCBasFGC_PGLS",4,100.7,106.92
+"ElvFGCBasFGC_Stressor",5,102.55,110.19
+"ElvFGCBasFGC_Method",5,100,107.64
+"LifespanBasFGC_PGLS",4,65.13,71.98
+"LifespanBasFGC_Stressor",5,69.76,78.21
+"LifespanBasFGC_Method",6,69.65,79.63

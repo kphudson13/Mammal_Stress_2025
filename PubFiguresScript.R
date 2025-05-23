@@ -5,7 +5,6 @@ library(nlme) #for gls
 library(rr2) #for the R2 function
 library(grid) #to set table themes
 library(gridExtra) #to set table themes
-library(rlang)
 library(phytools) #for phylosig
 library(cowplot) #to combine plots 
 
@@ -20,20 +19,16 @@ load("Cortisol/CortisolUncorrected/ElvFGCBasFGC_Plot.RData")
 load("Cortisol/CortisolUncorrected/LifespanBasFGC_Plot.RData")
 
 BasFGCMSMR_Cortisol <- BasFGCMSMR_Plot +
-  labs(x = "MSMR (ln(mW/g))",
-       y = "Cortisol (ln(ng/g))") #change axis labels 
+  labs(title = "Cortisol Based Assay")
 
-BasFGCMass_Cortisol <- BasFGCMass_Plot +
-  labs(x = "Body Mass (ln(g))",
-       y = "Cortisol (ln(ng/g))") 
+BasFGCMass_Cortisol <- BasFGCMass_Plot  +
+  labs(title = "Cortisol Based Assay")
 
-ElvFGCBasFGC_Cortisol <- ElvFGCBasFGC_Plot +
-  labs(x = "Basal Cortisol (ln(ng/g))",
-       y = "Elevated Cortisol (ln(ng/g))") 
+ElvFGCBasFGC_Cortisol <- ElvFGCBasFGC_Plot  +
+  labs(title = "Cortisol Based Assay")
 
-LifespanBasFGC_Cortisol <- LifespanBasFGC_Plot +
-  labs(x = "Basal Cortisol (ln(ng/g))",
-       y = "Lifespan (years)") 
+LifespanBasFGC_Cortisol <- LifespanBasFGC_Plot  +
+  labs(title = "Cortisol Based Assay")
 
 #load in corticosterone ggplot objects
 load("Corticosterone/CrtstnUncorrected/BasFGCMSMR_Plot.RData")
@@ -42,35 +37,31 @@ load("Corticosterone/CrtstnUncorrected/ElvFGCBasFGC_Plot.RData")
 load("Corticosterone/CrtstnUncorrected/LifespanBasFGC_Plot.RData")
 
 BasFGCMSMR_Corticosterone <- BasFGCMSMR_Plot +
-  labs(x = "MSMR (ln(mW/g)",
-       y = "Corticosterone (ng/g)") 
+  labs(title = "Corticosterone Based Assay")
 
 BasFGCMass_Corticosterone <- BasFGCMass_Plot +
-  labs(x = "Body Mass (ln(g))",
-       y = "Corticosterone (ln(ng/g))") 
+  labs(title = "Corticosterone Based Assay")
 
 ElvFGCBasFGC_Corticosterone <- ElvFGCBasFGC_Plot +
-  labs(x = "Basal Corticosterone (ln(ng/g))",
-       y = "Elevated Corticosterone (ln(ng/g))") 
+  labs(title = "Corticosterone Based Assay")
 
 LifespanBasFGC_Corticosterone <- LifespanBasFGC_Plot  +
-  labs(x = "Basal Corticosterone (ln(ng/g))",
-       y = "Lifespan (years)") 
+  labs(title = "Corticosterone Based Assay")
 
 #export cortisol and corticosterone combined figures 
-save_plot(plot_grid(BasFGCMSMR_Cortisol, BasFGCMSMR_Corticosterone, labels = c("A", "B")),
+save_plot(plot_grid(BasFGCMSMR_Cortisol, BasFGCMSMR_Corticosterone, labels = c("A:", "B:")),
           filename = "PublicationFigures/BasFGCMSMR.png",
           base_height = 4, base_width = 8)
 
-save_plot(plot_grid(BasFGCMass_Cortisol, BasFGCMass_Corticosterone, labels = c("A", "B")),
+save_plot(plot_grid(BasFGCMass_Cortisol, BasFGCMass_Corticosterone, labels = c("A:", "B:")),
           filename = "PublicationFigures/BasFGCMass.png",
           base_height = 4, base_width = 8)
 
-save_plot(plot_grid(ElvFGCBasFGC_Cortisol, ElvFGCBasFGC_Corticosterone, labels = c("A", "B")),
+save_plot(plot_grid(ElvFGCBasFGC_Cortisol, ElvFGCBasFGC_Corticosterone, labels = c("A:", "B:")),
           filename = "PublicationFigures/ElvFGCBasFGC.png",
           base_height = 4, base_width = 8)
 
-save_plot(plot_grid(LifespanBasFGC_Cortisol, LifespanBasFGC_Corticosterone, labels = c("A", "B")),
+save_plot(plot_grid(LifespanBasFGC_Cortisol, LifespanBasFGC_Corticosterone, labels = c("A:", "B:")),
           filename = "PublicationFigures/LifespanBasFGC.png",
           base_height = 4, base_width = 8)
 
@@ -104,59 +95,56 @@ LifespanBasFGC_Crtstn_PGLS <- LifespanBasFGC_PGLS
 
 #set shape weirdly because there is multiple data sets 
 legend_shapes <- c("Plasma Cortisol" = 15, "Fecal Cortisol" = 1, "Fecal Corticosterone" = 17)
-legend_colors <- c("Plasma Cortisol" = "red", "Fecal Cortisol" = "blue", "Fecal Corticosterone" = "green")
+legend_colors <- c("Plasma Cortisol" = "firebrick", "Fecal Cortisol" = "dodgerblue2", "Fecal Corticosterone" = "seagreen3")
 
 BasFGCMSMR_combined <- ggplot() +
-  geom_point(data = Plasma_data, aes(x = log(MSMR), y = log(Base), shape = "Plasma Cortisol")) +
-  geom_point(data = Cortisol_data, aes(x = log(MSMR), y = log(BasalFGC), shape = "Fecal Cortisol")) +
-  geom_point(data = Crtstn_data, aes(x = log(MSMR), y = log(BasalFGC), shape = "Fecal Corticosterone")) +
+  geom_point(data = Plasma_data, aes(x = log(MSMR), y = log(Base), color = "Plasma Cortisol")) +
+  geom_point(data = Cortisol_data, aes(x = log(MSMR), y = log(BasalFGC), color = "Fecal Cortisol")) +
+  geom_point(data = Crtstn_data, aes(x = log(MSMR), y = log(BasalFGC), color = "Fecal Corticosterone")) +
   labs(x = "MSMR (ln(mW/g)", y = "Glucocorticoid (ln(ng/g))", shape = " ") +
-  scale_shape_manual(values = legend_shapes) +
-  geom_abline(intercept = 3.3, slope = 0.97, colour = "red", linewidth = 1) + #from Haase et al. 2016
-  geom_abline(intercept = coefficients(BasFGCMSMR_FecalCort_PGLS)[1], slope = coefficients(BasFGCMSMR_FecalCort_PGLS)[2], colour = "blue", linewidth = 1) + #from PGLS
-  geom_abline(intercept = coefficients(BasFGCMSMR_Crtstn_PGLS)[1], slope = coefficients(BasFGCMSMR_Crtstn_PGLS)[2], colour = "green", linewidth = 1) + #from PGLS
+  scale_color_manual(values = legend_colors) +
+  geom_abline(intercept = 3.3, slope = 0.97, colour = "firebrick", linewidth = 1) + #from Haase et al. 2016
+  geom_abline(intercept = coefficients(BasFGCMSMR_FecalCort_PGLS)[1], slope = coefficients(BasFGCMSMR_FecalCort_PGLS)[2], colour = "dodgerblue2", linewidth = 1) + #from PGLS
+  geom_abline(intercept = coefficients(BasFGCMSMR_Crtstn_PGLS)[1], slope = coefficients(BasFGCMSMR_Crtstn_PGLS)[2], colour = "seagreen3", linewidth = 1) + #from PGLS
   theme_classic() +
   theme(legend.position = "none") # Removes the legend
 
 BasFGCMSMR_combined  
 
 BasFGCMass_combined <- ggplot() +
-  geom_point(data = Plasma_data, aes(x = log(as.numeric(Mass)), y = log(Base), shape = "Plasma Cortisol")) +
-  geom_point(data = Cortisol_data, aes(x = log(BodyMassAnAge), y = log(BasalFGC), shape = "Fecal Cortisol")) +
-  geom_point(data = Crtstn_data, aes(x = log(BodyMassAnAge), y = log(BasalFGC), shape = "Fecal Corticosterone")) +
+  geom_point(data = Plasma_data, aes(x = log(as.numeric(Mass)), y = log(Base),  color = "Plasma Cortisol")) +
+  geom_point(data = Cortisol_data, aes(x = log(BodyMassAnAge), y = log(BasalFGC), color = "Fecal Cortisol")) +
+  geom_point(data = Crtstn_data, aes(x = log(BodyMassAnAge), y = log(BasalFGC), color = "Fecal Corticosterone")) +
   labs(x = "Body Mass (ln(g)", y = "Glucocorticoid (ln(ng/g))", shape = " ") +
-  scale_shape_manual(values = legend_shapes) +
-  geom_abline(intercept = 6.12, slope = -0.22, colour = "red", linewidth = 1) + #from Haase et al. 2016
-  geom_abline(intercept = coefficients(BasFGCMass_FecalCort_PGLS)[1], slope = coefficients(BasFGCMass_FecalCort_PGLS)[2], colour = "blue", linewidth = 1) + #from PGLS
-  geom_abline(intercept = coefficients(BasFGCMass_Crtstn_PGLS)[1], slope = coefficients(BasFGCMass_Crtstn_PGLS)[2], colour = "green", linewidth = 1) + #from PGLS
+  scale_color_manual(values = legend_colors) +
+  geom_abline(intercept = 6.12, slope = -0.22, colour = "firebrick", linewidth = 1) + #from Haase et al. 2016
+  geom_abline(intercept = coefficients(BasFGCMass_FecalCort_PGLS)[1], slope = coefficients(BasFGCMass_FecalCort_PGLS)[2], colour = "dodgerblue2", linewidth = 1) + #from PGLS
+  geom_abline(intercept = coefficients(BasFGCMass_Crtstn_PGLS)[1], slope = coefficients(BasFGCMass_Crtstn_PGLS)[2], colour = "seagreen3", linewidth = 1) + #from PGLS
   theme_classic() +
   theme(legend.position = "none") # Removes the legend
 
 BasFGCMass_combined
 
 ElvFGCBasFGC_combined <- ggplot() +
-  geom_point(data = Plasma_data, aes(x = log(Base), y = log(Elev), shape = "Plasma Cortisol")) +
-  geom_point(data = Cortisol_data, aes(x = log(BasalFGC), y = log(ElevFGC), shape = "Fecal Cortisol")) +
-  geom_point(data = Crtstn_data, aes(x = log(BasalFGC), y = log(ElevFGC), shape = "Fecal Corticosterone")) +
-  labs(x = "Basal Glucocorticoid (ln(ng/g))", y = "Elevated Glucocorticoid (ln(ng/g))", shape = " ", color = " ") +
-  scale_shape_manual(values = legend_shapes) +
-  geom_abline(intercept = 3.01, slope = 0.57, linewidth = 1, colour = "red") + #from Haase et al. 2016
-  geom_abline(intercept = coefficients(ElvFGCBasFGC_FecalCort_PGLS)[1], slope = coefficients(ElvFGCBasFGC_FecalCort_PGLS)[2], colour = "blue", linewidth = 1) + #from PGLS
-  geom_abline(intercept = coefficients(ElvFGCBasFGC_Crtstn_PGLS)[1], slope = coefficients(ElvFGCBasFGC_Crtstn_PGLS)[2], colour = "green", linewidth = 1) + #from PGLS
+  geom_point(data = Plasma_data, aes(x = log(Base), y = log(Elev), color = "Plasma Cortisol")) +
+  geom_point(data = Cortisol_data, aes(x = log(BasalFGC), y = log(ElevFGC), color = "Fecal Cortisol")) +
+  geom_point(data = Crtstn_data, aes(x = log(BasalFGC), y = log(ElevFGC), color = "Fecal Corticosterone")) +
+  labs(x = "Basal Glucocorticoid (ln(ng/g))", y = "Elevated Glucocorticoid (ln(ng/g))", color = " ") +
+  scale_color_manual(values = legend_colors) +
+  geom_abline(intercept = 3.01, slope = 0.57, linewidth = 1, colour = "firebrick") + #from Haase et al. 2016
+  geom_abline(intercept = coefficients(ElvFGCBasFGC_FecalCort_PGLS)[1], slope = coefficients(ElvFGCBasFGC_FecalCort_PGLS)[2], colour = "dodgerblue2", linewidth = 1) + #from PGLS
+  geom_abline(intercept = coefficients(ElvFGCBasFGC_Crtstn_PGLS)[1], slope = coefficients(ElvFGCBasFGC_Crtstn_PGLS)[2], colour = "seagreen3", linewidth = 1) + #from PGLS
   theme_classic() +
-  theme(legend.position = "none") # Removes the legend
+  theme(legend.position = "inside",
+        legend.position.inside = c(0.8,0.2))
 
 ElvFGCBasFGC_combined  
 
-#save a legend object to share in the combined plot
-PlotLegend <- get_legend(BasFGCMSMR_combined +
-                           theme(legend.position = "right"))
-
 #save the combined plot
-save_plot(plot_grid(BasFGCMSMR_combined, BasFGCMass_combined, ElvFGCBasFGC_combined, PlotLegend,
-                    labels = c("A", "B", "C")), 
+save_plot(plot_grid(BasFGCMSMR_combined, BasFGCMass_combined, ElvFGCBasFGC_combined, 
+                    labels = c("A", "B", "C"), nrow = 1), 
           filename = "PublicationFigures/FGC_Plasma.png",
-          base_height = 8, base_width = 8)
+          base_height = 4, base_width = 12)
 
 
 # Stats table -------------------------------------------------------------
@@ -254,86 +242,86 @@ Cortisol_tree <- read.nexus("Cortisol/StressTree.nex")
 Crtstn_tree <- read.nexus("Corticosterone/StressTree.nex")
 
 PhyloSigTab <- 
-cbind(c(phylosig(tree = Cortisol_tree,
-           x = setNames(Cortisol_data$BasalFGC, Cortisol_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)[["lambda"]], 
-  phylosig(tree = Cortisol_tree,
-           x = setNames(Cortisol_data$ElevFGC, Cortisol_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)[["lambda"]], 
-  phylosig(tree = Cortisol_tree,
-           x = setNames(Cortisol_data$MSMR, Cortisol_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)[["lambda"]],
-  phylosig(tree = Cortisol_tree,
-           x = setNames(Cortisol_data$BodyMassAnAge, Cortisol_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)[["lambda"]],
-  phylosig(tree = Crtstn_tree,
-           x = setNames(Crtstn_data$BasalFGC, Crtstn_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)[["lambda"]], 
-  phylosig(tree = Crtstn_tree,
-           x = setNames(Crtstn_data$ElevFGC, Crtstn_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)[["lambda"]], 
-  phylosig(tree = Crtstn_tree,
-           x = setNames(Crtstn_data$MSMR, Crtstn_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)[["lambda"]],
-  phylosig(tree = Crtstn_tree,
-           x = setNames(Crtstn_data$BodyMassAnAge, Crtstn_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)[["lambda"]]),
-       c(phylosig(tree = Cortisol_tree,
-             x = setNames(Cortisol_data$BasalFGC, Cortisol_data$Species),   
-             method = "lambda",
-             test = TRUE, 
-             nsim = 1000)[["P"]], 
-    phylosig(tree = Cortisol_tree,
-             x = setNames(Cortisol_data$ElevFGC, Cortisol_data$Species),   
-             method = "lambda",
-             test = TRUE, 
-             nsim = 1000)[["P"]], 
-    phylosig(tree = Cortisol_tree,
-             x = setNames(Cortisol_data$MSMR, Cortisol_data$Species),   
-             method = "lambda",
-             test = TRUE, 
-             nsim = 1000)[["P"]],
-    phylosig(tree = Cortisol_tree,
-             x = setNames(Cortisol_data$BodyMassAnAge, Cortisol_data$Species),   
-             method = "lambda",
-             test = TRUE, 
-             nsim = 1000)[["P"]],
-    phylosig(tree = Crtstn_tree,
-             x = setNames(Crtstn_data$BasalFGC, Crtstn_data$Species),   
-             method = "lambda",
-             test = TRUE, 
-             nsim = 1000)[["P"]],
-    phylosig(tree = Crtstn_tree,
-             x = setNames(Crtstn_data$ElevFGC, Crtstn_data$Species),   
-             method = "lambda",
-             test = TRUE, 
-             nsim = 1000)[["P"]],
-    phylosig(tree = Crtstn_tree,
-             x = setNames(Crtstn_data$MSMR, Crtstn_data$Species),   
-             method = "lambda",
-             test = TRUE, 
-             nsim = 1000)[["P"]],
-    phylosig(tree = Crtstn_tree,
-             x = setNames(Crtstn_data$BodyMassAnAge, Crtstn_data$Species),   
-             method = "lambda",
-             test = TRUE, 
-             nsim = 1000)[["P"]])) %>%
+  cbind(c(phylosig(tree = Cortisol_tree,
+                   x = setNames(Cortisol_data$BasalFGC, Cortisol_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["lambda"]], 
+          phylosig(tree = Cortisol_tree,
+                   x = setNames(Cortisol_data$ElevFGC, Cortisol_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["lambda"]], 
+          phylosig(tree = Cortisol_tree,
+                   x = setNames(Cortisol_data$MSMR, Cortisol_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["lambda"]],
+          phylosig(tree = Cortisol_tree,
+                   x = setNames(Cortisol_data$BodyMassAnAge, Cortisol_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["lambda"]],
+          phylosig(tree = Crtstn_tree,
+                   x = setNames(Crtstn_data$BasalFGC, Crtstn_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["lambda"]], 
+          phylosig(tree = Crtstn_tree,
+                   x = setNames(Crtstn_data$ElevFGC, Crtstn_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["lambda"]], 
+          phylosig(tree = Crtstn_tree,
+                   x = setNames(Crtstn_data$MSMR, Crtstn_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["lambda"]],
+          phylosig(tree = Crtstn_tree,
+                   x = setNames(Crtstn_data$BodyMassAnAge, Crtstn_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["lambda"]]),
+        c(phylosig(tree = Cortisol_tree,
+                   x = setNames(Cortisol_data$BasalFGC, Cortisol_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["P"]], 
+          phylosig(tree = Cortisol_tree,
+                   x = setNames(Cortisol_data$ElevFGC, Cortisol_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["P"]], 
+          phylosig(tree = Cortisol_tree,
+                   x = setNames(Cortisol_data$MSMR, Cortisol_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["P"]],
+          phylosig(tree = Cortisol_tree,
+                   x = setNames(Cortisol_data$BodyMassAnAge, Cortisol_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["P"]],
+          phylosig(tree = Crtstn_tree,
+                   x = setNames(Crtstn_data$BasalFGC, Crtstn_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["P"]],
+          phylosig(tree = Crtstn_tree,
+                   x = setNames(Crtstn_data$ElevFGC, Crtstn_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["P"]],
+          phylosig(tree = Crtstn_tree,
+                   x = setNames(Crtstn_data$MSMR, Crtstn_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["P"]],
+          phylosig(tree = Crtstn_tree,
+                   x = setNames(Crtstn_data$BodyMassAnAge, Crtstn_data$Species),   
+                   method = "lambda",
+                   test = TRUE, 
+                   nsim = 1000)[["P"]])) %>%
   as.data.frame(.) %>%
   mutate(across(c(1,2), \(x) round(x, digits = 4))) %>%
   `colnames<-`(c("Lambda", "p value")) %>%
@@ -342,7 +330,7 @@ cbind(c(phylosig(tree = Cortisol_tree,
   add_row(.before = 1) %>% add_row(.before = 6) %>% #add blank rows to divide cortisol and crtstn
   mutate(Variable = c("Cortisol", "Basal FGC", "Elevated FGC", "MSMR", "Body Mass (g)", 
                       "Corticosterone", "Basal FGC", "Elevated FGC", "MSMR", "Body Mass (g)")) 
-  
+
 PhyloSigTab <- PhyloSigTab[ , c(3,1,2)]
 PhyloSigTab[is.na(PhyloSigTab)] <- " "
 
@@ -362,18 +350,30 @@ grid.draw(g3)
 dev.off()
 
 
+# AIC Table ---------------------------------------------------------------
 
+load("Cortisol/CortisolUncorrected/AIC_table.RData")
+Cortisol_AIC <- AIC_table %>%
+  mutate(Model = row.names(.))
+load("Corticosterone/CrtstnUncorrected/AIC_table.RData")
+Crtstn_AIC <- AIC_table %>%
+  mutate(Model = row.names(.))
 
+AICTab <- rbind(Cortisol_AIC, Crtstn_AIC) %>%
+  add_row(.before = 1) %>% add_row(.before = 4) %>% add_row(.before = 14) %>% #add blank rows to divide cortisol and crtstn and blank model
+  mutate(Model = c("Cortisol", 
+                   "Basal FGC ~ MSMR", "Basal FGC ~ MSMR + Stressor", "Basal FGC ~ MSMR + Method",
+                   "Basal FGC ~ Mass", "Basal FGC ~ Mass + Stressor", "Basal FGC ~ Mass + Method",
+                   "Elevated FGC ~ Basal FGC", "Elevated FGC ~ Basal FGC + Stressor", "Elevated FGC ~ Basal FGC + Method",
+                   "Lifespan ~ Basal FGC", "Lifespan ~ Basal FGC + Stressor", "Lifespan ~ Basal FGC + Method",
+                   "Corticosterone",
+                   "Basal FGC ~ MSMR", "Basal FGC ~ MSMR + Stressor", "Basal FGC ~ MSMR + Method",
+                   "Basal FGC ~ Mass", "Basal FGC ~ Mass + Stressor", "Basal FGC ~ Mass + Method",
+                   "Elevated FGC ~ Basal FGC", "Elevated FGC ~ Basal FGC + Stressor", "Elevated FGC ~ Basal FGC + Method",
+                   "Lifespan ~ Basal FGC", "Lifespan ~ Basal FGC + Stressor", "Lifespan ~ Basal FGC + Method")) %>%
+  `rownames<-`(NULL) 
 
-
-
-
-
-
-
-
-
-
+AICTab <- AICTab[ ,c(4,1,2,3)]
 
 
 
