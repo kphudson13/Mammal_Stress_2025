@@ -100,7 +100,7 @@ PhyloSig_table <-
 tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
                                    bg_params=list(fill="grey80")))
 #export stats table 
-png(paste(directory, "PhysoSigTable.png", sep = ""),
+png(paste(directory, "Figures/PhysoSigTable.png", sep = ""),
     height = 190*nrow(PhyloSig_table), 
     width = 700*ncol(PhyloSig_table),
     res = 300)

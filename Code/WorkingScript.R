@@ -73,7 +73,7 @@ BasFGCMSMR_Plot <-
 
 BasFGCMSMR_Plot
 save(BasFGCMSMR_Plot, file = paste(directory,"BasFGCMSMR_Plot.RData", sep = "")) #save file
-ggsave(filename = paste(directory,"BasFGCMSMR_Plot.png",sep = ""),
+ggsave(filename = paste(directory,"Figures/BasFGCMSMR_Plot.png",sep = ""),
        width = 5,
        height = 4) #save a picture
 
@@ -146,7 +146,7 @@ BasFGCMass_Plot <-
 
 BasFGCMass_Plot
 save(BasFGCMass_Plot, file = paste(directory, "BasFGCMass_Plot.RData", sep = "")) #save file
-ggsave(filename = paste(directory, "BasFGCMass_Plot.png", sep = ""),
+ggsave(filename = paste(directory, "Figures/BasFGCMass_Plot.png", sep = ""),
        width = 5,
        height = 4) #save a picture
 
@@ -218,7 +218,7 @@ ElvFGCBasFGC_Plot <-
 
 ElvFGCBasFGC_Plot
 save(ElvFGCBasFGC_Plot, file = paste(directory, "ElvFGCBasFGC_Plot.RData", sep = "")) #save file
-ggsave(filename = paste(directory, "ElvFGCBasFGC_Plot.png", sep = ""),
+ggsave(filename = paste(directory, "Figures/ElvFGCBasFGC_Plot.png", sep = ""),
        width = 5,
        height = 4) #save a picture
 
@@ -290,7 +290,7 @@ LifespanBasFGC_Plot <-
 
 LifespanBasFGC_Plot
 save(LifespanBasFGC_Plot, file = paste(directory, "LifespanBasFGC_Plot.RData", sep = "")) #save file
-ggsave(filename = paste(directory, "LifespanBasFGC_Plot.png", sep = ""),
+ggsave(filename = paste(directory, "Figures/LifespanBasFGC_Plot.png", sep = ""),
        width = 5,
        height = 4) #save a picture
 
@@ -328,10 +328,10 @@ StatsTab_PGLS <- rbind(cbind(coefficients(summary(BasFGCMSMR_PGLS)), intervals(B
 tt1 <- ttheme_default(rowhead=list(fg_params=list(fontface = "bold"),
                                    bg_params=list(fill="grey80")))
 
-write.csv(StatsTab_PGLS, file = paste(directory, "StatsTab_PGLS.csv", sep = ""), row.names = TRUE)
+write.csv(StatsTab_PGLS, file = paste(directory, "Figures/StatsTab_PGLS.csv", sep = ""), row.names = TRUE)
 
 #export stats table 
-png(paste(directory, "StatsTab_PGLS.png", sep = ""),
+png(paste(directory, "Figures/StatsTab_PGLS.png", sep = ""),
     height = 190*nrow(StatsTab_PGLS), 
     width = 800*ncol(StatsTab_PGLS),
     res = 300)

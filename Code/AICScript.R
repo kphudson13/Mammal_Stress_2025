@@ -80,7 +80,7 @@ AIC_table <- as.data.frame(rbind(BasFGCMSMR_AIC, BasFGCMass_AIC, ElvFGCBasFGC_AI
 save(AIC_table, file = paste(directory, "AIC_table.RData", sep = ""))
 
 #export stats table 
-png(paste(directory, "AICTable.png", sep = ""),
+png(paste(directory, "Figures/AICTable.png", sep = ""),
     height = 190*nrow(AIC_table), 
     width = 1000*ncol(AIC_table),
     res = 300)

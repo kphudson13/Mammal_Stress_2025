@@ -15,20 +15,6 @@ library(cowsay) #for the fun frog
 
 rm(list=ls())
 
-# #store shapes so all orders match in geom_point functions
-# shapes <- c("Artiodactyla" = 0, 
-#             "Carnivora" = 1,
-#             "Chiroptera"= 2,
-#             "Cingulata" = 3,
-#             "Rodentia" = 4,
-#             "Lagomorpha" = 11,
-#             "Perissodactyla" = 15,
-#             "Proboscidea" = 16,
-#             "Primates" = 17, 
-#             "Pilosa" = 19)
-
-#To view data structure
-#str(read.nexus("StressTree.nex"))
 
 # Crtstn Uncorrected ------------------------------------------------------------
 
@@ -40,11 +26,17 @@ rownames(StressData) = StressData$Species
 
 directory <- "Corticosterone/CrtstnUncorrected/"
 
+#make a figure directory for initial pull users
+if(file.exists(paste(directory, "Figures", sep = ""))) {
+  } else {
+    dir.create(paste(directory, "Figures", sep = ""))
+  }
+
 Label <- "Corticosterone - Uncorrected Model"
 
-source("Workingscript.R")
-source("PhyloSigScript.R")
-source("AICScript.R")
+source("Code/Workingscript.R")
+source("Code/PhyloSigScript.R")
+source("Code/AICScript.R")
 
 # Crtstn Wet Corrected Feces ----------------------------------------------
 
@@ -65,11 +57,17 @@ StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
 
 directory <- "Corticosterone/CrtstnWetCorrected/"
 
+#make a figure directory for initial pull users
+if(file.exists(paste(directory, "Figures", sep = ""))) {
+} else {
+  dir.create(paste(directory, "Figures", sep = ""))
+}
+
 Label <- "Corticosterone - Wet Corrected Model"
 
-source("Workingscript.R")
-source("PhyloSigScript.R")
-source("AICScript.R")
+source("Code/Workingscript.R")
+source("Code/PhyloSigScript.R")
+source("Code/AICScript.R")
 
 # Cortisol Uncorrected ----------------------------------------------------
 
@@ -80,11 +78,17 @@ StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
 
 directory <- "Cortisol/CortisolUncorrected/"
 
+#make a figure directory for initial pull users
+if(file.exists(paste(directory, "Figures", sep = ""))) {
+} else {
+  dir.create(paste(directory, "Figures", sep = ""))
+}
+
 Label <- "Cortisol - Uncorrected Model"
 
-source("Workingscript.R")
-source("PhyloSigScript.R")
-source("AICScript.R")
+source("Code/Workingscript.R")
+source("Code/PhyloSigScript.R")
+source("Code/AICScript.R")
 
 # Cortisol Wet Corrected --------------------------------------------------
 
@@ -105,11 +109,17 @@ StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
 
 directory <- "Cortisol/CortisolWetCorrected/"
 
+#make a figure directory for initial pull users
+if(file.exists(paste(directory, "Figures", sep = ""))) {
+} else {
+  dir.create(paste(directory, "Figures", sep = ""))
+}
+
 Label <- "Cortisol - Wet Corrected Model"
 
-source("Workingscript.R")
-source("PhyloSigScript.R")
-source("AICScript.R")
+source("Code/Workingscript.R")
+source("Code/PhyloSigScript.R")
+source("Code/AICScript.R")
 
 # FGC Uncorrected ---------------------------------------------------------
     
@@ -120,11 +130,17 @@ StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
 
 directory <- "FGCAnalysis/FGCUncorrected/"
 
+#make a figure directory for initial pull users
+if(file.exists(paste(directory, "Figures", sep = ""))) {
+} else {
+  dir.create(paste(directory, "Figures", sep = ""))
+}
+
 Label <- "FGC - Uncorrected Model"
 
-source("Workingscript.R")
-source("PhyloSigScript.R")
-# source("AICScript.R")
+source("Code/Workingscript.R")
+source("Code/PhyloSigScript.R")
+# source("Code/AICScript.R")
 
 # FGC Wet Corrected -------------------------------------------------------
 
@@ -144,11 +160,17 @@ StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
 
 directory <- "FGCAnalysis/FGCWetCorrected/"
 
+#make a figure directory for initial pull users
+if(file.exists(paste(directory, "Figures", sep = ""))) {
+} else {
+  dir.create(paste(directory, "Figures", sep = ""))
+}
+
 Label <- "FGC - Wet Corrected Model"
 
-source("Workingscript.R")
-source("PhyloSigScript.R")
-# source("AICScript.R")     
+source("Code/Workingscript.R")
+source("Code/PhyloSigScript.R")
+# source("Code/AICScript.R")     
 
 # Done --------------------------------------------------------------------
 

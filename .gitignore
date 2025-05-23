@@ -3,7 +3,8 @@
 .RData
 .Ruserdata
 .Rprofile
-PEERsScript.R
-BasCrtsolMass_PEERS.png
-BasCrtstnMass_PEERS.png
 PEERS_talk/
+Cortisol/CortisolUncorrected/Figures
+Cortisol/CortisolWetCorrected/Figures
+Corticosterone/CrtstnUncorrected/Figures
+Corticosterone/CrtstnWetCorrected/Figures

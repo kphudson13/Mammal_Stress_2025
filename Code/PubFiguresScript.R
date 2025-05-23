@@ -10,6 +10,11 @@ library(cowplot) #to combine plots
 
 rm(list=ls())
 
+if (file.exists("PublicationFigures")) {
+} else {
+  dir.create("PublicationFigures")
+}
+
 # FGC Figures -------------------------------------------------------------
 
 #load in cortisol ggplot objects
