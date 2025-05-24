@@ -27,12 +27,15 @@ rm(list=ls())
 
 # Crtstn Uncorrected --------------------------------------------------------
 
+#Load tree build by CleanAndTree.R
 tree <- read.nexus("Corticosterone/StressTree.nex")
 
+#Load data and clean it up
 StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) 
 rownames(StressData) = StressData$Species
 
+#set directory for these data
 directory <- "Corticosterone/CrtstnUncorrected/"
 
 #make a figure directory for initial pull users
@@ -47,9 +50,11 @@ if(file.exists(directory)) {
   dir.create(paste(directory, "Figures", sep = ""))
 }
 
+#label figures
 Label <- "Corticosterone - Uncorrected Model"
 
-source("Code/Workingscript.R")
+#run the scripts
+source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
@@ -72,7 +77,6 @@ StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
 
 directory <- "Corticosterone/CrtstnWetCorrected/"
 
-#make a figure directory for initial pull users
 if(file.exists(directory)) {
   if(file.exists(paste(directory, "Figures", sep = ""))) {
     #do nothing
@@ -86,7 +90,7 @@ if(file.exists(directory)) {
 
 Label <- "Corticosterone - Wet Corrected Model"
 
-source("Code/Workingscript.R")
+source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
@@ -99,7 +103,6 @@ StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
 
 directory <- "Cortisol/CortisolUncorrected/"
 
-#make a figure directory for initial pull users
 if(file.exists(directory)) {
   if(file.exists(paste(directory, "Figures", sep = ""))) {
     #do nothing
@@ -113,7 +116,7 @@ if(file.exists(directory)) {
 
 Label <- "Cortisol - Uncorrected Model"
 
-source("Code/Workingscript.R")
+source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
@@ -136,7 +139,6 @@ StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
 
 directory <- "Cortisol/CortisolWetCorrected/"
 
-#make a figure directory for initial pull users
 if(file.exists(directory)) {
   if(file.exists(paste(directory, "Figures", sep = ""))) {
     #do nothing
@@ -150,7 +152,7 @@ if(file.exists(directory)) {
 
 Label <- "Cortisol - Wet Corrected Model"
 
-source("Code/Workingscript.R")
+source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
@@ -163,7 +165,6 @@ StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
 
 directory <- "FGCAnalysis/FGCUncorrected/"
 
-#make a figure directory for initial pull users
 if(file.exists(directory)) {
   if(file.exists(paste(directory, "Figures", sep = ""))) {
     #do nothing
@@ -177,7 +178,7 @@ if(file.exists(directory)) {
 
 Label <- "FGC - Uncorrected Model"
 
-source("Code/Workingscript.R")
+source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 # source("Code/AICScript.R")
 
@@ -199,7 +200,6 @@ StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
 
 directory <- "FGCAnalysis/FGCWetCorrected/"
 
-#make a figure directory for initial pull users
 if(file.exists(directory)) {
   if(file.exists(paste(directory, "Figures", sep = ""))) {
     #do nothing
@@ -213,7 +213,7 @@ if(file.exists(directory)) {
 
 Label <- "FGC - Wet Corrected Model"
 
-source("Code/Workingscript.R")
+source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 # source("Code/AICScript.R")     
 
@@ -221,5 +221,3 @@ source("Code/PhyloSigScript.R")
 
 say("Done", by = "frog", what_color = "darkgreen")
 beep(10)
-
-
