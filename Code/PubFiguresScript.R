@@ -19,6 +19,7 @@ library(cowplot) #to combine plots
 rm(list=ls())
 
 if (file.exists("PublicationFigures")) {
+  #Do nothing
 } else {
   dir.create("PublicationFigures")
 }
@@ -142,7 +143,7 @@ ElvFGCBasFGC_combined <- ggplot() +
   geom_point(data = Plasma_data, aes(x = log(Base), y = log(Elev), color = "Plasma Cortisol")) +
   geom_point(data = Cortisol_data, aes(x = log(BasalFGC), y = log(ElevFGC), color = "Fecal Cortisol")) +
   geom_point(data = Crtstn_data, aes(x = log(BasalFGC), y = log(ElevFGC), color = "Fecal Corticosterone")) +
-  labs(x = "Basal Glucocorticoid (ln(ng/g))", y = "Elevated Glucocorticoid (ln(ng/g))", color = " ") +
+  labs(x = "Baseline Glucocorticoid (ln(ng/g))", y = "Elevated Glucocorticoid (ln(ng/g))", color = " ") +
   scale_color_manual(values = legend_colors) +
   geom_abline(intercept = 3.01, slope = 0.57, linewidth = 1, colour = "firebrick") + #from Haase et al. 2016
   geom_abline(intercept = coefficients(ElvFGCBasFGC_FecalCort_PGLS)[1], slope = coefficients(ElvFGCBasFGC_FecalCort_PGLS)[2], colour = "dodgerblue2", linewidth = 1) + #from PGLS
@@ -181,7 +182,6 @@ BasFGCMSMR_Crtstn_Reduced <- BasFGCMSMR_Reduced
 BasFGCMass_Crtstn_Reduced <- BasFGCMass_Reduced
 ElvFGCBasFGC_Crtstn_Reduced <- ElvFGCBasFGC_Reduced
 LifespanBasFGC_Crtstn_Reduced <- LifespanBasFGC_Reduced
-
 
 StatsTab <- rbind(intervals(BasFGCMSMR_FecalCort_PGLS)[["coef"]][1,],
                   intervals(BasFGCMass_FecalCort_PGLS)[["coef"]][1,],
@@ -224,8 +224,8 @@ StatsTab <- rbind(intervals(BasFGCMSMR_FecalCort_PGLS)[["coef"]][1,],
               coefficients(summary(ElvFGCBasFGC_Crtstn_PGLS))[2,4],
               coefficients(summary(LifespanBasFGC_Crtstn_PGLS))[2,4])) %>% #p value column
   add_row(.before = 1) %>% add_row(.before = 6) %>% #add blank rows to divide cortisol and crtstn
-  mutate(Model = c("Cortisol", "Basal FGC vs. MSMR", "Basal FGC vs. Mass", "Elevated FGC vs. Basal FGC", "Lifespan vs. Basal FGC", 
-                   "Corticosterone", "Basal FGC vs. MSMR", "Basal FGC vs. Mass", "Elevated FGC vs. Basal FGC", "Lifespan vs. Basal FGC")) %>%
+  mutate(Model = c("Cortisol", "Baseline FGC vs. MSMR", "Baseline FGC vs. Mass", "Elevated FGC vs. Baseline FGC", "Lifespan vs. Baseline FGC", 
+                   "Corticosterone", "Baseline FGC vs. MSMR", "Baseline FGC vs. Mass", "Elevated FGC vs. Baseline FGC", "Lifespan vs. Baseline FGC")) %>%
   `colnames<-`(c("Intercept (95% CI)", "Slope (95% CI)", "Likelihood R2","p-value", "Model")) %>%
   mutate(across(c(3,4), \(x) round(x, digits = 3))) %>%
   mutate(`p-value` = ifelse(`p-value` < 0.001, "< 0.001", `p-value`)) #change very small p values to < 0.001
@@ -341,8 +341,8 @@ PhyloSigTab <-
   mutate(`p value` = ifelse(`p value` < 0.001, "< 0.001", `p value`)) %>% #change very small p values to < 0.001
   mutate(Lambda = ifelse(Lambda < 0.001, "< 0.001", Lambda)) %>% 
   add_row(.before = 1) %>% add_row(.before = 6) %>% #add blank rows to divide cortisol and crtstn
-  mutate(Variable = c("Cortisol", "Basal FGC", "Elevated FGC", "MSMR", "Body Mass (g)", 
-                      "Corticosterone", "Basal FGC", "Elevated FGC", "MSMR", "Body Mass (g)")) 
+  mutate(Variable = c("Cortisol", "Baseline FGC", "Elevated FGC", "MSMR", "Body Mass (g)", 
+                      "Corticosterone", "Baseline FGC", "Elevated FGC", "MSMR", "Body Mass (g)")) 
 
 PhyloSigTab <- PhyloSigTab[ , c(3,1,2)]
 PhyloSigTab[is.na(PhyloSigTab)] <- " "
@@ -375,20 +375,18 @@ Crtstn_AIC <- AIC_table %>%
 AICTab <- rbind(Cortisol_AIC, Crtstn_AIC) %>%
   add_row(.before = 1) %>% add_row(.before = 4) %>% add_row(.before = 14) %>% #add blank rows to divide cortisol and crtstn and blank model
   mutate(Model = c("Cortisol", 
-                   "Basal FGC ~ MSMR", "Basal FGC ~ MSMR + Stressor", "Basal FGC ~ MSMR + Method",
-                   "Basal FGC ~ Mass", "Basal FGC ~ Mass + Stressor", "Basal FGC ~ Mass + Method",
-                   "Elevated FGC ~ Basal FGC", "Elevated FGC ~ Basal FGC + Stressor", "Elevated FGC ~ Basal FGC + Method",
-                   "Lifespan ~ Basal FGC", "Lifespan ~ Basal FGC + Stressor", "Lifespan ~ Basal FGC + Method",
+                   "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Stressor", "Baseline FGC ~ MSMR + Method",
+                   "Baseline FGC ~ Mass", "Baseline FGC ~ Mass + Stressor", "Baseline FGC ~ Mass + Method",
+                   "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Stressor", "Elevated FGC ~ Baseline FGC + Method",
+                   "Lifespan ~ Baseline FGC", "Lifespan ~ Baseline FGC + Stressor", "Lifespan ~ Baseline FGC + Method",
                    "Corticosterone",
-                   "Basal FGC ~ MSMR", "Basal FGC ~ MSMR + Stressor", "Basal FGC ~ MSMR + Method",
-                   "Basal FGC ~ Mass", "Basal FGC ~ Mass + Stressor", "Basal FGC ~ Mass + Method",
-                   "Elevated FGC ~ Basal FGC", "Elevated FGC ~ Basal FGC + Stressor", "Elevated FGC ~ Basal FGC + Method",
-                   "Lifespan ~ Basal FGC", "Lifespan ~ Basal FGC + Stressor", "Lifespan ~ Basal FGC + Method")) %>%
+                   "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Stressor", "Baseline FGC ~ MSMR + Method",
+                   "Baseline FGC ~ Mass", "Baseline FGC ~ Mass + Stressor", "Baseline FGC ~ Mass + Method",
+                   "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Stressor", "Elevated FGC ~ Baseline FGC + Method",
+                   "Lifespan ~ Baseline FGC", "Lifespan ~ Baseline FGC + Stressor", "Lifespan ~ Baseline FGC + Method")) %>%
   `rownames<-`(NULL) 
 
 AICTab <- AICTab[ ,c(4,1,2,3)]
-
-dir.create("PublicationFigures")
 
 
 

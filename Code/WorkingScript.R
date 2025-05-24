@@ -4,15 +4,15 @@
 # Models are written in y vs. x format
 # live laugh love -Kyle
 
-# Basal vs. MSMR model ----------------------------------------------------
+# Baseline vs. MSMR model ----------------------------------------------------
 
-#Filter out blank rows of Basal FGC
+#Filter out blank rows of Baseline FGC
 BasFGCMSMR_data <- StressData %>% drop_na(c(BasalFGC, MSMR))
 
 #Setting row names to map the tree to
 rownames(BasFGCMSMR_data) = BasFGCMSMR_data$Species
 
-#Remove tree species not in the basal FGC data
+#Remove tree species not in the Baseline FGC data
 if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$MSMR)) > 0) {
   BasFGCMSMR_Tree <- drop.tip(tree, name.check(tree, BasFGCMSMR_data)$tree_not_data)
 } else {
@@ -64,7 +64,7 @@ BasFGCMSMR_Plot <-
               ) +
   theme_classic() +
   labs(x = "MSMR (ln(mW/g))",
-       y = "Basal FGC (ln(ng/g))") +
+       y = "Baseline FGC (ln(ng/g))") +
   annotate("text",  x = 2, y = 2.5,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(BasFGCMSMR_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(BasFGCMSMR_PGLS))[2,1], 2)),
@@ -79,15 +79,15 @@ ggsave(filename = paste(directory,"Figures/BasFGCMSMR_Plot.png",sep = ""),
        width = 5,
        height = 4) #save a picture
 
-# Basal vs. Mass model ----------------------------------------------------
+# Baseline vs. Mass model ----------------------------------------------------
 
-#Filter out blank rows of Basal FGC
+#Filter out blank rows of Baseline FGC
 BasFGCMass_data <- StressData %>% drop_na(BasalFGC)
 
 #Setting row names to map the tree to
 rownames(BasFGCMass_data) = BasFGCMass_data$Species
 
-#Remove tree species not in the basal FGC data
+#Remove tree species not in the Baseline FGC data
 if (sum(is.na(StressData$BasalFGC)) > 0) {
   BasFGCMass_Tree <- drop.tip(tree, name.check(tree, BasFGCMass_data)$tree_not_data)
 } else {
@@ -137,7 +137,7 @@ BasFGCMass_Plot <-
               slope = coefficients(summary(BasFGCMass_PGLS))[2,1]) +
   theme_classic() +
   labs(x = "Body Mass (ln(g))",
-       y = "Basal FGC (ln(ng/g))") +
+       y = "Baseline FGC (ln(ng/g))") +
   annotate("text",  x = 5, y = 2,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(BasFGCMass_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(BasFGCMass_PGLS))[2,1], 2)),
@@ -152,15 +152,15 @@ ggsave(filename = paste(directory, "Figures/BasFGCMass_Plot.png", sep = ""),
        width = 5,
        height = 4) #save a picture
 
-# Elevated vs. Basal FGC --------------------------------------------------
+# Elevated vs. Baseline FGC --------------------------------------------------
 
-#Filter out blank rows of Basal FGC and Elevated FGC
+#Filter out blank rows of Baseline FGC and Elevated FGC
 ElvFGCBasFGC_data <- StressData %>% drop_na(c(BasalFGC, ElevFGC))
 
 #Setting row names to map the tree to
 rownames(ElvFGCBasFGC_data) = ElvFGCBasFGC_data$Species
 
-#Remove tree species not in the basal FGC data
+#Remove tree species not in the Baseline FGC data
 if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$ElevFGC)) > 0) {
   ElvFGCBasFGC_Tree <- drop.tip(tree, name.check(tree, ElvFGCBasFGC_data)$tree_not_data)
 } else {
@@ -208,7 +208,7 @@ ElvFGCBasFGC_Plot <-
   geom_abline(intercept = coefficients(summary(ElvFGCBasFGC_PGLS))[1,1], 
               slope = coefficients(summary(ElvFGCBasFGC_PGLS))[2,1]) +
   theme_classic() +
-  labs(x = "Basal FGC (ln(ng/g))",
+  labs(x = "Baseline FGC (ln(ng/g))",
        y = "Elevated FGC (ln(ng/g))") +
   annotate("text",  x = 6, y = 3,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(ElvFGCBasFGC_PGLS))[1,1], 2))
@@ -224,15 +224,15 @@ ggsave(filename = paste(directory, "Figures/ElvFGCBasFGC_Plot.png", sep = ""),
        width = 5,
        height = 4) #save a picture
 
-# Lifespan vs. Basal model ------------------------------------------------
+# Lifespan vs. Baseline model ------------------------------------------------
 
-#Filter out blank rows of Basal FGC
+#Filter out blank rows of Baseline FGC
 LifespanBasFGC_data <- StressData %>% drop_na(c(BasalFGC, MaxLifespan))
 
 #Setting row names to map the tree to
 rownames(LifespanBasFGC_data) = LifespanBasFGC_data$Species
 
-#Remove tree species not in the basal FGC data
+#Remove tree species not in the Baseline FGC data
 if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$MaxLifespan)) > 0) {
   LifespanBasFGC_Tree <- drop.tip(tree, name.check(tree, LifespanBasFGC_data)$tree_not_data)
 } else {
@@ -280,8 +280,8 @@ LifespanBasFGC_Plot <-
   geom_abline(intercept = coefficients(summary(LifespanBasFGC_PGLS))[1,1], 
               slope = coefficients(summary(LifespanBasFGC_PGLS))[2,1]) +
   theme_classic() +
-  labs(x = "Basal FGC (ln(ng/g))",
-       y = "lifespan ln((years))") +
+  labs(x = "Baseline FGC (ln(ng/g))",
+       y = "Lifespan ln((years))") +
   annotate("text",  x = 3, y = 1.5,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(LifespanBasFGC_PGLS))[1,1], 2))
                                ~x^.(round(coefficients(summary(LifespanBasFGC_PGLS))[2,1], 2)),
@@ -320,10 +320,10 @@ StatsTab_PGLS <- rbind(cbind(coefficients(summary(BasFGCMSMR_PGLS)), intervals(B
   mutate(est. = str_c(est., " (", `lower`, ", ", `upper`, ")")) %>%
   select(., -c("lower", "upper")) %>%
   `colnames<-`(c("Slope (95% CI)", "p value (slope)", "Intercept  (95% CI)", "Predicted R2")) %>%
-  `rownames<-`(c("Basal FGC ~ MSMR",
-                 "Basal FGC ~ Body Mass", 
-                 "Elevated FGC ~ Basal FGC",
-                 "Lifespan ~ Basal FGC")) %>%
+  `rownames<-`(c("Baseline FGC ~ MSMR",
+                 "Baseline FGC ~ Body Mass", 
+                 "Elevated FGC ~ Baseline FGC",
+                 "Lifespan ~ Baseline FGC")) %>%
   mutate(across(c(2,4), \(x) round(x, digits = 3))) %>%
   mutate(`p value (slope)` = ifelse(`p value (slope)` < 0.001, "< 0.001", `p value (slope)`)) #change very small p values to < 0.001
 
