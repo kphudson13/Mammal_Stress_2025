@@ -6,8 +6,10 @@
 PEERS_talk/
 Cortisol/CortisolUncorrected
 Cortisol/CortisolWetCorrected
+Cortisol/CortisolLifespan
 Corticosterone/CrtstnUncorrected
 Corticosterone/CrtstnWetCorrected
+Corticosterone/CrtstnLifespan
 FGCAnalysis/FGCUncorrected
 FGCAnalysis/FGCWetCorrected
 PublicationFigures/

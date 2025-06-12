@@ -41,7 +41,7 @@ if (BasFGCMSMR_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
 #Store the PGLS model
 save(BasFGCMSMR_PGLS, file = paste(directory,"BasFGCMSMR_PGLS.RData", sep = ""))
 
-#Specify reduced model, phylogeny is the same
+#Specify reduced model
 BasFGCMSMR_Reduced <- lm(log(BasalFGC) ~ 1, 
                          data = BasFGCMSMR_data) 
 
@@ -117,7 +117,7 @@ if (BasFGCMass_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
 save(BasFGCMass_PGLS, file = paste(directory,"BasFGCMass_PGLS.RData", sep = ""))
 
 
-#Specify reduced model, intercept model but phylogeny is the same
+#Specify reduced model
 BasFGCMass_Reduced <- lm(log(BasalFGC) ~ 1, 
                          data = BasFGCMass_data)
 
@@ -189,7 +189,7 @@ if (ElvFGCBasFGC_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
 #Store the PGLS model
 save(ElvFGCBasFGC_PGLS, file = paste(directory, "ElvFGCBasFGC_PGLS.RData", sep = ""))
 
-#Specify reduced model, phylogeny is the same
+#Specify reduced model
 ElvFGCBasFGC_Reduced <- lm(log(ElevFGC) ~ 1, 
                            data=ElvFGCBasFGC_data)
 
@@ -261,7 +261,7 @@ if (LifespanBasFGC_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
 #Store the PGLS model
 save(LifespanBasFGC_PGLS, file = paste(directory, "LifespanBasFGC_PGLS.RData", sep = ""))
 
-#Specify reduced model, phylogeny is the same
+#Specify reduced model
 LifespanBasFGC_Reduced <- lm(log(MaxLifespan) ~ 1, 
                              data = LifespanBasFGC_data) 
 

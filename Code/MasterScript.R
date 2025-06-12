@@ -25,6 +25,22 @@ library(phytools) #for use in the phylo signal script
 rm(list=ls())
 
 
+# Directory function ------------------------------------------------------
+
+#make a figure directory for initial pull users
+CreateDR <- function(DR) {
+  if(file.exists(DR)) {
+    if(file.exists(paste(DR, "Figures", sep = ""))) {
+      #do nothing
+    } else {
+      dir.create(paste(DR, "Figures", sep = ""))
+    }
+  } else {
+    dir.create(DR)
+    dir.create(paste(DR, "Figures", sep = ""))
+  }
+}
+
 # Crtstn Uncorrected --------------------------------------------------------
 
 #Load tree build by CleanAndTree.R
@@ -37,18 +53,7 @@ rownames(StressData) = StressData$Species
 
 #set directory for these data
 directory <- "Corticosterone/CrtstnUncorrected/"
-
-#make a figure directory for initial pull users
-if(file.exists(directory)) {
-  if(file.exists(paste(directory, "Figures", sep = ""))) {
-    #do nothing
-  } else {
-    dir.create(paste(directory, "Figures", sep = ""))
-  }
-} else {
-  dir.create(directory)
-  dir.create(paste(directory, "Figures", sep = ""))
-}
+CreateDR(directory)
 
 #label figures
 Label <- "Corticosterone - Uncorrected Model"
@@ -76,20 +81,44 @@ StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
 
 directory <- "Corticosterone/CrtstnWetCorrected/"
-
-if(file.exists(directory)) {
-  if(file.exists(paste(directory, "Figures", sep = ""))) {
-    #do nothing
-  } else {
-    dir.create(paste(directory, "Figures", sep = ""))
-  }
-} else {
-  dir.create(directory)
-  dir.create(paste(directory, "Figures", sep = ""))
-}
+CreateDR(directory)
 
 Label <- "Corticosterone - Wet Corrected Model"
 
+source("Code/WorkingScript.R")
+source("Code/PhyloSigScript.R")
+source("Code/AICScript.R")
+
+# Crtstn Lifespan Update --------------------------------------------------
+
+tree <- read.nexus("Corticosterone/StressTree.nex")
+
+Lifespan <- read.csv("LifespanData.csv")
+
+#Load data and clean it up
+StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) 
+StressData <- merge(StressData, Lifespan, by = "Species", all.x = TRUE) 
+
+#use mean lifespan, if not use 0.8 max lifespan 
+for (i in 1:nrow(StressData)) {
+  if (is.na(StressData$MeanLifespan[i]) == FALSE) {
+    StressData$MaxLifespan[i] <- StressData$MeanLifespan[i]
+  } else {
+    StressData$MaxLifespan[i] <- StressData$MaxLifespan[i]*0.8
+  }
+}
+
+rownames(StressData) = StressData$Species
+
+#set directory for these data
+directory <- "Corticosterone/CrtstnLifespan/"
+CreateDR(directory)
+
+#label figures
+Label <- "Corticosterone - Lifespan Update"
+
+#run the scripts
 source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
@@ -102,17 +131,7 @@ StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
 
 directory <- "Cortisol/CortisolUncorrected/"
-
-if(file.exists(directory)) {
-  if(file.exists(paste(directory, "Figures", sep = ""))) {
-    #do nothing
-  } else {
-    dir.create(paste(directory, "Figures", sep = ""))
-  }
-} else {
-  dir.create(directory)
-  dir.create(paste(directory, "Figures", sep = ""))
-}
+CreateDR(directory)
 
 Label <- "Cortisol - Uncorrected Model"
 
@@ -138,20 +157,45 @@ StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
 
 directory <- "Cortisol/CortisolWetCorrected/"
-
-if(file.exists(directory)) {
-  if(file.exists(paste(directory, "Figures", sep = ""))) {
-    #do nothing
-  } else {
-    dir.create(paste(directory, "Figures", sep = ""))
-  }
-} else {
-  dir.create(directory)
-  dir.create(paste(directory, "Figures", sep = ""))
-}
+CreateDR(directory)
 
 Label <- "Cortisol - Wet Corrected Model"
 
+source("Code/WorkingScript.R")
+source("Code/PhyloSigScript.R")
+source("Code/AICScript.R")
+
+# Cortisol Lifespan Update ------------------------------------------------
+
+
+tree <- read.nexus("Cortisol/StressTree.nex")
+
+Lifespan <- read.csv("LifespanData.csv")
+
+#Load data and clean it up
+StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) 
+StressData <- merge(StressData, Lifespan, by = "Species", all.x = TRUE) 
+
+#use mean lifespan, if not use 0.8 max lifespan 
+for (i in 1:nrow(StressData)) {
+  if (is.na(StressData$MeanLifespan[i]) == FALSE) {
+    StressData$MaxLifespan[i] <- StressData$MeanLifespan[i]
+  } else {
+    StressData$MaxLifespan[i] <- StressData$MaxLifespan[i]*0.8
+  }
+}
+
+rownames(StressData) = StressData$Species
+
+#set directory for these data
+directory <- "Cortisol/CortisolLifespan/"
+CreateDR(directory)
+
+#label figures
+Label <- "Cortisol - Lifespan Update"
+
+#run the scripts
 source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
@@ -164,17 +208,7 @@ StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
 
 directory <- "FGCAnalysis/FGCUncorrected/"
-
-if(file.exists(directory)) {
-  if(file.exists(paste(directory, "Figures", sep = ""))) {
-    #do nothing
-  } else {
-    dir.create(paste(directory, "Figures", sep = ""))
-  }
-} else {
-  dir.create(directory)
-  dir.create(paste(directory, "Figures", sep = ""))
-}
+CreateDR(directory)
 
 Label <- "FGC - Uncorrected Model"
 
@@ -199,17 +233,7 @@ StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
 
 directory <- "FGCAnalysis/FGCWetCorrected/"
-
-if(file.exists(directory)) {
-  if(file.exists(paste(directory, "Figures", sep = ""))) {
-    #do nothing
-  } else {
-    dir.create(paste(directory, "Figures", sep = ""))
-  }
-} else {
-  dir.create(directory)
-  dir.create(paste(directory, "Figures", sep = ""))
-}
+CreateDR(directory)
 
 Label <- "FGC - Wet Corrected Model"
 
