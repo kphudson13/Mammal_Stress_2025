@@ -58,13 +58,13 @@ if (length(unique(ElvFGCBasFGC_data$Method)) > 1) {
 }
 
 
-LifespanBasFGC_Stressor <- gls(log(MaxLifespan) ~ log(BasalFGC) + Stressor, 
+LifespanBasFGC_Stressor <- gls(log(Lifespan) ~ log(BasalFGC) + Stressor, 
                            data = LifespanBasFGC_data, 
                            correlation = corPagel(value = Lifespan_signal$lambda,phy = LifespanBasFGC_Tree, form = ~Species))
 
 #Because there is errors when there is only one method
 if (length(unique(LifespanBasFGC_data$Method)) > 1) {
-  LifespanBasFGC_Method <- gls(log(MaxLifespan) ~ log(BasalFGC) + Method, 
+  LifespanBasFGC_Method <- gls(log(Lifespan) ~ log(BasalFGC) + Method, 
                            data = LifespanBasFGC_data, 
                            correlation = corPagel(value = Lifespan_signal$lambda,phy = LifespanBasFGC_Tree, form = ~Species))
   

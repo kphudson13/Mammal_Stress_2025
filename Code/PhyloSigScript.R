@@ -29,7 +29,7 @@ PhyloSig_table <-
                         test = TRUE, 
                         nsim = 1000)[["lambda"]], 
                phylosig(tree = tree,
-                        x = setNames(StressData$MaxLifespan, StressData$Species),   
+                        x = setNames(StressData$Lifespan, StressData$Species),   
                         method = "lambda",
                         test = TRUE, 
                         nsim = 1000)[["lambda"]]),
@@ -54,7 +54,7 @@ PhyloSig_table <-
                          test = TRUE, 
                          nsim = 1000)[["P"]], 
                 phylosig(tree = tree,
-                         x = setNames(StressData$MaxLifespan, StressData$Species),   
+                         x = setNames(StressData$Lifespan, StressData$Species),   
                          method = "lambda",
                          test = TRUE, 
                          nsim = 1000)[["P"]])) %>%

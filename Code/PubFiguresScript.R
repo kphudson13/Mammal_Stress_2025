@@ -32,17 +32,11 @@ load("Cortisol/CortisolUncorrected/BasFGCMass_Plot.RData")
 load("Cortisol/CortisolUncorrected/ElvFGCBasFGC_Plot.RData")
 load("Cortisol/CortisolUncorrected/LifespanBasFGC_Plot.RData")
 
-BasFGCMSMR_Cortisol <- BasFGCMSMR_Plot +
-  labs(title = "Cortisol Based Assay")
-
-BasFGCMass_Cortisol <- BasFGCMass_Plot  +
-  labs(title = "Cortisol Based Assay")
-
-ElvFGCBasFGC_Cortisol <- ElvFGCBasFGC_Plot  +
-  labs(title = "Cortisol Based Assay")
-
-LifespanBasFGC_Cortisol <- LifespanBasFGC_Plot  +
-  labs(title = "Cortisol Based Assay")
+#Add titles to the plots
+BasFGCMSMR_Cortisol <- BasFGCMSMR_Plot + labs(title = "Cortisol Based Assay")
+BasFGCMass_Cortisol <- BasFGCMass_Plot + labs(title = "Cortisol Based Assay")
+ElvFGCBasFGC_Cortisol <- ElvFGCBasFGC_Plot + labs(title = "Cortisol Based Assay")
+LifespanBasFGC_Cortisol <- LifespanBasFGC_Plot + labs(title = "Cortisol Based Assay")
 
 #load in corticosterone ggplot objects
 load("Corticosterone/CrtstnUncorrected/BasFGCMSMR_Plot.RData")
@@ -50,17 +44,10 @@ load("Corticosterone/CrtstnUncorrected/BasFGCMass_Plot.RData")
 load("Corticosterone/CrtstnUncorrected/ElvFGCBasFGC_Plot.RData")
 load("Corticosterone/CrtstnUncorrected/LifespanBasFGC_Plot.RData")
 
-BasFGCMSMR_Corticosterone <- BasFGCMSMR_Plot +
-  labs(title = "Corticosterone Based Assay")
-
-BasFGCMass_Corticosterone <- BasFGCMass_Plot +
-  labs(title = "Corticosterone Based Assay")
-
-ElvFGCBasFGC_Corticosterone <- ElvFGCBasFGC_Plot +
-  labs(title = "Corticosterone Based Assay")
-
-LifespanBasFGC_Corticosterone <- LifespanBasFGC_Plot  +
-  labs(title = "Corticosterone Based Assay")
+BasFGCMSMR_Corticosterone <- BasFGCMSMR_Plot + labs(title = "Corticosterone Based Assay")
+BasFGCMass_Corticosterone <- BasFGCMass_Plot + labs(title = "Corticosterone Based Assay")
+ElvFGCBasFGC_Corticosterone <- ElvFGCBasFGC_Plot + labs(title = "Corticosterone Based Assay")
+LifespanBasFGC_Corticosterone <- LifespanBasFGC_Plot + labs(title = "Corticosterone Based Assay")
 
 #export cortisol and corticosterone combined figures 
 save_plot(plot_grid(BasFGCMSMR_Cortisol, BasFGCMSMR_Corticosterone, labels = c("A:", "B:")),
@@ -78,8 +65,6 @@ save_plot(plot_grid(ElvFGCBasFGC_Cortisol, ElvFGCBasFGC_Corticosterone, labels =
 save_plot(plot_grid(LifespanBasFGC_Cortisol, LifespanBasFGC_Corticosterone, labels = c("A:", "B:")),
           filename = "PublicationFigures/LifespanBasFGC.png",
           base_height = 4, base_width = 8)
-
-
 
 # FGC and Plasma Figures --------------------------------------------------
 

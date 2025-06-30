@@ -41,22 +41,24 @@ CreateDR <- function(DR) {
   }
 }
 
-# Crtstn Uncorrected --------------------------------------------------------
+# Crtstn Max Lifespan --------------------------------------------------------
+
+#Analysis of data where lifespan is the max value reported from AnAge
 
 #Load tree build by CleanAndTree.R
 tree <- read.nexus("Corticosterone/StressTree.nex")
 
 #Load data and clean it up
 StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) 
-rownames(StressData) = StressData$Species
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>% #simplify stressor into ACTH or Other
+  mutate(Lifespan = MaxLifespan)
 
 #set directory for these data
-directory <- "Corticosterone/CrtstnUncorrected/"
+directory <- "Corticosterone/CrtstnMaxLifespan/"
 CreateDR(directory)
 
 #label figures
-Label <- "Corticosterone - Uncorrected Model"
+Label <- "Corticosterone - Max Lifespan Model"
 
 #run the scripts
 source("Code/WorkingScript.R")
@@ -64,6 +66,9 @@ source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
 # Crtstn Wet Corrected Feces ----------------------------------------------
+
+#Analysis of data where feces mass is corrected for wet samples
+#also max lifespan is used
 
 tree <- read.nexus("Corticosterone/StressTree.nex")
 
@@ -78,7 +83,8 @@ StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
       FecesMass == "wet" ~ ElevFGC,
       FecesMass == "dry" ~ ElevFGC/4,
       TRUE ~ ElevFGC/4)) %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>%
+  mutate(Lifespan = MaxLifespan)
 
 directory <- "Corticosterone/CrtstnWetCorrected/"
 CreateDR(directory)
@@ -89,57 +95,91 @@ source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
-# Crtstn Lifespan Update --------------------------------------------------
+# Crtstn Mean + Max Lifespan Update --------------------------------------------------
+
+#Analysis of data where lifespan is the mean if available or max value reported from AnAge times 0.8 if not
 
 tree <- read.nexus("Corticosterone/StressTree.nex")
 
-Lifespan <- read.csv("LifespanData.csv")
+LifespanData <- read.csv("LifespanData.csv")
 
 #Load data and clean it up
 StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) 
-StressData <- merge(StressData, Lifespan, by = "Species", all.x = TRUE) 
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
+StressData <- merge(StressData, LifespanData, by = "Species", all.x = TRUE) 
 
 #use mean lifespan, if not use 0.8 max lifespan 
 for (i in 1:nrow(StressData)) {
   if (is.na(StressData$MeanLifespan[i]) == FALSE) {
-    StressData$MaxLifespan[i] <- StressData$MeanLifespan[i]
+    StressData$Lifespan[i] <- StressData$MeanLifespan[i]
   } else {
-    StressData$MaxLifespan[i] <- StressData$MaxLifespan[i]*0.8
+    StressData$Lifespan[i] <- StressData$MaxLifespan[i]*0.8
   }
 }
 
 rownames(StressData) = StressData$Species
 
 #set directory for these data
-directory <- "Corticosterone/CrtstnLifespan/"
+directory <- "Corticosterone/CrtstnMixedLifespan/"
 CreateDR(directory)
 
 #label figures
-Label <- "Corticosterone - Lifespan Update"
+Label <- "Corticosterone - Mixed Lifespan"
 
 #run the scripts
 source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
-# Cortisol Uncorrected ----------------------------------------------------
+# Crtstn Mean Lifespan ----------------------------------------------------
+
+#Analysis of data where mean lifespan is used from various sources 
+
+#Load tree build by CleanAndTree.R
+tree <- read.nexus("Corticosterone/StressTree.nex")
+
+#Load data and clean it up
+StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) #simplify stressor into ACTH or Other
+
+StressData <- merge(StressData, LifespanData, by = "Species", all.x = TRUE) %>% #mergee in lifespan data
+  mutate(Lifespan = MeanLifespan)
+
+#set directory for these data
+directory <- "Corticosterone/CrtstnMeanLifespan/"
+CreateDR(directory)
+
+#label figures
+Label <- "Corticosterone - Mean Lifespan Model"
+
+#run the scripts
+source("Code/WorkingScript.R")
+source("Code/PhyloSigScript.R")
+source("Code/AICScript.R")
+
+# Cortisol Max Lifespan ----------------------------------------------------
+
+#Analysis of data where lifespan is the max value reported from AnAge
 
 tree <- read.nexus("Cortisol/StressTree.nex")
 
 StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>%
+  mutate(Lifespan = MaxLifespan)
 
-directory <- "Cortisol/CortisolUncorrected/"
+directory <- "Cortisol/CortisolMaxLifespan/"
 CreateDR(directory)
 
-Label <- "Cortisol - Uncorrected Model"
+Label <- "Cortisol - Max Lifespan Model"
 
 source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
 # Cortisol Wet Corrected --------------------------------------------------
+
+#Analysis of data where feces mass is corrected for wet samples
+#also max lifespan is used
 
 tree <- read.nexus("Cortisol/StressTree.nex")
 
@@ -154,7 +194,8 @@ StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
       FecesMass == "wet" ~ ElevFGC, 
       FecesMass == "dry" ~ ElevFGC/4,
       TRUE ~ ElevFGC/4)) %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>%
+  mutate(Lifespan = MaxLifespan)
 
 directory <- "Cortisol/CortisolWetCorrected/"
 CreateDR(directory)
@@ -165,47 +206,74 @@ source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
-# Cortisol Lifespan Update ------------------------------------------------
+# Cortisol Mean + Max Lifespan Update ------------------------------------------------
 
+#Analysis of data where lifespan is the mean if available or max value reported from AnAge times 0.8 if not
 
 tree <- read.nexus("Cortisol/StressTree.nex")
 
-Lifespan <- read.csv("LifespanData.csv")
+LifespanData <- read.csv("LifespanData.csv")
 
 #Load data and clean it up
 StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) 
-StressData <- merge(StressData, Lifespan, by = "Species", all.x = TRUE) 
+StressData <- merge(StressData, LifespanData, by = "Species", all.x = TRUE) 
 
 #use mean lifespan, if not use 0.8 max lifespan 
 for (i in 1:nrow(StressData)) {
   if (is.na(StressData$MeanLifespan[i]) == FALSE) {
-    StressData$MaxLifespan[i] <- StressData$MeanLifespan[i]
+    StressData$Lifespan[i] <- StressData$MeanLifespan[i]
   } else {
-    StressData$MaxLifespan[i] <- StressData$MaxLifespan[i]*0.8
+    StressData$Lifespan[i] <- StressData$MaxLifespan[i]*0.8
   }
 }
 
 rownames(StressData) = StressData$Species
 
 #set directory for these data
-directory <- "Cortisol/CortisolLifespan/"
+directory <- "Cortisol/CortisolMixedLifespan/"
 CreateDR(directory)
 
 #label figures
-Label <- "Cortisol - Lifespan Update"
+Label <- "Cortisol - Mixed Lifespan"
 
 #run the scripts
 source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
-# FGC Uncorrected ---------------------------------------------------------
+
+# Cortisol Mean Lifespan --------------------------------------------------
+
+#Analysis of data where mean lifespan is used from various sources 
+
+tree <- read.nexus("Cortisol/StressTree.nex")
+
+StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) #simplify stressor into ACTH or Other
+
+StressData <- merge(StressData, LifespanData, by = "Species", all.x = TRUE) %>% #merge in lifespan data
+  mutate(Lifespan = MeanLifespan)
+
+directory <- "Cortisol/CortisolMeanLifespan/"
+CreateDR(directory)
+
+Label <- "Cortisol - Mean Lifespan Model"
+
+source("Code/WorkingScript.R")
+source("Code/PhyloSigScript.R")
+source("Code/AICScript.R")
+
+# FGC Max lifespan ---------------------------------------------------------
+
+#Use cortisol or corticosterone based on dominance
+#Analysis of data where lifespan is the max value reported from AnAge
 
 tree <- read.nexus("FGCAnalysis/StressTree.nex")  
 
 StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>%
+  mutate(Lifespan = MaxLifespan)
 
 directory <- "FGCAnalysis/FGCUncorrected/"
 CreateDR(directory)
@@ -217,6 +285,10 @@ source("Code/PhyloSigScript.R")
 # source("Code/AICScript.R")
 
 # FGC Wet Corrected -------------------------------------------------------
+
+#Use cortisol or corticosterone based on dominance
+#Analysis of data where feces mass is corrected for wet samples
+#also max lifespan is used
 
 tree <- read.nexus("FGCAnalysis/StressTree.nex")  
 
@@ -230,7 +302,8 @@ StressData <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
       FecesMass == "wet" ~ ElevFGC, 
       FecesMass == "dry" ~ ElevFGC/4,
       TRUE ~ ElevFGC/4)) %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>%
+  mutate(Lifespan = MaxLifespan)
 
 directory <- "FGCAnalysis/FGCWetCorrected/"
 CreateDR(directory)

@@ -1,0 +1,5 @@
+"","Slope (95% CI)","p value (slope)","Intercept  (95% CI)","Likelihood R2"
+"Baseline FGC ~ MSMR","1.19 (0.76, 1.62)","< 0.001","4.13 (3.33, 4.93)",0.705
+"Baseline FGC ~ Body Mass","-0.28 (-0.39, -0.18)","< 0.001","7.15 (5.88, 8.41)",0.544
+"Elevated FGC ~ Baseline FGC","0.77 (0.4, 1.15)","< 0.001","2.57 (0.62, 4.53)",0.574
+"Lifespan ~ Baseline FGC","-0.45 (-0.79, -0.1)","0.013","4.33 (2.71, 5.94)",0.162

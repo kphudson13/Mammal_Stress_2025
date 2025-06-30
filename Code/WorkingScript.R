@@ -227,13 +227,13 @@ ggsave(filename = paste(directory, "Figures/ElvFGCBasFGC_Plot.png", sep = ""),
 # Lifespan vs. Baseline model ------------------------------------------------
 
 #Filter out blank rows of Baseline FGC
-LifespanBasFGC_data <- StressData %>% drop_na(c(BasalFGC, MaxLifespan))
+LifespanBasFGC_data <- StressData %>% drop_na(c(BasalFGC, Lifespan))
 
 #Setting row names to map the tree to
 rownames(LifespanBasFGC_data) = LifespanBasFGC_data$Species
 
 #Remove tree species not in the Baseline FGC data
-if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$MaxLifespan)) > 0) {
+if (sum(is.na(StressData$BasalFGC)) > 0 | sum(is.na(StressData$Lifespan)) > 0) {
   LifespanBasFGC_Tree <- drop.tip(tree, name.check(tree, LifespanBasFGC_data)$tree_not_data)
 } else {
   LifespanBasFGC_Tree <- tree
@@ -243,13 +243,13 @@ name.check(LifespanBasFGC_Tree, LifespanBasFGC_data)
 
 Lifespan_signal <-
   phylosig(tree = LifespanBasFGC_Tree,
-           x = setNames(LifespanBasFGC_data$MaxLifespan, LifespanBasFGC_data$Species),   
+           x = setNames(LifespanBasFGC_data$Lifespan, LifespanBasFGC_data$Species),   
            method = "lambda",
            test = TRUE, 
            nsim = 1000)
 
 #Build gls model 
-LifespanBasFGC_PGLS <- gls(log(MaxLifespan) ~ log(BasalFGC), 
+LifespanBasFGC_PGLS <- gls(log(Lifespan) ~ log(BasalFGC), 
                            data = LifespanBasFGC_data, 
                            correlation = corPagel(value = Lifespan_signal$lambda, phy = LifespanBasFGC_Tree, form = ~Species))
 
@@ -262,20 +262,20 @@ if (LifespanBasFGC_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
 save(LifespanBasFGC_PGLS, file = paste(directory, "LifespanBasFGC_PGLS.RData", sep = ""))
 
 #Specify reduced model
-LifespanBasFGC_Reduced <- lm(log(MaxLifespan) ~ 1, 
+LifespanBasFGC_Reduced <- lm(log(Lifespan) ~ 1, 
                              data = LifespanBasFGC_data) 
 
 save(LifespanBasFGC_Reduced, file = paste(directory, "LifespanBasFGC_Reduced.RData", sep = ""))
 
 #Build ordinary linear model 
-# LifespanBasFGC_Ordinary <- lm(log(MaxLifespan) ~ log(BasalFGC),
+# LifespanBasFGC_Ordinary <- lm(log(Lifespan) ~ log(BasalFGC),
 #                               data=LifespanBasFGC_data)
 # 
 # LifespanBasFGC_Summ_Ordinary <- summary(LifespanBasFGC_Ordinary)
 
 LifespanBasFGC_Plot <-
   ggplot(data = LifespanBasFGC_data,
-         aes(x = log(BasalFGC), y = log(MaxLifespan))) +
+         aes(x = log(BasalFGC), y = log(Lifespan))) +
   geom_point() +
   geom_abline(intercept = coefficients(summary(LifespanBasFGC_PGLS))[1,1], 
               slope = coefficients(summary(LifespanBasFGC_PGLS))[2,1]) +
@@ -312,14 +312,14 @@ StatsTab_PGLS <- rbind(cbind(coefficients(summary(BasFGCMSMR_PGLS)), intervals(B
                  intervals(BasFGCMass_PGLS)[["coef"]][1,],
                  intervals(ElvFGCBasFGC_PGLS)[["coef"]][1,],
                  intervals(LifespanBasFGC_PGLS)[["coef"]][1,]), #add back in a column for the intercept
-        rbind(R2(BasFGCMSMR_PGLS, BasFGCMSMR_Reduced)[3], 
-              R2(BasFGCMass_PGLS, BasFGCMass_Reduced)[3], 
-              R2(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Reduced)[3], 
-              R2(LifespanBasFGC_PGLS, LifespanBasFGC_Reduced)[3])) %>%
+        rbind(R2(BasFGCMSMR_PGLS, BasFGCMSMR_Reduced)[1], 
+              R2(BasFGCMass_PGLS, BasFGCMass_Reduced)[1], 
+              R2(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Reduced)[1], 
+              R2(LifespanBasFGC_PGLS, LifespanBasFGC_Reduced)[1])) %>%
   mutate(across(c(3,4,5), \(x) round(x, digits = 2))) %>% 
   mutate(est. = str_c(est., " (", `lower`, ", ", `upper`, ")")) %>%
   select(., -c("lower", "upper")) %>%
-  `colnames<-`(c("Slope (95% CI)", "p value (slope)", "Intercept  (95% CI)", "Predicted R2")) %>%
+  `colnames<-`(c("Slope (95% CI)", "p value (slope)", "Intercept  (95% CI)", "Likelihood R2")) %>%
   `rownames<-`(c("Baseline FGC ~ MSMR",
                  "Baseline FGC ~ Body Mass", 
                  "Elevated FGC ~ Baseline FGC",
