@@ -4,18 +4,12 @@ library(rotl) #pull from tree of life
 library(tidyverse)
 library(taxize) #pull upstream taxonomic data, package installed from github not CRAN
 library(cowsay)
-library(beepr) #beep when done)
-
-BaseWD <- "C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R" #Default WD
-setwd(BaseWD)
 
 # summary(rawdata)
 
 # Corticosterone model -----------------------------------------------------
 
-setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Corticosterone")
-
-StressData <- read.csv("CrtstnDataRaw.csv")
+StressData <- read.csv("Corticosterone/CrtstnDataRaw.csv")
 
 StressData$Species[StressData$Species == "Suricata suricatta "] <- "Suricata suricatta"
 StressData$Species[StressData$Species == "Sturnira parivdens"] <- "Sturnira parvidens"
@@ -52,24 +46,23 @@ tree$tip.label[tree$tip.label == "Sapajus apella"] <- "Cebus apella"
 #to view the lists lining up
 cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
 
-write.nexus(tree, file = "StressTree.nex")
+write.nexus(tree, file = "Corticosterone/StressTree.nex")
 
-png("TreePic.png",
+png("Corticosterone/TreePic.png",
     height = 3000,
     width = 1800,
     res = 200)
 plot(tree)
 dev.off()
 
-StressData$MSMR <- StressData$MSMR * 1000 #convert to mW/g
+#convert MSMR to mW/g
+StressData$MSMR <- StressData$MSMR * 1000 
 
-write.csv(StressData, file = "CrtstnDataClean.csv")
+write.csv(StressData, file = "Corticosterone/CrtstnDataClean.csv")
 
 # Cortisol Model ------------------------------------------------------------
 
-setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/Cortisol")
-
-StressData <- read.csv("CortisolDataRaw.csv")
+StressData <- read.csv("Cortisol/CortisolDataRaw.csv")
 
 # StressData <- rawdata %>% 
 #   filter(Species != "Gerbillus piridium") #Cant find this species 
@@ -111,33 +104,29 @@ tree$tip.label[tree$tip.label == "Mazama gouazoupira"] <- "Mazama gouazoubira"
 #to view the lists lining up
 cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
 
-write.nexus(tree, file = "StressTree.nex")
+write.nexus(tree, file = "Cortisol/StressTree.nex")
 
-png("TreePic.png",
+png("Cortisol/TreePic.png",
     height = 3000,
     width = 1800,
     res = 200)
 plot(tree)
 dev.off()
 
-StressData$MSMR <- StressData$MSMR * 1000 #convert to mW/g
+#convert MSMR to mW/g
+StressData$MSMR <- StressData$MSMR * 1000
 
-write.csv(StressData, file = "CortisolDataClean.csv")
-
-setwd(BaseWD) #return to base working directory
+write.csv(StressData, file = "Cortisol/CortisolDataClean.csv")
 
 #beep()
 
 
 # FGC model ---------------------------------------------------------------
 
-setwd(BaseWD)
-
 #pull in already cleaned data with orders and familys attached 
 CrtsnData <- read.csv("Corticosterone/CrtstnDataClean.csv") 
 CortisolData <- read.csv("Cortisol/CortisolDataClean.csv")
 
-setwd("C:/Users/kphud/Documents/Mammal_Stress/Mammal_Stress_R/FGCAnalysis")
 
 #add a column to sort by 
 CrtsnData$Hormone <- "Corticosterone"
@@ -164,20 +153,28 @@ tree$tip.label[tree$tip.label == "Mazama gouazoupira"] <- "Mazama gouazoubira"
 #to view the lists lining up
 cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
 
-write.nexus(tree, file = "StressTree.nex")
+write.nexus(tree, file = "FGCAnalysis/StressTree.nex")
 
-png("TreePic.png",
+png("FGCAnalysis/TreePic.png",
     height = 3000,
     width = 1800,
     res = 200)
 plot(tree)
 dev.off()
 
-write.csv(StressData, file = "FGCDataClean.csv")
+write.csv(StressData, file = "FGCAnalysis/FGCDataClean.csv")
 
-setwd(BaseWD) 
+# Lifespan Data Cleaning --------------------------------------------------
+
+MyhrvoldData <- read.csv("LifespanData/MyhrvoldDataRaw.csv") %>%
+  filter(longevity_y != -999 & class == "Mammalia") %>% #-999 is no data for this set, and we only want mammals
+  select("genus", "species", "longevity_y") %>% #cut unused columns
+  mutate(Species = paste(genus, species, sep = " ")) %>% #combine into binomial names 
+  select(Species, longevity_y) 
+
+write.csv(MyhrvoldData, file = "LifespanData/MyhrvoldDataClean.csv")
 
 # Done --------------------------------------------------------------------
 
 say("Done", by = "frog", what_color = "darkgreen")
-beep(10)
+

@@ -22,24 +22,8 @@ library(beepr) #for sound notifications
 library(cowsay) #for the fun frog
 library(phytools) #for use in the phylo signal script
 
-rm(list=ls())
-
-
-# Directory function ------------------------------------------------------
-
-#make a figure directory for initial pull users
-CreateDR <- function(DR) {
-  if(file.exists(DR)) {
-    if(file.exists(paste(DR, "Figures", sep = ""))) {
-      #do nothing
-    } else {
-      dir.create(paste(DR, "Figures", sep = ""))
-    }
-  } else {
-    dir.create(DR)
-    dir.create(paste(DR, "Figures", sep = ""))
-  }
-}
+rm(list=ls()) #clear environment
+source("Code/DirectoryFunction.R") #function to create directories
 
 # Crtstn Max Lifespan --------------------------------------------------------
 
@@ -101,12 +85,14 @@ source("Code/AICScript.R")
 
 tree <- read.nexus("Corticosterone/StressTree.nex")
 
-LifespanData <- read.csv("LifespanData.csv")
+MyhrvoldData <- read.csv("LifespanData/MyhrvoldDataClean.csv")
+TurbillData <- read.csv("LifespanData/TurbillDataRaw.csv")
+AZAData <- read.csv("LifespanData/AZADataRaw.csv")
 
 #Load data and clean it up
 StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
-StressData <- merge(StressData, LifespanData, by = "Species", all.x = TRUE) 
+StressData <- merge(StressData, MyhyrvoldData, TurbillData, AZAData, by = "Species", all.x = TRUE) 
 
 #use mean lifespan, if not use 0.8 max lifespan 
 for (i in 1:nrow(StressData)) {
@@ -138,12 +124,14 @@ source("Code/AICScript.R")
 #Load tree build by CleanAndTree.R
 tree <- read.nexus("Corticosterone/StressTree.nex")
 
+LifespanData <- read.csv("MyhrvoldDataClean.csv")
+
 #Load data and clean it up
 StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) #simplify stressor into ACTH or Other
 
 StressData <- merge(StressData, LifespanData, by = "Species", all.x = TRUE) %>% #mergee in lifespan data
-  mutate(Lifespan = MeanLifespan)
+  mutate(Lifespan = longevity_y)
 
 #set directory for these data
 directory <- "Corticosterone/CrtstnMeanLifespan/"
@@ -249,11 +237,13 @@ source("Code/AICScript.R")
 
 tree <- read.nexus("Cortisol/StressTree.nex")
 
+LifespanData <- read.csv("MyhrvoldDataClean.csv")
+
 StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) #simplify stressor into ACTH or Other
 
 StressData <- merge(StressData, LifespanData, by = "Species", all.x = TRUE) %>% #merge in lifespan data
-  mutate(Lifespan = MeanLifespan)
+  mutate(Lifespan = longevity_y)
 
 directory <- "Cortisol/CortisolMeanLifespan/"
 CreateDR(directory)

@@ -1,0 +1,50 @@
+Group,Species,BodyMassAnAge,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,MaxLifespan,MSMR,Temp,RMR
+,Acinonyx jubatus,38446.1,618.5,1850.3,EIA,9,longitudinal analysis,dry,adult,20.5,0.001607,39,
+,Acomys cahirinus,45.2,1077.33,1838.98,EIA,4,ACTH,wet,subadult,5.9,0.006143,37.5,
+,Ailuropoda melanoleuca,117500,114.66,179.492,EIA,17,artifical semen collection and artifical insemination,dry,adult,36.8,,,
+,Artibeus jamaicensis,42.2,557.46,,EIA,22,none,wet,,19.2,0.007787,36.4,
+,Artibeus lituratus,65,872.25,,EIA,22,none,wet,,,0.008588,37.3,
+,Blastocerus dichotomus,102500,130.333,,EIA,4,N/A,dry,adult and juveniles,13.7,,,
+,Bos taurus,750000,96.4,,EIA,1,N/A,wet,adult (pregnant and lactating),20,0.000884,38,
+,Canis rufus,22983.2,312.55,969.85,EIA,9,longitudinal analysis,dry,adult,,,,
+,Capra aegargrus hircus,61000,124,1096,EIA,1,ACTH,wet,adult,20.8,0.0014,39.3,
+,Capreolus capreolus,21667,60.92,459,EIA,1,ACTH,wet,,17.5,0.002156,,
+,Cavia porcellus,728,349.23,,EIA,1,N/A,dry,,12,0.003333,39,
+,Ceratotherium simum,2175000,4.1,28.3,HPLC,HPLC,restraint/relocation,dry,adult,45,,,
+,Diceros bicornis,1100000,3,30.1,HPLC,HPLC,restraint/relocation,dry,adult,57,,,
+,Cerdocyon thous,6500,84.5,1638.53,EIA,4,ACTH,N/A,N/A,12.7,0.001562,38.2,
+,Choeropsis liberiensis,215000,6.3,19.2,EIA,2,ACTH,wet,,42.3,,,
+,Crocuta crocuta,63000,43.75,744.95,EIA,2,ACTH,wet,adult,41.1,,,N/A
+,Elephas maximus,3178000,17.1,,EIA,19,EIA,dry,adult (ranged from 9.2-57 years),79.6,0.000636,35.8,
+,Felis catus,3900,213.6,384.6,EIA,9,longitudinal analysis,dry,adult,30,0.00247,38.1,
+,Giraffa camelopardalis,800000,23.725,49.3,EIA,9,ACTH,dry,adult and juveniles,39.5,0.000874,37.1,
+,Gorilla gorilla gorilla,139842,20,40,EIA,2,various,wet,,60.1,,,N/A
+,Hylobates pileatus,5735,33,188.5,EIA,2,ACTH,dry,adult,38,,,N/A
+,Lepus americanus,1600,1054,11130,EIA,1,ACTH,dry,adult,,0.004184,39.8,
+,Macaca tonkeana,11950,51.505,80.245,EIA,13,relocation,dry,,28.4,,,N/A
+,Mazama gouazoubira,17000,181.5,770.5,EIA,4,ACTH,dry,adult and juveniles,14.8,,,
+,Melursus ursinus,100000,48.7,1428.8,EIA,9,longitudinal analysis,dry,adult,33.3,0.000703,,
+,Mesocricetus auratus,105,204.55,346,EIA,4,ACTH,dry,adult,3.9,0.006377,38.1,
+,Microcebus murinus,64.8,420,1940,EIA,2,capture,wet,,18.2,,,N/A
+,Moschus berezovskii,12000,47.5483,65.8161,EIA,16,"capture, restraint, and extraction of musk",dry,adult (ranged from 2-8 years),20,,,N/A
+,Mungos mungo,1332,58.4,104.2,EIA,9,ACTH,dry,,17.4,,,
+,Mustela nigripes,1021,170.1,324.6,EIA,9,longitudinal analysis,dry,adult,9.4,,,N/A
+,Neofelis nebulosa,19500,248.8,1100.7,EIA,9,longitudinal analysis,dry,adult,19.8,,,N/A
+,Ovibos moschatus,315000,64.122,110.875,EIA,9,ACTH,wet,juvenile,27.4,,37.7,
+,Pan troglodytes,45000,18,,EIA,9,ACTH,wet,adult,68,0.0015,,N/A
+,Panthera leo bleyenberghi,175000,15.4489,24.7638,EIA,15,death of dominant male,dry,adult,28,0.000965,37.9,
+,Panthera tigris sumatrae,119700,101.455,,EIA,9,drawing blood,dry,adult,26.3,0.000971,37.5,
+,Panthera tigris tigris,119700,101.445,,EIA,9,drawing blood,dry,adult,26.3,0.000971,37.5,
+,Pecari tajacu,20200,35.9,96.3,EIA,9,ACTH,dry,adult,31.5,0.001618,37.5,
+,Propithecus verreauxi,5000,21,37,EIA,7,ACTH,wet,adult,31,0.001116,36,
+,Rattus rattus,200,3210,4410,EIA,11,ACTH,wet,adult ,4.2,0.006581,38,
+,Rhinoceros unicornis,1602330,9.66,35.28,EIA,9,ACTH,dry,adult,43.5,,37.4,
+,Spermophilus columbianus,412.5,263.03,416.87,EIA,11,trapping,dry,adult,,,,N/A
+,Sturnira hondurensis,17.25,3145.27,,EIA,22,none,wet,,,,,
+,Sturnira parivdens,15.3,206.15,,EIA,22,none,wet,,,,,
+,Suricata suricatta ,776,110.2,614.1,EIA,9,ACTH,dry,adult,20.6,0.002034,36.3,
+,Tolypeutes matacus,1500,642.1,1379.3,EIA,9,ACTH,dry,adult,36.8,0.00101,33,
+,Ursus thibetanus,103750,80.7,369.6,EIA,9,longitudinal analysis,dry,adult,39.2,,37.5,N/A
+,Vulpes lagopus,5200,695,2414,EIA,11,ACTH,dry,adult and juveniles,16.3,0.002129,38.6,
+,Vulpes vulpes,4132,475,2143,EIA,11,ACTH,dry,adult and juveniles,21.3,0.002998,38.7,
+,Loxodonta africana,4800000,69.7,,,,,wet,,65,,,

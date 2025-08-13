@@ -248,6 +248,11 @@ Lifespan_signal <-
            test = TRUE, 
            nsim = 1000)
 
+#Limit lambda to 1 to avoid errors 
+if (Lifespan_signal$lambda > 1) {
+  Lifespan_signal$lambda <- 0.9999
+}
+
 #Build gls model 
 LifespanBasFGC_PGLS <- gls(log(Lifespan) ~ log(BasalFGC), 
                            data = LifespanBasFGC_data, 
@@ -293,6 +298,83 @@ LifespanBasFGC_Plot <-
 LifespanBasFGC_Plot
 save(LifespanBasFGC_Plot, file = paste(directory, "LifespanBasFGC_Plot.RData", sep = "")) #save file
 ggsave(filename = paste(directory, "Figures/LifespanBasFGC_Plot.png", sep = ""),
+       width = 5,
+       height = 4) #save a picture
+
+# Lifespan vs. MSMR model -------------------------------------------------
+
+#Filter out blank rows of MSMR and Lifespan
+LifespanMSMR_data <- StressData %>% drop_na(c(MSMR, Lifespan))
+
+#Setting row names to map the tree to
+rownames(LifespanMSMR_data) = LifespanMSMR_data$Species
+
+#Remove tree species not in the MSMR data
+if (sum(is.na(StressData$MSMR)) > 0 | sum(is.na(StressData$Lifespan)) > 0) {
+  LifespanMSMR_Tree <- drop.tip(tree, name.check(tree, LifespanMSMR_data)$tree_not_data)
+} else {
+  LifespanMSMR_Tree <- tree
+}
+
+name.check(LifespanMSMR_Tree, LifespanMSMR_data)
+
+Lifespan_signal <-
+  phylosig(tree = LifespanMSMR_Tree,
+           x = setNames(LifespanMSMR_data$Lifespan, LifespanMSMR_data$Species),   
+           method = "lambda",
+           test = TRUE, 
+           nsim = 1000)
+
+#Limit lambda to 1 to avoid errors 
+if (Lifespan_signal$lambda > 1) {
+  Lifespan_signal$lambda <- 0.9999
+}
+
+#Build gls model 
+LifespanMSMR_PGLS <- gls(log(Lifespan) ~ log(MSMR), 
+                           data = LifespanMSMR_data, 
+                           correlation = corPagel(value = Lifespan_signal$lambda, phy = LifespanMSMR_Tree, form = ~Species))
+
+#limit lambda to >0 to avoid errors 
+if (LifespanMSMR_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
+  LifespanMSMR_PGLS[["modelStruct"]][["corStruct"]][1] <- 0
+} 
+
+#Store the PGLS model
+save(LifespanMSMR_PGLS, file = paste(directory, "LifespanMSMR_PGLS.RData", sep = ""))
+
+#Specify reduced model
+LifespanMSMR_Reduced <- lm(log(Lifespan) ~ 1, 
+                             data = LifespanMSMR_data) 
+
+save(LifespanMSMR_Reduced, file = paste(directory, "LifespanMSMR_Reduced.RData", sep = ""))
+
+#Build ordinary linear model 
+# LifespanMSMR_Ordinary <- lm(log(Lifespan) ~ log(MSMR),
+#                               data=LifespanMSMR_data)
+# 
+# LifespanMSMR_Summ_Ordinary <- summary(LifespanMSMR_Ordinary)
+
+LifespanMSMR_Plot <-
+  ggplot(data = LifespanMSMR_data,
+         aes(x = log(MSMR), y = log(Lifespan))) +
+  geom_point() +
+  geom_abline(intercept = coefficients(summary(LifespanMSMR_PGLS))[1,1], 
+              slope = coefficients(summary(LifespanMSMR_PGLS))[2,1]) +
+  theme_classic() +
+  labs(x = "MSMR (ln(mW/g))",
+       y = "Lifespan ln((years))") +
+  annotate("text",  x = 1, y = 1.2,
+           label = list(bquote(atop(y==~ .(round(coefficients(summary(LifespanMSMR_PGLS))[1,1], 2))
+                                    ~x^.(round(coefficients(summary(LifespanMSMR_PGLS))[2,1], 2)),
+                                    ~R^2 ==~ .(round(as.numeric(R2(LifespanMSMR_PGLS, LifespanMSMR_Reduced)[1]), 2))))),
+           parse = TRUE) +
+  scale_x_continuous(limits = c(0, 4)) +
+  scale_y_continuous(limits = c(1, 5))
+
+LifespanMSMR_Plot
+save(LifespanMSMR_Plot, file = paste(directory, "LifespanMSMR_Plot.RData", sep = "")) #save file
+ggsave(filename = paste(directory, "Figures/LifespanMSMR_Plot.png", sep = ""),
        width = 5,
        height = 4) #save a picture
 
