@@ -49,6 +49,11 @@ source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
+#load lifespan data for later use
+MyhrvoldData <- read.csv("LifespanData/MyhrvoldDataClean.csv")
+TurbillData <- read.csv("LifespanData/TurbillDataRaw.csv")
+AZAData <- read.csv("LifespanData/AZADataRaw.csv")
+
 # Crtstn Wet Corrected Feces ----------------------------------------------
 
 #Analysis of data where feces mass is corrected for wet samples
@@ -79,20 +84,42 @@ source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
+# Crtstn Mean Lifespan ----------------------------------------------------
+
+#Analysis of data where mean lifespan is used from various sources 
+
+#Load tree build by CleanAndTree.R
+tree <- read.nexus("Corticosterone/StressTree.nex")
+
+#Load data and clean it up
+StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>% #simplify stressor into ACTH or Other
+  merge(., MyhrvoldData, by = "Species", all.x = TRUE) %>% #mergee in lifespan data
+  mutate(Lifespan = longevity_y)
+
+#set directory for these data
+directory <- "Corticosterone/CrtstnMeanLifespan/"
+CreateDR(directory)
+
+#label figures
+Label <- "Corticosterone - Mean Lifespan Model"
+
+#run the scripts
+source("Code/WorkingScript.R")
+source("Code/PhyloSigScript.R")
+source("Code/AICScript.R")
+
 # Crtstn Mean + Max Lifespan Update --------------------------------------------------
 
 #Analysis of data where lifespan is the mean if available or max value reported from AnAge times 0.8 if not
 
 tree <- read.nexus("Corticosterone/StressTree.nex")
 
-MyhrvoldData <- read.csv("LifespanData/MyhrvoldDataClean.csv")
-TurbillData <- read.csv("LifespanData/TurbillDataRaw.csv")
-AZAData <- read.csv("LifespanData/AZADataRaw.csv")
-
 #Load data and clean it up
 StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other'))
-StressData <- merge(StressData, MyhyrvoldData, TurbillData, AZAData, by = "Species", all.x = TRUE) 
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>%
+  merge(., MyhrvoldData, by = "Species", all.x = TRUE) %>% #merge in lifespan data
+  mutate(MeanLifespan = longevity_y)
 
 #use mean lifespan, if not use 0.8 max lifespan 
 for (i in 1:nrow(StressData)) {
@@ -117,33 +144,6 @@ source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
-# Crtstn Mean Lifespan ----------------------------------------------------
-
-#Analysis of data where mean lifespan is used from various sources 
-
-#Load tree build by CleanAndTree.R
-tree <- read.nexus("Corticosterone/StressTree.nex")
-
-LifespanData <- read.csv("MyhrvoldDataClean.csv")
-
-#Load data and clean it up
-StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) #simplify stressor into ACTH or Other
-
-StressData <- merge(StressData, LifespanData, by = "Species", all.x = TRUE) %>% #mergee in lifespan data
-  mutate(Lifespan = longevity_y)
-
-#set directory for these data
-directory <- "Corticosterone/CrtstnMeanLifespan/"
-CreateDR(directory)
-
-#label figures
-Label <- "Corticosterone - Mean Lifespan Model"
-
-#run the scripts
-source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-source("Code/AICScript.R")
 
 # Cortisol Max Lifespan ----------------------------------------------------
 
@@ -194,18 +194,37 @@ source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
+# Cortisol Mean Lifespan --------------------------------------------------
+
+#Analysis of data where mean lifespan is used from various sources 
+
+tree <- read.nexus("Cortisol/StressTree.nex")
+
+StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>% #simplify stressor into ACTH or Other
+  merge(., MyhrvoldData, by = "Species", all.x = TRUE) %>% #merge in lifespan data
+  mutate(Lifespan = longevity_y)
+
+directory <- "Cortisol/CortisolMeanLifespan/"
+CreateDR(directory)
+
+Label <- "Cortisol - Mean Lifespan Model"
+
+source("Code/WorkingScript.R")
+source("Code/PhyloSigScript.R")
+source("Code/AICScript.R")
+
 # Cortisol Mean + Max Lifespan Update ------------------------------------------------
 
 #Analysis of data where lifespan is the mean if available or max value reported from AnAge times 0.8 if not
 
 tree <- read.nexus("Cortisol/StressTree.nex")
 
-LifespanData <- read.csv("LifespanData.csv")
-
 #Load data and clean it up
 StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) 
-StressData <- merge(StressData, LifespanData, by = "Species", all.x = TRUE) 
+  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>%
+  merge(., MyhrvoldData, by = "Species", all.x = TRUE) %>% #merge in lifespan data
+  mutate(MeanLifespan = longevity_y)
 
 #use mean lifespan, if not use 0.8 max lifespan 
 for (i in 1:nrow(StressData)) {
@@ -226,30 +245,6 @@ CreateDR(directory)
 Label <- "Cortisol - Mixed Lifespan"
 
 #run the scripts
-source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-source("Code/AICScript.R")
-
-
-# Cortisol Mean Lifespan --------------------------------------------------
-
-#Analysis of data where mean lifespan is used from various sources 
-
-tree <- read.nexus("Cortisol/StressTree.nex")
-
-LifespanData <- read.csv("MyhrvoldDataClean.csv")
-
-StressData <- read.csv("Cortisol/CortisolDataClean.csv") %>%
-  mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) #simplify stressor into ACTH or Other
-
-StressData <- merge(StressData, LifespanData, by = "Species", all.x = TRUE) %>% #merge in lifespan data
-  mutate(Lifespan = longevity_y)
-
-directory <- "Cortisol/CortisolMeanLifespan/"
-CreateDR(directory)
-
-Label <- "Cortisol - Mean Lifespan Model"
-
 source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
