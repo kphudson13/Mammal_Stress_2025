@@ -1,4 +1,4 @@
-Group,Species,BodyMassAnAge,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,MaxLifespan,MSMR,Temp,RMR
+Group,Species,Mass,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,MaxLifespan,MSMR,Temp,RMR
 ,Acinonyx jubatus,38446.1,232.9,3578,RIA,14,longitudinal analysis,dry,adult,20.5,0.001607,39,
 ,Aepyceros melampus,52500,45.74,,RIA,14,none,dry,,25.6,,,
 ,Artibeus jamaicensis,42.2,357.23,,EIA,23,none,wet,,19.2,0.007787,36.4,

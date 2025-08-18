@@ -1,4 +1,4 @@
-"","X","Species","Group","BodyMassAnAge","BasalFGC","ElevFGC","Method","AssayType","Stressor","FecesMass","Stage","MaxLifespan","MSMR","Temp","RMR","Family","Order","Hormone"
+"","X","Species","Group","Mass","BasalFGC","ElevFGC","Method","AssayType","Stressor","FecesMass","Stage","MaxLifespan","MSMR","Temp","RMR","Family","Order","Hormone"
 "9",9,"Ctenomys sociabilis","",400,43.71,NA,"EIA","21","none","?","",NA,NA,NA,"","Ctenomyidae","Rodentia","Corticosterone"
 "14",14,"Gerbillus andersoni","",21,797,2377,"EIA","12","ACTH","dry","",NA,NA,NA,"","Muridae","Rodentia","Corticosterone"
 "15",15,"Gerbillus gerbillus","",30,2842.33,NA,"EIA","10","ACTH","dry","non-breeding adults",5.9,7.98,37.2,"","Muridae","Rodentia","Corticosterone"

@@ -6,79 +6,79 @@
 
 #this includes the if functions because sometimes there is only one method
 
-BasFGCMSMR_Stressor <- gls(log(BasalFGC) ~ log(MSMR) + Stressor, 
-                       data = BasFGCMSMR_data, 
-                       correlation = corPagel(value = BasFGC_signal1$lambda, phy = BasFGCMSMR_Tree, form = ~Species))
+BasalFGCMSMR_Stressor <- gls(log(BasalFGC) ~ log(MSMR) + Stressor, 
+                       data = BasalFGCMSMR_data, 
+                       correlation = corPagel(value = BasalFGC_signal1$lambda, phy = BasalFGCMSMR_Tree, form = ~Species))
 
 #Because there is errors when there is only one method
-if (length(unique(BasFGCMSMR_data$Method)) > 1) {
-  BasFGCMSMR_Method <- gls(log(BasalFGC) ~ log(MSMR) + Method, 
-                           data = BasFGCMSMR_data, 
-                           correlation = corPagel(value = BasFGC_signal1$lambda, phy = BasFGCMSMR_Tree, form = ~Species))
-  BasFGCMSMR_AIC <- AIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor, BasFGCMSMR_Method) #compare models
-  BasFGCMSMR_BIC <- BIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor, BasFGCMSMR_Method) 
+if (length(unique(BasalFGCMSMR_data$Method)) > 1) {
+  BasalFGCMSMR_Method <- gls(log(BasalFGC) ~ log(MSMR) + Method, 
+                           data = BasalFGCMSMR_data, 
+                           correlation = corPagel(value = BasalFGC_signal1$lambda, phy = BasalFGCMSMR_Tree, form = ~Species))
+  BasalFGCMSMR_AIC <- AIC(BasalFGCMSMR_PGLS, BasalFGCMSMR_Stressor, BasalFGCMSMR_Method) #compare models
+  BasalFGCMSMR_BIC <- BIC(BasalFGCMSMR_PGLS, BasalFGCMSMR_Stressor, BasalFGCMSMR_Method) 
 } else {
-  BasFGCMSMR_AIC <- AIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor) #compare models
-  BasFGCMSMR_BIC <- BIC(BasFGCMSMR_PGLS, BasFGCMSMR_Stressor) 
+  BasalFGCMSMR_AIC <- AIC(BasalFGCMSMR_PGLS, BasalFGCMSMR_Stressor) #compare models
+  BasalFGCMSMR_BIC <- BIC(BasalFGCMSMR_PGLS, BasalFGCMSMR_Stressor) 
 }
 
-BasFGCMass_Stressor <- gls(log(BasalFGC) ~ log(BodyMassAnAge) + Stressor, 
-                           data = BasFGCMass_data, 
-                           correlation = corPagel(value = BasFGC_signal2$lambda, phy = BasFGCMass_Tree, form = ~Species))
+BasalFGCMass_Stressor <- gls(log(BasalFGC) ~ log(Mass) + Stressor, 
+                           data = BasalFGCMass_data, 
+                           correlation = corPagel(value = BasalFGC_signal2$lambda, phy = BasalFGCMass_Tree, form = ~Species))
 
 #Because there is errors when there is only one method
-if (length(unique(BasFGCMass_data$Method)) >1 ) {
-  BasFGCMass_Method <- gls(log(BasalFGC) ~ log(BodyMassAnAge) + Method, 
-                           data = BasFGCMass_data, 
-                           correlation = corPagel(value = BasFGC_signal2$lambda, phy = BasFGCMass_Tree, form = ~Species)) 
+if (length(unique(BasalFGCMass_data$Method)) >1 ) {
+  BasalFGCMass_Method <- gls(log(BasalFGC) ~ log(Mass) + Method, 
+                           data = BasalFGCMass_data, 
+                           correlation = corPagel(value = BasalFGC_signal2$lambda, phy = BasalFGCMass_Tree, form = ~Species)) 
   
-  BasFGCMass_AIC <- AIC(BasFGCMass_PGLS, BasFGCMass_Stressor, BasFGCMass_Method) #compare models
-  BasFGCMass_BIC <- BIC(BasFGCMass_PGLS, BasFGCMass_Stressor, BasFGCMass_Method) 
+  BasalFGCMass_AIC <- AIC(BasalFGCMass_PGLS, BasalFGCMass_Stressor, BasalFGCMass_Method) #compare models
+  BasalFGCMass_BIC <- BIC(BasalFGCMass_PGLS, BasalFGCMass_Stressor, BasalFGCMass_Method) 
 } else {
-  BasFGCMass_AIC <- AIC(BasFGCMass_PGLS, BasFGCMass_Stressor) #compare models
-  BasFGCMass_BIC <- BIC(BasFGCMass_PGLS, BasFGCMass_Stressor) 
+  BasalFGCMass_AIC <- AIC(BasalFGCMass_PGLS, BasalFGCMass_Stressor) #compare models
+  BasalFGCMass_BIC <- BIC(BasalFGCMass_PGLS, BasalFGCMass_Stressor) 
 }
 
 
-ElvFGCBasFGC_Stressor <- gls(log(ElevFGC) ~ log(BasalFGC) + Stressor,
-                         data=ElvFGCBasFGC_data, 
-                         correlation = corPagel(value = ElvFGC_signal$lambda, phy = ElvFGCBasFGC_Tree, form = ~Species))
+ElevFGCBasalFGC_Stressor <- gls(log(ElevFGC) ~ log(BasalFGC) + Stressor,
+                         data=ElevFGCBasalFGC_data, 
+                         correlation = corPagel(value = ElevFGC_signal$lambda, phy = ElevFGCBasalFGC_Tree, form = ~Species))
 
 #Because there is errors when there is only one method
-if (length(unique(ElvFGCBasFGC_data$Method)) > 1) {
-  ElvFGCBasFGC_Method <- gls(log(ElevFGC) ~ log(BasalFGC) + Method, 
-                           data=ElvFGCBasFGC_data, 
-                           correlation = corPagel(value = ElvFGC_signal$lambda,phy = ElvFGCBasFGC_Tree, form = ~Species))
+if (length(unique(ElevFGCBasalFGC_data$Method)) > 1) {
+  ElevFGCBasalFGC_Method <- gls(log(ElevFGC) ~ log(BasalFGC) + Method, 
+                           data=ElevFGCBasalFGC_data, 
+                           correlation = corPagel(value = ElevFGC_signal$lambda,phy = ElevFGCBasalFGC_Tree, form = ~Species))
   
-  ElvFGCBasFGC_AIC <- AIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor, ElvFGCBasFGC_Method) #compare models
-  ElvFGCBasFGC_BIC <- BIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor, ElvFGCBasFGC_Method) 
+  ElevFGCBasalFGC_AIC <- AIC(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Stressor, ElevFGCBasalFGC_Method) #compare models
+  ElevFGCBasalFGC_BIC <- BIC(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Stressor, ElevFGCBasalFGC_Method) 
 } else {
-  ElvFGCBasFGC_AIC <- AIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor) #compare models
-  ElvFGCBasFGC_BIC <- BIC(ElvFGCBasFGC_PGLS, ElvFGCBasFGC_Stressor) 
+  ElevFGCBasalFGC_AIC <- AIC(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Stressor) #compare models
+  ElevFGCBasalFGC_BIC <- BIC(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Stressor) 
 }
 
 
-LifespanBasFGC_Stressor <- gls(log(Lifespan) ~ log(BasalFGC) + Stressor, 
-                           data = LifespanBasFGC_data, 
-                           correlation = corPagel(value = Lifespan_signal$lambda,phy = LifespanBasFGC_Tree, form = ~Species))
+LifespanBasalFGC_Stressor <- gls(log(Lifespan) ~ log(BasalFGC) + Stressor, 
+                           data = LifespanBasalFGC_data, 
+                           correlation = corPagel(value = Lifespan_signal$lambda,phy = LifespanBasalFGC_Tree, form = ~Species))
 
 #Because there is errors when there is only one method
-if (length(unique(LifespanBasFGC_data$Method)) > 1) {
-  LifespanBasFGC_Method <- gls(log(Lifespan) ~ log(BasalFGC) + Method, 
-                           data = LifespanBasFGC_data, 
-                           correlation = corPagel(value = Lifespan_signal$lambda,phy = LifespanBasFGC_Tree, form = ~Species))
+if (length(unique(LifespanBasalFGC_data$Method)) > 1) {
+  LifespanBasalFGC_Method <- gls(log(Lifespan) ~ log(BasalFGC) + Method, 
+                           data = LifespanBasalFGC_data, 
+                           correlation = corPagel(value = Lifespan_signal$lambda,phy = LifespanBasalFGC_Tree, form = ~Species))
   
-  LifespanBasFGC_AIC <- AIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor, LifespanBasFGC_Method) #compare models
-  LifespanBasFGC_BIC <- BIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor, LifespanBasFGC_Method) 
+  LifespanBasalFGC_AIC <- AIC(LifespanBasalFGC_PGLS, LifespanBasalFGC_Stressor, LifespanBasalFGC_Method) #compare models
+  LifespanBasalFGC_BIC <- BIC(LifespanBasalFGC_PGLS, LifespanBasalFGC_Stressor, LifespanBasalFGC_Method) 
 } else {
-  LifespanBasFGC_AIC <- AIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor) #compare models
-  LifespanBasFGC_BIC <- BIC(LifespanBasFGC_PGLS, LifespanBasFGC_Stressor) 
+  LifespanBasalFGC_AIC <- AIC(LifespanBasalFGC_PGLS, LifespanBasalFGC_Stressor) #compare models
+  LifespanBasalFGC_BIC <- BIC(LifespanBasalFGC_PGLS, LifespanBasalFGC_Stressor) 
 }
 
 
 
-AIC_table <- as.data.frame(rbind(BasFGCMSMR_AIC, BasFGCMass_AIC, ElvFGCBasFGC_AIC, LifespanBasFGC_AIC)) %>%
-  cbind(., rbind(BasFGCMSMR_BIC, BasFGCMass_BIC, ElvFGCBasFGC_BIC, LifespanBasFGC_BIC)[ ,2]) %>%
+AIC_table <- as.data.frame(rbind(BasalFGCMSMR_AIC, BasalFGCMass_AIC, ElevFGCBasalFGC_AIC, LifespanBasalFGC_AIC)) %>%
+  cbind(., rbind(BasalFGCMSMR_BIC, BasalFGCMass_BIC, ElevFGCBasalFGC_BIC, LifespanBasalFGC_BIC)[ ,2]) %>%
   mutate(across(c(2,3), \(x) round(x, digits = 2))) %>%
   `colnames<-`(c("df", "AIC", "BIC"))
 

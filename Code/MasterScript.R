@@ -18,12 +18,17 @@ library(rr2) #for the R2 function
 library(grid) #to set table themes
 library(gridExtra) #to set table themes
 library(cowplot) #to combine plots 
-library(beepr) #for sound notifications
 library(cowsay) #for the fun frog
 library(phytools) #for use in the phylo signal script
 
 rm(list=ls()) #clear environment
 source("Code/DirectoryFunction.R") #function to create directories
+source("Code/DataAndTreeFunction.R") #function to make trees
+
+#load lifespan data for later use
+MyhrvoldData <- read.csv("LifespanData/MyhrvoldDataClean.csv")
+# TurbillData <- read.csv("LifespanData/TurbillDataRaw.csv") #seems like Turbill an AZA completely overlap with Myhrvold
+# AZAData <- read.csv("LifespanData/AZADataRaw.csv")
 
 # Crtstn Max Lifespan --------------------------------------------------------
 
@@ -48,11 +53,6 @@ Label <- "Corticosterone - Max Lifespan Model"
 source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
-
-#load lifespan data for later use
-MyhrvoldData <- read.csv("LifespanData/MyhrvoldDataClean.csv")
-TurbillData <- read.csv("LifespanData/TurbillDataRaw.csv")
-AZAData <- read.csv("LifespanData/AZADataRaw.csv")
 
 # Crtstn Wet Corrected Feces ----------------------------------------------
 
@@ -109,7 +109,7 @@ source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
-# Crtstn Mean + Max Lifespan Update --------------------------------------------------
+# Crtstn Mixed Lifespan --------------------------------------------------
 
 #Analysis of data where lifespan is the mean if available or max value reported from AnAge times 0.8 if not
 
@@ -214,7 +214,7 @@ source("Code/WorkingScript.R")
 source("Code/PhyloSigScript.R")
 source("Code/AICScript.R")
 
-# Cortisol Mean + Max Lifespan Update ------------------------------------------------
+# Cortisol Mixed Lifespan ------------------------------------------------
 
 #Analysis of data where lifespan is the mean if available or max value reported from AnAge times 0.8 if not
 
@@ -302,4 +302,3 @@ source("Code/PhyloSigScript.R")
 # Done --------------------------------------------------------------------
 
 say("Done", by = "frog", what_color = "darkgreen")
-beep(10)

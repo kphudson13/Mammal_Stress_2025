@@ -1,4 +1,4 @@
-"","Species","Group","BodyMassAnAge","BasalFGC","ElevFGC","Method","AssayType","Stressor","FecesMass","Stage","MaxLifespan","MSMR","Temp","RMR","Family","Order"
+"","Species","Group","Mass","BasalFGC","ElevFGC","Method","AssayType","Stressor","FecesMass","Stage","MaxLifespan","MSMR","Temp","RMR","Family","Order"
 "1","Acinonyx jubatus","",38446.1,232.9,3578,"RIA",14,"longitudinal analysis","dry","adult",20.5,1.607,39,"","Felidae","Carnivora"
 "2","Aepyceros melampus","",52500,45.74,NA,"RIA",14,"none","dry","",25.6,NA,NA,"","Bovidae","Artiodactyla"
 "3","Artibeus jamaicensis","",42.2,357.23,NA,"EIA",23,"none","wet","",19.2,7.787,36.4,"","Phyllostomidae","Chiroptera"

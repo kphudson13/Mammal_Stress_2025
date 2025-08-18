@@ -1,4 +1,4 @@
-"","Species","Group","BodyMassAnAge","BasalFGC","ElevFGC","Method","AssayType","Stressor","FecesMass","Stage","MaxLifespan","MSMR","Temp","RMR","Family","Order"
+"","Species","Group","Mass","BasalFGC","ElevFGC","Method","AssayType","Stressor","FecesMass","Stage","MaxLifespan","MSMR","Temp","RMR","Family","Order"
 "1","Acinonyx jubatus",NA,38446.1,618.5,1850.3,"EIA","9","longitudinal analysis","dry","adult",20.5,1.607,39,"","Felidae","Carnivora"
 "2","Acomys cahirinus",NA,45.2,1077.33,1838.98,"EIA","4","ACTH","wet","subadult",5.9,6.143,37.5,"","Muridae","Rodentia"
 "3","Ailuropoda melanoleuca",NA,117500,114.66,179.492,"EIA","17","artifical semen collection and artifical insemination","dry","adult",36.8,NA,NA,"","Ursidae","Carnivora"

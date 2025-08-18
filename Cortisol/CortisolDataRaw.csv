@@ -1,4 +1,4 @@
-Group,Species,BodyMassAnAge,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,MaxLifespan,MSMR,Temp,RMR
+Group,Species,Mass,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,MaxLifespan,MSMR,Temp,RMR
 ,Acinonyx jubatus,38446.1,618.5,1850.3,EIA,9,longitudinal analysis,dry,adult,20.5,0.001607,39,
 ,Acomys cahirinus,45.2,1077.33,1838.98,EIA,4,ACTH,wet,subadult,5.9,0.006143,37.5,
 ,Ailuropoda melanoleuca,117500,114.66,179.492,EIA,17,artifical semen collection and artifical insemination,dry,adult,36.8,,,

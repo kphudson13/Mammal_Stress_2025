@@ -4,12 +4,10 @@
 # Models are written in y vs. x format
 # live laugh love -Kyle
 
-library(phytools) 
-
 PhyloSig_table <- 
   data.frame(
     Lambda = c(phylosig(tree = tree, 
-                        x = setNames(StressData$BodyMassAnAge, StressData$Species),   
+                        x = setNames(StressData$Mass, StressData$Species),   
                         method = "lambda",
                         test = TRUE, 
                         nsim = 1000)[["lambda"]], 
@@ -34,7 +32,7 @@ PhyloSig_table <-
                         test = TRUE, 
                         nsim = 1000)[["lambda"]]),
     P_value = c(phylosig(tree = tree, 
-                         x = setNames(StressData$BodyMassAnAge, StressData$Species),   
+                         x = setNames(StressData$Mass, StressData$Species),   
                          method = "lambda",
                          test = TRUE, 
                          nsim = 1000)[["P"]], 

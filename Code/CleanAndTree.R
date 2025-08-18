@@ -11,13 +11,14 @@ library(cowsay)
 
 StressData <- read.csv("Corticosterone/CrtstnDataRaw.csv")
 
+#update taxonomy from the data set
 StressData$Species[StressData$Species == "Suricata suricatta "] <- "Suricata suricatta"
 StressData$Species[StressData$Species == "Sturnira parivdens"] <- "Sturnira parvidens"
 StressData$Species[StressData$Species == "Equus burchelli"] <- "Equus burchellii"
 StressData$Species[StressData$Species == "Papio hamadryas ursinus"] <- "Papio ursinus"
 
 StressData <- StressData %>% 
-     filter(Species != "Gerbillus andersoni") #Got rid of one of them, fix this later
+     filter(Species != "Gerbillus andersoni") #Got rid of one of them
 StressData$Species[StressData$Species == "Gerbillus andersoni allenbyi"] <- "Gerbillus andersoni"
 
 #NCBI access is only available with an API key stored in the .Rprofile
@@ -64,10 +65,7 @@ write.csv(StressData, file = "Corticosterone/CrtstnDataClean.csv")
 
 StressData <- read.csv("Cortisol/CortisolDataRaw.csv")
 
-# StressData <- rawdata %>% 
-#   filter(Species != "Gerbillus piridium") #Cant find this species 
-# 
-# #update taxonomy from the data set
+#update taxonomy from the data set
 StressData$Species[StressData$Species == "Spermophilus columbianus"] <- "Urocitellus columbianus"
 StressData$Species[StressData$Species == "Capra aegargrus hircus"] <- "Capra hircus"
 StressData$Species[StressData$Species == "Suricata suricatta "] <- "Suricata suricatta"
