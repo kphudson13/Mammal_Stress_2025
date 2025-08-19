@@ -24,9 +24,9 @@ BasalFGCMSMR_PGLS <- gls(log(BasalFGC) ~ log(MSMR),
                        correlation = corPagel(value = BasalFGC_signal1$lambda, phy = BasalFGCMSMR_Tree, form = ~Species, fixed = TRUE)) 
 
 #limit lambda to >0 to avoid errors 
-if (BasalFGCMSMR_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
-  BasalFGCMSMR_PGLS[["modelStruct"]][["corStruct"]][1] <- 0
-} 
+# if (BasalFGCMSMR_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
+#   BasalFGCMSMR_PGLS[["modelStruct"]][["corStruct"]][1] <- 0
+# } 
 
 #Store the PGLS model
 save(BasalFGCMSMR_PGLS, file = paste(directory,"BasalFGCMSMR_PGLS.RData", sep = ""))
@@ -197,9 +197,9 @@ Lifespan_signal <-
            nsim = 1000)
 
 #Limit lambda to 1 to avoid errors 
-if (Lifespan_signal$lambda > 1) {
-  Lifespan_signal$lambda <- 0.9999
-}
+# if (Lifespan_signal$lambda > 1) {
+#   Lifespan_signal$lambda <- 0.9999
+# }
 
 #Build gls model 
 LifespanBasalFGC_PGLS <- gls(log(Lifespan) ~ log(BasalFGC), 
@@ -258,9 +258,9 @@ Lifespan_signal <-
            nsim = 1000)
 
 #Limit lambda to 1 to avoid errors 
-if (Lifespan_signal$lambda > 1) {
-  Lifespan_signal$lambda <- 0.9999
-}
+# if (Lifespan_signal$lambda > 1) {
+#   Lifespan_signal$lambda <- 0.9999
+# }
 
 #Build gls model 
 LifespanMSMR_PGLS <- gls(log(Lifespan) ~ log(MSMR), 

@@ -20,6 +20,7 @@ library(gridExtra) #to set table themes
 library(cowplot) #to combine plots 
 library(cowsay) #for the fun frog
 library(phytools) #for use in the phylo signal script
+library(nlme)
 
 rm(list=ls()) #clear environment
 source("Code/DirectoryFunction.R") #function to create directories

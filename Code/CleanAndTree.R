@@ -61,6 +61,23 @@ StressData$MSMR <- StressData$MSMR * 1000
 
 write.csv(StressData, file = "Corticosterone/CrtstnDataClean.csv")
 
+#build a covariance matrix for the tree
+atrix <- vcv.phylo(tree, corr = TRUE)
+diag(matrix) <- NA
+longdata <- melt(matrix) 
+
+vcv_plot <- ggplot(longdata, aes(Var1, Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(mid = "lightblue", high = "red", midpoint = 0, na.value = "black") +
+  theme_minimal() +
+  labs(title = "Phylogenetic Correlation Matrix",
+       x = "Species",
+       y = "Species",
+       fill = "Correlation") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+
+ggsave("Corticosterone/PhyloCovarianceMatrix.png", plot = vcv_plot, width = 10, height = 8, dpi = 300)
+
 # Cortisol Model ------------------------------------------------------------
 
 StressData <- read.csv("Cortisol/CortisolDataRaw.csv")
@@ -116,8 +133,22 @@ StressData$MSMR <- StressData$MSMR * 1000
 
 write.csv(StressData, file = "Cortisol/CortisolDataClean.csv")
 
-#beep()
+#build a covariance matrix for the tree
+atrix <- vcv.phylo(tree, corr = TRUE)
+diag(matrix) <- NA
+longdata <- melt(matrix) 
 
+vcv_plot <- ggplot(longdata, aes(Var1, Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(mid = "lightblue", high = "red", midpoint = 0, na.value = "black") +
+  theme_minimal() +
+  labs(title = "Phylogenetic Correlation Matrix",
+       x = "Species",
+       y = "Species",
+       fill = "Correlation") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+
+ggsave("Cortisol/PhyloCovarianceMatrix.png", plot = vcv_plot, width = 10, height = 8, dpi = 300)
 
 # FGC model ---------------------------------------------------------------
 
