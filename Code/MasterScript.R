@@ -52,8 +52,8 @@ Label <- "Corticosterone - Max Lifespan Model"
 
 #run the scripts
 source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-source("Code/AICScript.R")
+#source("Code/PhyloSigScript.R")
+#source("Code/AICScript.R.R")
 
 # Crtstn Wet Corrected Feces ----------------------------------------------
 
@@ -82,8 +82,8 @@ CreateDR(directory)
 Label <- "Corticosterone - Wet Corrected Model"
 
 source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-source("Code/AICScript.R")
+#source("Code/PhyloSigScript.R")
+#source("Code/AICScript.R.R")
 
 # Crtstn Mean Lifespan ----------------------------------------------------
 
@@ -107,8 +107,8 @@ Label <- "Corticosterone - Mean Lifespan Model"
 
 #run the scripts
 source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-source("Code/AICScript.R")
+#source("Code/PhyloSigScript.R")
+#source("Code/AICScript.R.R")
 
 # Crtstn Mixed Lifespan --------------------------------------------------
 
@@ -142,8 +142,8 @@ Label <- "Corticosterone - Mixed Lifespan"
 
 #run the scripts
 source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-source("Code/AICScript.R")
+#source("Code/PhyloSigScript.R")
+#source("Code/AICScript.R.R")
 
 
 # Cortisol Max Lifespan ----------------------------------------------------
@@ -162,8 +162,8 @@ CreateDR(directory)
 Label <- "Cortisol - Max Lifespan Model"
 
 source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-source("Code/AICScript.R")
+#source("Code/PhyloSigScript.R")
+#source("Code/AICScript.R.R")
 
 # Cortisol Wet Corrected --------------------------------------------------
 
@@ -191,9 +191,9 @@ CreateDR(directory)
 
 Label <- "Cortisol - Wet Corrected Model"
 
-source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-source("Code/AICScript.R")
+# source("Code/WorkingScript.R")
+#source("Code/PhyloSigScript.R")
+#source("Code/AICScript.R.R")
 
 # Cortisol Mean Lifespan --------------------------------------------------
 
@@ -212,8 +212,8 @@ CreateDR(directory)
 Label <- "Cortisol - Mean Lifespan Model"
 
 source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-source("Code/AICScript.R")
+#source("Code/PhyloSigScript.R")
+#source("Code/AICScript.R.R")
 
 # Cortisol Mixed Lifespan ------------------------------------------------
 
@@ -247,8 +247,8 @@ Label <- "Cortisol - Mixed Lifespan"
 
 #run the scripts
 source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-source("Code/AICScript.R")
+#source("Code/PhyloSigScript.R")
+#source("Code/AICScript.R.R")
 
 # FGC Max lifespan ---------------------------------------------------------
 
@@ -267,8 +267,8 @@ CreateDR(directory)
 Label <- "FGC - Uncorrected Model"
 
 source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-# source("Code/AICScript.R")
+#source("Code/PhyloSigScript.R")
+# #source("Code/AICScript.R.R")
 
 # FGC Wet Corrected -------------------------------------------------------
 
@@ -297,8 +297,8 @@ CreateDR(directory)
 Label <- "FGC - Wet Corrected Model"
 
 source("Code/WorkingScript.R")
-source("Code/PhyloSigScript.R")
-# source("Code/AICScript.R")     
+#source("Code/PhyloSigScript.R")
+# #source("Code/AICScript.R.R")     
 
 # Done --------------------------------------------------------------------
 

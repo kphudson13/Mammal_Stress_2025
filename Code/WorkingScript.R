@@ -11,17 +11,17 @@ SetDataAndTree("BasalFGC", "MSMR")
 
 name.check(BasalFGCMSMR_Tree, BasalFGCMSMR_data)
 
-BasalFGC_signal1 <-
-  phylosig(tree = BasalFGCMSMR_Tree,
-           x = setNames(BasalFGCMSMR_data$BasalFGC, BasalFGCMSMR_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)
+# BasalFGC_signal1 <-
+#   phylosig(tree = BasalFGCMSMR_Tree,
+#            x = setNames(BasalFGCMSMR_data$BasalFGC, BasalFGCMSMR_data$Species),   
+#            method = "lambda",
+#            test = TRUE, 
+#            nsim = 1000)
 
 #Build gls model 
 BasalFGCMSMR_PGLS <- gls(log(BasalFGC) ~ log(MSMR), 
                        data = BasalFGCMSMR_data, 
-                       correlation = corPagel(value = BasalFGC_signal1$lambda, phy = BasalFGCMSMR_Tree, form = ~Species, fixed = TRUE)) 
+                       correlation = corPagel(value = 0.1, phy = BasalFGCMSMR_Tree, form = ~Species)) 
 
 #limit lambda to >0 to avoid errors 
 # if (BasalFGCMSMR_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
@@ -74,17 +74,17 @@ SetDataAndTree("BasalFGC", "Mass")
 
 name.check(BasalFGCMass_Tree, BasalFGCMass_data)
 
-BasalFGC_signal2 <-
-  phylosig(tree = BasalFGCMass_Tree,
-           x = setNames(BasalFGCMass_data$BasalFGC, BasalFGCMass_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)
+# BasalFGC_signal2 <-
+#   phylosig(tree = BasalFGCMass_Tree,
+#            x = setNames(BasalFGCMass_data$BasalFGC, BasalFGCMass_data$Species),   
+#            method = "lambda",
+#            test = TRUE, 
+#            nsim = 1000)
 
 #Build gls model 
 BasalFGCMass_PGLS <- gls(log(BasalFGC) ~ log(Mass), 
                        data = BasalFGCMass_data, 
-                       correlation = corPagel(value = BasalFGC_signal2$lambda, phy = BasalFGCMass_Tree, form = ~Species, fixed = TRUE))
+                       correlation = corPagel(value = 0.1, phy = BasalFGCMass_Tree, form = ~Species))
 
 #Store the PGLS model
 save(BasalFGCMass_PGLS, file = paste(directory,"BasalFGCMass_PGLS.RData", sep = ""))
@@ -132,17 +132,17 @@ SetDataAndTree("ElevFGC", "BasalFGC")
 
 name.check(ElevFGCBasalFGC_Tree, ElevFGCBasalFGC_data)
 
-ElevFGC_signal <-
-  phylosig(tree = ElevFGCBasalFGC_Tree,
-           x = setNames(ElevFGCBasalFGC_data$ElevFGC, ElevFGCBasalFGC_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)
+# ElevFGC_signal <-
+#   phylosig(tree = ElevFGCBasalFGC_Tree,
+#            x = setNames(ElevFGCBasalFGC_data$ElevFGC, ElevFGCBasalFGC_data$Species),   
+#            method = "lambda",
+#            test = TRUE, 
+#            nsim = 1000)
 
 #Build gls model 
 ElevFGCBasalFGC_PGLS <- gls(log(ElevFGC) ~ log(BasalFGC),
                          data=ElevFGCBasalFGC_data, 
-                         correlation = corPagel(value = ElevFGC_signal$lambda, phy = ElevFGCBasalFGC_Tree, form = ~Species, fixed = TRUE))
+                         correlation = corPagel(value = 0.1, phy = ElevFGCBasalFGC_Tree, form = ~Species))
 
 #Store the PGLS model
 save(ElevFGCBasalFGC_PGLS, file = paste(directory, "ElevFGCBasalFGC_PGLS.RData", sep = ""))
@@ -189,12 +189,12 @@ SetDataAndTree("Lifespan", "BasalFGC")
 
 name.check(LifespanBasalFGC_Tree, LifespanBasalFGC_data)
 
-Lifespan_signal <-
-  phylosig(tree = LifespanBasalFGC_Tree,
-           x = setNames(LifespanBasalFGC_data$Lifespan, LifespanBasalFGC_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)
+# Lifespan_signal <-
+#   phylosig(tree = LifespanBasalFGC_Tree,
+#            x = setNames(LifespanBasalFGC_data$Lifespan, LifespanBasalFGC_data$Species),   
+#            method = "lambda",
+#            test = TRUE, 
+#            nsim = 1000)
 
 #Limit lambda to 1 to avoid errors 
 # if (Lifespan_signal$lambda > 1) {
@@ -204,7 +204,7 @@ Lifespan_signal <-
 #Build gls model 
 LifespanBasalFGC_PGLS <- gls(log(Lifespan) ~ log(BasalFGC), 
                            data = LifespanBasalFGC_data, 
-                           correlation = corPagel(value = Lifespan_signal$lambda, phy = LifespanBasalFGC_Tree, form = ~Species, fixed = TRUE))
+                           correlation = corPagel(value = 0.1, phy = LifespanBasalFGC_Tree, form = ~Species))
 
 #Store the PGLS model
 save(LifespanBasalFGC_PGLS, file = paste(directory, "LifespanBasalFGC_PGLS.RData", sep = ""))
@@ -250,12 +250,12 @@ SetDataAndTree("Lifespan", "MSMR")
 
 name.check(LifespanMSMR_Tree, LifespanMSMR_data)
 
-Lifespan_signal <-
-  phylosig(tree = LifespanMSMR_Tree,
-           x = setNames(LifespanMSMR_data$Lifespan, LifespanMSMR_data$Species),   
-           method = "lambda",
-           test = TRUE, 
-           nsim = 1000)
+# Lifespan_signal <-
+#   phylosig(tree = LifespanMSMR_Tree,
+#            x = setNames(LifespanMSMR_data$Lifespan, LifespanMSMR_data$Species),   
+#            method = "lambda",
+#            test = TRUE, 
+#            nsim = 1000)
 
 #Limit lambda to 1 to avoid errors 
 # if (Lifespan_signal$lambda > 1) {
@@ -265,7 +265,7 @@ Lifespan_signal <-
 #Build gls model 
 LifespanMSMR_PGLS <- gls(log(Lifespan) ~ log(MSMR), 
                            data = LifespanMSMR_data, 
-                           correlation = corPagel(value = Lifespan_signal$lambda, phy = LifespanMSMR_Tree, form = ~Species, fixed = TRUE))
+                           correlation = corPagel(value = 0.1, phy = LifespanMSMR_Tree, form = ~Species))
 
 # #limit lambda to >0 to avoid errors 
 # if (LifespanMSMR_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
@@ -329,11 +329,15 @@ StatsTab_PGLS <- rbind(cbind(coefficients(summary(BasalFGCMSMR_PGLS)), intervals
         rbind(R2_lik(BasalFGCMSMR_PGLS, BasalFGCMSMR_Reduced), 
               R2_lik(BasalFGCMass_PGLS, BasalFGCMass_Reduced), 
               R2_lik(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Reduced), 
-              R2_lik(LifespanBasalFGC_PGLS, LifespanBasalFGC_Reduced))) %>%
-  mutate(across(c(3,4,5), \(x) round(x, digits = 2))) %>% 
+              R2_lik(LifespanBasalFGC_PGLS, LifespanBasalFGC_Reduced)),
+        rbind(BasalFGCMass_PGLS[["modelStruct"]][["corStruct"]],
+              BasalFGCMSMR_PGLS[["modelStruct"]][["corStruct"]],
+              ElevFGCBasalFGC_PGLS[["modelStruct"]][["corStruct"]],
+              LifespanBasalFGC_PGLS[["modelStruct"]][["corStruct"]])) %>%
+  mutate(across(c(3,4,5,7), \(x) round(x, digits = 2))) %>% 
   mutate(est. = str_c(est., " (", `lower`, ", ", `upper`, ")")) %>%
   select(., -c("lower", "upper")) %>%
-  `colnames<-`(c("Slope (95% CI)", "p value (slope)", "Intercept  (95% CI)", "Likelihood R2")) %>%
+  `colnames<-`(c("Slope (95% CI)", "p value (slope)", "Intercept  (95% CI)", "Likelihood R2", "Lambda")) %>%
   `rownames<-`(c("Baseline FGC ~ MSMR",
                  "Baseline FGC ~ Body Mass", 
                  "Elevated FGC ~ Baseline FGC",
