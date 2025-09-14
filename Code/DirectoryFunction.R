@@ -14,3 +14,15 @@ CreateDR <- function(DR) {
     dir.create(paste(DR, "Figures", sep = ""))
   }
 }
+
+
+#Pull model 
+
+PullModel <- function(mod1) {
+  if(file.exists(paste(DR, mod1, sep = ""))) {
+    load(paste(DR, mod1, sep = ""))
+  } else {
+    stop("Model not found. Run 'MasterScript' first")
+  }
+}
+

@@ -11,22 +11,10 @@ SetDataAndTree("BasalFGC", "MSMR")
 
 name.check(BasalFGCMSMR_Tree, BasalFGCMSMR_data)
 
-# BasalFGC_signal1 <-
-#   phylosig(tree = BasalFGCMSMR_Tree,
-#            x = setNames(BasalFGCMSMR_data$BasalFGC, BasalFGCMSMR_data$Species),   
-#            method = "lambda",
-#            test = TRUE, 
-#            nsim = 1000)
-
 #Build gls model 
 BasalFGCMSMR_PGLS <- gls(log(BasalFGC) ~ log(MSMR), 
                        data = BasalFGCMSMR_data, 
                        correlation = corPagel(value = 0.1, phy = BasalFGCMSMR_Tree, form = ~Species)) 
-
-#limit lambda to >0 to avoid errors 
-# if (BasalFGCMSMR_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
-#   BasalFGCMSMR_PGLS[["modelStruct"]][["corStruct"]][1] <- 0
-# } 
 
 #Store the PGLS model
 save(BasalFGCMSMR_PGLS, file = paste(directory,"BasalFGCMSMR_PGLS.RData", sep = ""))
@@ -37,11 +25,9 @@ BasalFGCMSMR_Reduced <- lm(log(BasalFGC) ~ 1,
 
 save(BasalFGCMSMR_Reduced, file = paste(directory,"BasalFGCMSMR_Reduced.RData", sep = ""))
 
-# #Build ordinary linear model 
-# BasalFGCMSMR_Ordinary <- lm(log(BasalFGC) ~ log(MSMR),
-#                           data=BasalFGCMSMR_data)
-# 
-# BasalFGCMSMR_Summ_Ordinary <- summary(BasalFGCMSMR_Ordinary)
+#Build ordinary linear model
+BasalFGCMSMR_Ordinary <- lm(log(BasalFGC) ~ log(MSMR),
+                          data=BasalFGCMSMR_data)
 
 BasalFGCMSMR_Plot <-
   ggplot(data = BasalFGCMSMR_data,
@@ -74,13 +60,6 @@ SetDataAndTree("BasalFGC", "Mass")
 
 name.check(BasalFGCMass_Tree, BasalFGCMass_data)
 
-# BasalFGC_signal2 <-
-#   phylosig(tree = BasalFGCMass_Tree,
-#            x = setNames(BasalFGCMass_data$BasalFGC, BasalFGCMass_data$Species),   
-#            method = "lambda",
-#            test = TRUE, 
-#            nsim = 1000)
-
 #Build gls model 
 BasalFGCMass_PGLS <- gls(log(BasalFGC) ~ log(Mass), 
                        data = BasalFGCMass_data, 
@@ -96,11 +75,9 @@ BasalFGCMass_Reduced <- lm(log(BasalFGC) ~ 1,
 
 save(BasalFGCMass_Reduced, file = paste(directory,"BasalFGCMass_Reduced.RData", sep = ""))
 
-#Build ordinary linear model 
-# BasalFGCMass_Ordinary <- lm(log(BasalFGC) ~ log(Mass),
-#                              data=BasalFGCMass_data)
-# 
-# BasalFGCMass_Summ_Ordinary <- summary(BasalFGCMass_Ordinary)
+#Build ordinary linear model
+BasalFGCMass_Ordinary <- lm(log(BasalFGC) ~ log(Mass),
+                             data=BasalFGCMass_data)
 
 BasalFGCMass_Plot <-
   ggplot(data = BasalFGCMass_data,
@@ -132,13 +109,6 @@ SetDataAndTree("ElevFGC", "BasalFGC")
 
 name.check(ElevFGCBasalFGC_Tree, ElevFGCBasalFGC_data)
 
-# ElevFGC_signal <-
-#   phylosig(tree = ElevFGCBasalFGC_Tree,
-#            x = setNames(ElevFGCBasalFGC_data$ElevFGC, ElevFGCBasalFGC_data$Species),   
-#            method = "lambda",
-#            test = TRUE, 
-#            nsim = 1000)
-
 #Build gls model 
 ElevFGCBasalFGC_PGLS <- gls(log(ElevFGC) ~ log(BasalFGC),
                          data=ElevFGCBasalFGC_data, 
@@ -153,11 +123,9 @@ ElevFGCBasalFGC_Reduced <- lm(log(ElevFGC) ~ 1,
 
 save(ElevFGCBasalFGC_Reduced, file = paste(directory, "ElevFGCBasalFGC_Reduced.RData", sep = ""))
 
-#Build ordinary linear model 
-# ElevFGCBasalFGC_Ordinary <- lm(log(ElevFGC) ~ log(BasalFGC),
-#                                   data=ElevFGCBasalFGC_data)
-# 
-# ElevFGCBasalFGC_Summ_Ordinary <- summary(ElevFGCBasalFGC_Ordinary)
+#Build ordinary linear model
+ElevFGCBasalFGC_Ordinary <- lm(log(ElevFGC) ~ log(BasalFGC),
+                                  data=ElevFGCBasalFGC_data)
 
 ElevFGCBasalFGC_Plot <- 
   ggplot(data = ElevFGCBasalFGC_data,
@@ -189,18 +157,6 @@ SetDataAndTree("Lifespan", "BasalFGC")
 
 name.check(LifespanBasalFGC_Tree, LifespanBasalFGC_data)
 
-# Lifespan_signal <-
-#   phylosig(tree = LifespanBasalFGC_Tree,
-#            x = setNames(LifespanBasalFGC_data$Lifespan, LifespanBasalFGC_data$Species),   
-#            method = "lambda",
-#            test = TRUE, 
-#            nsim = 1000)
-
-#Limit lambda to 1 to avoid errors 
-# if (Lifespan_signal$lambda > 1) {
-#   Lifespan_signal$lambda <- 0.9999
-# }
-
 #Build gls model 
 LifespanBasalFGC_PGLS <- gls(log(Lifespan) ~ log(BasalFGC), 
                            data = LifespanBasalFGC_data, 
@@ -215,11 +171,9 @@ LifespanBasalFGC_Reduced <- lm(log(Lifespan) ~ 1,
 
 save(LifespanBasalFGC_Reduced, file = paste(directory, "LifespanBasalFGC_Reduced.RData", sep = ""))
 
-#Build ordinary linear model 
-# LifespanBasalFGC_Ordinary <- lm(log(Lifespan) ~ log(BasalFGC),
-#                               data=LifespanBasalFGC_data)
-# 
-# LifespanBasalFGC_Summ_Ordinary <- summary(LifespanBasalFGC_Ordinary)
+#Build ordinary linear model
+LifespanBasalFGC_Ordinary <- lm(log(Lifespan) ~ log(BasalFGC),
+                              data=LifespanBasalFGC_data)
 
 LifespanBasalFGC_Plot <-
   ggplot(data = LifespanBasalFGC_data,
@@ -250,27 +204,10 @@ SetDataAndTree("Lifespan", "MSMR")
 
 name.check(LifespanMSMR_Tree, LifespanMSMR_data)
 
-# Lifespan_signal <-
-#   phylosig(tree = LifespanMSMR_Tree,
-#            x = setNames(LifespanMSMR_data$Lifespan, LifespanMSMR_data$Species),   
-#            method = "lambda",
-#            test = TRUE, 
-#            nsim = 1000)
-
-#Limit lambda to 1 to avoid errors 
-# if (Lifespan_signal$lambda > 1) {
-#   Lifespan_signal$lambda <- 0.9999
-# }
-
 #Build gls model 
 LifespanMSMR_PGLS <- gls(log(Lifespan) ~ log(MSMR), 
                            data = LifespanMSMR_data, 
                            correlation = corPagel(value = 0.1, phy = LifespanMSMR_Tree, form = ~Species))
-
-# #limit lambda to >0 to avoid errors 
-# if (LifespanMSMR_PGLS[["modelStruct"]][["corStruct"]][1] < 0) {
-#   LifespanMSMR_PGLS[["modelStruct"]][["corStruct"]][1] <- 0
-# } 
 
 #Store the PGLS model
 save(LifespanMSMR_PGLS, file = paste(directory, "LifespanMSMR_PGLS.RData", sep = ""))
@@ -282,10 +219,8 @@ LifespanMSMR_Reduced <- lm(log(Lifespan) ~ 1,
 save(LifespanMSMR_Reduced, file = paste(directory, "LifespanMSMR_Reduced.RData", sep = ""))
 
 #Build ordinary linear model 
-# LifespanMSMR_Ordinary <- lm(log(Lifespan) ~ log(MSMR),
-#                               data=LifespanMSMR_data)
-# 
-# LifespanMSMR_Summ_Ordinary <- summary(LifespanMSMR_Ordinary)
+LifespanMSMR_Ordinary <- lm(log(Lifespan) ~ log(MSMR),
+                              data=LifespanMSMR_data)
 
 LifespanMSMR_Plot <-
   ggplot(data = LifespanMSMR_data,
