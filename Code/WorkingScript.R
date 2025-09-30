@@ -1,8 +1,12 @@
 
+################################################################################
+
 # This script is meant to be ran as a function from MasterScript.R
 # If you wish to troubleshoot first load inputs from MasterScript.R for the dataset of choice
 # Models are written in y vs. x format
 # live laugh love -Kyle
+
+################################################################################
 
 # Baseline vs. MSMR model ----------------------------------------------------
 

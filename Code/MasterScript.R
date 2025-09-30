@@ -1,4 +1,6 @@
 
+################################################################################
+
 # Master script for core data analysis
 # This script controls the flow of the analysis and runs the individual scripts
 # It is dependent on outputs from CleanAndTree.R, but those are already in the the remote repository
@@ -6,6 +8,7 @@
 # I also want the original .nex files saved, so if taxonomy changes we can still confirm our analysis
 # live laugh love -Kyle
 
+################################################################################
 
 # Load packages ------------------------------------------------------------
 
