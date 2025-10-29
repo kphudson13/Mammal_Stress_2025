@@ -1,5 +1,12 @@
 
+################################################################################
 
+# This is just a script to count the amount of observations 
+# live laugh love -Kyle
+
+################################################################################
+
+library(tidyverse)
 Crtsn <- read.csv("Corticosterone/CrtstnDataClean.csv")
 
 Cort <- read.csv("Cortisol/CortisolDataClean.csv")
@@ -7,9 +14,8 @@ Cort <- read.csv("Cortisol/CortisolDataClean.csv")
 FGC <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
   .[ , -c(1, 19)]
 
-setwd(BaseWD)
 
-combined <- rbind(Crtsn, Cort, FGC)
+combined <- rbind(Crtsn, Cort)
 
 length(unique(combined$Species))
 

@@ -99,7 +99,7 @@ tree <- read.nexus("Corticosterone/StressTree.nex")
 #Load data and clean it up
 StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
   mutate(Stressor = ifelse(Stressor == 'ACTH', Stressor, 'Other')) %>% #simplify stressor into ACTH or Other
-  merge(., MyhrvoldData, by = "Species", all.x = TRUE) %>% #mergee in lifespan data
+  merge(., MyhrvoldData, by = "Species", all.x = TRUE) %>% #merge in lifespan data
   mutate(Lifespan = longevity_y)
 
 #set directory for these data
