@@ -53,17 +53,20 @@ ElevFGCBasalFGC_Corticosterone <- ElevFGCBasalFGC_Plot
 # LifespanBasalFGC_Corticosterone <- LifespanBasalFGC_Plot 
 
 #export cortisol and corticosterone combined figures 
-save_plot(plot_grid(BasalFGCMSMR_Cortisol, BasalFGCMSMR_Corticosterone, labels = c("A", "B")),
-          filename = "PublicationFigures/BasalFGCMSMR.png",
-          base_height = 4, base_width = 8)
+save_plot(plot_grid(BasalFGCMSMR_Cortisol, BasalFGCMSMR_Corticosterone, 
+                    labels = c("A", "B"), label_fontface = "plain"),
+          filename = "PublicationFigures/Figure_1.png",
+          base_height = 3.3, base_width = 6.6)
 
-save_plot(plot_grid(BasalFGCMass_Cortisol, BasalFGCMass_Corticosterone, labels = c("A", "B")),
-          filename = "PublicationFigures/BasalFGCMass.png",
-          base_height = 4, base_width = 8)
+save_plot(plot_grid(BasalFGCMass_Cortisol, BasalFGCMass_Corticosterone, 
+                    labels = c("A", "B"), label_fontface = "plain"),
+          filename = "PublicationFigures/Figure_2.png",
+          base_height = 3.3, base_width = 6.6)
 
-save_plot(plot_grid(ElevFGCBasalFGC_Cortisol, ElevFGCBasalFGC_Corticosterone, labels = c("A", "B")),
-          filename = "PublicationFigures/ElevFGCBasalFGC.png",
-          base_height = 4, base_width = 8)
+save_plot(plot_grid(ElevFGCBasalFGC_Cortisol, ElevFGCBasalFGC_Corticosterone, 
+                    labels = c("A", "B"), label_fontface = "plain"),
+          filename = "PublicationFigures/Figure_3.png",
+          base_height = 3.3, base_width = 6.6)
 
 # save_plot(plot_grid(LifespanBasalFGC_Cortisol, LifespanBasalFGC_Corticosterone, labels = c("A", "B")),
 #           filename = "PublicationFigures/LifespanBasalFGC.png",
@@ -99,6 +102,8 @@ ElevFGCBasalFGC_Crtstn_PGLS <- ElevFGCBasalFGC_PGLS
 legend_shapes <- c("Plasma Cortisol" = 15, "Fecal Cortisol" = 1, "Fecal Corticosterone" = 17)
 legend_colors <- c("Plasma Cortisol" = "firebrick", "Fecal Cortisol" = "dodgerblue2", "Fecal Corticosterone" = "seagreen3")
 
+theme1 <- theme(axis.title = element_text(size =10)) 
+
 (BasalFGCMSMR_combined <- ggplot() +
     geom_point(data = Plasma_data, aes(x = log(MSMR), y = log(Base), color = "Plasma Cortisol")) +
     geom_point(data = Cortisol_data, aes(x = log(MSMR), y = log(BasalFGC), color = "Fecal Cortisol")) +
@@ -109,7 +114,8 @@ legend_colors <- c("Plasma Cortisol" = "firebrick", "Fecal Cortisol" = "dodgerbl
     geom_abline(intercept = coefficients(BasalFGCMSMR_FecalCort_PGLS)[1], slope = coefficients(BasalFGCMSMR_FecalCort_PGLS)[2], colour = "dodgerblue2", linewidth = 1) + #from PGLS
     geom_abline(intercept = coefficients(BasalFGCMSMR_Crtstn_PGLS)[1], slope = coefficients(BasalFGCMSMR_Crtstn_PGLS)[2], colour = "seagreen3", linewidth = 1) + #from PGLS
     theme_classic() +
-    theme(legend.position = "none")) # Removes the legend
+    theme(axis.title = element_text(size =10),
+          legend.position = "none")) # Removes the legend
 
 (BasalFGCMass_combined <- ggplot() +
     geom_point(data = Plasma_data, aes(x = log(as.numeric(Mass)), y = log(Base),  color = "Plasma Cortisol")) +
@@ -121,7 +127,8 @@ legend_colors <- c("Plasma Cortisol" = "firebrick", "Fecal Cortisol" = "dodgerbl
     geom_abline(intercept = coefficients(BasalFGCMass_FecalCort_PGLS)[1], slope = coefficients(BasalFGCMass_FecalCort_PGLS)[2], colour = "dodgerblue2", linewidth = 1) + #from PGLS
     geom_abline(intercept = coefficients(BasalFGCMass_Crtstn_PGLS)[1], slope = coefficients(BasalFGCMass_Crtstn_PGLS)[2], colour = "seagreen3", linewidth = 1) + #from PGLS
     theme_classic() +
-    theme(legend.position = "none")) # Removes the legend
+    theme(axis.title = element_text(size=10), 
+          legend.position = "none")) # Removes the legend
 
 (ElevFGCBasalFGC_combined <- ggplot() +
     geom_point(data = Plasma_data, aes(x = log(Base), y = log(Elev), color = "Plasma Cortisol")) +
@@ -133,14 +140,16 @@ legend_colors <- c("Plasma Cortisol" = "firebrick", "Fecal Cortisol" = "dodgerbl
     geom_abline(intercept = coefficients(ElevFGCBasalFGC_FecalCort_PGLS)[1], slope = coefficients(ElevFGCBasalFGC_FecalCort_PGLS)[2], colour = "dodgerblue2", linewidth = 1) + #from PGLS
     geom_abline(intercept = coefficients(ElevFGCBasalFGC_Crtstn_PGLS)[1], slope = coefficients(ElevFGCBasalFGC_Crtstn_PGLS)[2], colour = "seagreen3", linewidth = 1) + #from PGLS
     theme_classic() +
-    theme(legend.position = "inside",
-          legend.position.inside = c(0.8,0.2)))
+    theme(axis.title = element_text(size=10),
+          legend.position = "inside",
+          legend.position.inside = c(0.74,0.18), 
+          legend.background = element_blank()))
 
 #save the combined plot
 save_plot(plot_grid(BasalFGCMSMR_combined, BasalFGCMass_combined, ElevFGCBasalFGC_combined, 
-                    labels = c("A", "B", "C"), nrow = 1), 
-          filename = "PublicationFigures/FGC_Plasma.png",
-          base_height = 4, base_width = 12)
+                    labels = c("A", "B", "C"), label_fontface = "plain", nrow = 1), 
+          filename = "PublicationFigures/Figure_4.png",
+          base_height = 3.3, base_width = 9)
 
 
 # Stats table -------------------------------------------------------------
@@ -225,9 +234,9 @@ tt1 <- ttheme_minimal(core=list(fg_params=list(hjust = 1, x = 0.95)))
 tt2 <- ttheme_minimal(core=list(fg_params=list(hjust = 0, x = 0.05)))
 
 
-png("PublicationFigures/StatsTab_PGLS.png", 
+png("PublicationFigures/Table_1.png", 
     height = 100*nrow(StatsTab), 
-    width = 500*ncol(StatsTab),
+    width = 400*ncol(StatsTab),
     res = 300)
 grid.newpage()
 g <- tableGrob(StatsTab[,1], cols = "Model", theme = tt2)
@@ -238,30 +247,28 @@ grid.draw(g3)
 dev.off()
 
 
-# AIC Table ---------------------------------------------------------------
+# BIC Table ---------------------------------------------------------------
 
-load("Cortisol/CortisolMeanLifespan/AIC_table.RData")
-Cortisol_AIC <- AIC_table %>%
+load("Cortisol/CortisolMeanLifespan/BIC_table.RData")
+Cortisol_BIC <- BIC_table %>%
   mutate(Model = row.names(.))
-load("Corticosterone/CrtstnMeanLifespan/AIC_table.RData")
-Crtstn_AIC <- AIC_table %>%
+load("Corticosterone/CrtstnMeanLifespan/BIC_table.RData")
+Crtstn_BIC <- BIC_table %>%
   mutate(Model = row.names(.))
 
-AICTab <- rbind(Cortisol_AIC, Crtstn_AIC) %>%
-  add_row(.before = 1) %>% add_row(.before = 4) %>% add_row(.before = 14) %>% #add blank rows to divide cortisol and crtstn and blank model
+AICTab <- rbind(Cortisol_BIC, Crtstn_BIC) %>%
+  add_row(.before = 1) %>% add_row(.before = 10) %>% #add blank rows to divide cortisol and crtstn and blank model
   mutate(Model = c("Cortisol-Based Assay", 
-                   "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Stressor", "Baseline FGC ~ MSMR + Method",
+                   "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Stressor",
                    "Baseline FGC ~ Mass", "Baseline FGC ~ Mass + Stressor", "Baseline FGC ~ Mass + Method",
                    "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Stressor", "Elevated FGC ~ Baseline FGC + Method",
-                   "Lifespan ~ Baseline FGC", "Lifespan ~ Baseline FGC + Stressor", "Lifespan ~ Baseline FGC + Method",
                    "Corticosterone-Based Assay",
                    "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Stressor", "Baseline FGC ~ MSMR + Method",
                    "Baseline FGC ~ Mass", "Baseline FGC ~ Mass + Stressor", "Baseline FGC ~ Mass + Method",
-                   "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Stressor", "Elevated FGC ~ Baseline FGC + Method",
-                   "Lifespan ~ Baseline FGC", "Lifespan ~ Baseline FGC + Stressor", "Lifespan ~ Baseline FGC + Method")) %>%
+                   "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Stressor", "Elevated FGC ~ Baseline FGC + Method")) %>%
   `rownames<-`(NULL) 
 
-AICTab <- AICTab[ ,c(4,1,2,3)]
+AICTab <- AICTab[ ,c(3,1,2)]
 
 
 

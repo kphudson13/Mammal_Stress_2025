@@ -34,6 +34,8 @@ MyhrvoldData <- read.csv("LifespanData/MyhrvoldDataClean.csv")
 # TurbillData <- read.csv("LifespanData/TurbillDataRaw.csv") #seems like Turbill an AZA completely overlap with Myhrvold
 # AZAData <- read.csv("LifespanData/AZADataRaw.csv")
 
+theme1 <- theme(axis.title = element_text(size =10)) 
+
 # Crtstn Max Lifespan --------------------------------------------------------
 
 #Analysis of data where lifespan is the max value reported from AnAge
@@ -112,7 +114,7 @@ Label <- "Corticosterone - Mean Lifespan Model"
 #run the scripts
 source("Code/WorkingScript.R")
 #source("Code/PhyloSigScript.R")
-#source("Code/AICScript.R.R")
+source("Code/BICScript.R")
 
 # Crtstn Mixed Lifespan --------------------------------------------------
 
@@ -147,7 +149,7 @@ Label <- "Corticosterone - Mixed Lifespan"
 #run the scripts
 source("Code/WorkingScript.R")
 #source("Code/PhyloSigScript.R")
-#source("Code/AICScript.R.R")
+# source("Code/BICScript.R")
 
 
 # Cortisol Max Lifespan ----------------------------------------------------
@@ -217,7 +219,7 @@ Label <- "Cortisol - Mean Lifespan Model"
 
 source("Code/WorkingScript.R")
 #source("Code/PhyloSigScript.R")
-#source("Code/AICScript.R.R")
+source("Code/BICScript.R")
 
 # Cortisol Mixed Lifespan ------------------------------------------------
 

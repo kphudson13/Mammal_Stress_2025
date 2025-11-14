@@ -42,8 +42,8 @@ BasalFGCMSMR_Plot <-
   theme_classic() +
   labs(x = "MSMR (ln(mW/g))",
        y = "Baseline FGC (ln(ng/g))") +
-  theme(axis.title = element_text(size =14)) +
-  annotate("text", size = 5, x = 2, y = 2.5,
+  theme1 +
+  annotate("text", size = 3, x = 2, y = 2.5,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(BasalFGCMSMR_PGLS))[1,1], 2))
                                     ~x^.(round(coefficients(summary(BasalFGCMSMR_PGLS))[2,1], 2)),
                                     ~R^2 ==~ .(round(as.numeric(R2_lik(BasalFGCMSMR_PGLS, BasalFGCMSMR_Reduced)), 2))))),
@@ -54,8 +54,7 @@ BasalFGCMSMR_Plot <-
 BasalFGCMSMR_Plot
 save(BasalFGCMSMR_Plot, file = paste(directory,"BasalFGCMSMR_Plot.RData", sep = "")) #save file
 ggsave(filename = paste(directory,"Figures/BasalFGCMSMR_Plot.png",sep = ""),
-       width = 5,
-       height = 4) #save a picture
+       width=70, height=70, units="mm") #save a picture
 
 # Baseline vs. Mass model ----------------------------------------------------
 
@@ -82,8 +81,6 @@ save(BasalFGCMass_Reduced, file = paste(directory,"BasalFGCMass_Reduced.RData", 
 BasalFGCMass_Ordinary <- lm(log(BasalFGC) ~ log(Mass),
                             data=BasalFGCMass_data)
 
-sprintf("%.2f", round(coefficients(summary(BasalFGCMass_PGLS))[1,1], 2))
-
 BasalFGCMass_Plot <-
   ggplot(data = BasalFGCMass_data,
          aes(x = log(Mass), y = log(BasalFGC))) +
@@ -93,8 +90,8 @@ BasalFGCMass_Plot <-
   theme_classic() +
   labs(x = "Body Mass (ln(g))",
        y = "Baseline FGC (ln(ng/g))") +
-  theme(axis.title = element_text(size =14)) +
-  annotate("text", size = 5, x = 5, y = 2,
+  theme1 +
+  annotate("text", size = 3, x = 5, y = 2,
            label = list(bquote(atop(y==~ .(sprintf("%.2f", round(coefficients(summary(BasalFGCMass_PGLS))[1,1], 2))) # sprintf is there to keep trailing 0s
                                     ~x^.(round(coefficients(summary(BasalFGCMass_PGLS))[2,1], 2)),
                                     ~R^2 ==~ .(round(as.numeric(R2_lik(BasalFGCMass_PGLS, BasalFGCMass_Reduced)), 2))))),
@@ -105,8 +102,7 @@ BasalFGCMass_Plot <-
 BasalFGCMass_Plot
 save(BasalFGCMass_Plot, file = paste(directory, "BasalFGCMass_Plot.RData", sep = "")) #save file
 ggsave(filename = paste(directory, "Figures/BasalFGCMass_Plot.png", sep = ""),
-       width = 5,
-       height = 4) #save a picture
+       width=70, height=70, units="mm") #save a picture
 
 # Elevated vs. Baseline FGC --------------------------------------------------
 
@@ -142,8 +138,8 @@ ElevFGCBasalFGC_Plot <-
   theme_classic() +
   labs(x = "Baseline FGC (ln(ng/g))",
        y = "Elevated FGC (ln(ng/g))") +
-  theme(axis.title = element_text(size =14)) +
-  annotate("text", size = 5, x = 6, y = 3,
+  theme1 +
+  annotate("text", size = 3, x = 6, y = 3,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(ElevFGCBasalFGC_PGLS))[1,1], 2))
                                     ~x^.(round(coefficients(summary(ElevFGCBasalFGC_PGLS))[2,1], 2)),
                                     ~R^2 ==~ .(round(as.numeric(R2_lik(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Reduced)), 2))))),
@@ -154,8 +150,7 @@ ElevFGCBasalFGC_Plot <-
 ElevFGCBasalFGC_Plot
 save(ElevFGCBasalFGC_Plot, file = paste(directory, "ElevFGCBasalFGC_Plot.RData", sep = "")) #save file
 ggsave(filename = paste(directory, "Figures/ElevFGCBasalFGC_Plot.png", sep = ""),
-       width = 5,
-       height = 4) #save a picture
+       width=70, height=70, units="mm") #save a picture
 
 # Lifespan vs. Baseline model ------------------------------------------------
 
