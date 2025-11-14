@@ -224,11 +224,10 @@ StatsTab <- rbind(intervals(BasalFGCMSMR_FecalCort_PGLS)[["coef"]][1,],
   mutate(Model = c("Cortisol-Based Assay", "Baseline FGC vs. MSMR", "Baseline FGC vs. Mass", "Elevated FGC vs. Baseline FGC", 
                    "Corticosterone-Based Assay", "Baseline FGC vs. MSMR", "Baseline FGC vs. Mass", "Elevated FGC vs. Baseline FGC")) %>%
   `colnames<-`(c("Intercept (95% CI)", "Slope (95% CI)", "Likelihood R2","p-value", "Lambda", "n", "Model")) %>%
-  mutate(`p-value` = ifelse(`p-value` < 0.001, "< 0.001", `p-value`)) #change very small p values to < 0.001
-
-#reorder the table and remove NAs
-StatsTab <- StatsTab[,c(7,1,2,3,4,5,6)]
-StatsTab[is.na(StatsTab)] <- " "
+  mutate(`p-value` = ifelse(`p-value` < 0.001, "< 0.001", `p-value`)) %>% #change very small p values to < 0.001
+  select(7,1,2,3,4,5,6)
+  
+StatsTab[is.na(StatsTab)] <- " " # remove NAs
 
 tt1 <- ttheme_minimal(core=list(fg_params=list(hjust = 1, x = 0.95)))
 tt2 <- ttheme_minimal(core=list(fg_params=list(hjust = 0, x = 0.05)))
@@ -266,11 +265,22 @@ AICTab <- rbind(Cortisol_BIC, Crtstn_BIC) %>%
                    "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Stressor", "Baseline FGC ~ MSMR + Method",
                    "Baseline FGC ~ Mass", "Baseline FGC ~ Mass + Stressor", "Baseline FGC ~ Mass + Method",
                    "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Stressor", "Elevated FGC ~ Baseline FGC + Method")) %>%
-  `rownames<-`(NULL) 
+  `rownames<-`(NULL) %>%
+  select(3,1,2)
 
-AICTab <- AICTab[ ,c(3,1,2)]
+AICTab[is.na(AICTab)] <- " "  # remove NAs
 
-
+png("PublicationFigures/Appendix_2.png", 
+    height = 100*nrow(AICTab), 
+    width = 500*ncol(AICTab),
+    res = 300)
+grid.newpage()
+g <- tableGrob(AICTab[,1], cols = "Model", theme = tt2)
+g2 <- tableGrob(AICTab[,2:ncol(AICTab)], rows = NULL, theme = ttheme_minimal())
+g3 <- gtable_combine(g,g2, along=1)
+grid.draw(g3)
+# grid.text(Label, x = 0.2, y = 0.9, gp = gpar(fontface = "bold"))
+dev.off()
 
 
 
