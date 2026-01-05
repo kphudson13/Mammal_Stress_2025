@@ -43,7 +43,7 @@ BasalFGCMSMR_Plot <-
   labs(x = "MSMR (ln(mW/g))",
        y = "Baseline FGC (ln(ng/g))") +
   theme1 +
-  annotate("text", size = 3, x = 2, y = 2.5,
+  annotate("text", size = 3.5, x = 2, y = 2.5,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(BasalFGCMSMR_PGLS))[1,1], 2))
                                     ~x^.(round(coefficients(summary(BasalFGCMSMR_PGLS))[2,1], 2)),
                                     ~R^2 ==~ .(round(as.numeric(R2_lik(BasalFGCMSMR_PGLS, BasalFGCMSMR_Reduced)), 2))))),
@@ -91,7 +91,7 @@ BasalFGCMass_Plot <-
   labs(x = "Body Mass (ln(g))",
        y = "Baseline FGC (ln(ng/g))") +
   theme1 +
-  annotate("text", size = 3, x = 5, y = 2,
+  annotate("text", size = 3.5, x = 5, y = 2,
            label = list(bquote(atop(y==~ .(sprintf("%.2f", round(coefficients(summary(BasalFGCMass_PGLS))[1,1], 2))) # sprintf is there to keep trailing 0s
                                     ~x^.(round(coefficients(summary(BasalFGCMass_PGLS))[2,1], 2)),
                                     ~R^2 ==~ .(round(as.numeric(R2_lik(BasalFGCMass_PGLS, BasalFGCMass_Reduced)), 2))))),
@@ -139,7 +139,7 @@ ElevFGCBasalFGC_Plot <-
   labs(x = "Baseline FGC (ln(ng/g))",
        y = "Elevated FGC (ln(ng/g))") +
   theme1 +
-  annotate("text", size = 3, x = 6, y = 3,
+  annotate("text", size = 3.5, x = 6, y = 3,
            label = list(bquote(atop(y==~ .(round(coefficients(summary(ElevFGCBasalFGC_PGLS))[1,1], 2))
                                     ~x^.(round(coefficients(summary(ElevFGCBasalFGC_PGLS))[2,1], 2)),
                                     ~R^2 ==~ .(round(as.numeric(R2_lik(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Reduced)), 2))))),

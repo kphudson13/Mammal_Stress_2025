@@ -1,5 +1,5 @@
 Group,Species,Mass,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,MaxLifespan,MSMR,Temp,RMR
-,Acinonyx jubatus,38446.1,618.5,1850.3,EIA,9,Anesthesia,dry,adult,20.5,0.001607,39,
+,Acinonyx jubatus,53500,618.5,1850.3,EIA,9,Anesthesia,dry,adult,20.5,0.001607,39,
 ,Acomys cahirinus,45.2,1077.33,1838.98,EIA,4,ACTH,wet,subadult,5.9,0.006143,37.5,
 ,Ailuropoda melanoleuca,117500,114.66,179.492,EIA,17,artifical semen collection and artifical insemination,dry,adult,36.8,,,
 ,Artibeus jamaicensis,42.2,557.46,,EIA,22,none,wet,,19.2,0.007787,36.4,
@@ -15,7 +15,7 @@ Group,Species,Mass,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,Ma
 ,Cerdocyon thous,6500,84.5,1638.53,EIA,4,ACTH,N/A,N/A,12.7,0.001562,38.2,
 ,Choeropsis liberiensis,215000,6.3,19.2,EIA,2,ACTH,wet,,42.3,,,
 ,Crocuta crocuta,63000,43.75,744.95,EIA,2,ACTH,wet,adult,41.1,,,N/A
-,Elephas maximus,3178000,17.1,,EIA,19,EIA,dry,adult (ranged from 9.2-57 years),79.6,0.000636,35.8,
+,Elephas maximus,3178000,17.1,,EIA,19,,dry,adult (ranged from 9.2-57 years),79.6,0.000636,35.8,
 ,Felis catus,3900,213.6,384.6,EIA,9,Gonadotropin treatment and anesthesia,dry,adult,30,0.00247,38.1,
 ,Giraffa camelopardalis,800000,23.725,49.3,EIA,9,ACTH,dry,adult and juveniles,39.5,0.000874,37.1,
 ,Gorilla gorilla gorilla,139842,20,40,EIA,2,various,wet,,60.1,,,N/A
@@ -31,15 +31,14 @@ Group,Species,Mass,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,Ma
 ,Mustela nigripes,1021,170.1,324.6,EIA,9,Restraint and saline injection,dry,adult,9.4,,,N/A
 ,Neofelis nebulosa,19500,248.8,1100.7,EIA,9,Gonadotropin treatment and anesthesia,dry,adult,19.8,,,N/A
 ,Ovibos moschatus,315000,64.122,110.875,EIA,9,ACTH,wet,juvenile,27.4,,37.7,
-,Pan troglodytes,45000,18,,EIA,9,ACTH,wet,adult,68,0.0015,,N/A
+,Pan troglodytes,44984,9.9,14.9,EIA,9,ACTH,wet,adult,68,0.0015,,N/A
 ,Panthera leo bleyenberghi,175000,15.4489,24.7638,EIA,15,death of dominant male,dry,adult,28,0.000965,37.9,
-,Panthera tigris sumatrae,119700,101.455,,EIA,9,drawing blood,dry,adult,26.3,0.000971,37.5,
-,Panthera tigris tigris,119700,101.445,,EIA,9,drawing blood,dry,adult,26.3,0.000971,37.5,
+,Panthera tigris,119700,101.445,,EIA,9,drawing blood,dry,adult,26.3,0.000971,37.5,
 ,Pecari tajacu,20200,35.9,96.3,EIA,9,ACTH,dry,adult,31.5,0.001618,37.5,
 ,Propithecus verreauxi,5000,21,37,EIA,7,ACTH,wet,adult,31,0.001116,36,
 ,Rattus rattus,200,3210,4410,EIA,11,ACTH,wet,adult ,4.2,0.006581,38,
 ,Rhinoceros unicornis,1602330,9.66,35.28,EIA,9,ACTH,dry,adult,43.5,,37.4,
-,Spermophilus columbianus,412.5,263.03,416.87,EIA,11,trapping,dry,adult,,,,N/A
+,Spermophilus columbianus,493,263.03,416.87,EIA,11,trapping,dry,adult,,,,N/A
 ,Sturnira hondurensis,17.25,3145.27,,EIA,22,none,wet,,,,,
 ,Sturnira parivdens,15.3,206.15,,EIA,22,none,wet,,,,,
 ,Suricata suricatta ,776,110.2,614.1,EIA,9,ACTH,dry,adult,20.6,0.002034,36.3,
@@ -48,3 +47,7 @@ Group,Species,Mass,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,Ma
 ,Vulpes lagopus,5200,695,2414,EIA,11,ACTH,dry,adult and juveniles,16.3,0.002129,38.6,
 ,Vulpes vulpes,4132,475,2143,EIA,11,ACTH,dry,adult and juveniles,21.3,0.002998,38.7,
 ,Loxodonta africana,4800000,69.7,,,,,wet,,65,,,
+,Octodon degus,235,139,272,RIA,14,ACTH,dry,,14,0.0048,37.6,
+Yes,Otolemur garnettii,1300,25.683,209.113,RIA,14,relocation,wet,About 4 yrs-old?,20,0.002989,,
+,Panthera onca,81150,307.8,820.9,RIA ,14,chemical restraint and electroejaculation,dry,adult,28,0.001238,37,
+Yes,Papio hamadryas ursinus,18000,63.3,, RIA,14,Lactation,dry,adult,37.5,0.001665,,
