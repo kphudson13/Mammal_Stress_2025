@@ -275,7 +275,7 @@ Crtstn_BIC <- BIC_table %>%
 BICTab <- rbind(Cortisol_BIC, Crtstn_BIC) %>%
   add_row(.before = 1) %>% add_row(.before = 11) %>% #add blank rows to divide cortisol and crtstn and blank model
   mutate(Model = c("Cortisol-Based Assay", 
-                   "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Stressor", "Baseline FGC ~ Mass + Method",
+                   "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Stressor", "Baseline FGC ~ MSMR + Method",
                    "Baseline FGC ~ Mass", "Baseline FGC ~ Mass + Stressor", "Baseline FGC ~ Mass + Method",
                    "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Stressor", "Elevated FGC ~ Baseline FGC + Method",
                    "Corticosterone-Based Assay",

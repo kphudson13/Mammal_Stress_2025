@@ -84,12 +84,10 @@ StressData <- read.csv("Cortisol/CortisolDataRaw.csv")
 #update taxonomy from the data set
 StressData$Species[StressData$Species == "Spermophilus columbianus"] <- "Urocitellus columbianus"
 StressData$Species[StressData$Species == "Capra aegargrus hircus"] <- "Capra hircus"
-StressData$Species[StressData$Species == "Suricata suricatta "] <- "Suricata suricatta"
-StressData$Species[StressData$Species == "Sturnira parivdens"] <- "Sturnira parvidens"
-StressData$Species[StressData$Species == "Equus burchelli"] <- "Equus burchellii"
-StressData <- StressData %>% 
-  filter(Species != "Gerbillus andersoni") #Got rid of one of them, fix this later
-StressData$Species[StressData$Species == "Gerbillus andersoni allenbyi"] <- "Gerbillus andersoni"
+# StressData$Species[StressData$Species == "Equus burchelli"] <- "Equus burchellii"
+# StressData <- StressData %>% 
+#   filter(Species != "Gerbillus andersoni") #Got rid of one of them, fix this later
+# StressData$Species[StressData$Species == "Gerbillus andersoni allenbyi"] <- "Gerbillus andersoni"
 
 #NCBI access is only available with an API key stored in the .Rprofile
 rawtaxa <- tax_name(unique(StressData$Species), get = c("family", "order"), db = "ncbi")
