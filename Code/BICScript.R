@@ -11,86 +11,92 @@
 
 # Basal FGC vs. MSMR ------------------------------------------------------
 
-#model without stressor or assay should already be in environement as xx_PGLS
+#model without additional effects should already be in environment as xx_PGLS
 
-BasalFGCMSMR_Stressor <- gls(log(BasalFGC) ~ log(MSMR) + Stressor, 
-                       data = BasalFGCMSMR_data, 
-                       correlation = corPagel(value = 1, phy = BasalFGCMSMR_Tree, form = ~Species))
-
-BasalFGCMSMR_Sex <- gls(log(BasalFGC) ~ log(MSMR) + Sex,
-                            data = BasalFGCMSMR_data, 
-                            correlation = corPagel(value = 1, phy = BasalFGCMSMR_Tree, form = ~Species))
+BasalFGCMSMR_Method <- gls(log(BasalFGC) ~ log(MSMR) + Method, 
+                           data = BasalFGCMSMR_data, 
+                           correlation = corPagel(value = 1, phy = BasalFGCMSMR_Tree, form = ~Species))
 
 BasalFGCMSMR_Captive <- gls(log(BasalFGC) ~ log(MSMR) + Captive, 
                             data = BasalFGCMSMR_data, 
                             correlation = corPagel(value = 1, phy = BasalFGCMSMR_Tree, form = ~Species))
 
-#this includes the 'if' functions because sometimes there is only one method
-#Because there is errors when there is only one method
-if (length(unique(BasalFGCMSMR_data$Method)) > 1) {
-  BasalFGCMSMR_Method <- gls(log(BasalFGC) ~ log(MSMR) + Method, 
-                           data = BasalFGCMSMR_data, 
-                           correlation = corPagel(value = 1, phy = BasalFGCMSMR_Tree, form = ~Species))
-  
-  BasalFGCMSMR_BIC <- BIC(BasalFGCMSMR_PGLS, BasalFGCMSMR_Stressor, BasalFGCMSMR_Method, BasalFGCMSMR_Captive, BasalFGCMSMR_Sex) 
-} else {
-  BasalFGCMSMR_BIC <- BIC(BasalFGCMSMR_PGLS, BasalFGCMSMR_Stressor, BasalFGCMSMR_Captive, BasalFGCMSMR_Sex) 
-}
+BasalFGCMSMR_Sex <- gls(log(BasalFGC) ~ log(MSMR) + Sex,
+                        data = BasalFGCMSMR_data, 
+                        correlation = corPagel(value = 1, phy = BasalFGCMSMR_Tree, form = ~Species))
 
+BasalFGCMSMR_BIC <- BIC(BasalFGCMSMR_PGLS, BasalFGCMSMR_Method, BasalFGCMSMR_Captive, BasalFGCMSMR_Sex) 
+
+# #this includes the 'if' functions because sometimes there is only one method
+# #Because there is errors when there is only one method
+# if (length(unique(BasalFGCMSMR_data$Method)) > 1) {
+#   BasalFGCMSMR_Method <- gls(log(BasalFGC) ~ log(MSMR) + Method, 
+#                            data = BasalFGCMSMR_data, 
+#                            correlation = corPagel(value = 1, phy = BasalFGCMSMR_Tree, form = ~Species))
+#   
+#   BasalFGCMSMR_BIC <- BIC(BasalFGCMSMR_PGLS, BasalFGCMSMR_Method, BasalFGCMSMR_Captive, BasalFGCMSMR_Sex) 
+# } else {
+#   BasalFGCMSMR_BIC <- BIC(BasalFGCMSMR_PGLS, BasalFGCMSMR_Captive, BasalFGCMSMR_Sex) 
+# }
 
 # Basal FGC vs. Mass ------------------------------------------------------
 
-
-BasalFGCMass_Stressor <- gls(log(BasalFGC) ~ log(Mass) + Stressor, 
+BasalFGCMass_Method <- gls(log(BasalFGC) ~ log(Mass) + Method, 
                            data = BasalFGCMass_data, 
                            correlation = corPagel(value = 1, phy = BasalFGCMass_Tree, form = ~Species))
-
-BasalFGCMass_Sex <- gls(log(BasalFGC) ~ log(Mass) + Sex, 
-                        data = BasalFGCMass_data, 
-                        correlation = corPagel(value = 1, phy = BasalFGCMass_Tree, form = ~Species))
 
 BasalFGCMass_Captive <- gls(log(BasalFGC) ~ log(Mass) + Captive, 
                              data = BasalFGCMass_data, 
                              correlation = corPagel(value = 1, phy = BasalFGCMass_Tree, form = ~Species))
 
-#Because there is errors when there is only one method
-if (length(unique(BasalFGCMass_data$Method)) >1 ) {
-  BasalFGCMass_Method <- gls(log(BasalFGC) ~ log(Mass) + Method, 
-                           data = BasalFGCMass_data, 
-                           correlation = corPagel(value = 1, phy = BasalFGCMass_Tree, form = ~Species),) 
-  BasalFGCMass_BIC <- BIC(BasalFGCMass_PGLS, BasalFGCMass_Stressor, BasalFGCMass_Method, BasalFGCMass_Captive, BasalFGCMass_Sex) 
-} else {
-  BasalFGCMass_BIC <- BIC(BasalFGCMass_PGLS, BasalFGCMass_Stressor, BasalFGCMass_Captive, BasalFGCMass_Sex) 
-}
+BasalFGCMass_Sex <- gls(log(BasalFGC) ~ log(Mass) + Sex, 
+                        data = BasalFGCMass_data, 
+                        correlation = corPagel(value = 1, phy = BasalFGCMass_Tree, form = ~Species))
+
+BasalFGCMass_BIC <- BIC(BasalFGCMass_PGLS, BasalFGCMass_Method, BasalFGCMass_Captive, BasalFGCMass_Sex)
+
+# #Because there is errors when there is only one method
+# if (length(unique(BasalFGCMass_data$Method)) >1 ) {
+#   BasalFGCMass_Method <- gls(log(BasalFGC) ~ log(Mass) + Method, 
+#                            data = BasalFGCMass_data, 
+#                            correlation = corPagel(value = 1, phy = BasalFGCMass_Tree, form = ~Species)) 
+#   BasalFGCMass_BIC <- BIC(BasalFGCMass_PGLS, BasalFGCMass_Method, BasalFGCMass_Captive, BasalFGCMass_Sex) 
+# } else {
+#   BasalFGCMass_BIC <- BIC(BasalFGCMass_PGLS, BasalFGCMass_Captive, BasalFGCMass_Sex) 
+# }
 
 # Elev. vs. Basal ---------------------------------------------------------
 
-
-ElevFGCBasalFGC_Stressor <- gls(log(ElevFGC) ~ log(BasalFGC) + Stressor,
-                         data=ElevFGCBasalFGC_data, 
-                         correlation = corPagel(value = 1, phy = ElevFGCBasalFGC_Tree, form = ~Species))
-
-ElevFGCBasalFGC_Sex <- gls(log(ElevFGC) ~ log(BasalFGC) + Sex,
-                                data=ElevFGCBasalFGC_data, 
-                                correlation = corPagel(value = 1, phy = ElevFGCBasalFGC_Tree, form = ~Species))
+ElevFGCBasalFGC_Method <- gls(log(ElevFGC) ~ log(BasalFGC) + Method, 
+                              data=ElevFGCBasalFGC_data, 
+                              correlation = corPagel(value = 1,phy = ElevFGCBasalFGC_Tree, form = ~Species))
 
 ElevFGCBasalFGC_Captive <- gls(log(ElevFGC) ~ log(BasalFGC) + Captive,
                                data=ElevFGCBasalFGC_data, 
                                correlation = corPagel(value = 1, phy = ElevFGCBasalFGC_Tree, form = ~Species))
 
-#Because there is errors when there is only one method
-if (length(unique(ElevFGCBasalFGC_data$Method)) > 1) {
-  ElevFGCBasalFGC_Method <- gls(log(ElevFGC) ~ log(BasalFGC) + Method, 
+ElevFGCBasalFGC_Sex <- gls(log(ElevFGC) ~ log(BasalFGC) + Sex,
                            data=ElevFGCBasalFGC_data, 
-                           correlation = corPagel(value = 1,phy = ElevFGCBasalFGC_Tree, form = ~Species))
-  
-  ElevFGCBasalFGC_BIC <- BIC(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Stressor, ElevFGCBasalFGC_Method, ElevFGCBasalFGC_Captive, ElevFGCBasalFGC_Sex) 
-} else {
-  ElevFGCBasalFGC_BIC <- BIC(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Stressor, ElevFGCBasalFGC_Captive, ElevFGCBasalFGC_Sex) 
-}
+                           correlation = corPagel(value = 1, phy = ElevFGCBasalFGC_Tree, form = ~Species))
+
+ElevFGCBasalFGC_Stressor <- gls(log(ElevFGC) ~ log(BasalFGC) + Stressor,
+                                data=ElevFGCBasalFGC_data, 
+                                correlation = corPagel(value = 1, phy = ElevFGCBasalFGC_Tree, form = ~Species))
+
+ElevFGCBasalFGC_BIC <- BIC(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Method, ElevFGCBasalFGC_Captive, ElevFGCBasalFGC_Sex, ElevFGCBasalFGC_Stressor)
+
+# #Because there is errors when there is only one method
+# if (length(unique(ElevFGCBasalFGC_data$Method)) > 1) {
+#   ElevFGCBasalFGC_Method <- gls(log(ElevFGC) ~ log(BasalFGC) + Method, 
+#                            data=ElevFGCBasalFGC_data, 
+#                            correlation = corPagel(value = 1,phy = ElevFGCBasalFGC_Tree, form = ~Species))
+#   
+#   ElevFGCBasalFGC_BIC <- BIC(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Stressor, ElevFGCBasalFGC_Method, ElevFGCBasalFGC_Captive, ElevFGCBasalFGC_Sex) 
+# } else {
+#   ElevFGCBasalFGC_BIC <- BIC(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Stressor, ElevFGCBasalFGC_Captive, ElevFGCBasalFGC_Sex) 
+# }
 
 # Lifespan vs. Basal ------------------------------------------------------
-
 
 # LifespanBasalFGC_Stressor <- gls(log(Lifespan) ~ log(BasalFGC) + Stressor, 
 #                            data = LifespanBasalFGC_data, 
@@ -108,7 +114,6 @@ if (length(unique(ElevFGCBasalFGC_data$Method)) > 1) {
 #   LifespanBasalFGC_AIC <- AIC(LifespanBasalFGC_PGLS, LifespanBasalFGC_Stressor) #compare models
 #   LifespanBasalFGC_BIC <- BIC(LifespanBasalFGC_PGLS, LifespanBasalFGC_Stressor) 
 # }
-
 
 
 BIC_table <- as.data.frame(rbind(BasalFGCMSMR_BIC, BasalFGCMass_BIC, ElevFGCBasalFGC_BIC)) %>%

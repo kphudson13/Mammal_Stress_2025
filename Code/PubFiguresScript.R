@@ -215,7 +215,7 @@ StatsTab <- rbind(intervals(BasalFGCMSMR_FecalCort_PGLS)[["coef"]][1,],
               R2(ElevFGCBasalFGC_FecalCort_PGLS, ElevFGCBasalFGC_Cortisol_Reduced)[1],
               R2(BasalFGCMSMR_Crtstn_PGLS, BasalFGCMSMR_Crtstn_Reduced)[1],
               R2(BasalFGCMass_Crtstn_PGLS, BasalFGCMass_Crtstn_Reduced)[1],
-              R2(ElevFGCBasalFGC_Crtstn_PGLS, ElevFGCBasalFGC_Crtstn_Reduced)[1]), #likelihoof r squared column
+              R2(ElevFGCBasalFGC_Crtstn_PGLS, ElevFGCBasalFGC_Crtstn_Reduced)[1]), #likelihood r squared column
         rbind(coefficients(summary(BasalFGCMSMR_FecalCort_PGLS))[2,4],
               coefficients(summary(BasalFGCMass_FecalCort_PGLS))[2,4],
               coefficients(summary(ElevFGCBasalFGC_FecalCort_PGLS))[2,4],
@@ -273,15 +273,15 @@ Crtstn_BIC <- BIC_table %>%
   mutate(Model = row.names(.))
 
 BICTab <- rbind(Cortisol_BIC, Crtstn_BIC) %>%
-  add_row(.before = 1) %>% add_row(.before = 11) %>% #add blank rows to divide cortisol and crtstn and blank model
+  add_row(.before = 1) %>% add_row(.before = 15) %>% #add blank rows to divide cortisol and crtstn and blank model
   mutate(Model = c("Cortisol-Based Assay", 
-                   "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Stressor", "Baseline FGC ~ MSMR + Method",
-                   "Baseline FGC ~ Mass", "Baseline FGC ~ Mass + Stressor", "Baseline FGC ~ Mass + Method",
-                   "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Stressor", "Elevated FGC ~ Baseline FGC + Method",
+                   "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Method", "Baseline FGC ~ MSMR + Captive", "Baseline FGC ~ MSMR + Sex",
+                   "Baseline FGC ~ Mass", "Baseline FGC ~ Mass + Method", "Baseline FGC ~ Mass + Captive", "Baseline FGC ~ Mass + Sex",
+                   "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Method", "Elevated FGC ~ Baseline FGC + Captive", "Elevated FGC ~ Baseline FGC + Sex", "Elevated FGC ~ Baseline FGC + Stressor",
                    "Corticosterone-Based Assay",
-                   "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Stressor", "Baseline FGC ~ MSMR + Method",
-                   "Baseline FGC ~ Mass", "Baseline FGC ~ Mass + Stressor", "Baseline FGC ~ Mass + Method",
-                   "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Stressor", "Elevated FGC ~ Baseline FGC + Method")) %>%
+                   "Baseline FGC ~ MSMR", "Baseline FGC ~ MSMR + Method", "Baseline FGC ~ MSMR + Captive", "Baseline FGC ~ MSMR + Sex",
+                   "Baseline FGC ~ Mass", "Baseline FGC ~ Mass + Method", "Baseline FGC ~ Mass + Captive", "Baseline FGC ~ Mass + Sex",
+                   "Elevated FGC ~ Baseline FGC", "Elevated FGC ~ Baseline FGC + Method", "Elevated FGC ~ Baseline FGC + Captive", "Elevated FGC ~ Baseline FGC + Sex", "Elevated FGC ~ Baseline FGC + Stressor")) %>%
   `rownames<-`(NULL) %>%
   select(3,1,2)
 
@@ -300,14 +300,5 @@ g3 <- gtable_combine(g,g2, along=1)
 grid.draw(g3)
 # grid.text(Label, x = 0.2, y = 0.9, gp = gpar(fontface = "bold"))
 dev.off()
-
-
-
-
-
-
-
-
-
 
 

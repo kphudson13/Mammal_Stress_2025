@@ -104,6 +104,8 @@ StressData <- read.csv("Corticosterone/CrtstnDataClean.csv") %>%
   merge(., MyhrvoldData, by = "Species", all.x = TRUE) %>% #merge in lifespan data
   mutate(Lifespan = longevity_y)
 
+summary(StressData)
+
 #set directory for these data
 directory <- "Corticosterone/CrtstnMeanLifespan/"
 CreateDR(directory)

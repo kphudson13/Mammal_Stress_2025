@@ -16,10 +16,6 @@ StressData$Species[StressData$Species == "Suricata suricatta "] <- "Suricata sur
 StressData$Species[StressData$Species == "Sturnira parivdens"] <- "Sturnira parvidens"
 StressData$Species[StressData$Species == "Equus burchelli"] <- "Equus burchellii"
 
-StressData <- StressData %>% 
-     filter(Species != "Gerbillus andersoni") #Got rid of one of them without elv. value
-StressData$Species[StressData$Species == "Gerbillus andersoni allenbyi"] <- "Gerbillus andersoni"
-
 #NCBI access is only available with an API key stored in the .Rprofile
 rawtaxa <- tax_name(unique(StressData$Species), get = c("family", "order"), db = "ncbi")
 
@@ -113,6 +109,9 @@ tree$tip.label[tree$tip.label == "Capra hircus (species in domain Eukaryota)"] <
 tree$tip.label[tree$tip.label == "Hexaprotodon liberiensis"] <- "Choeropsis liberiensis"
 tree$tip.label[tree$tip.label == "Mazama gouazoupira"] <- "Mazama gouazoubira"
 StressData$Species[StressData$Species == "Papio hamadryas ursinus"] <- "Papio ursinus"
+
+unique((StressData$Sex))
+is.na(StressData$Stage)
 
 #to view the lists lining up
 cbind(sort(tree$tip.label), sort(unique(StressData$Species)))

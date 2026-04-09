@@ -1,46 +1,45 @@
-Group,Species,Mass,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,MaxLifespan,MSMR,Temp,n,Sex,MassSource,MassEffects,TimeToSample,ReproductivePeriod,Captive,Location
-,Acinonyx jubatus,53500,232.9,3578,RIA,14,anesthesia,dry,adult,20.5,0.001607,39,2,F,,,,,Captive,"Florida, USA"
-,Aepyceros melampus,52500,45.74,,RIA,14,none,dry,,25.6,,,,Both ,,,,,Wild,"KwaZulu-Natal, South Africa"
-,Artibeus jamaicensis,42.2,357.23,,EIA,23,none,wet,,19.2,0.007787,36.4,12,Both,,,,,Wild,"Oaxaca, Mexico"
-,Artibeus lituratus,65,335.81,,EIA,23,none,wet,,,0.008588,37.3,5,Both,,,,,Wild,"Oaxaca, Mexico"
-,Canis rufus,22983.2,215.8,684.8,RIA,14,Restraints . blood sampling . Relocation . Construction and saline injection,dry,adult,,,,,,,,,,,
-,Cervus elaphus,200000,26.03,,RIA ,14,N/A,wet,,31.5,0.001678,35.2,,,,,,,,
-,Choeropsis liberiensis,215000,102.75,283.9,EIA,3,ACTH,wet,,42.3,,,,,,,,,,
-,Connochaetes taurinus,164500,24.09,,RIA,14,none,dry,,24.3,0.001171,38,,Both ,,,,,Wild,"KwaZulu-Natal, South Africa"
-,Ctenomys sociabilis,400,43.71,,EIA,21,none,?,,,,,,,,,,,,
-,Equus burchelli,276000,14.08,,RIA,14,none,dry,,,,,,Both ,,,,,Wild,"KwaZulu-Natal, South Africa"
-,Equus caballus,444900,24.02,33.51,RIA,14,relocation,dry,,57,0.0014,38.3,,,,,,,,
-,Equus grevyi,384000,16.2,25.1,RIA,14,relocation,dry,adult,31,,,,,,,,,,
-,Felis catus,3900,354.7,544.5,RIA,14,Gonadotropin treatment and anesthesia,dry,adult,30,0.00247,38.1,,,,,,,,
-,Gerbillus andersoni,20.87,1743.1,,EIA,10,ACTH,dry,non-breeding adults,,,,,,,,,,,
-,Gerbillus andersoni allenbyi,26.9,797,2377,EIA,12,ACTH,dry,,,,,,,,,,,,
-,Gerbillus gerbillus,30,2182.1,10232,EIA,10,ACTH,dry,non-breeding adults,5.9,0.00798,37.2,,,,,,,,
-,Gerbillus nanus,18.5,183,589,EIA,12,ACTH,dry,,4.5,0.004343,38.8,,,,,,,,
-,Gerbillus pyramidum,37,1770.1,6606,EIA,10,ACTH,dry,non-breeding adults,8.2,0.004184,36.1,,,,,,,,
-,Giraffa camelopardalis,800000,64.76,178.8,EIA,10,ACTH,dry,adult and juveniles,39.5,0.000874,37.1,,,,,,,,
-Yes,Gorilla gorilla gorilla,139842,60,140,EIA,8,various,wet,,60.1,,,,,,,,,,
-Yes,Hylobates pileatus,5735,26.67,749.5,EIA,8,ACTH,dry,adult,38,,,,,,,,,,
-,Lycaon pictus,26500,267.75,4446,RIA,14,ACTH,dry,"Two 2 yr-old females, one 3-yr old female, two 8 yr-old males",17,0.003773,,,,,,,,,
-,Marmota flaviventris,3500,132,4417,RIA,14,ACTH,dry,adult (non-breeding),21.2,0.002008,36.5,,,,,,,,
-,Melursus ursinus,100000,64.1,666.5,RIA,14,Infection . male introduction . breeding,dry,adult,33.3,0.000703,,,,,,,,,
-Yes,Microcebus murinus,64.8,90,870,EIA,8,capture,wet,,18.2,,,,,,,,,,
-,Mungos mungo,1332,1030,2120,EIA,10,ACTH,dry,,17.4,,,,,,,,,,
-,Mus musculus,20.5,4472.05,,RIA,14,housing ,dry,9 weeks old,4,0.015056,36.9,,,,,,,,
-,Mustela nigripes,1021,101.9,174.7,RIA,14,longitudinal analysis,dry,adult,9.4,,,,,,,,,,
-,Neofelis nebulosa,19500,302.2,1621.8,RIA,14,longitudinal analysis,dry,adult,19.8,,,,,,,,,,
-,Odocoileus virginianus,87000,67.5,190.25,RIA ,14,ACTH,dry,adult,23,0.001996,39,,,,,,,,
-,Ovibos moschatus,315000,14.91,53.32,EIA,10,ACTH,wet,juvenile,27.4,,37.7,,,,,,,,
-,Peromyscus maniculatus,21,1436.55,2368.47,EIA,10,ACTH,dry,adult (non-reproductive),8.3,0.010683,36.6,,,,,,,,
-,Rangifer tarandus tarandus,101250,60.66,82.6,RIA,14,ACTH,dry,,21.8,0.001408,37.2,,,,,,,,
-,Rangifer tarandus granti,101250,41.3,137.8,RIA,14,ACTH,dry,,21.8,0.001408,,,,,,,,,
-,Rattus norvegicus,300,175,,EIA,20,,dry,10 weeks old,3.8,0.006786,37.1,,,,,,,,
-,Sturnira hondurensis,17.25,1064.48,,EIA,23,none,wet,,,,,5,Both,,,,,Wild,"Oaxaca, Mexico"
-,Sturnira parivdens,15.3,176.79,,EIA,23,none,wet,,,,,4,Both,,,,,Wild,"Oaxaca, Mexico"
-,Suricata suricatta ,776,175,2672.8,RIA,14,ACTH,dry,adult,20.6,0.002034,36.3,,,,,,,,
-,Syncerus caffer,700000,40.19,250.29,RIA,14,ACTH,dry,adults and subadults,32.8,,,,,,,,,,
-,Tragelaphus buxtoni,215001,60.09,,RIA,14,none,dry,,,,,,Both ,,,,,Wild,"KwaZulu-Natal, South Africa"
-,Tragelaphus strepsiceros,213501,46.34,,RIA,14,none,dry,,23.5,,38.9,,Both ,,,,,Wild,"KwaZulu-Natal, South Africa"
-,Ursus arctos horribilis,277500,19.043,112.455,RIA,14,ACTH,dry,,40,,37.3,,,,,,,,
-,Ursus maritimus,475000,36.6,,EIA,10,,dry,adults,43.8,0.00067,36.8,,,,,,,,
-,Ursus thibetanus,103750,45.1,212.8,RIA,14,Male introduction . aggressive behavior,dry,adult,39.2,,37.5,,,,,,,,
-,Myrmecophaga tridactyla,28500,30,,EIA,,,wet,adult,31,0.000475,,,,,,,,,
+Group,Species,Mass,BasalFGC,ElevFGC,Method,AssayType,Stressor,FecesMass,Stage,MaxLifespan,MSMR,Temp,n,Sex,MassSource,MassEffects,TimeToSample,ReproductivePeriod,Captive,Location,Notes
+,Acinonyx jubatus,53500,436.6,5941.1,RIA,14,ACTH,dry,adult,20.5,0.001607,39,1,F,AnAge,,,,Captive,"Florida, USA",Table 1
+,Aepyceros melampus,52500,45.74,,RIA,14,,dry,,25.6,,,,MF ,AnAge,,,,Wild,"KwaZulu-Natal, South Africa",Figure 2
+,Artibeus jamaicensis,42.2,357.23,,EIA,23,,wet,,19.2,0.007787,36.4,12,MF,AnAge,,,,Wild,"Oaxaca, Mexico",Table 2
+,Artibeus lituratus,65,335.81,,EIA,23,,wet,,,0.008588,37.3,5,MF,AnAge,,,,Wild,"Oaxaca, Mexico",Table 2
+,Canis rufus,22983.2,162.1,1875,RIA,14,ACTH,dry,adult,,,,2,MF,Other,,,,Captive,"Washington, USA",Table 1
+,Cervus elaphus,200000,26.03,,RIA ,14,,wet,adult and subadult,31.5,0.001678,35.2,30,MF,AnAge,,,,Wild,"South Dakota, USA",Avg. winter and summer
+,Choeropsis liberiensis,250000,102.75,283.9,EIA,3,ACTH,wet,adult,42.3,,,4,MF,Paper,,0-72hr,,Captive,North America,Table 1
+,Connochaetes taurinus,164500,24.09,,RIA,14,,dry,,24.3,0.001171,38,,MF ,AnAge,,,,Wild,"KwaZulu-Natal, South Africa",Figure 2
+,Ctenomys sociabilis,400,62.6,291.4,EIA,21,ACTH,,adult,,,,6,F,Other,,24hr,,Captive,"California, USA",Figure 4
+,Equus burchelli,276000,14.08,,RIA,14,,dry,,,,,,MF ,Other,,,,Wild,"KwaZulu-Natal, South Africa",Figure 2
+,Equus caballus,444900,26.5,,RIA,14,,dry,adult,57,0.0014,38.3,6,F,Other,,,Non-breeding,Wild,"North Carolina, USA","Figure 4, before"
+,Equus grevyi,384000,18.3,41.7,RIA,14,ACTH,dry,adult,31,,,1,F,AnAge,,,,Captive,"Florida, USA",Figure 2
+,Felis catus,3900,547.15,2165.1,RIA,14,ACTH,dry,adult,30,0.00247,38.1,2,MF,Other,,,,Captive,"Virginia, USA",Table 1
+,Gerbillus andersoni,26.9,797,2377,EIA,12,ACTH,dry,,,,,9,MF,AnAge,,8.8hr,,Captive,"Sede Boker, Israel",
+,Gerbillus gerbillus,30,2182.1,10232,EIA,10,ACTH,dry,adults,5.9,0.00798,37.2,3,M,AnAge,,6hr,Non-breeding,Captive,Isreal,"Table 1, Figure 2"
+,Gerbillus nanus,18.5,183,589,EIA,12,ACTH,dry,,4.5,0.004343,38.8,7,F,AnAge,,5.6hr,,Captive,"Sede Boker, Israel",
+,Gerbillus pyramidum,37,1770.1,6606,EIA,10,ACTH,dry,adults,8.2,0.004184,36.1,3,M,AnAge,,,Non-breeding,Captive,Isreal,"Table 1, Figure 3"
+,Giraffa camelopardalis,800000,64.76,178.8,EIA,10,ACTH,dry,adult and juveniles,39.5,0.000874,37.1,2,M,AnAge,,,,Captive,Misc.,
+Yes,Gorilla gorilla gorilla,139842,60,140,EIA,8,Anesthesia,wet,,60.1,,,6,MF,AnAge,,54hr,,Captive,UK,"Prioritize EIA, Table 1"
+Yes,Hylobates pileatus,5735,25,749.5,EIA,8,ACTH,dry,adult,38,,,2,MF,AnAge,,38.4hr,,Captive,Misc.,Table 2
+,Lycaon pictus,26500,217.75,3575,RIA,14,ACTH,dry,adult and subadult,17,0.003773,,5,MF,AnAge,,24hr,,Captive,"Illinois, USA",
+,Marmota flaviventris,3500,132,4417,RIA,14,ACTH,dry,adult,21.2,0.002008,36.5,6,MF,AnAge,,32hr,,Captive,"Colorado, USA",
+,Melursus ursinus,100000,64.1,666.5,RIA,14,"Infection, male introduction, breeding",dry,adult,33.3,0.000703,,1,F,AnAge,,,,Captive,"Arkansas, USA",Table 2
+Yes,Microcebus murinus,64.8,90,870,EIA,8,Capture,wet,,18.2,,,5,MF,AnAge,,45.5hr,,Wild,Madagascar,Table 2
+,Mungos mungo,1332,1030,2120,EIA,10,ACTH,dry,,17.4,,,3,MF,AnAge,,,,Captive,Botswana,
+,Mus musculus,20.5,4472.05,,RIA,14,,dry,adult,4,0.015056,36.9,60,M,AnAge,,,,Captive,UK,
+,Mustela nigripes,1021,114.5,264.3,RIA,14,ACTH,dry,adult,9.4,,,1,F,AnAge,,,,Captive,"Ontario, Canada",Table 1
+,Myrmecophaga tridactyla,28500,33.5,,EIA,,,wet,adult,31,0.000475,,1,F,AnAge,,,Estrous,Captive,"Tennessee, USA",
+,Neofelis nebulosa,19500,406.63,4143.9,RIA,14,ACTH,dry,adult,19.8,,,3,MF,AnAge,,,,Captive,"Virginia, USA",Table 1
+,Odocoileus virginianus,87000,67.5,190.25,RIA ,14,ACTH,dry,adult,23,0.001996,39,3,F,AnAge,,16.75hr,,Captive,"Missouri, USA",
+,Ovibos moschatus,315000,14.91,53.32,EIA,10,ACTH,wet,adult and subadult,27.4,,37.7,5,MF,AnAge,,7-55hr,,Captive,"Alaska, USA",supplementary data sheet 3
+,Peromyscus maniculatus,21,1436.55,2540.2,EIA,10,ACTH,dry,adult,8.3,0.010683,36.6,4,MF,AnAge,,2hr,,Captive,"Ontario, Canada",
+,Rangifer tarandus granti,132500,41.3,137.8,RIA,14,ACTH,dry,adult,21.8,0.001408,,5,MF,Source,,8hr,,Captive,"Alaska, USA",
+,Rangifer tarandus tarandus,85500,60.66,82.6,RIA,14,ACTH,dry,juvenile,21.8,0.001408,37.2,5,F,Source,,24hr,,Captive,"Alaska, USA",
+,Rattus norvegicus,300,175,,EIA,20,,dry,adult,3.8,0.006786,37.1,18,MF,AnAge,,,,Captive,Italy,Figure 3
+,Sturnira hondurensis,17.25,1064.48,,EIA,23,,wet,,,,,5,MF,Other,,,,Wild,"Oaxaca, Mexico",Table 2
+,Sturnira parivdens,15.3,176.79,,EIA,23,,wet,,,,,4,MF,Other,,,,Wild,"Oaxaca, Mexico",Table 2
+,Suricata suricatta ,776,174.25,1613.6,RIA,14,ACTH,dry,adult,20.6,0.002034,36.3,2,M,AnAge,,,,Captive,"Missouri, USA",Table 1
+,Syncerus caffer,368500,40.19,250.29,RIA,14,ACTH,dry,adults and subadults,32.8,,,4,MF,Source,,10.1-20hr,,Captive,South Africa,Fig 3
+,Tragelaphus buxtoni,215001,60.09,,RIA,14,,dry,,,,,,MF ,Other,,,,Wild,"KwaZulu-Natal, South Africa",
+,Tragelaphus strepsiceros,213501,46.34,,RIA,14,,dry,,23.5,,38.9,,MF ,Other,,,,Wild,"KwaZulu-Natal, South Africa",
+,Ursus arctos horribilis,277500,19.043,112.455,RIA,14,ACTH,dry,adult,40,,37.3,2,MF,AnAge,,27hr,,Captive,"Washington, USA",Figure 1
+,Ursus maritimus,475000,53,,EIA,10,,dry,adult,43.8,0.00067,36.8,10,MF,AnAge,,,,Captive,North America,Table 1
+,Ursus thibetanus,103750,34.5,197.9,RIA,14,ACTH,dry,adult,39.2,,37.5,1,F,AnAge,,,,Captive,"Quebec, Canada",Table 2
