@@ -33,25 +33,24 @@ save(BasalFGCMSMR_Reduced, file = paste(directory,"BasalFGCMSMR_Reduced.RData", 
 BasalFGCMSMR_Ordinary <- lm(log(BasalFGC) ~ log(MSMR),
                             data=BasalFGCMSMR_data)
 
-BasalFGCMSMR_Plot <-
-  ggplot(data = BasalFGCMSMR_data,
-         aes(x = log(MSMR), y = log(BasalFGC))) +
-  geom_point() +
-  geom_abline(intercept = coefficients(summary(BasalFGCMSMR_PGLS))[1,1], 
-              slope = coefficients(summary(BasalFGCMSMR_PGLS))[2,1]) +
-  theme_classic() +
-  labs(x = "MSMR (ln(mW/g))",
-       y = "Baseline FGC (ln(ng/g))") +
-  theme1 +
-  annotate("text", size = 3.5, x = 2, y = 2.5,
-           label = list(bquote(atop(y==~ .(round(coefficients(summary(BasalFGCMSMR_PGLS))[1,1], 2))
-                                    ~x^.(round(coefficients(summary(BasalFGCMSMR_PGLS))[2,1], 2)),
-                                    ~R^2 ==~ .(round(as.numeric(R2_lik(BasalFGCMSMR_PGLS, BasalFGCMSMR_Reduced)), 2))))),
-           parse = TRUE) +
-  scale_x_continuous(limits = c(-1.5, 3)) +
-  scale_y_continuous(limits = c(2, 8.5))
+(BasalFGCMSMR_Plot <-
+    ggplot(data = BasalFGCMSMR_data,
+           aes(x = log(MSMR), y = log(BasalFGC))) +
+    geom_point() +
+    geom_abline(intercept = coefficients(summary(BasalFGCMSMR_PGLS))[1,1], 
+                slope = coefficients(summary(BasalFGCMSMR_PGLS))[2,1]) +
+    theme_classic() +
+    labs(x = "MSMR (ln(mW/g))",
+         y = "Baseline FGC (ln(ng/g))") +
+    theme1 +
+    annotate("text", size = 3.5, x = 2, y = 2.5,
+             label = list(bquote(atop(y==~ .(round(coefficients(summary(BasalFGCMSMR_PGLS))[1,1], 2))
+                                      ~x^.(round(coefficients(summary(BasalFGCMSMR_PGLS))[2,1], 2)),
+                                      ~R^2 ==~ .(round(as.numeric(R2_lik(BasalFGCMSMR_PGLS, BasalFGCMSMR_Reduced)), 2))))),
+             parse = TRUE) +
+    scale_x_continuous(limits = c(-1.5, 3)) +
+    scale_y_continuous(limits = c(2, 8.5)))
 
-BasalFGCMSMR_Plot
 save(BasalFGCMSMR_Plot, file = paste(directory,"BasalFGCMSMR_Plot.RData", sep = "")) #save file
 ggsave(filename = paste(directory,"Figures/BasalFGCMSMR_Plot.png",sep = ""),
        width=70, height=70, units="mm") #save a picture
@@ -81,25 +80,24 @@ save(BasalFGCMass_Reduced, file = paste(directory,"BasalFGCMass_Reduced.RData", 
 BasalFGCMass_Ordinary <- lm(log(BasalFGC) ~ log(Mass),
                             data=BasalFGCMass_data)
 
-BasalFGCMass_Plot <-
-  ggplot(data = BasalFGCMass_data,
-         aes(x = log(Mass), y = log(BasalFGC))) +
-  geom_point() +
-  geom_abline(intercept = coefficients(summary(BasalFGCMass_PGLS))[1,1], 
-              slope = coefficients(summary(BasalFGCMass_PGLS))[2,1]) +
-  theme_classic() +
-  labs(x = "Body Mass (ln(g))",
-       y = "Baseline FGC (ln(ng/g))") +
-  theme1 +
-  annotate("text", size = 3.5, x = 5, y = 2,
-           label = list(bquote(atop(y==~ .(sprintf("%.2f", round(coefficients(summary(BasalFGCMass_PGLS))[1,1], 2))) # sprintf is there to keep trailing 0s
-                                    ~x^.(round(coefficients(summary(BasalFGCMass_PGLS))[2,1], 2)),
-                                    ~R^2 ==~ .(round(as.numeric(R2_lik(BasalFGCMass_PGLS, BasalFGCMass_Reduced)), 2))))),
-           parse = TRUE) +
-  scale_x_continuous(limits = c(2, 16)) +
-  scale_y_continuous(limits = c(1, 8.5))
+(BasalFGCMass_Plot <-
+    ggplot(data = BasalFGCMass_data,
+           aes(x = log(Mass), y = log(BasalFGC))) +
+    geom_point() +
+    geom_abline(intercept = coefficients(summary(BasalFGCMass_PGLS))[1,1], 
+                slope = coefficients(summary(BasalFGCMass_PGLS))[2,1]) +
+    theme_classic() +
+    labs(x = "Body Mass (ln(g))",
+         y = "Baseline FGC (ln(ng/g))") +
+    theme1 +
+    annotate("text", size = 3.5, x = 5, y = 2,
+             label = list(bquote(atop(y==~ .(sprintf("%.2f", round(coefficients(summary(BasalFGCMass_PGLS))[1,1], 2))) # sprintf is there to keep trailing 0s
+                                      ~x^.(round(coefficients(summary(BasalFGCMass_PGLS))[2,1], 2)),
+                                      ~R^2 ==~ .(round(as.numeric(R2_lik(BasalFGCMass_PGLS, BasalFGCMass_Reduced)), 2))))),
+             parse = TRUE) +
+    scale_x_continuous(limits = c(2, 16)) +
+    scale_y_continuous(limits = c(1, 8.5)))
 
-BasalFGCMass_Plot
 save(BasalFGCMass_Plot, file = paste(directory, "BasalFGCMass_Plot.RData", sep = "")) #save file
 ggsave(filename = paste(directory, "Figures/BasalFGCMass_Plot.png", sep = ""),
        width=70, height=70, units="mm") #save a picture
@@ -129,28 +127,29 @@ save(ElevFGCBasalFGC_Reduced, file = paste(directory, "ElevFGCBasalFGC_Reduced.R
 ElevFGCBasalFGC_Ordinary <- lm(log(ElevFGC) ~ log(BasalFGC),
                                data=ElevFGCBasalFGC_data)
 
-ElevFGCBasalFGC_Plot <- 
-  ggplot(data = ElevFGCBasalFGC_data,
-         aes(x = log(BasalFGC), y = log(ElevFGC))) +
-  geom_point() +
-  geom_abline(intercept = coefficients(summary(ElevFGCBasalFGC_PGLS))[1,1], 
-              slope = coefficients(summary(ElevFGCBasalFGC_PGLS))[2,1]) +
-  theme_classic() +
-  labs(x = "Baseline FGC (ln(ng/g))",
-       y = "Elevated FGC (ln(ng/g))") +
-  theme1 +
-  annotate("text", size = 3.5, x = 6, y = 3,
-           label = list(bquote(atop(y==~ .(round(coefficients(summary(ElevFGCBasalFGC_PGLS))[1,1], 2))
-                                    ~x^.(round(coefficients(summary(ElevFGCBasalFGC_PGLS))[2,1], 2)),
-                                    ~R^2 ==~ .(round(as.numeric(R2_lik(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Reduced)), 2))))),
-           parse = TRUE) +
-  scale_x_continuous(limits = c(1, 9)) +
-  scale_y_continuous(limits = c(2, 10))
+(ElevFGCBasalFGC_Plot <- 
+    ggplot(data = ElevFGCBasalFGC_data,
+           aes(x = log(BasalFGC), y = log(ElevFGC))) +
+    geom_point() +
+    geom_abline(intercept = coefficients(summary(ElevFGCBasalFGC_PGLS))[1,1], 
+                slope = coefficients(summary(ElevFGCBasalFGC_PGLS))[2,1]) +
+    theme_classic() +
+    labs(x = "Baseline FGC (ln(ng/g))",
+         y = "Elevated FGC (ln(ng/g))") +
+    theme1 +
+    annotate("text", size = 3.5, x = 6, y = 3,
+             label = list(bquote(atop(y==~ .(round(coefficients(summary(ElevFGCBasalFGC_PGLS))[1,1], 2))
+                                      ~x^.(round(coefficients(summary(ElevFGCBasalFGC_PGLS))[2,1], 2)),
+                                      ~R^2 ==~ .(round(as.numeric(R2_lik(ElevFGCBasalFGC_PGLS, ElevFGCBasalFGC_Reduced)), 2))))),
+             parse = TRUE) +
+    scale_x_continuous(limits = c(1, 9)) +
+    scale_y_continuous(limits = c(2, 10)))
 
-ElevFGCBasalFGC_Plot
 save(ElevFGCBasalFGC_Plot, file = paste(directory, "ElevFGCBasalFGC_Plot.RData", sep = "")) #save file
 ggsave(filename = paste(directory, "Figures/ElevFGCBasalFGC_Plot.png", sep = ""),
        width=70, height=70, units="mm") #save a picture
+
+
 
 # Lifespan vs. Baseline model ------------------------------------------------
 
@@ -248,7 +247,7 @@ ggsave(filename = paste(directory, "Figures/ElevFGCBasalFGC_Plot.png", sep = "")
 #        width = 5,
 #        height = 4) #save a picture
 
-# Stats Table ------------------------------------------------------------
+# Stats Table ----------------------------------------------------------------
 
 #PGLS table
 StatsTab_PGLS <- rbind(cbind(coefficients(summary(BasalFGCMSMR_PGLS)), intervals(BasalFGCMSMR_PGLS)[["coef"]]),
@@ -294,7 +293,13 @@ grid.table(StatsTab_PGLS, theme = tt1)
 grid.text(Label, x = 0.2, y = 0.9, gp = gpar(fontface = "bold"))
 dev.off()
 
+# Fold difference ------------------------------------------------------------
 
+
+exp(
+  ((ElevFGCBasalFGC_PGLS[["coefficients"]][["log(BasalFGC)"]]*log(mean(ElevFGCBasalFGC_data$BasalFGC)))+ElevFGCBasalFGC_PGLS[["coefficients"]][["(Intercept)"]])
+  /log(mean(ElevFGCBasalFGC_data$BasalFGC))
+)
 
 
 

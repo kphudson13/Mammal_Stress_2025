@@ -11,8 +11,8 @@ Crtsn <- read.csv("Corticosterone/CrtstnDataClean.csv")
 
 Cort <- read.csv("Cortisol/CortisolDataClean.csv")
 
-FGC <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
-  .[ , -c(1, 19)]
+# FGC <- read.csv("FGCAnalysis/FGCDataClean.csv") %>%
+#   .[ , -c(1, 19)]
 
 
 combined <- rbind(Crtsn, Cort)
