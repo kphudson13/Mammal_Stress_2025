@@ -1,8 +1,8 @@
 #NEXUS
-[R-package APE, Tue Aug 19 15:51:23 2025]
+[R-package APE, Mon Jul 20 22:38:03 2026]
 
 BEGIN TAXA;
-	DIMENSIONS NTAX = 59;
+	DIMENSIONS NTAX = 77;
 	TAXLABELS
 		Mus musculus
 		Rattus rattus
@@ -20,22 +20,36 @@ BEGIN TAXA;
 		Marmota flaviventris
 		Urocitellus columbianus
 		Lepus americanus
+		Papio ursinus
 		Macaca tonkeana
 		Pan troglodytes
 		Gorilla gorilla gorilla
 		Hylobates pileatus
 		Microcebus murinus
 		Propithecus verreauxi
+		Otolemur garnettii
+		Cervus elaphus
 		Mazama gouazoubira
 		Blastocerus dichotomus
+		Odocoileus virginianus
+		Rangifer tarandus granti
+		Rangifer tarandus tarandus
 		Capreolus capreolus
 		Capra hircus
 		Ovibos moschatus
+		Connochaetes taurinus
+		Aepyceros melampus
+		Tragelaphus strepsiceros
+		Tragelaphus buxtoni
+		Syncerus caffer
 		Bos taurus
 		Moschus berezovskii
 		Giraffa camelopardalis
 		Choeropsis liberiensis
 		Pecari tajacu
+		Equus burchellii
+		Equus caballus
+		Equus grevyi
 		Diceros bicornis
 		Ceratotherium simum
 		Rhinoceros unicornis
@@ -44,9 +58,12 @@ BEGIN TAXA;
 		Sturnira hondurensis
 		Sturnira parvidens
 		Mustela nigripes
+		Ursus maritimus
+		Ursus arctos horribilis
 		Ursus thibetanus
 		Melursus ursinus
 		Ailuropoda melanoleuca
+		Lycaon pictus
 		Canis rufus
 		Cerdocyon thous
 		Vulpes lagopus
@@ -54,15 +71,16 @@ BEGIN TAXA;
 		Mungos mungo
 		Suricata suricatta
 		Crocuta crocuta
-		Panthera tigris tigris
-		Panthera tigris sumatrae
+		Panthera tigris
 		Panthera leo bleyenberghi
+		Panthera onca
 		Neofelis nebulosa
 		Felis catus
 		Acinonyx jubatus
 		Elephas maximus
 		Loxodonta africana
 		Tolypeutes matacus
+		Myrmecophaga tridactyla
 	;
 END;
 BEGIN TREES;
@@ -83,49 +101,67 @@ BEGIN TREES;
 		14	Marmota flaviventris,
 		15	Urocitellus columbianus,
 		16	Lepus americanus,
-		17	Macaca tonkeana,
-		18	Pan troglodytes,
-		19	Gorilla gorilla gorilla,
-		20	Hylobates pileatus,
-		21	Microcebus murinus,
-		22	Propithecus verreauxi,
-		23	Mazama gouazoubira,
-		24	Blastocerus dichotomus,
-		25	Capreolus capreolus,
-		26	Capra hircus,
-		27	Ovibos moschatus,
-		28	Bos taurus,
-		29	Moschus berezovskii,
-		30	Giraffa camelopardalis,
-		31	Choeropsis liberiensis,
-		32	Pecari tajacu,
-		33	Diceros bicornis,
-		34	Ceratotherium simum,
-		35	Rhinoceros unicornis,
-		36	Artibeus jamaicensis,
-		37	Artibeus lituratus,
-		38	Sturnira hondurensis,
-		39	Sturnira parvidens,
-		40	Mustela nigripes,
-		41	Ursus thibetanus,
-		42	Melursus ursinus,
-		43	Ailuropoda melanoleuca,
-		44	Canis rufus,
-		45	Cerdocyon thous,
-		46	Vulpes lagopus,
-		47	Vulpes vulpes,
-		48	Mungos mungo,
-		49	Suricata suricatta,
-		50	Crocuta crocuta,
-		51	Panthera tigris tigris,
-		52	Panthera tigris sumatrae,
-		53	Panthera leo bleyenberghi,
-		54	Neofelis nebulosa,
-		55	Felis catus,
-		56	Acinonyx jubatus,
-		57	Elephas maximus,
-		58	Loxodonta africana,
-		59	Tolypeutes matacus
+		17	Papio ursinus,
+		18	Macaca tonkeana,
+		19	Pan troglodytes,
+		20	Gorilla gorilla gorilla,
+		21	Hylobates pileatus,
+		22	Microcebus murinus,
+		23	Propithecus verreauxi,
+		24	Otolemur garnettii,
+		25	Cervus elaphus,
+		26	Mazama gouazoubira,
+		27	Blastocerus dichotomus,
+		28	Odocoileus virginianus,
+		29	Rangifer tarandus granti,
+		30	Rangifer tarandus tarandus,
+		31	Capreolus capreolus,
+		32	Capra hircus,
+		33	Ovibos moschatus,
+		34	Connochaetes taurinus,
+		35	Aepyceros melampus,
+		36	Tragelaphus strepsiceros,
+		37	Tragelaphus buxtoni,
+		38	Syncerus caffer,
+		39	Bos taurus,
+		40	Moschus berezovskii,
+		41	Giraffa camelopardalis,
+		42	Choeropsis liberiensis,
+		43	Pecari tajacu,
+		44	Equus burchellii,
+		45	Equus caballus,
+		46	Equus grevyi,
+		47	Diceros bicornis,
+		48	Ceratotherium simum,
+		49	Rhinoceros unicornis,
+		50	Artibeus jamaicensis,
+		51	Artibeus lituratus,
+		52	Sturnira hondurensis,
+		53	Sturnira parvidens,
+		54	Mustela nigripes,
+		55	Ursus maritimus,
+		56	Ursus arctos horribilis,
+		57	Ursus thibetanus,
+		58	Melursus ursinus,
+		59	Ailuropoda melanoleuca,
+		60	Lycaon pictus,
+		61	Canis rufus,
+		62	Cerdocyon thous,
+		63	Vulpes lagopus,
+		64	Vulpes vulpes,
+		65	Mungos mungo,
+		66	Suricata suricatta,
+		67	Crocuta crocuta,
+		68	Panthera tigris,
+		69	Panthera leo bleyenberghi,
+		70	Panthera onca,
+		71	Neofelis nebulosa,
+		72	Felis catus,
+		73	Acinonyx jubatus,
+		74	Elephas maximus,
+		75	Loxodonta africana,
+		76	Tolypeutes matacus,
+		77	Myrmecophaga tridactyla
 	;
-	TREE * UNTITLED = [&R] (((((((((1:0.03448275862,(2:0.01724137931,3:0.01724137931)mrcaott8118ott92106:0.01724137931)mrcaott102ott8118:0.08620689655,((6:0.05172413793,7:0.05172413793,(4:0.01724137931,5:0.01724137931)mrcaott404779ott5925550:0.03448275862)mrcaott89162ott135787:0.01724137931,8:0.06896551724)mrcaott19510ott154782:0.05172413793)Muridae_ott816256:0.03448275862,(9:0.01724137931,10:0.01724137931)Cricetidae_ott671049:0.1379310345)mrcaott102ott739:0.05172413793,((11:0.01724137931,12:0.01724137931)mrcaott38834ott198654:0.01724137931,13:0.03448275862)mrcaott38834ott44975:0.1724137931)mrcaott42ott38834:0.03448275862,(14:0.01724137931,15:0.01724137931)mrcaott10477ott136299:0.224137931)mrcaott42ott10477:0.01724137931,16:0.2586206897)mrcaott42ott29157:0.1034482759,((17:0.05172413793,((18:0.01724137931,19:0.01724137931)Homininae_ott312031:0.01724137931,20:0.03448275862)mrcaott83926ott96938:0.01724137931)mrcaott786ott83926:0.03448275862,(21:0.01724137931,22:0.01724137931)mrcaott3428ott132960:0.06896551724)mrcaott786ott3428:0.275862069)Euarchontoglires_ott392222:0.5862068966,(((((((((23:0.01724137931,24:0.01724137931)mrcaott15447ott678842:0.01724137931,25:0.03448275862)mrcaott15447ott54038:0.06896551724,(((26:0.01724137931,27:0.01724137931)Caprinae_ott122647:0.01724137931,28:0.03448275862)Bovidae_ott768677:0.01724137931,29:0.05172413793)mrcaott20474ott233507:0.05172413793)mrcaott1548ott20474:0.01724137931,30:0.1206896552)Pecora_ott403912:0.01724137931,31:0.1379310345)mrcaott1548ott5256:0.01724137931,32:0.1551724138)mrcaott1548ott21987:0.05172413793,(33:0.03448275862,34:0.03448275862,35:0.03448275862)Rhinocerotidae_ott1034218:0.1724137931)mrcaott1548ott3021:0.06896551724,((36:0.01724137931,37:0.01724137931)mrcaott9379ott62481:0.03448275862,(38:0.01724137931,39:0.01724137931)mrcaott136686ott526954:0.03448275862)Stenodermatinae_ott1039976:0.224137931)mrcaott1548ott6790:0.2931034483,(((40:0.05172413793,((41:0.01724137931,42:0.01724137931)mrcaott10732ott297463:0.01724137931,43:0.03448275862)Ursidae_ott297458:0.01724137931)mrcaott4697ott10732:0.06896551724,((44:0.01724137931,45:0.01724137931)mrcaott47497ott110766:0.03448275862,(46:0.01724137931,47:0.01724137931)mrcaott297455ott419501:0.03448275862)mrcaott47497ott77889:0.06896551724)Caniformia_ott827263:0.1551724138,(((48:0.01724137931,49:0.01724137931)mrcaott6940ott803645:0.01724137931,50:0.03448275862)mrcaott6940ott383901:0.1034482759,((((51:0.01724137931,52:0.01724137931)Panthera_tigris_ott42314:0.01724137931,53:0.03448275862)Panthera_ott563154:0.01724137931,54:0.05172413793)mrcaott19397ott882765:0.03448275862,(55:0.01724137931,56:0.01724137931)mrcaott54737ott86162:0.06896551724)Felidae_ott563159:0.05172413793)mrcaott6940ott19397:0.1379310345)mrcaott4697ott6940:0.2931034483)mrcaott1548ott4697:0.3793103448)Boreoeutheria_ott5334778:0.05172413793,((57:0.01724137931,58:0.01724137931)Elephantidae_ott541924:0.01724137931,59:0.03448275862)Atlantogenata_ott6520513:0.9655172414)mrcaott42ott72667;
+	TREE * UNTITLED = [&R] (((((((((1:0.02631578947,(2:0.01315789474,3:0.01315789474)mrcaott8118ott92106:0.01315789474)mrcaott102ott8118:0.06578947368,((6:0.03947368421,7:0.03947368421,(4:0.01315789474,5:0.01315789474)mrcaott404779ott5925550:0.02631578947)mrcaott89162ott135787:0.01315789474,8:0.05263157895)mrcaott19510ott154782:0.03947368421)Muridae_ott816256:0.02631578947,(9:0.01315789474,10:0.01315789474)Cricetidae_ott671049:0.1052631579)mrcaott102ott739:0.03947368421,((11:0.01315789474,12:0.01315789474)mrcaott38834ott198654:0.01315789474,13:0.02631578947)mrcaott38834ott44975:0.1315789474)mrcaott42ott38834:0.02631578947,(14:0.01315789474,15:0.01315789474)mrcaott10477ott136299:0.1710526316)mrcaott42ott10477:0.01315789474,16:0.1973684211)mrcaott42ott29157:0.1052631579,(((17:0.01315789474,18:0.01315789474)mrcaott33609ott111862:0.03947368421,((19:0.01315789474,20:0.01315789474)Homininae_ott312031:0.01315789474,21:0.02631578947)mrcaott83926ott96938:0.02631578947)mrcaott786ott83926:0.03947368421,((22:0.01315789474,23:0.01315789474)mrcaott3428ott132960:0.01315789474,24:0.02631578947)Strepsirrhini_ott702147:0.06578947368)mrcaott786ott3428:0.2105263158)Euarchontoglires_ott392222:0.6447368421,((((((((25:0.07894736842,((((26:0.01315789474,27:0.01315789474)mrcaott15447ott678842:0.01315789474,28:0.02631578947)mrcaott15447ott90636:0.02631578947,(29:0.01315789474,30:0.01315789474)Rangifer_tarandus_ott410153:0.03947368421)mrcaott15447ott114864:0.01315789474,31:0.06578947368)mrcaott15447ott54038:0.01315789474)Cervidae_ott460505:0.1184210526,(((((32:0.01315789474,33:0.01315789474)Caprinae_ott122647:0.01315789474,34:0.02631578947)mrcaott20474ott98208:0.01315789474,35:0.03947368421)mrcaott20474ott561127:0.05263157895,((37:0.01315789474,36:0.01315789474)mrcaott24247ott70829:0.02631578947,(38:0.01315789474,39:0.01315789474)mrcaott73074ott354607:0.02631578947)mrcaott24247ott73074:0.05263157895)Bovidae_ott768677:0.01315789474,40:0.1052631579)mrcaott20474ott233507:0.09210526316)mrcaott1548ott20474:0.01315789474,41:0.2105263158)Pecora_ott403912:0.01315789474,42:0.2236842105)mrcaott1548ott5256:0.01315789474,43:0.2368421053)mrcaott1548ott21987:0.07894736842,((44:0.02631578947,45:0.02631578947,46:0.02631578947)Equus_ott541951:0.03947368421,(47:0.02631578947,48:0.02631578947,49:0.02631578947)Rhinocerotidae_ott1034218:0.03947368421)Perissodactyla_ott541948:0.25)mrcaott1548ott3021:0.05263157895,((50:0.01315789474,51:0.01315789474)mrcaott9379ott62481:0.02631578947,(52:0.01315789474,53:0.01315789474)mrcaott136686ott526954:0.02631578947)Stenodermatinae_ott1039976:0.3289473684)mrcaott1548ott6790:0.2631578947,(((54:0.06578947368,((((55:0.01315789474,56:0.01315789474)mrcaott10732ott350099:0.01315789474,57:0.02631578947)mrcaott10732ott300426:0.01315789474,58:0.03947368421)mrcaott10732ott297463:0.01315789474,59:0.05263157895)Ursidae_ott297458:0.01315789474)mrcaott4697ott10732:0.06578947368,((61:0.02631578947,60:0.02631578947,62:0.02631578947)mrcaott47497ott110766:0.02631578947,(63:0.01315789474,64:0.01315789474)mrcaott297455ott419501:0.03947368421)mrcaott47497ott77889:0.07894736842)Caniformia_ott827263:0.1184210526,(((65:0.01315789474,66:0.01315789474)mrcaott6940ott803645:0.01315789474,67:0.02631578947)mrcaott6940ott383901:0.07894736842,(((68:0.02631578947,(70:0.01315789474,69:0.01315789474)mrcaott371429ott735488:0.01315789474)Panthera_ott563154:0.01315789474,71:0.03947368421)mrcaott19397ott882765:0.02631578947,(72:0.01315789474,73:0.01315789474)mrcaott54737ott86162:0.05263157895)Felidae_ott563159:0.03947368421)mrcaott6940ott19397:0.1447368421)mrcaott4697ott6940:0.3815789474)mrcaott1548ott4697:0.3157894737)Boreoeutheria_ott5334778:0.05263157895,((74:0.01315789474,75:0.01315789474)Elephantidae_ott541924:0.02631578947,(76:0.01315789474,77:0.01315789474)Xenarthra_ott847764:0.02631578947)Atlantogenata_ott6520513:0.9605263158)mrcaott42ott72667;
 END;

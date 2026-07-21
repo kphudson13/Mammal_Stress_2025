@@ -295,11 +295,8 @@ dev.off()
 
 # Fold difference ------------------------------------------------------------
 
-
 exp(
   ((ElevFGCBasalFGC_PGLS[["coefficients"]][["log(BasalFGC)"]]*log(mean(ElevFGCBasalFGC_data$BasalFGC)))+ElevFGCBasalFGC_PGLS[["coefficients"]][["(Intercept)"]])
   /log(mean(ElevFGCBasalFGC_data$BasalFGC))
 )
-
-
 

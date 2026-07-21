@@ -148,47 +148,44 @@ write.csv(StressData, file = "Cortisol/CortisolDataClean.csv")
 # ggsave("Cortisol/PhyloCovarianceMatrix.png", plot = vcv_plot, width = 10, height = 8, dpi = 300)
 
 # FGC model ---------------------------------------------------------------
-# 
-# #pull in already cleaned data with orders and familys attached 
-# CrtsnData <- read.csv("Corticosterone/CrtstnDataClean.csv") 
-# CortisolData <- read.csv("Cortisol/CortisolDataClean.csv")
-# 
-# 
-# #add a column to sort by 
-# CrtsnData$Hormone <- "Corticosterone"
-# CortisolData$Hormone <- "Cortisol"
-# 
-# #keep corticosterone for rodents and cortisol for everything else 
-# StressData <- rbind(CrtsnData, CortisolData) %>% 
-#   subset(., (Hormone == "Corticosterone" & Order == "Rodentia") | (Hormone == "Cortisol" & Order != "Roentia"))
-# 
-# taxa <- tnrs_match_names(unique(StressData$Species)) #match names with open tree taxonomy 
-# 
-# tree <- tol_induced_subtree(ott_ids = taxa$ott_id) #pull the subtree of the matched names 
-# # is_in_tree(ott_id(taxa)) #check that only the taxa that are in the synthetic tree
-# tree <- compute.brlen(tree, method = "Grafen", power=1) #compute branch lengths, grafen method
-# 
-# #Clean tree tip labels 
-# tree$tip.label <- strip_ott_ids(tree$tip.label, remove_underscores = T)
-# 
-# #Update taxonomy from tree of life
-# tree$tip.label[tree$tip.label == "Capra hircus (species in domain Eukaryota)"] <- "Capra hircus"
-# tree$tip.label[tree$tip.label == "Hexaprotodon liberiensis"] <- "Choeropsis liberiensis"
-# tree$tip.label[tree$tip.label == "Mazama gouazoupira"] <- "Mazama gouazoubira"
-# 
-# #to view the lists lining up
-# cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
-# 
-# write.nexus(tree, file = "FGCAnalysis/StressTree.nex")
-# 
-# png("FGCAnalysis/TreePic.png",
-#     height = 3000,
-#     width = 1800,
-#     res = 200)
-# plot(tree)
-# dev.off()
-# 
-# write.csv(StressData, file = "FGCAnalysis/FGCDataClean.csv")
+
+#pull in already cleaned data with orders and familys attached
+CrtsnData <- read.csv("Corticosterone/CrtstnDataClean.csv")
+CortisolData <- read.csv("Cortisol/CortisolDataClean.csv")
+
+#add a column to sort by
+CrtsnData$Hormone <- "Corticosterone"
+CortisolData$Hormone <- "Cortisol"
+
+StressData <- rbind(CrtsnData, CortisolData) 
+
+taxa <- tnrs_match_names(unique(StressData$Species)) #match names with open tree taxonomy
+
+tree <- tol_induced_subtree(ott_ids = taxa$ott_id) #pull the subtree of the matched names
+# is_in_tree(ott_id(taxa)) #check that only the taxa that are in the synthetic tree
+tree <- compute.brlen(tree, method = "Grafen", power=1) #compute branch lengths, grafen method
+
+#Clean tree tip labels
+tree$tip.label <- strip_ott_ids(tree$tip.label, remove_underscores = T)
+
+#Update taxonomy from tree of life
+tree$tip.label[tree$tip.label == "Capra hircus (species in domain Eukaryota)"] <- "Capra hircus"
+tree$tip.label[tree$tip.label == "Hexaprotodon liberiensis"] <- "Choeropsis liberiensis"
+tree$tip.label[tree$tip.label == "Mazama gouazoupira"] <- "Mazama gouazoubira"
+
+#to view the lists lining up
+cbind(sort(tree$tip.label), sort(unique(StressData$Species)))
+
+write.nexus(tree, file = "FGCAnalysis/StressTree.nex")
+
+png("FGCAnalysis/TreePic.png",
+    height = 3000,
+    width = 1800,
+    res = 200)
+plot(tree)
+dev.off()
+
+write.csv(StressData, file = "FGCAnalysis/FGCDataClean.csv")
 
 # Lifespan Data Cleaning --------------------------------------------------
 
