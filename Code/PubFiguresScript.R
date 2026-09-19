@@ -141,7 +141,7 @@ theme1 <- theme(axis.title = element_text(size =10),
     theme_classic() +
     theme1 +
     theme(legend.position = "inside",
-          legend.position.inside = c(0.7,0.16), 
+          legend.position.inside = c(0.65,0.12), 
           legend.background = element_blank(),
           legend.key.height = unit(0.6, "lines"))) # move legend labels closer together
 
@@ -169,26 +169,26 @@ save_plot(plot_grid(BasalFGCMSMR_combined, BasalFGCMass_combined, ElevFGCBasalFG
 
 
 # Stats table -------------------------------------------------------------
-
-#load and rename cortisol reduced PGLS
-load("Cortisol/CortisolMeanLifespan/BasalFGCMSMR_Reduced.RData") 
-load("Cortisol/CortisolMeanLifespan/BasalFGCMass_Reduced.RData")
-load("Cortisol/CortisolMeanLifespan/ElevFGCBasalFGC_Reduced.RData")
-# load("Cortisol/CortisolMeanLifespan/LifespanBasalFGC_Reduced.RData")
-BasalFGCMSMR_Cortisol_Reduced <- BasalFGCMSMR_Reduced
-BasalFGCMass_Cortisol_Reduced <- BasalFGCMass_Reduced
-ElevFGCBasalFGC_Cortisol_Reduced <- ElevFGCBasalFGC_Reduced
-# LifespanBasalFGC_Cortisol_Reduced <- LifespanBasalFGC_Reduced
-
-#load and rename corticosterone reduced PGLS
-load("Corticosterone/CrtstnMeanLifespan/BasalFGCMSMR_Reduced.RData") 
-load("Corticosterone/CrtstnMeanLifespan/BasalFGCMass_Reduced.RData")
-load("Corticosterone/CrtstnMeanLifespan/ElevFGCBasalFGC_Reduced.RData")
-# load("Corticosterone/CrtstnMeanLifespan/LifespanBasalFGC_Reduced.RData")
-BasalFGCMSMR_Crtstn_Reduced <- BasalFGCMSMR_Reduced
-BasalFGCMass_Crtstn_Reduced <- BasalFGCMass_Reduced
-ElevFGCBasalFGC_Crtstn_Reduced <- ElevFGCBasalFGC_Reduced
-# LifespanBasalFGC_Crtstn_Reduced <- LifespanBasalFGC_Reduced
+# 
+# #load and rename cortisol reduced PGLS
+# load("Cortisol/CortisolMeanLifespan/BasalFGCMSMR_Reduced.RData") 
+# load("Cortisol/CortisolMeanLifespan/BasalFGCMass_Reduced.RData")
+# load("Cortisol/CortisolMeanLifespan/ElevFGCBasalFGC_Reduced.RData")
+# # load("Cortisol/CortisolMeanLifespan/LifespanBasalFGC_Reduced.RData")
+# BasalFGCMSMR_Cortisol_Reduced <- BasalFGCMSMR_Reduced
+# BasalFGCMass_Cortisol_Reduced <- BasalFGCMass_Reduced
+# ElevFGCBasalFGC_Cortisol_Reduced <- ElevFGCBasalFGC_Reduced
+# # LifespanBasalFGC_Cortisol_Reduced <- LifespanBasalFGC_Reduced
+# 
+# #load and rename corticosterone reduced PGLS
+# load("Corticosterone/CrtstnMeanLifespan/BasalFGCMSMR_Reduced.RData") 
+# load("Corticosterone/CrtstnMeanLifespan/BasalFGCMass_Reduced.RData")
+# load("Corticosterone/CrtstnMeanLifespan/ElevFGCBasalFGC_Reduced.RData")
+# # load("Corticosterone/CrtstnMeanLifespan/LifespanBasalFGC_Reduced.RData")
+# BasalFGCMSMR_Crtstn_Reduced <- BasalFGCMSMR_Reduced
+# BasalFGCMass_Crtstn_Reduced <- BasalFGCMass_Reduced
+# ElevFGCBasalFGC_Crtstn_Reduced <- ElevFGCBasalFGC_Reduced
+# # LifespanBasalFGC_Crtstn_Reduced <- LifespanBasalFGC_Reduced
 
 StatsTab <- rbind(intervals(BasalFGCMSMR_FecalCort_PGLS)[["coef"]][1,],
                   intervals(BasalFGCMass_FecalCort_PGLS)[["coef"]][1,],
@@ -210,12 +210,12 @@ StatsTab <- rbind(intervals(BasalFGCMSMR_FecalCort_PGLS)[["coef"]][1,],
   mutate(`Slope (95% CI)` = str_c(est., " (", `lower`, ", ", `upper`, ")")) %>% #merge slope columns
   select(., -c("est.", "lower", "upper")) %>% #remove the columns we don't want
   cbind(., 
-        rbind(R2(BasalFGCMSMR_FecalCort_PGLS, BasalFGCMSMR_Cortisol_Reduced)[1],
-              R2(BasalFGCMass_FecalCort_PGLS, BasalFGCMass_Cortisol_Reduced)[1],
-              R2(ElevFGCBasalFGC_FecalCort_PGLS, ElevFGCBasalFGC_Cortisol_Reduced)[1],
-              R2(BasalFGCMSMR_Crtstn_PGLS, BasalFGCMSMR_Crtstn_Reduced)[1],
-              R2(BasalFGCMass_Crtstn_PGLS, BasalFGCMass_Crtstn_Reduced)[1],
-              R2(ElevFGCBasalFGC_Crtstn_PGLS, ElevFGCBasalFGC_Crtstn_Reduced)[1]), #likelihood r squared column
+        rbind(R2_lik(BasalFGCMSMR_FecalCort_PGLS),
+              R2_lik(BasalFGCMass_FecalCort_PGLS),
+              R2_lik(ElevFGCBasalFGC_FecalCort_PGLS),
+              R2_lik(BasalFGCMSMR_Crtstn_PGLS),
+              R2_lik(BasalFGCMass_Crtstn_PGLS),
+              R2_lik(ElevFGCBasalFGC_Crtstn_PGLS)), #likelihood r squared column
         rbind(coefficients(summary(BasalFGCMSMR_FecalCort_PGLS))[2,4],
               coefficients(summary(BasalFGCMass_FecalCort_PGLS))[2,4],
               coefficients(summary(ElevFGCBasalFGC_FecalCort_PGLS))[2,4],
